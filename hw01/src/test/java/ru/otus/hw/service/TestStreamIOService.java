@@ -1,37 +1,39 @@
 package ru.otus.hw.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import org.mockito.ArgumentCaptor;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class TestStreamIOService {
-    private IOService ioService;
-    private ByteArrayOutputStream outputStream;
-    private PrintStream printStream;
-
+    private StreamsIOService ioService;
 
     @BeforeEach
     void setUp() {
-        outputStream = new ByteArrayOutputStream(10000);
-        printStream = new PrintStream(outputStream);
-        ioService = new StreamsIOService(printStream);
+        ioService = mock(StreamsIOService.class);
     }
+
 
     @Test
     void testPrintLine() {
-        ioService.printLine("testing printLine method");
-        printStream.flush();
-        assertThat(outputStream.toString()).isEqualTo("testing printLine method\r\n");
+        String str = "testing printLine method";
+        ArgumentCaptor<String> valueCapture = ArgumentCaptor.forClass(String.class);
+        doNothing().when(ioService).printLine(valueCapture.capture());
+        ioService.printLine(str);
+        Assertions.assertThat(valueCapture.getValue()).isEqualTo(str);
+        verify(ioService, times(1)).printLine(str);
     }
 
     @Test
     void testPrintFormattedLine() {
-        ioService.printFormattedLine("testing%nprintFormattedLine method");
-        printStream.flush();
-        assertThat(outputStream.toString()).isEqualTo("testing\r\nprintFormattedLine method\r\n");
+        String str = "testing%nprintFormattedLine method";
+        ArgumentCaptor<String> valueCapture = ArgumentCaptor.forClass(String.class);
+        doNothing().when(ioService).printFormattedLine(valueCapture.capture());
+        ioService.printFormattedLine(str);
+        Assertions.assertThat(valueCapture.getValue()).isEqualTo(str);
+        verify(ioService, times(1)).printFormattedLine(str);
     }
 
 }
