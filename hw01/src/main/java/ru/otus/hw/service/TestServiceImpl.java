@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TestServiceImpl implements TestService {
+    private static final String LINEBREAK = "%n";
 
     private final IOService ioService;
 
@@ -24,15 +25,15 @@ public class TestServiceImpl implements TestService {
 
     private void printQuestion(Question q) {
         if (Objects.nonNull(q.answers())) {
-            ioService.printFormattedLine(q.text() + "%n" + q.answers()
+            ioService.printFormattedLine(q.text() + LINEBREAK + q.answers()
                     .stream()
                     .filter(Objects::nonNull)
                     .map(a -> "-   %s".formatted(a.text()))
-                    .collect(Collectors.joining("%n"))
-                    + "%n"
+                    .collect(Collectors.joining(LINEBREAK))
+                    + LINEBREAK
             );
         } else {
-            ioService.printFormattedLine(q.text() + "%n");
+            ioService.printFormattedLine(q.text() + LINEBREAK);
         }
 
     }

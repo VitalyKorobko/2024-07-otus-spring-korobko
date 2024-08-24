@@ -33,12 +33,14 @@ public class CsvQuestionDao implements QuestionDao {
     private List<QuestionDto> createListQuestionDto() {
         try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(fileNameProvider.getTestFileName())) {
             if (Objects.nonNull(inputStream)) {
-                return new CsvToBeanBuilder<QuestionDto>(new InputStreamReader(inputStream))
-                        .withSkipLines(1)
-                        .withSeparator(';')
-                        .withType(QuestionDto.class)
-                        .build()
-                        .parse();
+                try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
+                    return new CsvToBeanBuilder<QuestionDto>(inputStreamReader)
+                            .withSkipLines(1)
+                            .withSeparator(';')
+                            .withType(QuestionDto.class)
+                            .build()
+                            .parse();
+                }
             }
         } catch (IOException e) {
             throw new QuestionReadException("Impossible to read questions DTO", e);

@@ -10,7 +10,7 @@ public class AnswerCsvConverter extends AbstractCsvConverter {
 
     @Override
     public Object convertToRead(String value) {
-        if (isValueNotCorrect(value)) {
+        if (isEmpty(value)) {
             return null;
         }
         var valueArr = value.split("%");
@@ -24,7 +24,7 @@ public class AnswerCsvConverter extends AbstractCsvConverter {
         }
     }
 
-    private static boolean isValueNotCorrect(String value) {
+    private static boolean isEmpty(String value) {
         return Objects.isNull(value) || value.isBlank();
     }
 
