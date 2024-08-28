@@ -16,12 +16,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class TestServiceImpl implements TestService {
+
     private static final String FREEANSWER = "Enter your answer in free form";
+
     private static final String SELECTANSWER = "Select an answer option:";
+
     private static final String ENTERVALUE = "You must enter a value from ";
+
     private static final String TO = " to ";
+
     private static final String LINEBREAK = "%n";
+
     private final IOService ioService;
+
     private final QuestionDao questionDao;
 
     @Override
@@ -84,7 +91,11 @@ public class TestServiceImpl implements TestService {
     }
 
     private boolean isAnswersExist(Question question) {
-        return Objects.nonNull(question.answers()) && question.answers().size() != 0 && Objects.nonNull(question.answers().get(0));
+        return Objects.nonNull(
+                question.answers())
+                && question.answers().size() != 0
+                && Objects.nonNull(question.answers().get(0)
+        );
     }
 
     private void printQuestion(@NonNull Question q) {
