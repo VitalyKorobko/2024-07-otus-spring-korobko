@@ -33,16 +33,13 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public TestResult executeTestFor(Student student) {
-//        ioService.printLine("");
-//        ioService.printFormattedLine("Please answer the questions below%n");
         var questions = questionDao.findAll();
         var testResult = new TestResult(student);
 
         for (var question : questions) {
-            // Задать вопрос, получить ответ
             printQuestion(question);
             if (isAnswersExist(question)) {
-                testWithAnswers(question, questions.size(), testResult);
+                testWithAnswers(question, question.answers().size(), testResult);
             } else {
                 testWithoutAnswers(question, testResult, String::isBlank);
             }
