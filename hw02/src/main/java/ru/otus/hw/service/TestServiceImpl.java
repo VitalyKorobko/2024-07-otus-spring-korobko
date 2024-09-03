@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class TestServiceImpl implements TestService {
 
-    private static final String FREEANSWER = "Enter your answer in free form";
+    private static final String FREE_ANSWER = "Enter your answer in free form";
 
-    private static final String SELECTANSWER = "Select an answer option:";
+    private static final String SELECT_ANSWER = "Select an answer option:";
 
-    private static final String ENTERVALUE = "You must enter a value from ";
+    private static final String ENTER_VALUE = "You must enter a value from ";
 
     private static final String TO = " to ";
 
-    private static final String LINEBREAK = "%n";
+    private static final String LINE_BREAK = "%n";
 
     private final IOService ioService;
 
@@ -48,7 +48,7 @@ public class TestServiceImpl implements TestService {
     }
 
     private void testWithoutAnswers(Question question, TestResult testResult, Predicate<String> predicate) {
-        String freeAnswer = ioService.readStringWithPrompt(FREEANSWER);
+        String freeAnswer = ioService.readStringWithPrompt(FREE_ANSWER);
         if (!predicate.test(freeAnswer)) {
             testResult.applyAnswer(question, true);
         }
@@ -58,8 +58,8 @@ public class TestServiceImpl implements TestService {
         int answerNum = ioService.readIntForRangeWithPrompt(
                 1,
                 countAnswers,
-                SELECTANSWER,
-                ENTERVALUE + 1 + TO + countAnswers
+                SELECT_ANSWER,
+                ENTER_VALUE + 1 + TO + countAnswers
         );
         int expectedNum = getExpectedNumOfAnswer(question);
         testResult.applyAnswer(question, answerNum == expectedNum);
@@ -68,23 +68,12 @@ public class TestServiceImpl implements TestService {
 
     private int getExpectedNumOfAnswer(Question question) {
         var answers = question.answers();
-        checkCountOfTrueAnswers(question);
         for (int i = 0; i < answers.size(); i++) {
             if (answers.get(i).isCorrect()) {
                 return ++i;
             }
         }
         throw new QuestionReadException("the correct option is missing");
-    }
-
-    private void checkCountOfTrueAnswers(Question question) {
-        if (question.answers()
-                .stream()
-                .map(a -> a.isCorrect())
-                .filter((el) -> el)
-                .count() >= 2) {
-            throw new QuestionReadException("more than one correct answer");
-        }
     }
 
     private boolean isAnswersExist(Question question) {
@@ -97,32 +86,18 @@ public class TestServiceImpl implements TestService {
 
     private void printQuestion(@NonNull Question q) {
         if (isAnswersExist(q)) {
-            ioService.printFormattedLine(LINEBREAK + q.text() + LINEBREAK + q.answers()
+            ioService.printFormattedLine(LINE_BREAK + q.text() + LINE_BREAK + q.answers()
                     .stream()
                     .filter(Objects::nonNull)
                     .map(a -> "-   %s".formatted(a.text()))
-                    .collect(Collectors.joining(LINEBREAK))
-                    + LINEBREAK
+                    .collect(Collectors.joining(LINE_BREAK))
+                    + LINE_BREAK
             );
         } else {
-            ioService.printFormattedLine(LINEBREAK + q.text() + LINEBREAK);
+            ioService.printFormattedLine(LINE_BREAK + q.text() + LINE_BREAK);
         }
 
     }
 
-//    private void printQuestion(Question q) {
-//        if (Objects.nonNull(q.answers())) {
-//            ioService.printFormattedLine(q.text() + LINEBREAK + q.answers()
-//                    .stream()
-//                    .filter(Objects::nonNull)
-//                    .map(a -> "-   %s".formatted(a.text()))
-//                    .collect(Collectors.joining(LINEBREAK))
-//                    + LINEBREAK
-//            );
-//        } else {
-//            ioService.printFormattedLine(q.text() + LINEBREAK);
-//        }
-//
-//    }
 
 }

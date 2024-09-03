@@ -15,15 +15,16 @@ import ru.otus.hw.domain.TestResult;
 import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.util.List;
+
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Сервис тестирования TestServiceImpl")
 @ExtendWith(MockitoExtension.class)
 public class TestServiceImplTest {
-    private static final String FREEANSWER = "Enter your answer in free form";
-    private static final String SELECTANSWER = "Select an answer option:";
-    private static final String ENTERVALUE = "You must enter a value from ";
+    private static final String FREE_ANSWER = "Enter your answer in free form";
+    private static final String SELECT_ANSWER = "Select an answer option:";
+    private static final String ENTER_VALUE = "You must enter a value from ";
     private static final String TO = " to ";
     @Mock
     private IOService ioService;
@@ -58,8 +59,8 @@ public class TestServiceImplTest {
         when(questionDao.findAll()).thenReturn(questions);
         when(ioService.readIntForRangeWithPrompt(1,
                 2,
-                SELECTANSWER,
-                ENTERVALUE + 1 + TO + 2))
+                SELECT_ANSWER,
+                ENTER_VALUE + 1 + TO + 2))
                 .thenReturn(1);
 
         assertThat(testService.executeTestFor(student)).isEqualTo(testResult);
@@ -77,7 +78,7 @@ public class TestServiceImplTest {
         testResult.applyAnswer(question, true);
 
         when(questionDao.findAll()).thenReturn(questions);
-        when(ioService.readStringWithPrompt(FREEANSWER)).thenReturn("some answer");
+        when(ioService.readStringWithPrompt(FREE_ANSWER)).thenReturn("some answer");
 
         assertThat(testService.executeTestFor(student)).isEqualTo(testResult);
     }
@@ -95,25 +96,8 @@ public class TestServiceImplTest {
         Student student = new Student("Ivan", "Ivanov");
 
         when(questionDao.findAll()).thenReturn(questions);
-        Assertions.assertThrows(QuestionReadException.class, ()->testService.executeTestFor(student));
+        Assertions.assertThrows(QuestionReadException.class, () -> testService.executeTestFor(student));
     }
-
-    @Test
-    @DisplayName("Проверяем, что при присутствии в списке варианта с двумя и более правильными ответами получаем исключение QuestionReadException")
-    public void testExecuteTestForWhereAnswersInQuestionHaveMoreThanOneCorrectAnswer() {
-        Question question = new Question("what is it?",
-                List.of(
-                        new Answer("A", true),
-                        new Answer("B", true)
-                )
-        );
-        List<Question> questions = List.of(question);
-        Student student = new Student("Ivan", "Ivanov");
-
-        when(questionDao.findAll()).thenReturn(questions);
-        Assertions.assertThrows(QuestionReadException.class, ()->testService.executeTestFor(student));
-    }
-
 
 
 }

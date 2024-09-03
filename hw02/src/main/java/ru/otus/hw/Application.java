@@ -2,18 +2,19 @@ package ru.otus.hw;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.support.DefaultPropertySourceFactory;
 import ru.otus.hw.service.TestRunnerService;
 
+@Configuration
+@ComponentScan
+@PropertySource(value = "application.properties", factory = DefaultPropertySourceFactory.class)
 public class Application {
-    private static final String ROOTPACKAGE = Application.class.getPackageName();
 
     public static void main(String[] args) {
-
-        ApplicationContext context = new AnnotationConfigApplicationContext(
-                ROOTPACKAGE + ".service",
-                ROOTPACKAGE + ".dao",
-                ROOTPACKAGE + ".config"
-        );
+        ApplicationContext context = new AnnotationConfigApplicationContext(Application.class);
         var testRunnerService = context.getBean(TestRunnerService.class);
         testRunnerService.run();
 

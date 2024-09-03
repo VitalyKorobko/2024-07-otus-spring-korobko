@@ -23,7 +23,7 @@ public class TestRunnerServiceImpl implements TestRunnerService {
             var testResult = testService.executeTestFor(student);
             resultService.showResult(testResult);
         } catch (QuestionReadException e) {
-            ioService.printLine("Failed to load list of questions");
+            ioService.printLine(e.getMessage());
         } catch (IllegalArgumentException e) {
             ioService.printLine("You have exceeded the maximum number of attempts to enter an answer.");
             if (ioService.readStringWithPrompt("Try to take the test again. YES/NO?").equalsIgnoreCase("YES")) {

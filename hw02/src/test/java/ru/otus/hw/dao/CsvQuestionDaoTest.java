@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.otus.hw.config.TestFileNameProvider;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exceptions.QuestionReadException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,35 +26,35 @@ public class CsvQuestionDaoTest {
     private CsvQuestionDao questionDao;
 
     @Test
-    @DisplayName("ожидаем, что не будет выброшено исключение, если файл пуст")
+    @DisplayName("Ожидаем, что не будет выброшено исключение, если файл пуст")
     public void expectThatNoExceptionWillBeThrownIfFileIsEmpty() {
         when(fileNameProvider.getTestFileName()).thenReturn("emptyFile.csv");
         assertDoesNotThrow(() -> questionDao.findAll());
     }
 
     @Test
-    @DisplayName("ожидаем, что не будет выброшено исключение, если содержаться вопросы только с вариантами ответов")
+    @DisplayName("Ожидаем, что не будет выброшено исключение, если содержаться вопросы только с вариантами ответов")
     public void expectThatNoExceptionWillBeThrownIfTheQuestionsContainOnlyMultipleChoiceQuestions() {
         when(fileNameProvider.getTestFileName()).thenReturn("withMultipleChoice.csv");
         assertDoesNotThrow(() -> questionDao.findAll());
     }
 
     @Test
-    @DisplayName("ожидаем, что не будет выброшено исключение, если присутствует вопрос в свободной форме")
+    @DisplayName("Ожидаем, что не будет выброшено исключение, если присутствует вопрос в свободной форме")
     public void expectThatNoExceptionWillBeThrownIfThereIsFreeFormQuestion() {
         when(fileNameProvider.getTestFileName()).thenReturn("includeFreeForm.csv");
         assertDoesNotThrow(() -> questionDao.findAll());
     }
 
     @Test
-    @DisplayName("ожидаем, что будет выброшено исключение RuntimeException, если присутствует некорректный ответ")
+    @DisplayName("Ожидаем, что будет выброшено исключение RuntimeException, если присутствует некорректный ответ")
     public void expectExceptionToBeThrownIfInvalidResponseIsPresent() {
         when(fileNameProvider.getTestFileName()).thenReturn("invalidAnswer.csv");
         assertThrows(RuntimeException.class, () -> questionDao.findAll());
     }
 
     @Test
-    @DisplayName("ожидаем, что полученный список вопросов соответствует ожидаемому")
+    @DisplayName("Ожидаем, что полученный список вопросов соответствует ожидаемому")
     public void expectThatReceivedListOfQuestionsIsEqualsToExpected() {
         var question_1 = new Question("What?",
                 List.of(
@@ -75,14 +76,25 @@ public class CsvQuestionDaoTest {
     }
 
     @Test
-    @DisplayName("проверяем, что, если ресурса не существует, то будет брошено исключение RuntimeException")
+    @DisplayName("Ожидаем, что, если ресурса не существует, то будет брошено исключение QuestionReadException")
     public void checkIfResourceNotExistWillBeThrownException() {
         when(fileNameProvider.getTestFileName()).thenReturn("question.csv");
-        assertThrows(RuntimeException.class, ()->questionDao.findAll());
+        assertThrows(QuestionReadException.class, () -> questionDao.findAll());
     }
 
+    @Test
+    @DisplayName("Ожидаем, что при присутствии в списке варианта с двумя и более правильными ответами будет брошено исключение QuestionReadException")
+    public void checkIfMoreOneCorrectAnswerWillBeThrownException() {
+        when(fileNameProvider.getTestFileName()).thenReturn("moreThanOneTrueAnswer.csv");
+        assertThrows(QuestionReadException.class, () -> questionDao.findAll());
+    }
 
-
+    @Test
+    @DisplayName("Ожидаем, что если есть вопрос с ответами и все ответы неверные, то выбрасывается исключение QuestionReadException")
+    public void checkIfNoOneCorrectAnswerWillBeThrownException() {
+        when(fileNameProvider.getTestFileName()).thenReturn("noOneTrueAnswer.csv");
+        assertThrows(QuestionReadException.class, () -> questionDao.findAll());
+    }
 
 
 }
