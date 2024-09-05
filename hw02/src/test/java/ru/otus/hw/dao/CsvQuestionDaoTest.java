@@ -82,19 +82,5 @@ public class CsvQuestionDaoTest {
         assertThrows(QuestionReadException.class, () -> questionDao.findAll());
     }
 
-    @Test
-    @DisplayName("Ожидаем, что при присутствии в списке варианта с двумя и более правильными ответами будет брошено исключение QuestionReadException")
-    public void checkIfMoreOneCorrectAnswerWillBeThrownException() {
-        when(fileNameProvider.getTestFileName()).thenReturn("moreThanOneTrueAnswer.csv");
-        assertThrows(QuestionReadException.class, () -> questionDao.findAll());
-    }
-
-    @Test
-    @DisplayName("Ожидаем, что если есть вопрос с ответами и все ответы неверные, то выбрасывается исключение QuestionReadException")
-    public void checkIfNoOneCorrectAnswerWillBeThrownException() {
-        when(fileNameProvider.getTestFileName()).thenReturn("noOneTrueAnswer.csv");
-        assertThrows(QuestionReadException.class, () -> questionDao.findAll());
-    }
-
 
 }

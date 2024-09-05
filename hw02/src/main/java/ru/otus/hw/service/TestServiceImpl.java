@@ -7,7 +7,6 @@ import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Question;
 import ru.otus.hw.domain.Student;
 import ru.otus.hw.domain.TestResult;
-import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -61,19 +60,9 @@ public class TestServiceImpl implements TestService {
                 SELECT_ANSWER,
                 ENTER_VALUE + 1 + TO + countAnswers
         );
-        int expectedNum = getExpectedNumOfAnswer(question);
-        testResult.applyAnswer(question, answerNum == expectedNum);
+        boolean result = question.answers().get(--answerNum).isCorrect();
+        testResult.applyAnswer(question, result);
 
-    }
-
-    private int getExpectedNumOfAnswer(Question question) {
-        var answers = question.answers();
-        for (int i = 0; i < answers.size(); i++) {
-            if (answers.get(i).isCorrect()) {
-                return ++i;
-            }
-        }
-        throw new QuestionReadException("the correct option is missing");
     }
 
     private boolean isAnswersExist(Question question) {

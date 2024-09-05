@@ -1,18 +1,16 @@
 package ru.otus.hw.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.otus.hw.dao.CsvQuestionDao;
+import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
 import ru.otus.hw.domain.Student;
 import ru.otus.hw.domain.TestResult;
-import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.util.List;
 
@@ -29,13 +27,13 @@ public class TestServiceImplTest {
     @Mock
     private IOService ioService;
     @Mock
-    private CsvQuestionDao questionDao;
+    private QuestionDao questionDao;
     @InjectMocks
     private TestServiceImpl testService;
 
     @Test
     @DisplayName("Проверяем, что возвращаемый результат ответов на вопросы соответствует ожидаемому (вопросы с вариантами ответов)")
-    public void testExecuteTestForWhereQuestionsWithAnswers() {
+    public void checkThatReturnedResultCorrespondsToExpected() {
         Question question_1 = new Question("what is it?",
                 List.of(
                         new Answer("A", true),
@@ -68,7 +66,7 @@ public class TestServiceImplTest {
 
     @Test
     @DisplayName("Проверяем, что если хоть какой-то ответ в свободной форме есть, то считаем, что он правильный")
-    public void testExecuteTestForWhereQuestionsWithoutAnswers() {
+    public void checkThatIfExistFreeAnswerThenItIsTrueAnswer() {
         Question question = new Question("What is it?", null);
         List<Question> questions = List.of(question);
 
@@ -81,22 +79,6 @@ public class TestServiceImplTest {
         when(ioService.readStringWithPrompt(FREE_ANSWER)).thenReturn("some answer");
 
         assertThat(testService.executeTestFor(student)).isEqualTo(testResult);
-    }
-
-    @Test
-    @DisplayName("Проверяем, что при отсутствии в списке варианта с правильным ответом (т.е. все false) получаем исключение QuestionReadException")
-    public void testExecuteTestForWhereAnswersInQuestionHaveNotTrueValue() {
-        Question question = new Question("what is it?",
-                List.of(
-                        new Answer("A", false),
-                        new Answer("B", false)
-                )
-        );
-        List<Question> questions = List.of(question);
-        Student student = new Student("Ivan", "Ivanov");
-
-        when(questionDao.findAll()).thenReturn(questions);
-        Assertions.assertThrows(QuestionReadException.class, () -> testService.executeTestFor(student));
     }
 
 
