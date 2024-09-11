@@ -67,11 +67,7 @@ public class TestServiceImpl implements TestService {
     }
 
     private boolean isAnswersExist(Question question) {
-        return Objects.nonNull(
-                question.answers())
-                && !CollectionUtils.isEmpty(question.answers())
-                && Objects.nonNull(question.answers().get(0)
-        );
+        return !CollectionUtils.isEmpty(question.answers());
     }
 
     private void printQuestion(@NonNull Question q) {
