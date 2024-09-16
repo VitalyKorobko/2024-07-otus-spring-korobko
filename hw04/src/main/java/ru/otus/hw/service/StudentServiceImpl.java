@@ -16,7 +16,7 @@ public class StudentServiceImpl implements StudentService {
     public Student determineCurrentStudent() {
         var firstName = ioService.readStringWithPromptLocalized("StudentService.input.first.name");
         var lastName = ioService.readStringWithPromptLocalized("StudentService.input.last.name");
-        loginContext.regStudent(firstName, lastName);
+        loginContext.authorizeStudent(firstName, lastName);
         return loginContext.get();
     }
 

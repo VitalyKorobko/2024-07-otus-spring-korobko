@@ -16,7 +16,7 @@ public class InMemoryLoginContext implements LoginContext {
     }
 
     @Override
-    public void regStudent(String firstname, String lastname) {
+    public void authorizeStudent(String firstname, String lastname) {
         student = new Student(firstname, lastname);
     }
 

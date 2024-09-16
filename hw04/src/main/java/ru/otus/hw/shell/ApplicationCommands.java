@@ -6,7 +6,6 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.hw.security.LoginContext;
-import ru.otus.hw.service.StudentService;
 import ru.otus.hw.service.TestRunnerService;
 
 import java.util.Objects;
@@ -25,11 +24,10 @@ public class ApplicationCommands {
 
     @ShellMethod(value = "login student command", key = {"l", "login"})
     public String loginStudent(@ShellOption() String firstname, @ShellOption String lastname) {
-        if (Objects.nonNull(firstname) && Objects.nonNull(lastname)) {
-            loginContext.regStudent(firstname, lastname);
-        } else {
+        if (Objects.isNull(firstname) || Objects.isNull(lastname)) {
             return ("You are entering incorrect login information.\nEnter, please, your firstname and lastname");
         }
+        loginContext.authorizeStudent(firstname, lastname);
         return String.format("Hello, %s %s!\n\nEnter 'test' to start testing", firstname, lastname);
     }
 

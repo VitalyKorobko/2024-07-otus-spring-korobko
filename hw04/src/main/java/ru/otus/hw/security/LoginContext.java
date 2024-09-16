@@ -7,5 +7,5 @@ import java.util.function.Supplier;
 public interface LoginContext extends Supplier<Student> {
     boolean isStudentLoggedIn();
 
-    void regStudent(String firstname, String lastname);
+    void authorizeStudent(String firstname, String lastname);
 }

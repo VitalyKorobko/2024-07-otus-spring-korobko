@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import ru.otus.hw.config.TestFileNameProvider;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
@@ -19,7 +17,7 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 
 @DisplayName("Интеграционный тест класса читающего вопросы")
-@SpringBootTest
+@SpringBootTest(classes = {CsvQuestionDao.class})
 public class CsvQuestionDaoTest {
 
     @MockBean
@@ -27,12 +25,6 @@ public class CsvQuestionDaoTest {
 
     @Autowired
     private CsvQuestionDao questionDao;
-
-    @Configuration
-    @Import(CsvQuestionDao.class)
-    static class Config{
-
-    }
 
     @Test
     @DisplayName("Ожидаем, что не будет выброшено исключение, если файл пуст")

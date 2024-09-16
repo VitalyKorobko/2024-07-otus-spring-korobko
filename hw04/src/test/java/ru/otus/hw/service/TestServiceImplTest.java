@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 @DisplayName("Сервис тестирования TestServiceImpl")
-@SpringBootTest
+@SpringBootTest(classes = {TestServiceImpl.class})
 public class TestServiceImplTest {
     private static final String FREE_ANSWER = "TestService.free.answer";
 
@@ -36,12 +36,6 @@ public class TestServiceImplTest {
 
     @Autowired
     private TestServiceImpl testService;
-
-    @Configuration
-    @Import(TestServiceImpl.class)
-    static class Config{
-
-    }
 
     @Test
     @DisplayName("Проверяем, что возвращаемый результат ответов на вопросы соответствует ожидаемому (вопросы с вариантами ответов)")
