@@ -1,5 +1,6 @@
 package ru.otus.hw.repositories;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
+import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
@@ -101,7 +103,19 @@ class JdbcBookRepositoryTest {
     void shouldDeleteBook() {
         assertThat(repositoryJdbc.findById(1L)).isPresent();
         repositoryJdbc.deleteById(1L);
-        assertThat(repositoryJdbc.findById(1L)).isEmpty();
+        Assertions.assertThrows(EntityNotFoundException.class, () -> repositoryJdbc.findById(1L));
+    }
+
+    @DisplayName("должен выбрасывать исключение при попытке удаления книги с несуществующим Id")
+    @Test
+    void shouldThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
+        Assertions.assertThrows(EntityNotFoundException.class, ()->repositoryJdbc.deleteById(4L));
+    }
+
+    @DisplayName("должен выбрасывать исключение при попытке загрузки книги с несуществующим Id")
+    @Test
+    void shouldThrowExceptionWhenTryingToLoadBookWithNonExistentId() {
+        Assertions.assertThrows(EntityNotFoundException.class, ()->repositoryJdbc.deleteById(4L));
     }
 
     private static List<Author> getDbAuthors() {

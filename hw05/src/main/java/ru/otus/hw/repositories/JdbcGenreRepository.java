@@ -24,7 +24,7 @@ public class JdbcGenreRepository implements GenreRepository {
     public List<Genre> findAll() {
         return namedParameterJdbcOperations.query(
                 "SELECT id, name FROM genres",
-                new GnreRowMapper()
+                new GenreRowMapper()
         );
     }
 
@@ -33,11 +33,11 @@ public class JdbcGenreRepository implements GenreRepository {
         return namedParameterJdbcOperations.query(
                 "SELECT id, name FROM genres WHERE id IN (:id)",
                 Map.of("id", ids),
-                new GnreRowMapper()
+                new GenreRowMapper()
         );
     }
 
-    private static class GnreRowMapper implements RowMapper<Genre> {
+    private static class GenreRowMapper implements RowMapper<Genre> {
 
         @Override
         public Genre mapRow(ResultSet rs, int i) throws SQLException {
