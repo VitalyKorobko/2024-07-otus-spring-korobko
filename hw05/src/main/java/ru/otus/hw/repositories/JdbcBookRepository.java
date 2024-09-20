@@ -1,6 +1,5 @@
 package ru.otus.hw.repositories;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,9 +14,11 @@ import ru.otus.hw.models.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Optional;
 
 @Repository
 public class JdbcBookRepository implements BookRepository {
@@ -25,27 +26,18 @@ public class JdbcBookRepository implements BookRepository {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
 
-    public JdbcBookRepository(GenreRepository genreRepository, NamedParameterJdbcOperations namedParameterJdbcOperations) {
+    public JdbcBookRepository(GenreRepository genreRepository,
+                              NamedParameterJdbcOperations namedParameterJdbcOperations) {
         this.genreRepository = genreRepository;
         this.namedParameterJdbcOperations = namedParameterJdbcOperations;
     }
 
     @Override
     public Optional<Book> findById(long id) {
-        Optional<Book> bookOptional = Optional.empty();
         try {
             var book = namedParameterJdbcOperations.query("""
-                            SELECT 
-                                a.id,
-                                a.title, 
-                                a.author_id, 
-                                b.full_name, 
-                                c.genre_id, 
-                                d.name  
-                            FROM (SELECT 
-                                    id, 
-                                    title, 
-                                    author_id 
+                            SELECT a.id, a.title, a.author_id, b.full_name, c.genre_id, d.name  
+                            FROM (SELECT id, title, author_id 
                                   FROM books 
                                   WHERE id = :id) a 
                             LEFT JOIN authors b 
@@ -58,22 +50,22 @@ public class JdbcBookRepository implements BookRepository {
                     Map.of("id", id),
                     new BookResultSetExtractor()
             );
-            bookOptional = Optional.ofNullable(book);
+            return Optional.ofNullable(book);
         } catch (DataAccessException e) {
             throw new EntityNotFoundException("book with id = %d not exist ".formatted(id));
         }
-        return bookOptional;
     }
 
     @Override
     public List<Book> findAll() {
-        var genreMap = toMapGenres(genreRepository.findAll());
-        var bookMap = toMapBooks(getAllBooksWithoutGenres());
+        var genreMap = convertToMapGenres(genreRepository.findAll());
+        var bookMap = convertToMapBooks(getAllBooksWithoutGenres());
         var relations = getAllGenreRelations();
         return mergeBooksInfo(bookMap, genreMap, relations);
     }
 
-    private List<Book> mergeBooksInfo(Map<Long, Book> bookMap, Map<Long, Genre> genreMap, List<BookGenreRelation> relations) {
+    private List<Book> mergeBooksInfo(Map<Long, Book> bookMap, Map<Long, Genre> genreMap,
+                                      List<BookGenreRelation> relations) {
         for (BookGenreRelation relation : relations) {
             bookMap
                     .get(relation.bookId())
@@ -83,7 +75,7 @@ public class JdbcBookRepository implements BookRepository {
         return bookMap.values().stream().toList();
     }
 
-    private Map<Long, Genre> toMapGenres(List<Genre> genres) {
+    private Map<Long, Genre> convertToMapGenres(List<Genre> genres) {
         return genres.stream()
                 .parallel()
                 .collect(
@@ -93,7 +85,7 @@ public class JdbcBookRepository implements BookRepository {
                 );
     }
 
-    private Map<Long, Book> toMapBooks(List<Book> books) {
+    private Map<Long, Book> convertToMapBooks(List<Book> books) {
         return books.stream()
                 .parallel()
                 .collect(
@@ -118,7 +110,8 @@ public class JdbcBookRepository implements BookRepository {
                 Map.of("book_id", id)
         );
         if (countChanges == 0) {
-            throw new EntityNotFoundException("Not a single book was deleted, book with id = %d does not exist".formatted(id));
+            throw new EntityNotFoundException("Not a single book was deleted, book with id = %d does not exist"
+                    .formatted(id));
         }
     }
 
@@ -185,7 +178,8 @@ public class JdbcBookRepository implements BookRepository {
                 )
         );
         if (countChanges == 0) {
-            throw new EntityNotFoundException("No one book has been changed, book with id = %d does not exist".formatted(book.getId()));
+            throw new EntityNotFoundException("No one book has been changed, book with id = %d does not exist"
+                    .formatted(book.getId()));
         }
         removeGenresRelationsFor(book);
         batchInsertGenresRelationsFor(book);
