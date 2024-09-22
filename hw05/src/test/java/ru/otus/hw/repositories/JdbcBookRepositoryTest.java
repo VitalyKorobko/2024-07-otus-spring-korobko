@@ -115,7 +115,7 @@ class JdbcBookRepositoryTest {
     @DisplayName("должен выбрасывать исключение при попытке загрузки книги с несуществующим Id")
     @Test
     void shouldThrowExceptionWhenTryingToLoadBookWithNonExistentId() {
-        Assertions.assertThrows(EntityNotFoundException.class, () -> repositoryJdbc.deleteById(4L));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> repositoryJdbc.findById(4L));
     }
 
     private static List<Author> getDbAuthors() {
