@@ -17,8 +17,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Repository
 public class JdbcBookRepository implements BookRepository {
@@ -52,7 +53,7 @@ public class JdbcBookRepository implements BookRepository {
             );
             return Optional.ofNullable(book);
         } catch (DataAccessException e) {
-            throw new EntityNotFoundException("book with id = %d not exist ".formatted(id));
+            throw new EntityNotFoundException("book with id = %d not exist ".formatted(id), e);
         }
     }
 
@@ -76,23 +77,11 @@ public class JdbcBookRepository implements BookRepository {
     }
 
     private Map<Long, Genre> convertToMapGenres(List<Genre> genres) {
-        return genres.stream()
-                .parallel()
-                .collect(
-                        HashMap::new,
-                        (map, genre) -> map.put(genre.getId(), genre),
-                        HashMap::putAll
-                );
+        return genres.stream().collect(Collectors.toMap(Genre::getId, Function.identity()));
     }
 
     private Map<Long, Book> convertToMapBooks(List<Book> books) {
-        return books.stream()
-                .parallel()
-                .collect(
-                        HashMap::new,
-                        (map, book) -> map.put(book.getId(), book),
-                        HashMap::putAll
-                );
+        return books.stream().collect(Collectors.toMap(Book::getId, Function.identity()));
     }
 
     @Override
