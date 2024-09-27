@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({JpaBookRepository.class, JpaGenreRepository.class})
 class JpaBookRepositoryTest {
-
     private static final int EXPECTED_NUMBER_OF_BOOKS = 3;
 
     private static final long FIRST_BOOK_ID = 1L;

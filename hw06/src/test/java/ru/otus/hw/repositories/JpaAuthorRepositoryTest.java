@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({JpaAuthorRepository.class})
 public class JpaAuthorRepositoryTest {
-
     private static final long FIRST_AUTHOR_ID = 1L;
 
     @Autowired

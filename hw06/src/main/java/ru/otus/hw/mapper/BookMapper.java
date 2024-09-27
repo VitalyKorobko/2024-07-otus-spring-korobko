@@ -8,7 +8,6 @@ import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
 
-import java.util.ArrayList;
 
 @Component
 public class BookMapper {
@@ -26,9 +25,8 @@ public class BookMapper {
                 book.getId(),
                 book.getTitle(),
                 new AuthorDto(book.getAuthor().getId(), book.getAuthor().getFullName()),
-                book.getGenres().stream().collect(ArrayList::new,
-                        (lst, g) -> lst.add(new GenreDto(g.getId(), g.getName())), ArrayList::addAll)
-                );
+                book.getGenres().stream().map(g -> new GenreDto(g.getId(), g.getName())).toList()
+        );
     }
 
 

@@ -25,7 +25,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({JpaCommentRepository.class, JpaBookRepository.class, JpaAuthorRepository.class, JpaGenreRepository.class})
 public class JpaCommentRepositoryTest {
-
     private static final long FIRST_COMMENT_ID = 1L;
 
     private static final long BOOK_ID = 2L;
