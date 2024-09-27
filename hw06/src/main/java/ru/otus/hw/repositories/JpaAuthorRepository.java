@@ -11,21 +11,21 @@ import java.util.Optional;
 @Repository
 public class JpaAuthorRepository implements AuthorRepository {
     @PersistenceContext
-    private final EntityManager em;
+    private final EntityManager entityManager;
 
-    public JpaAuthorRepository(EntityManager em) {
-        this.em = em;
+    public JpaAuthorRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public List<Author> findAll() {
-        var query = em.createQuery("SELECT a FROM Author a", Author.class);
+        var query = entityManager.createQuery("SELECT a FROM Author a", Author.class);
         return query.getResultList();
     }
 
     @Override
     public Optional<Author> findById(long id) {
-        var author = em.find(Author.class, id);
+        var author = entityManager.find(Author.class, id);
         return Optional.ofNullable(author);
     }
 

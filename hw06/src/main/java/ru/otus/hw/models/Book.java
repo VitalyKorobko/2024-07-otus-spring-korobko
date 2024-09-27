@@ -32,15 +32,14 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(targetEntity = Author.class,
-            cascade = {CascadeType.MERGE},
+    @ManyToOne(cascade = {CascadeType.MERGE},
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(targetEntity = Genre.class, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "books_genres",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id")

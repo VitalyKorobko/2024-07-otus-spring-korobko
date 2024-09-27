@@ -3,7 +3,9 @@ package ru.otus.hw.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.mapper.CommentMapper;
 import ru.otus.hw.models.Comment;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.CommentRepository;
@@ -18,34 +20,40 @@ public class CommentServiceImpl implements CommentService {
 
     private final BookRepository bookRepository;
 
+    private final CommentMapper commentMapper;
+
     @Override
     @Transactional(readOnly = true)
-    public Optional<Comment> findById(long id) {
-        return commentRepository.findById(id);
+    public Optional<CommentDto> findById(long id) {
+        return commentRepository.findById(id)
+                .map(commentMapper::toCommentDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Comment> findAllCommentsByBookId(long bookId) {
-        return commentRepository.findAllCommentsByBookId(bookId);
+    public List<CommentDto> findAllCommentsByBookId(long bookId) {
+        return commentRepository.findAllCommentsByBookId(bookId).stream()
+                .map(commentMapper::toCommentDto).toList();
     }
 
     @Override
     @Transactional
-    public Comment insert(String text, long bookId) {
+    public CommentDto insert(String text, long bookId) {
         return save(0L, text, bookId);
     }
 
     @Override
     @Transactional
-    public Comment update(long id, String text, long bookId) {
+    public CommentDto update(long id, String text, long bookId) {
         return save(id, text, bookId);
     }
 
-    private Comment save(long id, String text, long bookId) {
+    private CommentDto save(long id, String text, long bookId) {
         var book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("Book with id %d not found".formatted(bookId)));
-        return commentRepository.save(new Comment(id, text, book));
+        return commentMapper.toCommentDto(
+                commentRepository.save(new Comment(id, text, book))
+        );
     }
 
 

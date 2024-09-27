@@ -3,7 +3,7 @@ package ru.otus.hw.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Map;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,9 +12,8 @@ public class BookDto {
 
     private String title;
 
-    private long authorId;
+    private AuthorDto authorDto;
 
-    private String authorName;
+    private List<GenreDto> listDtoGenres;
 
-    private Map<Long, String> mapGenres;
 }

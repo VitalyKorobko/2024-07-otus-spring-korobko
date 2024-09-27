@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookDto;
+import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.repositories.JpaAuthorRepository;
@@ -60,39 +61,40 @@ public class BookServiceImplTest {
         assertThat(books)
                 .allMatch(Objects::nonNull)
                 .allMatch(bookDto -> bookDto.getId() != 0 && !bookDto.getTitle().isEmpty())
-                .allMatch(bookDto -> bookDto.getAuthorId() != 0 && !bookDto.getAuthorName().isEmpty())
-                .allMatch(bookDto -> !bookDto.getMapGenres().isEmpty());
+                .allMatch(bookDto -> bookDto.getAuthorDto().getId() != 0
+                        && !bookDto.getAuthorDto().getFullName().isEmpty())
+                .allMatch(bookDto -> !bookDto.getListDtoGenres().isEmpty());
     }
 
     @DisplayName(" должен возвращать BookDto по id")
     @Test
     void shouldReturnBookDtoById() {
+        var expectedGenreDto = new GenreDto(FIRST_GENRE_ID, FIRST_GENRE_NAME);
         var optionalBookDto = bookService.findById(FIRST_BOOK_ID);
         assertThat(optionalBookDto).isPresent()
                 .get()
                 .matches(bookDto -> bookDto.getId() == FIRST_BOOK_ID && BOOK_TITLE.equals(bookDto.getTitle()))
-                .matches(bookDto -> bookDto.getAuthorId() == FIRST_AUTHOR_ID && AUTHOR_NAME.equals(bookDto.getAuthorName()))
-                .matches(bookDto -> bookDto.getMapGenres().get(FIRST_GENRE_ID).equals(FIRST_GENRE_NAME)
-                        && bookDto.getMapGenres().get(SECOND_GENRE_ID).equals(SECOND_GENRE_NAME)
-                );
+                .matches(bookDto -> bookDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                        && AUTHOR_NAME.equals(bookDto.getAuthorDto().getFullName()))
+                .matches(bookDto -> bookDto.getListDtoGenres().contains(expectedGenreDto));
     }
 
     @DisplayName(" должен сохранять новую книгу")
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewBook() {
-        var returnedBook = bookService.insert(
+        var returnedBookDto = bookService.insert(
                 BOOK_TITLE,
                 FIRST_AUTHOR_ID,
                 Set.of(SECOND_GENRE_ID)
         );
 
-        assertThat(returnedBook).isNotNull()
-                .matches(book -> book.getId() == FOURTH_BOOK_ID && book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> book.getAuthor().getId() == FIRST_AUTHOR_ID
-                        && book.getAuthor().getFullName().equals(AUTHOR_NAME))
-                .matches(book -> book.getGenres().get(0).getId() == SECOND_GENRE_ID
-                        && book.getGenres().get(0).getName().equals(SECOND_GENRE_NAME));
+        assertThat(returnedBookDto).isNotNull()
+                .matches(bookDto -> bookDto.getId() == FOURTH_BOOK_ID && bookDto.getTitle().equals(BOOK_TITLE))
+                .matches(bookDto -> bookDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                        && bookDto.getAuthorDto().getFullName().equals(AUTHOR_NAME))
+                .matches(bookDto -> bookDto.getListDtoGenres().get(0).getId() == SECOND_GENRE_ID
+                        && bookDto.getListDtoGenres().get(0).getName().equals(SECOND_GENRE_NAME));
 
     }
 
@@ -112,11 +114,11 @@ public class BookServiceImplTest {
         );
 
         assertThat(returnedBook).isNotNull()
-                .matches(book -> book.getId() == THIRD_BOOK_ID && book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> book.getAuthor().getId() == FIRST_AUTHOR_ID
-                        && book.getAuthor().getFullName().equals(AUTHOR_NAME))
-                .matches(book -> book.getGenres().get(0).getId() == FIRST_GENRE_ID
-                        && book.getGenres().get(0).getName().equals(FIRST_GENRE_NAME));
+                .matches(booDto -> booDto.getId() == THIRD_BOOK_ID && booDto.getTitle().equals(BOOK_TITLE))
+                .matches(booDto -> booDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                        && booDto.getAuthorDto().getFullName().equals(AUTHOR_NAME))
+                .matches(booDto -> booDto.getListDtoGenres().get(0).getId() == FIRST_GENRE_ID
+                        && booDto.getListDtoGenres().get(0).getName().equals(FIRST_GENRE_NAME));
 
     }
 
@@ -124,8 +126,8 @@ public class BookServiceImplTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldDeleteBookById() {
-        var optionalBook = bookService.findById(THIRD_BOOK_ID);
-        assertThat(optionalBook).isPresent();
+        var optionalBookDto = bookService.findById(THIRD_BOOK_ID);
+        assertThat(optionalBookDto).isPresent();
         bookService.deleteById(THIRD_BOOK_ID);
         assertThat(bookService.findById(THIRD_BOOK_ID)).isNotPresent();
     }

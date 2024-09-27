@@ -1,12 +1,14 @@
 package ru.otus.hw.mapper;
 
 import org.springframework.stereotype.Component;
+import ru.otus.hw.dto.AuthorDto;
 import ru.otus.hw.dto.BookDto;
+import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 @Component
 public class BookMapper {
@@ -14,8 +16,8 @@ public class BookMapper {
         return new Book(
                 bookDto.getId(),
                 bookDto.getTitle(),
-                new Author(bookDto.getAuthorId(), bookDto.getAuthorName()),
-                bookDto.getMapGenres().entrySet().stream().map(e -> new Genre(e.getKey(), e.getValue())).toList()
+                new Author(bookDto.getAuthorDto().getId(), bookDto.getAuthorDto().getFullName()),
+                bookDto.getListDtoGenres().stream().map(gDto -> new Genre(gDto.getId(), gDto.getName())).toList()
         );
     }
 
@@ -23,10 +25,9 @@ public class BookMapper {
         return new BookDto(
                 book.getId(),
                 book.getTitle(),
-                book.getAuthor().getId(),
-                book.getAuthor().getFullName(),
-                book.getGenres().stream().collect(HashMap::new,
-                        (map, g) -> map.put(g.getId(), g.getName()), HashMap::putAll)
+                new AuthorDto(book.getAuthor().getId(), book.getAuthor().getFullName()),
+                book.getGenres().stream().collect(ArrayList::new,
+                        (lst, g) -> lst.add(new GenreDto(g.getId(), g.getName())), ArrayList::addAll)
                 );
     }
 

@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.exceptions.EntityNotFoundException;
-import ru.otus.hw.models.Comment;
+import ru.otus.hw.mapper.CommentMapper;
 import ru.otus.hw.repositories.JpaBookRepository;
 import ru.otus.hw.repositories.JpaCommentRepository;
 
@@ -21,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для работы с комментариями ")
 @DataJpaTest
-@Import({CommentServiceImpl.class, JpaCommentRepository.class, JpaBookRepository.class})
+@Import({CommentServiceImpl.class, JpaCommentRepository.class, JpaBookRepository.class, CommentMapper.class})
 @Transactional(propagation = Propagation.NEVER)
 public class CommentServiceImplTest {
 
@@ -52,26 +53,26 @@ public class CommentServiceImplTest {
     @DisplayName(" должен возвращать список комментариев по id книги")
     @Test
     void shouldFindAllCommentsById() {
-        List<Comment> comments = commentService.findAllCommentsByBookId(FIRST_BOOK_ID);
+        List<CommentDto> comments = commentService.findAllCommentsByBookId(FIRST_BOOK_ID);
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS)
                 .allMatch(Objects::nonNull)
-                .allMatch(comment -> comment.getId() != 0 && !comment.getText().isEmpty())
+                .allMatch(commentDto -> commentDto.getId() != 0 && !commentDto.getText().isEmpty())
                 .matches(c -> c.get(0).getId() == FIRST_COMMENT_ID
                         && c.get(0).getText().equals(FIRST_COMMENT_TEXT)
-                        && c.get(0).getBook().getId() == FIRST_BOOK_ID)
+                        && c.get(0).getBookId() == FIRST_BOOK_ID)
                 .matches(c -> c.get(1).getId() == SECOND_COMMENT_ID
                         && c.get(1).getText().equals(SECOND_COMMENT_TEXT)
-                        && c.get(1).getBook().getId() == FIRST_BOOK_ID)
+                        && c.get(1).getBookId() == FIRST_BOOK_ID)
                 .matches(c -> c.get(2).getId() == THIRD_COMMENT_ID
                         && c.get(2).getText().equals(THIRD_COMMENT_TEXT)
-                        && c.get(2).getBook().getId() == FIRST_BOOK_ID);
+                        && c.get(2).getBookId() == FIRST_BOOK_ID);
     }
 
     @DisplayName(" должен возвращать комментарий по id")
     @Test
     void shouldReturnCommentById() {
-        var optionalComment = commentService.findById(FIRST_COMMENT_ID);
-        assertThat(optionalComment).isPresent()
+        var optionalCommentDto = commentService.findById(FIRST_COMMENT_ID);
+        assertThat(optionalCommentDto).isPresent()
                 .get()
                 .matches(c -> c.getId() == FIRST_COMMENT_ID && c.getText().equals(FIRST_COMMENT_TEXT));
     }
@@ -80,15 +81,15 @@ public class CommentServiceImplTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewComment() {
-        var returnedComment = commentService.insert(
+        var returnedCommentDto = commentService.insert(
                 THIRD_COMMENT_TEXT,
                 SECOND_BOOK_ID
         );
 
-        assertThat(returnedComment).isNotNull()
-                .matches(comment -> comment.getId() == FOURTH_COMMENT_ID
-                        && comment.getText().equals(THIRD_COMMENT_TEXT))
-                .matches(comment -> comment.getBook().getId() == SECOND_BOOK_ID);
+        assertThat(returnedCommentDto).isNotNull()
+                .matches(c -> c.getId() == FOURTH_COMMENT_ID
+                        && c.getText().equals(THIRD_COMMENT_TEXT))
+                .matches(comment -> comment.getBookId() == SECOND_BOOK_ID);
 
     }
 
@@ -96,31 +97,31 @@ public class CommentServiceImplTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveChangedComment() {
-        var optionalComment = commentService.findById(THIRD_COMMENT_ID);
-        assertThat(optionalComment).isPresent()
+        var optionalCommentDto = commentService.findById(THIRD_COMMENT_ID);
+        assertThat(optionalCommentDto).isPresent()
                 .get()
-                .matches(comment -> comment.getId() == THIRD_COMMENT_ID
-                        && comment.getText().equals(THIRD_COMMENT_TEXT)
-                        && comment.getBook().getId() == FIRST_BOOK_ID
+                .matches(c -> c.getId() == THIRD_COMMENT_ID
+                        && c.getText().equals(THIRD_COMMENT_TEXT)
+                        && c.getBookId() == FIRST_BOOK_ID
                 );
 
-        var returnedComment = commentService.update(
+        var returnedCommentDto = commentService.update(
                 THIRD_COMMENT_ID,
                 FIRST_COMMENT_TEXT,
                 SECOND_BOOK_ID
         );
 
-        assertThat(returnedComment).isNotNull()
+        assertThat(returnedCommentDto).isNotNull()
                 .matches(c -> c.getId() == THIRD_COMMENT_ID && c.getText().equals(FIRST_COMMENT_TEXT))
-                .matches(c -> c.getBook().getId() == SECOND_BOOK_ID);
+                .matches(c -> c.getBookId() == SECOND_BOOK_ID);
     }
 
     @DisplayName(" должен удалять комментарий по id")
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldDeleteCommentById() {
-        var optionalComment = commentService.findById(THIRD_COMMENT_ID);
-        assertThat(optionalComment).isPresent();
+        var optionalCommentDto = commentService.findById(THIRD_COMMENT_ID);
+        assertThat(optionalCommentDto).isPresent();
         commentService.deleteById(THIRD_COMMENT_ID);
         assertThat(commentService.findById(THIRD_COMMENT_ID)).isNotPresent();
     }

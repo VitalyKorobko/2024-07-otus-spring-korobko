@@ -16,21 +16,21 @@ import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphTyp
 @Repository
 public class JpaBookRepository implements BookRepository {
     @PersistenceContext
-    private final EntityManager em;
+    private final EntityManager entityManager;
 
-    public JpaBookRepository(EntityManager em) {
-        this.em = em;
+    public JpaBookRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public Optional<Book> findById(long id) {
-        return Optional.ofNullable(em.find(Book.class, id));
+        return Optional.ofNullable(entityManager.find(Book.class, id));
     }
 
     @Override
     public List<Book> findAll() {
-        EntityGraph<?> entityGraphAuthor = em.getEntityGraph("book-author-entity-graph");
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b", Book.class);
+        EntityGraph<?> entityGraphAuthor = entityManager.getEntityGraph("book-author-entity-graph");
+        TypedQuery<Book> query = entityManager.createQuery("SELECT b FROM Book b", Book.class);
         query.setHint(FETCH.getKey(), entityGraphAuthor);
         return query.getResultList();
     }
@@ -38,15 +38,15 @@ public class JpaBookRepository implements BookRepository {
     @Override
     public Book save(Book book) {
         if (book.getId() == 0L) {
-            em.persist(book);
+            entityManager.persist(book);
             return book;
         }
-        return em.merge(book);
+        return entityManager.merge(book);
     }
 
     @Override
     public void deleteById(long id) {
-        var query = em.createQuery("""
+        var query = entityManager.createQuery("""
                 DELETE FROM Book b WHERE b.id = :id 
                 """);
         query.setParameter("id", id);

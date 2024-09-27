@@ -11,21 +11,21 @@ import java.util.Set;
 @Repository
 public class JpaGenreRepository implements GenreRepository {
     @PersistenceContext
-    private final EntityManager em;
+    private final EntityManager entityManager;
 
-    public JpaGenreRepository(EntityManager em) {
-        this.em = em;
+    public JpaGenreRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public List<Genre> findAll() {
-        var query = em.createQuery("SELECT g FROM Genre g", Genre.class);
+        var query = entityManager.createQuery("SELECT g FROM Genre g", Genre.class);
         return query.getResultList();
     }
 
     @Override
     public List<Genre> findAllByIds(Set<Long> ids) {
-        var query = em.createQuery("SELECT g FROM Genre g WHERE id IN (:ids)", Genre.class);
+        var query = entityManager.createQuery("SELECT g FROM Genre g WHERE id IN (:ids)", Genre.class);
         query.setParameter("ids", ids);
         return query.getResultList();
     }

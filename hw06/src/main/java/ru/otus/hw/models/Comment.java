@@ -1,13 +1,19 @@
 package ru.otus.hw.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GenerationType;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "comments")
-@NamedEntityGraph(name = "comment-book-entity-graph",
-        attributeNodes = {@NamedAttributeNode("book")})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +23,6 @@ public class Comment {
     private String text;
 
     @ManyToOne(
-            targetEntity = Book.class,
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "book_id", referencedColumnName = "id")
@@ -48,8 +53,8 @@ public class Comment {
         this.text = text;
     }
 
-    public Book getBook() {
-        return book;
+    public long getBookId() {
+        return book.getId();
     }
 
     public void setBook(Book book) {

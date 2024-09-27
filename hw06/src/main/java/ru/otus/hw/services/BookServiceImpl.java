@@ -11,7 +11,6 @@ import ru.otus.hw.repositories.AuthorRepository;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.GenreRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -32,8 +31,8 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public Optional<BookDto> findById(long id) {
-        var optionalBook = bookRepository.findById(id);
-        return optionalBook.map(bookMapper::toBookDto);
+        return bookRepository.findById(id)
+                .map(bookMapper::toBookDto);
     }
 
     @Override
@@ -45,13 +44,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book insert(String title, long authorId, Set<Long> genresIds) {
+    public BookDto insert(String title, long authorId, Set<Long> genresIds) {
         return save(0L, title, authorId, genresIds);
     }
 
     @Override
     @Transactional
-    public Book update(long id, String title, long authorId, Set<Long> genresIds) {
+    public BookDto update(long id, String title, long authorId, Set<Long> genresIds) {
         return save(id, title, authorId, genresIds);
     }
 
@@ -61,7 +60,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-    private Book save(long id, String title, long authorId, Set<Long> genresIds) {
+    private BookDto save(long id, String title, long authorId, Set<Long> genresIds) {
         if (isEmpty(genresIds)) {
             throw new IllegalArgumentException("Genres ids must not be null");
         }
@@ -75,6 +74,6 @@ public class BookServiceImpl implements BookService {
 
         var book = new Book(id, title, author, genres);
 
-        return bookRepository.save(book);
+        return bookMapper.toBookDto(bookRepository.save(book));
     }
 }
