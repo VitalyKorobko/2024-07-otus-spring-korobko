@@ -5,7 +5,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ru.otus.hw.exceptions.EntityNotFoundException;
-import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
 
 import java.util.List;
@@ -31,8 +30,11 @@ public class JpaCommentRepository implements CommentRepository {
 
     @Override
     public List<Comment> findAllCommentsByBookId(long bookId) {
-        TypedQuery<Comment> query = entityManager.createQuery("SELECT c FROM Comment c WHERE c.book = :book", Comment.class);
-        query.setParameter("book", new Book(bookId));
+        TypedQuery<Comment> query = entityManager.createQuery(
+                "SELECT c FROM Comment c WHERE c.book.id = :bookId",
+                Comment.class
+        );
+        query.setParameter("bookId", bookId);
         return query.getResultList();
     }
 

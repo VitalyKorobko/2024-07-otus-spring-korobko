@@ -16,7 +16,7 @@ import ru.otus.hw.models.Comment;
 import ru.otus.hw.models.Genre;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,12 +69,14 @@ public class JpaCommentRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewComment() {
-        var expectedComment = new Comment(0, TEXT_COMMENT, new Book(BOOK_ID));
+        var expectedBook = em.find(Book.class, BOOK_ID);
+        var expectedComment = new Comment(0, TEXT_COMMENT, expectedBook);
         var returnedComment = repositoryJpa.save(expectedComment);
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
                 .matches(c -> c.getBookId() == BOOK_ID)
+                .matches(c-> Objects.equals(c.getBook(), expectedBook))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
         assertThat(em.find(Comment.class, returnedComment.getId()))
