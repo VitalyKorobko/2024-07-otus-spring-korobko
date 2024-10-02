@@ -69,14 +69,12 @@ public class JpaCommentRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewComment() {
-        var expectedBook = em.find(Book.class, BOOK_ID);
-        var expectedComment = new Comment(0, TEXT_COMMENT, expectedBook);
+        var expectedComment = new Comment(0, TEXT_COMMENT, new Book(BOOK_ID));
         var returnedComment = repositoryJpa.save(expectedComment);
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
-                .matches(c -> c.getBookId() == BOOK_ID)
-                .matches(c-> Objects.equals(c.getBook(), expectedBook))
+                .matches(c -> Objects.equals(c.getBookId(), BOOK_ID))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
         assertThat(em.find(Comment.class, returnedComment.getId()))
