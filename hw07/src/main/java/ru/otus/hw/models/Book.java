@@ -23,8 +23,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "books")
 @NamedEntityGraph(name = "book-entity-graph",
-        attributeNodes = {@NamedAttributeNode("author"), @NamedAttributeNode("genres")})
-@NamedEntityGraph(name = "book-author-entity-graph",
         attributeNodes = {@NamedAttributeNode("author")})
 public class Book {
     @Id

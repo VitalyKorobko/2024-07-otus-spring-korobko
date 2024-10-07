@@ -21,7 +21,7 @@ public class JpaGenreRepositoryTest {
     @DisplayName("должен загружать жанры по списку ids жанров")
     @Test
     void shouldReturnCorrectGenreListByIds() {
-        var actualGenres = repositoryJpa.findAllByIds(Set.of(1L, 2L, 3L));
+        var actualGenres = repositoryJpa.findAllByIdIn(Set.of(1L, 2L, 3L));
         var expectedGenres = getDbGenres(1, 4);
         assertThat(actualGenres).
                 isEqualTo(expectedGenres);

@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentDto> findAllCommentsByBookId(long bookId) {
-        return commentRepository.findAllByBookId(bookId).stream()
+        return commentRepository.findByBook_Id(bookId).stream()
                 .map(commentMapper::toCommentDto).toList();
     }
 

@@ -1,5 +1,6 @@
 package ru.otus.hw.repositories;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,8 +55,8 @@ class JpaBookRepositoryTest {
         var students = repositoryJpa.findAll();
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
                 .allMatch(b -> !b.getTitle().equals(""))
-                .allMatch(b -> b.getGenres() != null && b.getGenres().size() > 0)
-                .allMatch(b -> b.getAuthor().getFullName() != null);
+                .allMatch(b -> CollectionUtils.isNotEmpty(b.getGenres()))
+                .allMatch(b -> Objects.nonNull(b.getAuthor().getFullName()));
         System.out.println("\n====================================================================\n");
         assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
     }
@@ -69,8 +71,8 @@ class JpaBookRepositoryTest {
         assertThat(returnedBook).isNotNull()
                 .matches(book -> book.getId() > 0)
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> book.getGenres() != null && book.getGenres().size() > 0)
-                .matches(book -> book.getAuthor() != null)
+                .matches(book -> CollectionUtils.isNotEmpty(book.getGenres()))
+                .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
         assertThat(entityManager.find(Book.class, returnedBook.getId()))
@@ -91,8 +93,8 @@ class JpaBookRepositoryTest {
         assertThat(returnedBook).isNotNull()
                 .matches(book -> book.getId() > 0)
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> book.getGenres() != null && book.getGenres().size() > 0)
-                .matches(book -> book.getAuthor() != null)
+                .matches(book -> CollectionUtils.isNotEmpty(book.getGenres()))
+                .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
         assertThat(entityManager.find(Book.class, returnedBook.getId()))

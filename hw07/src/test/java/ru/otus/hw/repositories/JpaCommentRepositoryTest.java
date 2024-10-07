@@ -44,7 +44,7 @@ public class JpaCommentRepositoryTest {
         sessionFactory.getStatistics().setStatisticsEnabled(true);
 
         System.out.println("\n===================================================================\n");
-        var actualComments = repositoryJpa.findAllByBookId(1L);
+        var actualComments = repositoryJpa.findByBook_Id(1L);
         var expectedComments = getDbComments(1L);
         assertThat(actualComments).
                 isEqualTo(expectedComments);
