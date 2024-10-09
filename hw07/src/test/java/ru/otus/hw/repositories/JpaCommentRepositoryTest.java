@@ -44,7 +44,7 @@ public class JpaCommentRepositoryTest {
         sessionFactory.getStatistics().setStatisticsEnabled(true);
 
         System.out.println("\n===================================================================\n");
-        var actualComments = repositoryJpa.findByBook_Id(1L);
+        var actualComments = repositoryJpa.findByBookId(1L);
         var expectedComments = getDbComments(1L);
         assertThat(actualComments).
                 isEqualTo(expectedComments);
@@ -71,7 +71,7 @@ public class JpaCommentRepositoryTest {
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
-                .matches(c -> Objects.equals(c.getBookId(), BOOK_ID))
+                .matches(c -> Objects.equals(c.getBook().getId(), BOOK_ID))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
         assertThat(entityManager.find(Comment.class, returnedComment.getId()))
@@ -92,7 +92,7 @@ public class JpaCommentRepositoryTest {
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
-                .matches(c -> Objects.equals(c.getBookId(), BOOK_ID))
+                .matches(c -> Objects.equals(c.getBook().getId(), BOOK_ID))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
         assertThat(entityManager.find(Comment.class, returnedComment.getId()))

@@ -53,8 +53,8 @@ public class Comment {
         this.text = text;
     }
 
-    public long getBookId() {
-        return book.getId();
+    public Book getBook() {
+        return book;
     }
 
     public void setBook(Book book) {
