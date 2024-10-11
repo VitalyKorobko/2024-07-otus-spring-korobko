@@ -26,6 +26,8 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    private final CommentService commentService;
+
     private final BookMapper bookMapper;
 
     @Override
@@ -57,6 +59,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void deleteById(long id) {
+        commentService.deleteAllByBookId(id);
         bookRepository.deleteById(id);
     }
 

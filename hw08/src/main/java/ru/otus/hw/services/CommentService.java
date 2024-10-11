@@ -16,5 +16,7 @@ public interface CommentService {
 
     void deleteById(long id);
 
+    void deleteAllByBookId(long bookId);
+
 
 }

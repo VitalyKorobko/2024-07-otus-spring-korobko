@@ -32,7 +32,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentDto> findAllCommentsByBookId(long bookId) {
-        return commentRepository.findByBook_Id(bookId).stream()
+        List<Comment> comments = commentRepository.findByBookId(bookId);
+        return commentRepository.findByBookId(bookId).stream()
                 .map(commentMapper::toCommentDto).toList();
     }
 
@@ -61,5 +62,10 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public void deleteById(long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllByBookId(long bookId) {
+        commentRepository.deleteAll(commentRepository.findByBookId(bookId));
     }
 }

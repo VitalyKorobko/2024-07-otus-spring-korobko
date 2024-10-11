@@ -3,9 +3,7 @@ package ru.otus.hw.mongock.changelog;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
@@ -27,7 +25,7 @@ public class DatabaseChangelog {
 
     @ChangeSet(order = "000", id = "2024-09-17-001-dropDb", author = "korobko", runAlways = true)
     public void dropDb(MongoDatabase db) {
-//        db.drop();
+        db.drop();
 //        db.createCollection("author");
 //        db.createCollection("genre");
 //        db.createCollection("book");

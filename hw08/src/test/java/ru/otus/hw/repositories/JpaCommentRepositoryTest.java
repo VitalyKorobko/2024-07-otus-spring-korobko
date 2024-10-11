@@ -1,12 +1,10 @@
 package ru.otus.hw.repositories;
 
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -20,7 +18,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с комментариями для книг")
-@DataJpaTest
+@DataMongoTest
 public class JpaCommentRepositoryTest {
     private static final long FIRST_COMMENT_ID = 1L;
 
@@ -28,35 +26,33 @@ public class JpaCommentRepositoryTest {
 
     private static final String TEXT_COMMENT = "comment";
 
-    private static final int EXPECTED_QUERIES_COUNT = 1;
-
     @Autowired
     private CommentRepository repositoryJpa;
-
-    @Autowired
-    TestEntityManager entityManager;
 
     @DisplayName(" должен загружать список всех комментариев для книги по её id")
     @Test
     void shouldReturnCorrectCommentsListByBookId() {
-        SessionFactory sessionFactory = entityManager.getEntityManager().getEntityManagerFactory()
-                .unwrap(SessionFactory.class);
-        sessionFactory.getStatistics().setStatisticsEnabled(true);
-
-        System.out.println("\n===================================================================\n");
-        var actualComments = repositoryJpa.findByBook_Id(1L);
+        var actualComments = repositoryJpa.findByBookId(1L);
         var expectedComments = getDbComments(1L);
         assertThat(actualComments).
                 isEqualTo(expectedComments);
-        System.out.println("\n====================================================================\n");
-        assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
     }
 
     @DisplayName(" должен загружать комментарий по его id")
     @Test
     void shouldReturnCorrectCommentById() {
         var actualOptionalComment = repositoryJpa.findById(FIRST_COMMENT_ID);
-        var expectedComment = entityManager.find(Comment.class, FIRST_COMMENT_ID);
+        var expectedComment = new Comment(
+                FIRST_COMMENT_ID,
+                "Comment_" + FIRST_COMMENT_ID,
+                new Book(1L,
+                        "BookTitle_" + 1L,
+                        new Author(1L, "Author_" + 1L),
+                        List.of(new Genre(1L, "Genre_" + 1L),
+                                new Genre(2L, "Genre_" + 2L)
+                        )
+                )
+        );
         assertThat(actualOptionalComment).isPresent()
                 .get()
                 .isEqualTo(expectedComment);
@@ -66,15 +62,15 @@ public class JpaCommentRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewComment() {
-        var expectedComment = new Comment(0, TEXT_COMMENT, new Book(BOOK_ID));
+        var expectedComment = new Comment(4L, TEXT_COMMENT, new Book(BOOK_ID));
         var returnedComment = repositoryJpa.save(expectedComment);
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
-                .matches(c -> Objects.equals(c.getBookId(), BOOK_ID))
+                .matches(c -> Objects.equals(c.getBook().getId(), BOOK_ID))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
-        assertThat(entityManager.find(Comment.class, returnedComment.getId()))
+        assertThat(repositoryJpa.findById(returnedComment.getId())).isPresent().get()
                 .isEqualTo(returnedComment);
     }
 
@@ -82,20 +78,26 @@ public class JpaCommentRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveUpdatedComment() {
-        var expectedBook = entityManager.find(Book.class, BOOK_ID);
+        var expectedBook = new Book(BOOK_ID,
+                "BookTitle_" + BOOK_ID,
+                new Author(2L, "Author_" + 2L),
+                List.of(new Genre(3L, "Genre_" + 3L),
+                        new Genre(4L, "Genre_" + 4L)
+                )
+        );
         var expectedComment = new Comment(FIRST_COMMENT_ID, TEXT_COMMENT, expectedBook);
 
-        assertThat(entityManager.find(Comment.class, expectedComment.getId()))
+        assertThat(repositoryJpa.findById(expectedComment.getId())).isPresent().get()
                 .isNotEqualTo(expectedComment);
 
         var returnedComment = repositoryJpa.save(expectedComment);
         assertThat(returnedComment).isNotNull()
                 .matches(c -> c.getId() > 0)
                 .matches(c -> c.getText().equals(TEXT_COMMENT))
-                .matches(c -> Objects.equals(c.getBookId(), BOOK_ID))
+                .matches(c -> Objects.equals(c.getBook().getId(), BOOK_ID))
                 .usingRecursiveComparison().isEqualTo(expectedComment);
 
-        assertThat(entityManager.find(Comment.class, returnedComment.getId()))
+        assertThat(repositoryJpa.findById(returnedComment.getId())).isPresent().get()
                 .isEqualTo(returnedComment);
     }
 
@@ -103,11 +105,10 @@ public class JpaCommentRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldDeleteComment() {
-        var comment = entityManager.find(Comment.class, FIRST_COMMENT_ID);
-        assertThat(comment).isNotNull();
-        entityManager.detach(comment);
+        var commentOptional = repositoryJpa.findById(FIRST_COMMENT_ID);
+        assertThat(commentOptional).isPresent().get().isNotNull();
         repositoryJpa.deleteById(FIRST_COMMENT_ID);
-        assertThat(entityManager.find(Comment.class, FIRST_COMMENT_ID)).isNull();
+        assertThat(repositoryJpa.findById(FIRST_COMMENT_ID)).isEmpty();
     }
 
     @DisplayName("не должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
