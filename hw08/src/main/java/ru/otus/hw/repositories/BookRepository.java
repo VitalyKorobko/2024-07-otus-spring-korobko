@@ -7,14 +7,6 @@ import ru.otus.hw.models.Book;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface BookRepository extends MongoRepository<Book, Long> {
-
-    Optional<Book> findById(long id);
-
-    @Override
-    List<Book> findAll();
-
-    void deleteById(long id);
 
 }

@@ -27,7 +27,7 @@ public class DatabaseChangelog {
 
     @ChangeSet(order = "000", id = "2024-09-17-001-dropDb", author = "korobko", runAlways = true)
     public void dropDb(MongoDatabase db) {
-        db.drop();
+//        db.drop();
 //        db.createCollection("author");
 //        db.createCollection("genre");
 //        db.createCollection("book");
@@ -51,14 +51,14 @@ public class DatabaseChangelog {
         genre6 = repository.save(getGenre(6L));
     }
 
-    @ChangeSet(order = "002", id = "2024-09-17-001-books", author = "korobko")
+    @ChangeSet(order = "003", id = "2024-09-17-001-books", author = "korobko")
     public void insertBooks(BookRepository repository) {
         book1 = repository.save(getBook(1L, author1, genre1, genre2));
         repository.save(getBook(2L, author2, genre3, genre4));
         repository.save(getBook(3L, author3, genre5, genre6));
     }
 
-    @ChangeSet(order = "003", id = "2024-09-22-001-comments", author = "korobko")
+    @ChangeSet(order = "004", id = "2024-09-22-001-comments", author = "korobko")
     public void insertComments(CommentRepository repository) {
         var comment1 = repository.save(getComment(1L, book1));
         var comment2 = repository.save(getComment(2L, book1));
