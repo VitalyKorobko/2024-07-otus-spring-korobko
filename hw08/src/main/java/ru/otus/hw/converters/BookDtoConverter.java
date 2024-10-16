@@ -18,7 +18,7 @@ public class BookDtoConverter {
                 .map(genreDtoConverter::genreDtoToString)
                 .map("{%s}"::formatted)
                 .collect(Collectors.joining(", "));
-        return "Id: %d, title: %s, author: {%s}, genres: [%s]".formatted(
+        return "Id: %s, title: %s, author: {%s}, genres: [%s]".formatted(
                 bookDto.getId(),
                 bookDto.getTitle(),
                 authorDtoConverter.authorDtoToString(bookDto.getAuthorDto()),

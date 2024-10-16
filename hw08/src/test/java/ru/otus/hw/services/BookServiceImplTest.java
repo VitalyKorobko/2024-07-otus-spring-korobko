@@ -23,22 +23,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для работы с книгами ")
 @DataMongoTest
-@Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, CommentMapper.class})
+@Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, IdSequencesServiceImpl.class, CommentMapper.class})
 @Transactional(propagation = Propagation.NEVER)
 public class BookServiceImplTest {
-    private static final long FIRST_BOOK_ID = 1L;
+    private static final String FIRST_BOOK_ID = "1";
 
-    private static final long THIRD_BOOK_ID = 3L;
+    private static final String THIRD_BOOK_ID = "3";
 
-    private static final long FOURTH_BOOK_ID = 4L;
+    private static final String FOURTH_BOOK_ID = "4";
 
-    private static final long FIFTH_BOOK_ID = 5L;
+    private static final String FIFTH_BOOK_ID = "5";
 
-    private static final long FIRST_AUTHOR_ID = 1L;
+    private static final String FIRST_AUTHOR_ID = "1";
 
-    private static final long FIRST_GENRE_ID = 1L;
+    private static final String FIRST_GENRE_ID = "1";
 
-    private static final long SECOND_GENRE_ID = 2L;
+    private static final String SECOND_GENRE_ID = "2";
 
     private static final String BOOK_TITLE = "BookTitle_1";
 
@@ -57,8 +57,8 @@ public class BookServiceImplTest {
         List<BookDto> books = bookService.findAll();
         assertThat(books)
                 .allMatch(Objects::nonNull)
-                .allMatch(bookDto -> bookDto.getId() != 0 && !bookDto.getTitle().isEmpty())
-                .allMatch(bookDto -> bookDto.getAuthorDto().getId() != 0
+                .allMatch(bookDto -> !bookDto.getId().equals("0") && !bookDto.getTitle().isEmpty())
+                .allMatch(bookDto -> !bookDto.getAuthorDto().getId().equals("0")
                         && !bookDto.getAuthorDto().getFullName().isEmpty())
                 .allMatch(bookDto -> !bookDto.getListDtoGenres().isEmpty());
     }
@@ -70,8 +70,9 @@ public class BookServiceImplTest {
         var optionalBookDto = bookService.findById(FIRST_BOOK_ID);
         assertThat(optionalBookDto).isPresent()
                 .get()
-                .matches(bookDto -> bookDto.getId() == FIRST_BOOK_ID && BOOK_TITLE.equals(bookDto.getTitle()))
-                .matches(bookDto -> bookDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                .matches(bookDto -> Objects.equals(bookDto.getId(), FIRST_BOOK_ID)
+                        && BOOK_TITLE.equals(bookDto.getTitle()))
+                .matches(bookDto -> Objects.equals(bookDto.getAuthorDto().getId(), FIRST_AUTHOR_ID)
                         && AUTHOR_NAME.equals(bookDto.getAuthorDto().getFullName()))
                 .matches(bookDto -> bookDto.getListDtoGenres().contains(expectedGenreDto));
     }
@@ -87,12 +88,11 @@ public class BookServiceImplTest {
         );
 
         assertThat(returnedBookDto).isNotNull()
-                //todo FOURTH_BOOK_ID must work
-//                .matches(bookDto -> bookDto.getId() == FOURTH_BOOK_ID && bookDto.getTitle().equals(BOOK_TITLE))
-                .matches(bookDto -> bookDto.getId() == 0L && bookDto.getTitle().equals(BOOK_TITLE))
-                .matches(bookDto -> bookDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                .matches(bookDto -> Objects.equals(bookDto.getId(), FOURTH_BOOK_ID )
+                        && bookDto.getTitle().equals(BOOK_TITLE))
+                .matches(bookDto -> Objects.equals(bookDto.getAuthorDto().getId(), FIRST_AUTHOR_ID)
                         && bookDto.getAuthorDto().getFullName().equals(AUTHOR_NAME))
-                .matches(bookDto -> bookDto.getListDtoGenres().get(0).getId() == SECOND_GENRE_ID
+                .matches(bookDto -> Objects.equals(bookDto.getListDtoGenres().get(0).getId(), SECOND_GENRE_ID)
                         && bookDto.getListDtoGenres().get(0).getName().equals(SECOND_GENRE_NAME));
 
     }
@@ -103,7 +103,8 @@ public class BookServiceImplTest {
     void shouldSaveChangedBook() {
         var optionalBook = bookService.findById(THIRD_BOOK_ID);
         assertThat(optionalBook).isPresent().get()
-                .matches(bookDto -> bookDto.getId() == THIRD_BOOK_ID && !bookDto.getTitle().equals(BOOK_TITLE));
+                .matches(bookDto -> Objects.equals(bookDto.getId(), THIRD_BOOK_ID)
+                        && !bookDto.getTitle().equals(BOOK_TITLE));
 
         var returnedBook = bookService.update(
                 THIRD_BOOK_ID,
@@ -113,10 +114,10 @@ public class BookServiceImplTest {
         );
 
         assertThat(returnedBook).isNotNull()
-                .matches(booDto -> booDto.getId() == THIRD_BOOK_ID && booDto.getTitle().equals(BOOK_TITLE))
-                .matches(booDto -> booDto.getAuthorDto().getId() == FIRST_AUTHOR_ID
+                .matches(booDto -> booDto.getId().equals(THIRD_BOOK_ID) && booDto.getTitle().equals(BOOK_TITLE))
+                .matches(booDto -> booDto.getAuthorDto().getId().equals(FIRST_AUTHOR_ID)
                         && booDto.getAuthorDto().getFullName().equals(AUTHOR_NAME))
-                .matches(booDto -> booDto.getListDtoGenres().get(0).getId() == FIRST_GENRE_ID
+                .matches(booDto -> booDto.getListDtoGenres().get(0).getId().equals(FIRST_GENRE_ID)
                         && booDto.getListDtoGenres().get(0).getName().equals(FIRST_GENRE_NAME));
 
     }

@@ -4,33 +4,30 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.context.annotation.Import;
-import ru.otus.hw.mapper.BookMapper;
-import ru.otus.hw.mapper.CommentMapper;
+import org.springframework.data.mongodb.core.MongoOperations;
 import ru.otus.hw.models.Author;
-import ru.otus.hw.services.BookServiceImpl;
-import ru.otus.hw.services.CommentServiceImpl;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Репозиторий на основе Jpa для работы с авторами книг ")
+@DisplayName("Репозиторий на основе MongoRepository для работы с авторами книг ")
 @DataMongoTest
-@Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, CommentMapper.class})
-public class JpaAuthorRepositoryTest {
-    private static final long FIRST_AUTHOR_ID = 1L;
+public class AuthorRepositoryTest {
+    private static final String FIRST_AUTHOR_ID = "1";
 
     @Autowired
-    private AuthorRepository repositoryJpa;
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private MongoOperations operations;
 
     @DisplayName("должен загружать автора по id")
     @Test
     void shouldReturnCorrectAuthorById() {
-        var optionalActualAuthor = repositoryJpa.findById(FIRST_AUTHOR_ID);
-//        var expectedAuthor = entityManager.find(Author.class, FIRST_AUTHOR_ID);
-        var expectedAuthor = new Author(FIRST_AUTHOR_ID, "Author_" + FIRST_AUTHOR_ID);
+        var optionalActualAuthor = authorRepository.findById(FIRST_AUTHOR_ID);
+        var expectedAuthor = operations.findById(FIRST_AUTHOR_ID, Author.class);
         assertThat(optionalActualAuthor).isPresent()
                 .get()
                 .isEqualTo(expectedAuthor);
@@ -39,18 +36,18 @@ public class JpaAuthorRepositoryTest {
     @DisplayName("должен загружать список всех авторов")
     @Test
     void shouldReturnCorrectAuthorsList() {
-        var actualAuthors = repositoryJpa.findAll();
+        var actualAuthors = authorRepository.findAll();
         var expectedAuthors = getDbAuthors();
-
         assertThat(actualAuthors).containsExactlyElementsOf(expectedAuthors);
         actualAuthors.forEach(System.out::println);
     }
 
     private static List<Author> getDbAuthors() {
         return IntStream.range(1, 4).boxed()
-                .map(id -> new Author(id, "Author_" + id))
+                .map(id -> new Author(String.valueOf(id), "Author_" + id))
                 .toList();
     }
 
 
 }
+

@@ -3,20 +3,22 @@ spring:
     mongodb:
       host: localhost
       port: 27017
+#      port: 0
       database: mainDB
 
   shell:
     interactive:
       enabled: true
-    noninteractive:
-      enabled: false
 
-    command:
-      version:
-        enabled: false
+#de:
+#  flapdoodle:
+#    mongodb:
+#      embedded:
+#        version: 4.0.2
+
 
 mongock:
-  #runner-type: "ApplicationRunner" # default
+#  runner-type: "ApplicationRunner" # default
   runner-type: "InitializingBean"
   change-logs-scan-package:
     - ru.otus.hw.mongock.changelog
@@ -28,44 +30,3 @@ mongock:
 logging:
   level:
     root: ERROR
-
-
-
-
-
-
-
-
-
-#spring:
-#  data:
-#    mongodb:
-#      port: 27017
-#      uri: mongodb://localhost/mainDB
-#      database: mainDB
-#      host: localhost
-#      username:
-#      password:
-
-#de:
-#  flapdoodle:
-#    mongodb:
-#      embedded:
-#        version: 4.0.2
-
-#mongock:
-#  enabled: true
-#  runner-type: initializingbean
-#  change-logs-scan-package:
-#    - ru.otus.hw.mongock.changelog
-#  mongo-db:
-#    write-concern:
-#      journal: false
-#    read-concern: local
-#
-#
-#
-#logging:
-#  level:
-#    ROOT: ERROR
-

@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookDto;
+import ru.otus.hw.enums.Seq;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.repositories.AuthorRepository;
-import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.GenreRepository;
+import ru.otus.hw.repositories.BookRepository;
+import ru.otus.hw.repositories.CommentRepository;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -26,13 +29,15 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    private final CommentService commentService;
+    private final CommentRepository commentRepository;
+
+    private final IdSequencesService idSequencesService;
 
     private final BookMapper bookMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<BookDto> findById(long id) {
+    public Optional<BookDto> findById(String id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toBookDto);
     }
@@ -46,24 +51,24 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public BookDto insert(String title, long authorId, Set<Long> genresIds) {
-        return save(0L, title, authorId, genresIds);
+    public BookDto insert(String title, String authorId, Set<String> genresIds) {
+        return save(idSequencesService.getNextId(Seq.BOOK.getSeqName()), title, authorId, genresIds);
     }
 
     @Override
     @Transactional
-    public BookDto update(long id, String title, long authorId, Set<Long> genresIds) {
+    public BookDto update(String id, String title, String authorId, Set<String> genresIds) {
         return save(id, title, authorId, genresIds);
     }
 
     @Override
     @Transactional
-    public void deleteById(long id) {
-        commentService.deleteAllByBookId(id);
+    public void deleteById(String id) {
         bookRepository.deleteById(id);
+        commentRepository.deleteAllByBookId(id);
     }
 
-    private BookDto save(long id, String title, long authorId, Set<Long> genresIds) {
+    private BookDto save(String id, String title, String authorId, Set<String> genresIds) {
         if (isEmpty(genresIds)) {
             throw new IllegalArgumentException("Genres ids must not be null");
         }
@@ -75,8 +80,15 @@ public class BookServiceImpl implements BookService {
             throw new EntityNotFoundException("One or all genres with ids %s not found".formatted(genresIds));
         }
 
-        var book = new Book(id, title, author, genres);
+        var book = bookRepository.save(new Book(id, title, author, genres));
+        updateComments(book);
+        return bookMapper.toBookDto(book);
+    }
 
-        return bookMapper.toBookDto(bookRepository.save(book));
+    private void updateComments(Book book) {
+        var comments = commentRepository.findByBookId(book.getId());
+        comments.forEach(c -> c.setBook(book));
+        commentRepository.saveAll(comments);
     }
 }
+

@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CommentDto {
-    private long id;
+    private String id;
 
     private String text;
 
-    private long bookId;
+    private String bookId;
 
 }

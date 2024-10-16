@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class BookDto {
-    private long id;
+    private String id;
 
     private String title;
 

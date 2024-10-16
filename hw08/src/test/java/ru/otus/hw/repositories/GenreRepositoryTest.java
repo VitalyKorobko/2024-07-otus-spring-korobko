@@ -12,16 +12,16 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Репозиторий на основе Jpa для работы с жанрами книг ")
+@DisplayName("Репозиторий на основе MongoRepository для работы с жанрами книг ")
 @DataMongoTest
-public class JpaGenreRepositoryTest {
+public class GenreRepositoryTest {
     @Autowired
-    private GenreRepository repositoryJpa;
+    private GenreRepository genreRepository;
 
     @DisplayName("должен загружать жанры по списку ids жанров")
     @Test
     void shouldReturnCorrectGenreListByIds() {
-        var actualGenres = repositoryJpa.findAllByIdIn(Set.of(1L, 2L, 3L));
+        var actualGenres = genreRepository.findAllByIdIn(Set.of("1", "2", "3"));
         var expectedGenres = getDbGenres(1, 4);
         assertThat(actualGenres).
                 isEqualTo(expectedGenres);
@@ -30,24 +30,23 @@ public class JpaGenreRepositoryTest {
     @DisplayName("должен загружать список всех жанров")
     @Test
     void shouldReturnCorrectGenreList() {
-        var actualGenres = repositoryJpa.findAll();
+        var actualGenres = genreRepository.findAll();
         var expectedGenres = getDbGenres();
-
         assertThat(actualGenres).containsExactlyElementsOf(expectedGenres);
-        actualGenres.forEach(System.out::println);
     }
 
     private static List<Genre> getDbGenres() {
         return IntStream.range(1, 7).boxed()
-                .map(id -> new Genre(id, "Genre_" + id))
+                .map(id -> new Genre(String.valueOf(id), "Genre_" + id))
                 .toList();
     }
 
     private static List<Genre> getDbGenres(long start, long end) {
         return IntStream.range(1, 4).boxed()
-                .map(id -> new Genre(id, "Genre_" + id))
+                .map(id -> new Genre(String.valueOf(id), "Genre_" + id))
                 .toList();
     }
 
-
 }
+
+

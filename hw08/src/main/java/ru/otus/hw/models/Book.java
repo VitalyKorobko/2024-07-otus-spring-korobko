@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Book {
     @Id
-    private long id;
+    private String id;
 
     private String title;
 
@@ -22,7 +22,7 @@ public class Book {
 
     private List<Genre> genres;
 
-    public Book(long id) {
+    public Book(String id) {
         this(id, null, null, null);
     }
 }

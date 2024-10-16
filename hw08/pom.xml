@@ -24,7 +24,6 @@
         <checkstyle.config.url>
             https://raw.githubusercontent.com/OtusTeam/Spring/master/checkstyle.xml
         </checkstyle.config.url>
-<!--        <reflections.version>0.10.2</reflections.version>-->
         <mongock.version>4.3.8</mongock.version>
         <flapdoodle.version>4.7.0</flapdoodle.version>
     </properties>
@@ -41,13 +40,6 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-
-<!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -59,23 +51,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.liquibase</groupId>-->
-<!--            <artifactId>liquibase-core</artifactId>-->
-<!--            <version>${liquibase.version}</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.reflections</groupId>-->
-<!--            <artifactId>reflections</artifactId>-->
-<!--            <version>${reflections.version}</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>com.github.cloudyrock.mongock</groupId>
@@ -89,7 +64,6 @@
             <version>${mongock.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
@@ -101,12 +75,6 @@
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
             <version>${flapdoodle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.1.5.Final</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

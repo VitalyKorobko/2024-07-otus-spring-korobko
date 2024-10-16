@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.CommentDto;
+import ru.otus.hw.enums.Seq;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.mapper.CommentMapper;
 import ru.otus.hw.models.Comment;
@@ -20,18 +21,20 @@ public class CommentServiceImpl implements CommentService {
 
     private final BookRepository bookRepository;
 
+    private final IdSequencesService idSequencesService;
+
     private final CommentMapper commentMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<CommentDto> findById(long id) {
+    public Optional<CommentDto> findById(String id) {
         return commentRepository.findById(id)
                 .map(commentMapper::toCommentDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<CommentDto> findAllCommentsByBookId(long bookId) {
+    public List<CommentDto> findAllCommentsByBookId(String bookId) {
         List<Comment> comments = commentRepository.findByBookId(bookId);
         return commentRepository.findByBookId(bookId).stream()
                 .map(commentMapper::toCommentDto).toList();
@@ -39,17 +42,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public CommentDto insert(String text, long bookId) {
-        return save(0L, text, bookId);
+    public CommentDto insert(String text, String bookId) {
+        return save(idSequencesService.getNextId(Seq.COMMENT.getSeqName()), text, bookId);
     }
 
     @Override
     @Transactional
-    public CommentDto update(long id, String text, long bookId) {
+    public CommentDto update(String id, String text, String bookId) {
         return save(id, text, bookId);
     }
 
-    private CommentDto save(long id, String text, long bookId) {
+    private CommentDto save(String id, String text, String bookId) {
         var book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("Book with id %d not found".formatted(bookId)));
         return commentMapper.toCommentDto(
@@ -57,15 +60,11 @@ public class CommentServiceImpl implements CommentService {
         );
     }
 
-
     @Override
     @Transactional
-    public void deleteById(long id) {
+    public void deleteById(String id) {
         commentRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteAllByBookId(long bookId) {
-        commentRepository.deleteAll(commentRepository.findByBookId(bookId));
-    }
+
 }

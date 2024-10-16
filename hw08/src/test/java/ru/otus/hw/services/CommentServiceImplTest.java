@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для работы с комментариями ")
 @DataMongoTest
-@Import({CommentServiceImpl.class, CommentMapper.class})
+@Import({CommentServiceImpl.class, IdSequencesServiceImpl.class, CommentMapper.class})
 @Transactional(propagation = Propagation.NEVER)
 public class CommentServiceImplTest {
-    private static final long FIRST_BOOK_ID = 1L;
-    private static final long SECOND_BOOK_ID = 2L;
+    private static final String FIRST_BOOK_ID = "1";
+    private static final String SECOND_BOOK_ID = "2";
 
     private static final int EXPECTED_NUMBER_OF_COMMENTS = 3;
 
@@ -34,15 +33,15 @@ public class CommentServiceImplTest {
 
     private static final String THIRD_COMMENT_TEXT = "Comment_3";
 
-    private static final long FIRST_COMMENT_ID = 1L;
+    private static final String FIRST_COMMENT_ID = "1";
 
-    private static final long SECOND_COMMENT_ID = 2L;
+    private static final String SECOND_COMMENT_ID = "2";
 
-    private static final long THIRD_COMMENT_ID = 3L;
+    private static final String THIRD_COMMENT_ID = "3";
 
-    private static final long FOURTH_COMMENT_ID = 4L;
+    private static final String FOURTH_COMMENT_ID = "4";
 
-    private static final long FIFTH_COMMENT_ID = 5L;
+    private static final String FIFTH_COMMENT_ID = "5";
 
     @Autowired
     private CommentServiceImpl commentService;
@@ -53,16 +52,16 @@ public class CommentServiceImplTest {
         List<CommentDto> comments = commentService.findAllCommentsByBookId(FIRST_BOOK_ID);
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS)
                 .allMatch(Objects::nonNull)
-                .allMatch(commentDto -> commentDto.getId() != 0 && !commentDto.getText().isEmpty())
-                .matches(c -> c.get(0).getId() == FIRST_COMMENT_ID
-                        && c.get(0).getText().equals(FIRST_COMMENT_TEXT)
-                        && c.get(0).getBookId() == FIRST_BOOK_ID)
-                .matches(c -> c.get(1).getId() == SECOND_COMMENT_ID
-                        && c.get(1).getText().equals(SECOND_COMMENT_TEXT)
-                        && c.get(1).getBookId() == FIRST_BOOK_ID)
-                .matches(c -> c.get(2).getId() == THIRD_COMMENT_ID
-                        && c.get(2).getText().equals(THIRD_COMMENT_TEXT)
-                        && c.get(2).getBookId() == FIRST_BOOK_ID);
+                .allMatch(commentDto -> !commentDto.getId().equals("0") && !commentDto.getText().isEmpty())
+                .matches(c -> Objects.equals(c.get(0).getId(), FIRST_COMMENT_ID)
+                        && Objects.equals(c.get(0).getText(), FIRST_COMMENT_TEXT)
+                        && Objects.equals(c.get(0).getBookId(), FIRST_BOOK_ID))
+                .matches(c -> Objects.equals(c.get(1).getId(), SECOND_COMMENT_ID)
+                        && Objects.equals(c.get(1).getText(), SECOND_COMMENT_TEXT)
+                        && Objects.equals(c.get(1).getBookId(), FIRST_BOOK_ID))
+                .matches(c -> Objects.equals(c.get(2).getId(), THIRD_COMMENT_ID)
+                        && Objects.equals(c.get(2).getText(), THIRD_COMMENT_TEXT)
+                        && Objects.equals(c.get(2).getBookId(), FIRST_BOOK_ID));
     }
 
     @DisplayName(" должен возвращать комментарий по id")
@@ -71,7 +70,8 @@ public class CommentServiceImplTest {
         var optionalCommentDto = commentService.findById(FIRST_COMMENT_ID);
         assertThat(optionalCommentDto).isPresent()
                 .get()
-                .matches(c -> c.getId() == FIRST_COMMENT_ID && c.getText().equals(FIRST_COMMENT_TEXT));
+                .matches(c -> Objects.equals(c.getId(), FIRST_COMMENT_ID)
+                        && Objects.equals(c.getText(), FIRST_COMMENT_TEXT));
     }
 
     @DisplayName(" должен сохранять новый комментарий к книге")
@@ -84,11 +84,9 @@ public class CommentServiceImplTest {
         );
 
         assertThat(returnedCommentDto).isNotNull()
-                //todo FOURTH_COMMENT_ID must work
-                .matches(c -> c.getId() == 0L
-//                .matches(c -> c.getId() == FOURTH_COMMENT_ID
+                .matches(c -> Objects.equals(c.getId(), FOURTH_COMMENT_ID)
                         && c.getText().equals(THIRD_COMMENT_TEXT))
-                .matches(comment -> comment.getBookId() == SECOND_BOOK_ID);
+                .matches(comment -> comment.getBookId().equals(SECOND_BOOK_ID));
 
     }
 
@@ -99,9 +97,9 @@ public class CommentServiceImplTest {
         var optionalCommentDto = commentService.findById(THIRD_COMMENT_ID);
         assertThat(optionalCommentDto).isPresent()
                 .get()
-                .matches(c -> c.getId() == THIRD_COMMENT_ID
-                        && c.getText().equals(THIRD_COMMENT_TEXT)
-                        && c.getBookId() == FIRST_BOOK_ID
+                .matches(c -> Objects.equals(c.getId(), THIRD_COMMENT_ID)
+                        && Objects.equals(c.getText(), THIRD_COMMENT_TEXT)
+                        && Objects.equals(c.getBookId(), FIRST_BOOK_ID)
                 );
 
         var returnedCommentDto = commentService.update(
@@ -111,8 +109,9 @@ public class CommentServiceImplTest {
         );
 
         assertThat(returnedCommentDto).isNotNull()
-                .matches(c -> c.getId() == THIRD_COMMENT_ID && c.getText().equals(FIRST_COMMENT_TEXT))
-                .matches(c -> c.getBookId() == SECOND_BOOK_ID);
+                .matches(c -> Objects.equals(c.getId(), THIRD_COMMENT_ID)
+                        && Objects.equals(c.getText(), FIRST_COMMENT_TEXT))
+                .matches(c -> Objects.equals(c.getBookId(), SECOND_BOOK_ID));
     }
 
     @DisplayName(" должен удалять комментарий по id")
@@ -128,7 +127,7 @@ public class CommentServiceImplTest {
     @DisplayName(" должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
     @Test
     void shouldThrowExceptionWhenTryingToDeleteCommentWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> commentService.deleteById(5L));
+        Assertions.assertDoesNotThrow(() -> commentService.deleteById("5"));
     }
 
     @DisplayName(" должен возвращать пустой Optional при попытке загрузки комментария с несуществующим Id")

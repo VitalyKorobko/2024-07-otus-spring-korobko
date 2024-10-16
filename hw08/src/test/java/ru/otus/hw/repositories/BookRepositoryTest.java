@@ -1,6 +1,7 @@
 package ru.otus.hw.repositories;
 
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.util.CollectionUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,45 +17,40 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Репозиторий на основе Jpa для работы с книгами ")
+@DisplayName("Репозиторий на основе MongoRepository для работы с книгами ")
 @DataMongoTest
-class JpaBookRepositoryTest {
+class BookRepositoryTest {
     private static final int EXPECTED_NUMBER_OF_BOOKS = 3;
 
-    private static final long FIRST_BOOK_ID = 1L;
+    private static final String FIRST_BOOK_ID = "1";
 
-    private static final long FOURTH_BOOK_ID = 4L;
+    private static final String FOURTH_BOOK_ID = "4";
 
-    private static final long FIRST_AUTHOR_ID = 1L;
+    private static final String FIRST_AUTHOR_ID = "1";
 
-    private static final long SECOND_AUTHOR_ID = 2L;
+    private static final String SECOND_AUTHOR_ID = "2";
 
-    private static final long FIRST_GENRE_ID = 1L;
+    private static final String FIRST_GENRE_ID = "1";
 
-    private static final long SECOND_GENRE_ID = 2L;
+    private static final String SECOND_GENRE_ID = "2";
 
-    private static final long FIFTH_GENRE_ID = 5L;
+    private static final String FIFTH_GENRE_ID = "5";
 
-    private static final long SIXTH_GENRE_ID = 6L;
+    private static final String SIXTH_GENRE_ID = "6";
 
     private static final String BOOK_TITLE = "BookTitle_10500";
 
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
-    private BookRepository repositoryJpa;
+    private MongoOperations operations;
 
-    @DisplayName(" должен загружать информацию о нужной книге по её id")
+    @DisplayName("должен загружать информацию о нужной книге по её id")
     @Test
     void shouldFindExpectedBookById() {
-        var optionalActualBook = repositoryJpa.findById(FIRST_BOOK_ID);
-        Book expectedBook = new Book(
-                FIRST_BOOK_ID,
-                "BookTitle_" + FIRST_BOOK_ID,
-                new Author(FIRST_AUTHOR_ID, "Author_" + FIRST_AUTHOR_ID),
-                List.of(new Genre(FIRST_GENRE_ID, "Genre_" + FIRST_GENRE_ID),
-                        new Genre(SECOND_GENRE_ID, "Genre_" + SECOND_GENRE_ID)
-                )
-        );
+        var optionalActualBook = bookRepository.findById(FIRST_BOOK_ID);
+        var expectedBook = operations.findById(FIRST_BOOK_ID, Book.class);
         assertThat(optionalActualBook).isPresent().get()
                 .usingRecursiveComparison().isEqualTo(expectedBook);
     }
@@ -62,32 +58,32 @@ class JpaBookRepositoryTest {
     @DisplayName("должен загружать список всех книг с полной информацией о них")
     @Test
     void shouldReturnCorrectBookListWithAllInfo() {
-        var students = repositoryJpa.findAll();
+        var students = bookRepository.findAll();
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
                 .allMatch(b -> !b.getTitle().equals(""))
                 .allMatch(b -> !CollectionUtils.isEmpty(b.getGenres()))
                 .allMatch(b -> Objects.nonNull(b.getAuthor().getFullName()));
-        System.out.println("\n====================================================================\n");
     }
 
     @DisplayName("должен сохранять новую книгу")
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewBook() {
-        var expectedBook = new Book(FOURTH_BOOK_ID, BOOK_TITLE, new Author(FIRST_AUTHOR_ID, "Author_" + FIRST_AUTHOR_ID),
-                List.of(new Genre(FIRST_GENRE_ID, "Genre_" + FIRST_GENRE_ID),
-                        new Genre(SECOND_GENRE_ID, "Genre_" + SECOND_GENRE_ID)
+        var expectedBook = new Book(FOURTH_BOOK_ID, BOOK_TITLE,
+                operations.findById(FIRST_AUTHOR_ID, Author.class),
+                List.of(Objects.requireNonNull(operations.findById(FIRST_GENRE_ID, Genre.class)),
+                        Objects.requireNonNull(operations.findById(SECOND_GENRE_ID, Genre.class))
                 )
         );
-        var returnedBook = repositoryJpa.save(expectedBook);
+        var returnedBook = bookRepository.save(expectedBook);
         assertThat(returnedBook).isNotNull()
-                .matches(book -> book.getId() > 0)
+                .matches(book -> !book.getId().equals("0"))
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
                 .matches(book -> !CollectionUtils.isEmpty(book.getGenres()))
                 .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
-        assertThat(repositoryJpa.findById(returnedBook.getId())).isPresent().get()
+        assertThat(operations.findById(returnedBook.getId(), Book.class))
                 .isEqualTo(returnedBook);
     }
 
@@ -95,24 +91,25 @@ class JpaBookRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveUpdatedBook() {
-        var expectedBook = new Book(1L, BOOK_TITLE, new Author(FIRST_AUTHOR_ID, "Author_" + SECOND_AUTHOR_ID),
-                List.of(new Genre(FIRST_GENRE_ID, "Genre_" + FIFTH_GENRE_ID),
-                        new Genre(SECOND_GENRE_ID, "Genre_" + SIXTH_GENRE_ID)
+        var expectedBook = new Book(FIRST_BOOK_ID, BOOK_TITLE,
+                operations.findById(SECOND_AUTHOR_ID, Author.class),
+                List.of(Objects.requireNonNull(operations.findById(FIFTH_GENRE_ID, Genre.class)),
+                        Objects.requireNonNull(operations.findById(SIXTH_GENRE_ID, Genre.class))
                 )
         );
 
-        assertThat(repositoryJpa.findById(expectedBook.getId())).isPresent().get()
+        assertThat(operations.findById(expectedBook.getId(), Book.class))
                 .isNotEqualTo(expectedBook);
 
-        var returnedBook = repositoryJpa.save(expectedBook);
+        var returnedBook = bookRepository.save(expectedBook);
         assertThat(returnedBook).isNotNull()
-                .matches(book -> book.getId() > 0)
+                .matches(book -> !book.getId().equals("0"))
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
                 .matches(book -> !CollectionUtils.isEmpty(book.getGenres()))
                 .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
-        assertThat(repositoryJpa.findById(returnedBook.getId())).isPresent().get()
+        assertThat(operations.findById(returnedBook.getId(), Book.class))
                 .isEqualTo(returnedBook);
     }
 
@@ -120,22 +117,22 @@ class JpaBookRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldDeleteBook() {
-        var bookOptional = repositoryJpa.findById(FIRST_BOOK_ID);
-        assertThat(bookOptional).isPresent().get().isNotNull();
-        repositoryJpa.deleteById(FIRST_BOOK_ID);
-        assertThat(repositoryJpa.findById(FIRST_BOOK_ID)).isEmpty();
+        var book = operations.findById(FIRST_BOOK_ID, Book.class);
+        assertThat(book).isNotNull();
+        bookRepository.deleteById(FIRST_BOOK_ID);
+        assertThat(operations.findById(FIRST_BOOK_ID, Book.class)).isNull();
     }
 
     @DisplayName("не должен выбрасывать исключение при попытке удаления книги с несуществующим Id")
     @Test
     void shouldNotThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> repositoryJpa.deleteById(4L));
+        Assertions.assertDoesNotThrow(() -> bookRepository.deleteById(FOURTH_BOOK_ID));
     }
 
     @DisplayName("должен возвращать пустой Optional при попытке загрузки книги с несуществующим Id")
     @Test
     void shouldReturnEmptyOptionalWhenTryingToLoadBookWithNonExistentId() {
-        assertThat(repositoryJpa.findById(4L)).isEmpty();
+        assertThat(bookRepository.findById(FOURTH_BOOK_ID)).isEmpty();
     }
 
 
