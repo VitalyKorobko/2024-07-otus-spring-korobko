@@ -54,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
 
     private CommentDto save(String id, String text, String bookId) {
         var book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new EntityNotFoundException("Book with id %d not found".formatted(bookId)));
+                .orElseThrow(() -> new EntityNotFoundException("Book with id %s not found".formatted(bookId)));
         return commentMapper.toCommentDto(
                 commentRepository.save(new Comment(id, text, book))
         );
