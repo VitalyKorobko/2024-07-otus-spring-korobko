@@ -5,15 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.mapper.CommentMapper;
+import ru.otus.hw.repositories.SequenceRepositoryCustomImpl;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для работы с книгами ")
 @DataMongoTest
-@Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, IdSequencesServiceImpl.class, CommentMapper.class})
+@Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, IdSequencesServiceImpl.class,
+        SequenceRepositoryCustomImpl.class, CommentMapper.class})
 public class BookServiceImplTest {
     private static final String FIRST_BOOK_ID = "1";
 

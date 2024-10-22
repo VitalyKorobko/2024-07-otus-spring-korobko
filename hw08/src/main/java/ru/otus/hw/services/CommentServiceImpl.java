@@ -32,7 +32,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDto> findAllCommentsByBookId(String bookId) {
-        List<Comment> comments = commentRepository.findByBookId(bookId);
         return commentRepository.findByBookId(bookId).stream()
                 .map(commentMapper::toCommentDto).toList();
     }

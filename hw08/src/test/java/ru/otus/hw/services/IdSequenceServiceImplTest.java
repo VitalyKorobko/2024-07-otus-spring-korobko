@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.enums.Seq;
+import ru.otus.hw.repositories.SequenceRepositoryCustomImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для получения id ")
 @DataMongoTest
-@Import({IdSequencesServiceImpl.class})
+@Import({IdSequencesServiceImpl.class, SequenceRepositoryCustomImpl.class})
 public class IdSequenceServiceImplTest {
     private static final String FOURTH_COMMENT_ID = "4";
 
