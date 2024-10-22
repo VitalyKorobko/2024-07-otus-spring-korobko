@@ -14,33 +14,13 @@ import ru.otus.hw.repositories.AuthorRepository;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.CommentRepository;
 import ru.otus.hw.repositories.GenreRepository;
-import ru.otus.hw.repositories.CustomSequenceRepository;
+import ru.otus.hw.repositories.SequenceRepository;
 
 import java.util.List;
 
 @ChangeLog(order = "001")
 public class DatabaseChangelog {
-    private static final String COMMENT_SEQ_ID = "commentId";
-
     private Book book1;
-
-    private Author author1;
-
-    private Author author2;
-
-    private Author author3;
-
-    private Genre genre1;
-
-    private Genre genre2;
-
-    private Genre genre3;
-
-    private Genre genre4;
-
-    private Genre genre5;
-
-    private Genre genre6;
 
     @ChangeSet(order = "000", id = "dropDb", author = "korobko", runAlways = true)
     public void dropDb(MongoDatabase db) {
@@ -49,35 +29,35 @@ public class DatabaseChangelog {
 
     @ChangeSet(order = "001", id = "2024-10-15-001-authors", author = "korobko")
     public void insertAuthors(AuthorRepository repository) {
-        author1 = repository.save(getAuthor(1L));
-        author2 = repository.save(getAuthor(2L));
-        author3 = repository.save(getAuthor(3L));
+        repository.save(getAuthor(1L));
+        repository.save(getAuthor(2L));
+        repository.save(getAuthor(3L));
     }
 
     @ChangeSet(order = "002", id = "2024-10-15-002-genres", author = "korobko")
     public void insertGenres(GenreRepository repository) {
-        genre1 = repository.save(getGenre(1L));
-        genre2 = repository.save(getGenre(2L));
-        genre3 = repository.save(getGenre(3L));
-        genre4 = repository.save(getGenre(4L));
-        genre5 = repository.save(getGenre(5L));
-        genre6 = repository.save(getGenre(6L));
+        repository.save(getGenre(1L));
+        repository.save(getGenre(2L));
+        repository.save(getGenre(3L));
+        repository.save(getGenre(4L));
+        repository.save(getGenre(5L));
+        repository.save(getGenre(6L));
     }
 
     @ChangeSet(order = "003", id = "2024-10-15-003-books", author = "korobko")
-    public void insertBooks(BookRepository repository, CustomSequenceRepository customSequenceRepository) {
-        book1 = repository.save(getBook(1L, author1, genre1, genre2));
-        repository.save(getBook(2L, author2, genre3, genre4));
-        repository.save(getBook(3L, author3, genre5, genre6));
-        customSequenceRepository.insert(new CustomSequence(Seq.BOOK.getSeqName(), 3L));
+    public void insertBooks(BookRepository repository, SequenceRepository sequenceRepository) {
+        book1 = repository.save(getBook(1L, getAuthor(1L), getGenre(1L), getGenre(2L)));
+        repository.save(getBook(2L, getAuthor(2L), getGenre(3L), getGenre(4L)));
+        repository.save(getBook(3L, getAuthor(3L), getGenre(5L), getGenre(6L)));
+        sequenceRepository.insert(new CustomSequence(Seq.BOOK.getSeqName(), 3L));
     }
 
     @ChangeSet(order = "004", id = "2024-10-15-004-comments", author = "korobko")
-    public void insertComments(CommentRepository repository, CustomSequenceRepository customSequenceRepository) {
+    public void insertComments(CommentRepository repository, SequenceRepository sequenceRepository) {
         repository.save(getComment(1L, book1));
         repository.save(getComment(2L, book1));
         repository.save(getComment(3L, book1));
-        customSequenceRepository.insert(new CustomSequence(Seq.COMMENT.getSeqName(), 3L));
+        sequenceRepository.insert(new CustomSequence(Seq.COMMENT.getSeqName(), 3L));
     }
 
     private Comment getComment(long id, Book book) {

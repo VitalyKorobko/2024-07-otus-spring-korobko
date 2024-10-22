@@ -2,7 +2,6 @@ package ru.otus.hw.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.enums.Seq;
 import ru.otus.hw.exceptions.EntityNotFoundException;
@@ -26,14 +25,12 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<CommentDto> findById(String id) {
         return commentRepository.findById(id)
                 .map(commentMapper::toCommentDto);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<CommentDto> findAllCommentsByBookId(String bookId) {
         List<Comment> comments = commentRepository.findByBookId(bookId);
         return commentRepository.findByBookId(bookId).stream()
@@ -41,13 +38,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public CommentDto insert(String text, String bookId) {
         return save(idSequencesService.getNextId(Seq.COMMENT.getSeqName()), text, bookId);
     }
 
     @Override
-    @Transactional
     public CommentDto update(String id, String text, String bookId) {
         return save(id, text, bookId);
     }
@@ -61,7 +56,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public void deleteById(String id) {
         commentRepository.deleteById(id);
     }

@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Сервис для работы с комментариями ")
 @DataMongoTest
 @Import({CommentServiceImpl.class, IdSequencesServiceImpl.class, CommentMapper.class})
-@Transactional(propagation = Propagation.NEVER)
 public class CommentServiceImplTest {
     private static final String FIRST_BOOK_ID = "1";
     private static final String SECOND_BOOK_ID = "2";

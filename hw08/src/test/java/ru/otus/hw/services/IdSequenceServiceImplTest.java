@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Сервис для получения id ")
 @DataMongoTest
 @Import({IdSequencesServiceImpl.class})
-@Transactional(propagation = Propagation.NEVER)
 public class IdSequenceServiceImplTest {
     private static final String FOURTH_COMMENT_ID = "4";
 

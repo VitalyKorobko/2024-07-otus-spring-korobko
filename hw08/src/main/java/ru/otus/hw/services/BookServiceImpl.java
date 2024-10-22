@@ -36,33 +36,28 @@ public class BookServiceImpl implements BookService {
     private final BookMapper bookMapper;
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<BookDto> findById(String id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toBookDto);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toBookDto).toList();
     }
 
     @Override
-    @Transactional
     public BookDto insert(String title, String authorId, Set<String> genresIds) {
         return save(idSequencesService.getNextId(Seq.BOOK.getSeqName()), title, authorId, genresIds);
     }
 
     @Override
-    @Transactional
     public BookDto update(String id, String title, String authorId, Set<String> genresIds) {
         return save(id, title, authorId, genresIds);
     }
 
     @Override
-    @Transactional
     public void deleteById(String id) {
         bookRepository.deleteById(id);
         commentRepository.deleteAllByBookId(id);

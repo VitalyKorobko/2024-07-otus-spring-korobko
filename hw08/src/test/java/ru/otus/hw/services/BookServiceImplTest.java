@@ -24,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Сервис для работы с книгами ")
 @DataMongoTest
 @Import({BookServiceImpl.class, BookMapper.class, CommentServiceImpl.class, IdSequencesServiceImpl.class, CommentMapper.class})
-@Transactional(propagation = Propagation.NEVER)
 public class BookServiceImplTest {
     private static final String FIRST_BOOK_ID = "1";
 
