@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг с комментариями</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+<main class="container">
+    <h3>Выберите книгу, по которой хотите посмотреть комментарии:</h3>
+    <div class="items" th:if="${!books.isEmpty()}">
+        <table class="rows">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genres</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}">999</td>
+                <td><a class="link" href="comments.html" th:href="@{/comments/}+${book.id}" th:text="${book.title}">Some
+                    Title</a></td>
+                <td th:text="${book.authorDto.fullName}">Some Author</td>
+                <td><span th:each="genre : ${book.listDtoGenres}" th:text="${genre.name} + '; '">some genre</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${books.isEmpty()}" class="block">
+        <p>Нет ни одной книги</p>
+    </div>
+    <div class="items comment-item">
+        <a href="add-comment.html" th:href="@{/comment/new}">
+            <button class="edit-btn" type="button">Добавить комментарий</button>
+        </a>
+    </div>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список комментариев</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+<main class="container">
+    <h3 th:text="'Список комментариев для книги: ' + ${bookInfo}">Список комментариев для книги:</h3>
+    <div class="items" th:if="${!comments.isEmpty()}">
+        <table class="rows">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th>BookId</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="comment : ${comments}">
+                <td th:text="${comment.id}">999</td>
+                <td><a class="link" href="comment.html" th:href="@{/comment(num=${comment.id})}" th:text="${comment.text}">some comment</a></td>
+                <td th:text="${comment.bookId}">some book</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${comments.isEmpty()}" class="block">
+        <p>Нет ни одного комментария</p>
+    </div>
+    <div class="items comment-item">
+        <a href="add-comment.html" th:href="@{/comments}">
+            <button class="edit-btn" type="button">Вернуться к списку</button>
+        </a>
+    </div>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>

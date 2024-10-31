@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить книгу</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+<main class="container">
+    <h3>Изменить книгу</h3>
+    <form method="post" th:action="@{'/book/' + ${book.id}+'/update'}">
+        <div class="row">
+            <label for="id-input">ID:</label>
+            <input id="id-input" type="number" readonly="readonly" name="id" th:value="${book.id}" value="999"/>
+        </div>
+
+        <div>
+            <label for="title-book" th:text="'Введите&nbsp;название&nbsp;книги'">Book title</label>
+            <input id="title-book" type="text" name="title" placeholder="Введите название книги"
+                   th:value="${book.title}" value="some title">
+            <div class="errors" th:if="${#fields.hasErrors('book.title')}" th:errors="${book.title}">Wrong title</div>
+        </div>
+
+        <div class="row">
+            <label for="author-id" th:text="'Выберите&nbsp;имя&nbsp;автора&nbsp;книги'">Book author:</label>
+            <select id="author-id" name="authorId">
+                <option th:each="author : ${authors}" th:value="${author.id}"
+                        th:text="${author.fullName}"></option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label for="genres-ids" th:text="'Выберите&nbsp;жанры&nbsp;для&nbsp;книги'">Book genres</label>
+            <select required multiple name="setGenresId" id="genres-ids">
+                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+            </select>
+        </div>
+        <button type="submit">Изменить</button>
+        <a href="index.html" th:href="@{/}" ><button type="button">Отменить</button></a>
+        <a th:href="@{/book/del/} + '' + ${book.id}" ><button type="button">Удалить</button></a>
+    </form>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>
