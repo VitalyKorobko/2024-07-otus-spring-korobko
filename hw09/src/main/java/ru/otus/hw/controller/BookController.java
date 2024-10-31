@@ -4,15 +4,16 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import ru.otus.hw.dto.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.services.AuthorService;
 import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.GenreService;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 public class BookController {
@@ -93,7 +94,7 @@ public class BookController {
     }
 
     @GetMapping("/book/del/{id}")
-    public String deleteComment(@PathVariable long id) {
+    public String deleteBook(@PathVariable long id) {
         bookService.deleteById(id);
         return "redirect:/";
     }

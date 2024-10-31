@@ -38,7 +38,7 @@
         </div>
         <button type="submit">Изменить</button>
         <a href="index.html" th:href="@{/}" ><button type="button">Отменить</button></a>
-        <a th:href="@{/book/del/} + '' + ${book.id}" ><button type="button">Удалить</button></a>
+        <a methods="delete" th:href="@{/book/del/} + '' + ${book.id}" ><button type="button">Удалить</button></a>
     </form>
 </main>
 <div th:replace="layouts/footer :: footer"></div>
