@@ -11,6 +11,7 @@ import ru.otus.hw.dto.AuthorDto;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.dto.GenreDto;
+import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.services.AuthorService;
 import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.GenreService;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@WebMvcTest(BookController.class)
+@WebMvcTest({BookController.class, BookMapper.class})
 public class BookControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -82,7 +83,8 @@ public class BookControllerTest {
 
         var result = mvc.perform(get("/book").param("num", "1"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("book", bookDto))
+                .andExpect(model().attribute("book",
+                        new BookDtoWeb(1, bookDto.getTitle(), 1, Set.of(1L))))
                 .andExpect(model().attribute("authors", authorDtoList))
                 .andExpect(model().attribute("genres", genreDtoList))
                 .andReturn().getResponse().getContentAsString();

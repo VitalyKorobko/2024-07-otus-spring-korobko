@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.services.AuthorService;
 import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.GenreService;
@@ -23,10 +24,14 @@ public class BookController {
 
     private final GenreService genreService;
 
-    public BookController(BookService bookService, AuthorService authorService, GenreService genreService) {
+    private final BookMapper mapper;
+
+    public BookController(BookService bookService, AuthorService authorService,
+                          GenreService genreService, BookMapper mapper) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.genreService = genreService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/")
@@ -37,8 +42,9 @@ public class BookController {
 
     @GetMapping("/book")
     public String editBook(@RequestParam("num") long id, Model model) {
-        model.addAttribute("book", bookService.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Книга с id = %d не найдена".formatted(id))));
+        var bookDto = bookService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Книга с id = %d не найдена".formatted(id)));
+        model.addAttribute("book", mapper.toBookDtoWeb(bookDto));
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("genres", genreService.findAll());
         return "update-book";

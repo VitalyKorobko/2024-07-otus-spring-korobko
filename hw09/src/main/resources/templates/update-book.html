@@ -24,7 +24,7 @@
 
         <div class="row">
             <label for="author-id" th:text="'Выберите&nbsp;имя&nbsp;автора&nbsp;книги'">Book author:</label>
-            <select id="author-id" name="authorId">
+            <select th:field="${book.authorId}" id="author-id" name="authorId">
                 <option th:each="author : ${authors}" th:value="${author.id}"
                         th:text="${author.fullName}"></option>
             </select>
@@ -32,7 +32,7 @@
 
         <div class="row">
             <label for="genres-ids" th:text="'Выберите&nbsp;жанры&nbsp;для&nbsp;книги'">Book genres</label>
-            <select required multiple name="setGenresId" id="genres-ids">
+            <select required multiple th:field="${book.setGenresId}"  name="setGenresId" id="genres-ids">
                 <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
             </select>
         </div>

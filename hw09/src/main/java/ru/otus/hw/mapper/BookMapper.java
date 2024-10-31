@@ -3,10 +3,13 @@ package ru.otus.hw.mapper;
 import org.springframework.stereotype.Component;
 import ru.otus.hw.dto.AuthorDto;
 import ru.otus.hw.dto.BookDto;
+import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
+
+import java.util.stream.Collectors;
 
 
 @Component
@@ -26,6 +29,15 @@ public class BookMapper {
                 book.getTitle(),
                 new AuthorDto(book.getAuthor().getId(), book.getAuthor().getFullName()),
                 book.getGenres().stream().map(g -> new GenreDto(g.getId(), g.getName())).toList()
+        );
+    }
+
+    public BookDtoWeb toBookDtoWeb(BookDto bookDto) {
+        return new BookDtoWeb(
+                bookDto.getId(),
+                bookDto.getTitle(),
+                bookDto.getAuthorDto().getId(),
+                bookDto.getListDtoGenres().stream().map(GenreDto::getId).collect(Collectors.toSet())
         );
     }
 
