@@ -9,7 +9,7 @@
 <div th:replace="layouts/header :: header"></div>
 <main class="container">
     <h3>Изменить книгу</h3>
-    <form method="post" th:action="@{'/book/' + ${book.id}+'/update'}">
+    <form th:method="post" th:action="@{'/book/' + ${book.id}+'/update'}">
         <div class="row">
             <label for="id-input">ID:</label>
             <input id="id-input" type="number" readonly="readonly" name="id" th:value="${book.id}" value="999"/>
@@ -38,8 +38,12 @@
         </div>
         <button type="submit">Изменить</button>
         <a href="index.html" th:href="@{/}" ><button type="button">Отменить</button></a>
-        <a methods="delete" th:href="@{/book/del/} + '' + ${book.id}" ><button type="button">Удалить</button></a>
     </form>
+    <div class="row">
+        <form action="index.html" th:action="@{/book/del/} + '' + ${book.id}" th:method="post">
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
 </main>
 <div th:replace="layouts/footer :: footer"></div>
 </body>

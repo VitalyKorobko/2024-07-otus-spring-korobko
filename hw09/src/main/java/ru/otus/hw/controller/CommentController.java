@@ -82,7 +82,7 @@ public class CommentController {
         return "redirect:/comments/%d".formatted(comment.getBookId());
     }
 
-    @GetMapping("/comment/del/{id}")
+    @PostMapping("/comment/del/{id}")
     public String deleteComment(@PathVariable long id) {
         commentService.deleteById(id);
         return "redirect:/comments";

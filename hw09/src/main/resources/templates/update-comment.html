@@ -9,7 +9,8 @@
 <div th:replace="layouts/header :: header"></div>
 <main class="container">
     <h3 th:text="'Комментарий N ' + ${comment.id}">Comment:</h3>
-    <form id="comment-form" action="comment.html" th:action="@{/comment(num=${comment.id})}" th:method="post" th:object="${comment}">
+    <form id="comment-form" action="comment.html" th:action="@{/comment(num=${comment.id})}" th:method="post"
+          th:object="${comment}">
         <div class="row">
             <label for="id-input">ID:</label>
             <input id="id-input" type="text" readonly="readonly" name="id" th:value="*{id}" value="999"/>
@@ -23,7 +24,7 @@
 
         <div class="row">
             <label for="comment-book-id" th:text="'Выберите&nbsp;книгу'">Label</label>
-            <select th:field="*{bookId}"  id="comment-book-id" name="bookId">
+            <select th:field="*{bookId}" id="comment-book-id" name="bookId">
                 <option th:each="book : ${books}" th:value="${book.id}"
                         th:text="${book.id} + ' ' + ${book.title}"></option>
             </select>
@@ -31,10 +32,16 @@
 
         <div class="row">
             <button type="submit">Сохранить</button>
-            <a href="index.html" th:href="@{/comments/} + '' + *{bookId}" ><button type="button">Отменить</button></a>
-            <a href="index.html" th:href="@{/comment/del/} + '' + *{id}" ><button type="button">Удалить</button></a>
+            <a href="index.html" th:href="@{/comments/} + '' + *{bookId}">
+                <button type="button">Отменить</button>
+            </a>
         </div>
     </form>
+    <div class="row">
+        <form action="index.html" th:action="@{/comment/del/} + '' + ${comment.id}" th:method="post">
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
 </main>
 <div th:replace="layouts/footer :: footer"></div>
 </body>

@@ -205,7 +205,7 @@ public class BookControllerTest {
     @Test
     @DisplayName("Должен удалять книгу")
     void shouldDeleteBook() throws Exception {
-        mvc.perform(get("/book/del/1"))
+        mvc.perform(post("/book/del/1"))
                 .andExpect(status().is(302))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
         verify(bookService, times(1)).deleteById(1L);
