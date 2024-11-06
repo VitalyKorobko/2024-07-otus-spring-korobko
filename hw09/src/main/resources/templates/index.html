@@ -22,7 +22,7 @@
             <tbody>
             <tr th:each="book : ${books}">
                 <td th:text="${book.id}">999</td>
-                <td><a class="link" href="book.html" th:href="@{/book(num=${book.id})}" th:text="${book.title}">Some Title</a></td>
+                <td><a class="link" href="book.html" th:href="@{/book/} + ${book.id}" th:text="${book.title}">Some Title</a></td>
                 <td th:text="${book.authorDto.fullName}">Some Author</td>
                 <td><span th:each="genre : ${book.listDtoGenres}" th:text="${genre.name} + '; '">some genre</span></td>
             </tr>

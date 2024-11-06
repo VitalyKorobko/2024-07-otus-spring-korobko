@@ -9,7 +9,7 @@
 <div th:replace="layouts/header :: header"></div>
 <main class="container">
     <h3 th:text="'Комментарий N ' + ${comment.id}">Comment:</h3>
-    <form id="comment-form" action="comment.html" th:action="@{/comment(num=${comment.id})}" th:method="post"
+    <form id="comment-form" action="comment.html" th:action="@{/comment/}" th:method="post"
           th:object="${comment}">
         <div class="row">
             <label for="id-input">ID:</label>
@@ -32,7 +32,7 @@
 
         <div class="row">
             <button type="submit">Сохранить</button>
-            <a href="index.html" th:href="@{/comments/} + '' + *{bookId}">
+            <a href="index.html" th:href="@{/comment/book(book_id=*{bookId})}">
                 <button type="button">Отменить</button>
             </a>
         </div>

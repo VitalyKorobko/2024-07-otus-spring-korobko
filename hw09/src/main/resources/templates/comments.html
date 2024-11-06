@@ -21,7 +21,7 @@
             <tbody>
             <tr th:each="comment : ${comments}">
                 <td th:text="${comment.id}">999</td>
-                <td><a class="link" href="comment.html" th:href="@{/comment(num=${comment.id})}" th:text="${comment.text}">some comment</a></td>
+                <td><a class="link" href="comment.html" th:href="@{/comment/} + ${comment.id}" th:text="${comment.text}">some comment</a></td>
                 <td th:text="${comment.bookId}">some book</td>
             </tr>
             </tbody>
@@ -31,7 +31,7 @@
         <p>Нет ни одного комментария</p>
     </div>
     <div class="items comment-item">
-        <a href="add-comment.html" th:href="@{/comments}">
+        <a href="add-comment.html" th:href="@{/comment/all}">
             <button class="edit-btn" type="button">Вернуться к списку</button>
         </a>
     </div>

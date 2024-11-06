@@ -1,11 +1,6 @@
 spring:
   datasource:
     url: jdbc:h2:mem:maindb
-#  sql:
-#    init:
-#      mode: always
-#      data-locations: data.sql
-#      schema-locations: schema.sql
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
@@ -21,7 +16,6 @@ spring:
 logging:
   level:
     ROOT: ERROR
-#    ROOT: DEBUG
 
 server:
   port: 7003

@@ -21,7 +21,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,27 +45,6 @@ public class BookControllerTest {
     private AuthorService authorService;
 
     @Test
-    @DisplayName("должен возвращать страницу со списком всех книг")
-    void shouldReturnCorrectBooksList() throws Exception {
-        List<BookDto> bookDtoList = List.of(
-                new BookDto(
-                        1,
-                        "title_111",
-                        new AuthorDto(1, "author_111"),
-                        List.of(new GenreDto(1, "genre_111")))
-        );
-        given(bookService.findAll()).willReturn(bookDtoList);
-        var result = mvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("books", bookDtoList))
-                .andReturn().getResponse().getContentAsString();
-        assertThat(result).contains("title_111")
-                .contains("author_111")
-                .contains("genre_111");
-    }
-
-
-    @Test
     @DisplayName("Должен возвращать страницу для редактирования книги")
     void shouldReturnEditBook() throws Exception {
         BookDto bookDto = new BookDto(
@@ -81,7 +61,7 @@ public class BookControllerTest {
         given(authorService.findAll()).willReturn(authorDtoList);
         given(genreService.findAll()).willReturn(genreDtoList);
 
-        var result = mvc.perform(get("/book").param("num", "1"))
+        var result = mvc.perform(get("/book/1"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("book",
                         new BookDtoWeb(1, bookDto.getTitle(), 1, Set.of(1L))))

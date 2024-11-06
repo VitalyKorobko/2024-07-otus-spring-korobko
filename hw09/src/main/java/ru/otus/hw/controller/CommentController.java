@@ -4,11 +4,12 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.otus.hw.converters.BookDtoConverter;
 import ru.otus.hw.dto.CommentDto;
 import ru.otus.hw.exceptions.EntityNotFoundException;
@@ -16,6 +17,7 @@ import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.CommentService;
 
 @Controller
+@RequestMapping("/comment")
 public class CommentController {
     private final CommentService commentService;
 
@@ -29,29 +31,29 @@ public class CommentController {
         this.converter = converter;
     }
 
-    @GetMapping("comments")
-    public String listBookWithComments(Model model) {
+    @GetMapping("/all")
+    public String getBookWithComments(Model model) {
         model.addAttribute("books", bookService.findAll());
         return "books-by-comments";
     }
 
-    @GetMapping("/comments/{id}")
-    public String listCommentsByBook(Model model, @PathVariable("id") long id) {
-        model.addAttribute("comments", commentService.findAllCommentsByBookId(id));
-        model.addAttribute("bookInfo", converter.bookDtoToString(bookService.findById(id)
+    @GetMapping("/book")
+    public String getCommentsByBook(Model model, @RequestParam("book_id") long bookId) {
+        model.addAttribute("comments", commentService.findAllCommentsByBookId(bookId));
+        model.addAttribute("bookInfo", converter.bookDtoToString(bookService.findById(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("такой книги не найдено"))));
         return "comments";
     }
 
-    @GetMapping("/comment")
-    public String editComment(Model model, @RequestParam("num") long id) {
+    @GetMapping("/{id}")
+    public String editComment(Model model, @PathVariable("id") long id) {
         model.addAttribute("comment", commentService.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Комментарий с id = %d не найден".formatted(id))));
         model.addAttribute("books", bookService.findAll());
         return "update-comment";
     }
 
-    @PostMapping("/comment")
+    @PostMapping("/")
     public String updateComment(@Valid @ModelAttribute("comment") CommentDto comment,
                                 BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -60,17 +62,17 @@ public class CommentController {
             return "update-comment";
         }
         commentService.update(comment.getId(), comment.getText(), comment.getBookId());
-        return "redirect:/comments/%d".formatted(comment.getBookId());
+        return "redirect:/comment/book?book_id=%d".formatted(comment.getBookId());
     }
 
-    @GetMapping("/comment/new")
+    @GetMapping("/new")
     public String addComment(Model model) {
         model.addAttribute("comment", new CommentDto());
         model.addAttribute("books", bookService.findAll());
         return "add-comment";
     }
 
-    @PostMapping("/comment/new")
+    @PostMapping("/new")
     public String saveComment(@Valid @ModelAttribute("comment") CommentDto comment,
                               BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -79,13 +81,13 @@ public class CommentController {
             return "add-comment";
         }
         commentService.insert(comment.getText(), comment.getBookId());
-        return "redirect:/comments/%d".formatted(comment.getBookId());
+        return "redirect:/comment/book?book_id=%d".formatted(comment.getBookId());
     }
 
-    @PostMapping("/comment/del/{id}")
+    @PostMapping("/del/{id}")
     public String deleteComment(@PathVariable long id) {
         commentService.deleteById(id);
-        return "redirect:/comments";
+        return "redirect:/comment/all";
     }
 
 
