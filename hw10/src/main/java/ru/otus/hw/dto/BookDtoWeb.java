@@ -1,6 +1,5 @@
 package ru.otus.hw.dto;
 
-//import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ public class BookDtoWeb {
 
     private long id;
 
-//    @NotBlank(message = "Поле не должно быть пустым")
     private String title;
 
     private long authorId;
