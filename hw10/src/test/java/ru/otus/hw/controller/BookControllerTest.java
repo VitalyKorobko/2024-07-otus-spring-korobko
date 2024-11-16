@@ -1,6 +1,9 @@
 package ru.otus.hw.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +12,19 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.AuthorDto;
 import ru.otus.hw.dto.BookDto;
+import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.services.BookService;
+import ru.otus.hw.controller.exceptionhandler.ErrorResponse;
 
+import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
@@ -30,6 +39,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest({BookController.class, BookMapper.class})
 public class BookControllerTest {
+    private static final String MESSAGE = "Не найдено! Книга с id = 1 не найдена";
+
+    private static final String SERVER_ERROR_MESSAGE = "Server error! The request could not be completed.";
+
+    private static final String VALIDATE_TITLE_MESSAGE = "Поле название книги не может быть пустым";
+
+    private static final String VALIDATE_AUTHOR_ID_MESSAGE = "Выберите автора книги";
+
+    private static final String VALIDATE_SET_GENRES_ID_MESSAGE = "Выберите жанры для книги";
+
     @Autowired
     private MockMvc mvc;
 
@@ -54,7 +73,7 @@ public class BookControllerTest {
         );
         given(bookService.findAll()).willReturn(bookDtoList);
 
-        mvc.perform(get("/api/v1/book/all"))
+        mvc.perform(get("/api/v1/book"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(bookDtoList)));
     }
@@ -76,23 +95,74 @@ public class BookControllerTest {
     }
 
     @Test
+    @DisplayName("должен возвращать ErrorResponse, если книги с запрашиваемым id не существует")
+    void shouldReturnErrorResponseIfBookNotExist() throws Exception {
+        mvc.perform(get("/api/v1/book/1"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json(mapper.writeValueAsString(new ErrorResponse(MESSAGE))));
+    }
+
+    @Test
     @DisplayName("должен корректно сохранять новую книгу")
     void shouldCorrectSaveNewBook() throws Exception {
-        var expectedBookDto = new BookDto(
+        var bookDto = new BookDto(
                 1,
                 "title_111",
                 new AuthorDto(1, "author_111"),
                 List.of(new GenreDto(1, "genre_111"))
         );
-        var bookDtoWeb = bookMapper.toBookDtoWeb(expectedBookDto);
+        var bookDtoWeb = bookMapper.toBookDtoWeb(bookDto, null);
         given(bookService.insert(bookDtoWeb.getTitle(), bookDtoWeb.getAuthorId(), bookDtoWeb.getSetGenresId()))
-                .willReturn(expectedBookDto);
+                .willReturn(bookDto);
         String requestBody = mapper.writeValueAsString(bookDtoWeb);
 
-        mvc.perform(post("/api/v1/book/new").contentType(APPLICATION_JSON)
+        mvc.perform(post("/api/v1/book").contentType(APPLICATION_JSON)
                         .content(requestBody))
-                .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(expectedBookDto)));
+                .andExpect(status().isCreated())
+                .andExpect(content().json(mapper.writeValueAsString(bookDtoWeb)));
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю title, Post метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectByTitleFieldWhenUsingPostMethod() throws Exception {
+        var result = mvc.perform(post("/api/v1/book").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(0L, "", 1L, Set.of(1L), null))))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_TITLE_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю authorId, Post метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectByAuthorIdFieldWhenUsingPostMethod() throws Exception {
+        var result = mvc.perform(post("/api/v1/book").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(0L, "title", 0L, Set.of(1L), null))))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_AUTHOR_ID_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю setGenresId, Post метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectBySetGenresIdFieldWhenUsingPostMethod() throws Exception {
+        var result = mvc.perform(post("/api/v1/book").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(0L, "title", 1L, new HashSet<>(), null))))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_SET_GENRES_ID_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать ErrorResponse, если переданы неверные данные в форму для создания новой книги")
+    void shouldReturnErrorResponseIfBookDtoWebByNewBookIsNotCorrect() throws Exception {
+        var title = "some title";
+        var authorId = 10L;
+        var setGenres = Set.of(1L, 2L);
+        given(bookService.insert(title, authorId, setGenres)).willThrow(new RuntimeException());
+        mvc.perform(post("/api/v1/book").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(0, title, authorId, setGenres, any()))))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().json(mapper.writeValueAsString(new ErrorResponse(SERVER_ERROR_MESSAGE))));
     }
 
     @Test
@@ -110,7 +180,7 @@ public class BookControllerTest {
                 new AuthorDto(2, "author_222"),
                 List.of(new GenreDto(2, "genre_222"))
         );
-        var bookDtoWeb = bookMapper.toBookDtoWeb(expectedBookDto);
+        var bookDtoWeb = bookMapper.toBookDtoWeb(expectedBookDto, any());
 
         given(bookService.findById(1)).willReturn(Optional.of(bookDto));
         given(bookService.update(
@@ -122,10 +192,53 @@ public class BookControllerTest {
 
         String requestBody = mapper.writeValueAsString(bookDtoWeb);
 
-        mvc.perform(patch("/api/v1/book").contentType(APPLICATION_JSON)
+        mvc.perform(patch("/api/v1/book/1").contentType(APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(expectedBookDto)));
+                .andExpect(content().json(requestBody));
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю title, Patch метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectByTitleFieldWhenUsingPatchMethod() throws Exception {
+        var result = mvc.perform(patch("/api/v1/book/1").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(1L, "", 1L, Set.of(1L), null))))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_TITLE_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю authorId, Post метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectByAuthorIdFieldWhenUsingPatchMethod() throws Exception {
+        var result = mvc.perform(patch("/api/v1/book/1").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(1L, "title", 0L, Set.of(1L), null))))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_AUTHOR_ID_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать BookDtoWeb с не пустым комментарием, если валидация не проходит по полю setGenresId, Post метод")
+    void shouldReturnNotNullMessageIfValidateNotCorrectBySetGenresIdFieldWhenUsingPatchMethod() throws Exception {
+        var result = mvc.perform(patch("/api/v1/book/1").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(1L, "title", 1L, new HashSet<>(), null))))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        assertThat(result).contains(VALIDATE_SET_GENRES_ID_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("должен возвращать ErrorResponse, если переданы неверные данные в форму для редактирования книги")
+    void shouldReturnErrorResponseIfBookDtoWebByExistBookIsNotCorrect() throws Exception {
+        var title = "some title";
+        var authorId = 10L;
+        var setGenres = Set.of(1L, 2L);
+        given(bookService.update(1, title, authorId, setGenres)).willThrow(new RuntimeException());
+        mvc.perform(patch("/api/v1/book/1").contentType(APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(new BookDtoWeb(1 , title, authorId, setGenres, any()))))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().json(mapper.writeValueAsString(new ErrorResponse(SERVER_ERROR_MESSAGE))));
     }
 
     @Test

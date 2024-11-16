@@ -1,6 +1,9 @@
 import React from 'react'
+import BookRepository from '../repository/BookRepository'
 
 export default class FormByNewComment extends React.Component {
+
+    bookRepository = new BookRepository
 
     constructor(props) {
         super(props)
@@ -13,10 +16,7 @@ export default class FormByNewComment extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
-        fetch('/api/v1/book/all')
-            .then(response => response.json())
-            .then(storageBooks => this.setState({storageBooks}))
+        this.bookRepository.findAll().then(storageBooks => this.setState({storageBooks}))
     }
 
 
@@ -35,8 +35,8 @@ export default class FormByNewComment extends React.Component {
 
                 <div className="row">
                     <label htmlFor="book-id">Выберите&nbsp;книгу</label>
-                    <select onChange = {e => this.setState({bookId: e.target.value})} id="book-id" name="bookId">
-                        <option disabled selected value>--выберите книгу--</option>
+                    <select id="book-id" defaultValue="default" onChange = {e => this.setState({bookId: e.target.value})} name="bookId">
+                        <option disabled value="default">--выберите книгу--</option>
                         {
                             this.state.storageBooks.map((book, i) => (
                                 <option value={book.id} key={i}>

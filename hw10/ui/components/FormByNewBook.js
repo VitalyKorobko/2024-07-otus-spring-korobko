@@ -1,7 +1,11 @@
 import React from 'react'
+import AuthorRepository from '../repository/AuthorRepository';
+import GenreRepository from '../repository/GenreRepository';
 
 export default class FormByNewBook extends React.Component {
 
+    genreRepository = new GenreRepository
+    authorRepository = new AuthorRepository
 
     constructor(props) {
         super(props)
@@ -17,12 +21,8 @@ export default class FormByNewBook extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/v1/authors')
-            .then(response => response.json())
-            .then(storageAutors => this.setState({storageAutors}))
-        fetch('/api/v1/genres')
-            .then(response => response.json())
-            .then(storageGenres => this.setState({storageGenres}))
+        this.authorRepository.findAll().then(storageAutors => this.setState({storageAutors}))
+        this.genreRepository.findAll().then(storageGenres => this.setState({storageGenres}))
     }
 
 
@@ -41,8 +41,8 @@ export default class FormByNewBook extends React.Component {
 
                 <div className="row">
                     <label htmlFor="author-id">Выберите&nbsp;имя&nbsp;автора&nbsp;книги</label>
-                    <select onChange = {e => this.setState({author: e.target.value})} id="author-id" name="authorId">
-                        <option disabled selected value>--выберите автора--</option>
+                    <select defaultValue = {"default"}onChange = {e => this.setState({author: e.target.value})} id="author-id" name="authorId">
+                        <option disabled value={"default"}>--выберите автора--</option>
                         {
                             this.state.storageAutors.map((author, i) => (
                                 <option value={author.id} key={i}>
@@ -56,7 +56,7 @@ export default class FormByNewBook extends React.Component {
 
                 <div className="row">
                     <label htmlFor="genres-ids">Выберите&nbsp;жанры&nbsp;для&nbsp;книги</label>
-                    <select multiple={true} onChange = {e => this.setState({genres: this.getGenres(e.target.selectedOptions)})} required>
+                    <select id="genres-ids" multiple={true} onChange = {e => this.setState({genres: this.getGenres(e.target.selectedOptions)})} required>
                         {
                             this.state.storageGenres.map((genre, i) => (
                                 <option value={genre.id} key={i}>

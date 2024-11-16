@@ -1,6 +1,8 @@
 package ru.otus.hw.controller;
 
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.services.BookService;
 
 import java.util.List;
@@ -20,11 +23,14 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-    public BookController(BookService bookService) {
+    private final BookMapper mapper;
+
+    public BookController(BookService bookService, BookMapper mapper) {
         this.bookService = bookService;
+        this.mapper = mapper;
     }
 
-    @GetMapping("/api/v1/book/all")
+    @GetMapping("/api/v1/book")
     public List<BookDto> getBooks() {
         return bookService.findAll();
     }
@@ -35,34 +41,48 @@ public class BookController {
                 .orElseThrow(() -> new EntityNotFoundException("Книга с id = %d не найдена".formatted(id)));
     }
 
-    @PostMapping("/api/v1/book/new")
-    public BookDto saveBook(@RequestBody BookDtoWeb bookDtoWeb) {
-        return bookService.insert(
-                bookDtoWeb.getTitle(),
-                bookDtoWeb.getAuthorId(),
-                bookDtoWeb.getSetGenresId()
+    @PostMapping("/api/v1/book")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookDtoWeb saveBook(@Valid @RequestBody BookDtoWeb bookDtoWeb, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new BookDtoWeb(
+                    0,
+                    bookDtoWeb.getTitle(),
+                    bookDtoWeb.getAuthorId(),
+                    bookDtoWeb.getSetGenresId(),
+                    bindingResult.getFieldError().getDefaultMessage());
+        }
+        return mapper.toBookDtoWeb(bookService.insert(
+                        bookDtoWeb.getTitle(),
+                        bookDtoWeb.getAuthorId(),
+                        bookDtoWeb.getSetGenresId()
+                ), bookDtoWeb.getMessage()
         );
     }
 
-    @PatchMapping("/api/v1/book")
-    public BookDto updateBook(@RequestBody BookDtoWeb bookDtoWeb) {
-        System.out.println(bookDtoWeb);
-        return bookService.update(
-                bookDtoWeb.getId(),
+    @PatchMapping("/api/v1/book/{id}")
+    public BookDtoWeb updateBook(@Valid @RequestBody BookDtoWeb bookDtoWeb,
+                                 BindingResult bindingResult, @PathVariable("id") long id) {
+        if (bindingResult.hasErrors()) {
+            return new BookDtoWeb(
+                    0,
+                    bookDtoWeb.getTitle(),
+                    bookDtoWeb.getAuthorId(),
+                    bookDtoWeb.getSetGenresId(),
+                    bindingResult.getFieldError().getDefaultMessage()
+            );
+        }
+        return mapper.toBookDtoWeb(bookService.update(
+                id,
                 bookDtoWeb.getTitle(),
                 bookDtoWeb.getAuthorId(),
                 bookDtoWeb.getSetGenresId()
-        );
+        ), bookDtoWeb.getMessage());
     }
 
     @DeleteMapping("/api/v1/book/{id}")
     public void deleteBook(@PathVariable long id) {
         bookService.deleteById(id);
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> bookNotFound(EntityNotFoundException exception) {
-        return ResponseEntity.badRequest().body("Ошибка! " + exception.getMessage());
     }
 
 

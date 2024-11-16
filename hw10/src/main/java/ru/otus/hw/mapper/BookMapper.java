@@ -32,12 +32,13 @@ public class BookMapper {
         );
     }
 
-    public BookDtoWeb toBookDtoWeb(BookDto bookDto) {
+    public BookDtoWeb toBookDtoWeb(BookDto bookDto, String message) {
         return new BookDtoWeb(
                 bookDto.getId(),
                 bookDto.getTitle(),
                 bookDto.getAuthorDto().getId(),
-                bookDto.getListDtoGenres().stream().map(GenreDto::getId).collect(Collectors.toSet())
+                bookDto.getListDtoGenres().stream().map(GenreDto::getId).collect(Collectors.toSet()),
+                message
         );
     }
 

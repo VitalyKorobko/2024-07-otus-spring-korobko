@@ -2,6 +2,7 @@ package ru.otus.hw.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.otus.hw.dto.CommentDto;
+import ru.otus.hw.dto.CommentDtoWeb;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
 
@@ -21,6 +22,15 @@ public class CommentMapper {
                 comment.getId(),
                 comment.getText(),
                 comment.getBook().getId()
+        );
+    }
+
+    public CommentDtoWeb commentDtoWeb(CommentDto commentDto, String message) {
+        return new CommentDtoWeb(
+                commentDto.getId(),
+                commentDto.getText(),
+                commentDto.getBookId(),
+                message
         );
     }
 

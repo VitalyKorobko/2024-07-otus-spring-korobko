@@ -1,8 +1,14 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
+import BookRepository from '../repository/BookRepository'
+import AuthorRepository from '../repository/AuthorRepository';
+import GenreRepository from '../repository/GenreRepository';
 
 export default class FormByUpdateBook extends React.Component {
-    titleMessage = "Введите название книги"
+
+    bookRepository = new BookRepository
+    genreRepository = new GenreRepository
+    authorRepository = new AuthorRepository
 
     constructor(props) {
         super(props)
@@ -22,12 +28,8 @@ export default class FormByUpdateBook extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/v1/authors')
-            .then(response => response.json())
-            .then(storageAutors => this.setState({storageAutors}))
-        fetch('/api/v1/genres')
-            .then(response => response.json())
-            .then(storageGenres => this.setState({storageGenres}))
+        this.authorRepository.findAll().then(storageAutors => this.setState({storageAutors}))
+        this.genreRepository.findAll().then(storageGenres => this.setState({storageGenres}))
     }
 
 
@@ -59,12 +61,12 @@ export default class FormByUpdateBook extends React.Component {
                             )
                         }
                     </select>
-                    <ErrorMessage message = {this.state.errorMessage}/>
+                    {this.state.errorMessage}
                 </div>
 
                 <div className="row">
                     <label htmlFor="genres-ids">Выберите&nbsp;жанры&nbsp;для&nbsp;книги</label>
-                    <select multiple={true} value = {this.state.genres}
+                    <select id="genres-ids" multiple={true} value = {this.state.genres}
                         onChange = {e => this.convertGenres(e.target.selectedOptions)} required>
                         {
                             this.state.storageGenres.map((genre, i) => (
@@ -87,12 +89,6 @@ export default class FormByUpdateBook extends React.Component {
     }
 
     add() {
-        if (this.state.title === "") {
-            this.setState({errorMessage: this.titleMessage})
-            return
-        } else {
-            this.setState({errorMessage: ""})
-        }
         var countArr = []
         for (let i = 0; i < this.state.el.length; i++) {
             countArr.push(i);
@@ -105,21 +101,19 @@ export default class FormByUpdateBook extends React.Component {
             authorId: this.state.author,
             setGenresId: this.state.genres
         }
-        
-        fetch('/api/v1/book', {
-            method: "PATCH",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(bookData),
-            }
-        )
-
+        this.bookRepository.update(bookData)
+        .then(bookDtoWeb => {if (!this.check(bookDtoWeb)) {return}})
+        this.setState({errorMessage: ""})
     }
+
+    check(bookDtoWeb) {
+        if (bookDtoWeb.message === null) {
+            return true
+        }
+        this.setState({errorMessage: <ErrorMessage message={bookDtoWeb.message}/>})
+        return false
+    }
+
 
     convertGenres(el) {
         this.setState({el: el})
@@ -127,9 +121,9 @@ export default class FormByUpdateBook extends React.Component {
         for (let i = 0; i < el.length; i++) {
             countArr.push(i);
           }
-        var genres = countArr.map(i => {return el.item(i).value})
-        this.setState({genres: genres})
-        return genres
+        var genresList = countArr.map(i => {return el.item(i).value})
+        this.setState({genres: genresList})
+        return genresList
     }
 
 

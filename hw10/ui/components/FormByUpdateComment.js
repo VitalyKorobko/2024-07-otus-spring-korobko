@@ -1,8 +1,12 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
+import BookRepository from '../repository/BookRepository'
+import CommentRepository from '../repository/CommentRepository'
 
 export default class FormByUpdateComment extends React.Component {
-    commentMessage = "Введите текст комментария"
+
+    bookRepository = new BookRepository
+    commentRepository = new CommentRepository
 
     constructor(props) {
         super(props)
@@ -18,10 +22,7 @@ export default class FormByUpdateComment extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
-        fetch('/api/v1/book/all')
-            .then(response => response.json())
-            .then(storageBooks => this.setState({storageBooks}))
+        this.bookRepository.findAll().then(storageBooks => this.setState({storageBooks}))
     }
 
 
@@ -36,8 +37,8 @@ export default class FormByUpdateComment extends React.Component {
 
                 <div className="row">
                     <label htmlFor="text-comment">Введите&nbsp;текст&nbsp;комментария</label>
-                    <input value = {this.state.text} onChange = {e => this.setState({text: e.target.value})} 
-                        id="text-comment" type="text" name="text" placeholder="Введите текст комментария"/>
+                    <input id="text-comment" value = {this.state.text} onChange = {e => this.setState({text: e.target.value})} 
+                        type="text" name="text" placeholder="Введите текст комментария"/>
                 </div>
 
                 <div className="row">
@@ -53,7 +54,7 @@ export default class FormByUpdateComment extends React.Component {
                             )
                         }
                     </select>
-                    <ErrorMessage message = {this.state.errorMessage}/>
+                    {this.state.errorMessage}
                 </div>
 
                 <button onClick={this.add} type="button">Сохранить</button>
@@ -62,33 +63,23 @@ export default class FormByUpdateComment extends React.Component {
     }
 
     add() {
-        if (this.state.title === "") {
-            this.setState({errorMessage: this.commentMessage})
-            return
-        } else {
-            this.setState({errorMessage: ""})
-        }
         var commentData = {
             id: this.state.id,
             text: this.state.text,
             bookId: this.state.bookId,
         }
-        console.log("commentData")
-        console.log(commentData)
-        
-        fetch('/api/v1/comment', {
-            method: "PATCH",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(commentData),
-            }
-        )
+        this.commentRepository.update(commentData)
+        .then(commentDtoWeb => {if (!this.check(commentDtoWeb)) {return}})
+        this.setState({errorMessage: ""})
 
+    }
+
+    check(commentDtoWeb) {
+        if (commentDtoWeb.message === null) {
+            return true
+        }
+        this.setState({errorMessage: <ErrorMessage message={commentDtoWeb.message}/>})
+        return false
     }
 
 }

@@ -9,20 +9,27 @@ import TableTitle from './TableTitle'
 import ErrorMessage from './ErrorMessage'
 import ButtonForNewComment from './ButtonForNewComment'
 
+import BookRepository from '../repository/BookRepository'
+import GenreRepository from '../repository/GenreRepository'
+import AuthorRepository from '../repository/AuthorRepository'
+import CommentRepository  from '../repository/CommentRepository'
+
 
 
 
 export default class App extends React.Component {
+
+    bookRepository = new BookRepository
+    genreRepository = new GenreRepository
+    authorRepository = new AuthorRepository
+    commentRepository = new CommentRepository
+
+
     title_ = "Список книг"
     genresTitle = "Список жанров"
     authorsTitle = "Список авторов"
     commentsTitle = "Выберите книгу для просмотра комментариев"
     commentTitle = "Список комментариев для книги: "
-    titleMessage = "Введите название книги"
-    authorMessage = "Вы не выбрали автора"
-    genresMessage = "Вы не выбрали жанры"
-    textMessage = "Вы не ввели текст комментария"
-    bookMessage = "Вы не выбрали книгу"
 
 
     constructor() {
@@ -58,9 +65,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/v1/book/all')
-            .then(response => response.json())
-            .then(books => this.setState({books}))
+        this.bookRepository.findAll().then(books => this.setState({books}))
         this.setState({buttonForNewBook: <ButtonForNewBook addBook = {this.addBook}/>})
     }
 
@@ -167,32 +172,14 @@ export default class App extends React.Component {
     }
 
     deleteBook(book){
-        fetch('/api/v1/book/' + book.id, {
-            method: "DELETE",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-          });
+        this.bookRepository.deleteById(book.id)
         var books = this.state.books;
         var reduceBooksArr = books.filter(function(b){ return b.id !== book.id } );
         this.setState({books: reduceBooksArr})
     }
 
     deleteComment(comment){
-        fetch('/api/v1/comment/' + comment.id, {
-            method: "DELETE",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-          });
+        this.commentRepository.deleteById(comment.id)
         var comments = this.state.comments;
         var reduceCommenrsArr = comments.filter(function(c){ return c.id !== comment.id } );
         this.setState({comments: reduceCommenrsArr})
@@ -203,80 +190,56 @@ export default class App extends React.Component {
         this.setState({buttonForNewBook: <ButtonForNewBook addBook = {this.addBook}/>})
         this.setState({title: this.title_})
         this.setState({columnName: "Title"})
-        fetch('/api/v1/book/all').then(response => response.json()).then(books => this.setState({books}))
+        this.bookRepository.findAll().then(books => this.setState({books}))
     }
 
-    addBook(book) {
-        if (book.title === "") {
-            this.setState({errorMessage: <ErrorMessage message={this.titleMessage}/>})
-            return
-        }
-        if (book.authorId === "") {
-            this.setState({errorMessage: <ErrorMessage message={this.authorMessage}/>})
-            return
-        }
-        if (book.setGenresId.length === 0) {
-            this.setState({errorMessage: <ErrorMessage message={this.genresMessage}/>})
-            return
-        }
+    addBook(book) { 
+        this.bookRepository.insert(book)
+        .then(bookDtoWeb =>  !this.check(bookDtoWeb))
+        .then(()=> this.bookRepository.findAll().then(books => this.setState({books})))
         this.setState({errorMessage: <ErrorMessage message=""/>})
-        fetch('/api/v1/book/new', {
-            method: "POST", 
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(book),
-            }
-        ).then(()=> fetch('/api/v1/book/all').then(response => response.json()).then(books => this.setState({books})))
+    }
+
+    check(dtoWeb) {
+        if (dtoWeb.message === null) {
+            return true
+        }
+        this.setState({errorMessage: <ErrorMessage message={dtoWeb.message}/>})
+        return false
     }
 
     addComment(comment) {
-        if (comment.text === "") {
-            this.setState({errorMessage: <ErrorMessage message={this.textMessage}/>})
-            return
+        if (comment.bookId==="") {
+            this.commentRepository.insert(comment)
+            .then(commentDtoWeb => this.check(commentDtoWeb))
+        } else {
+            this.commentRepository.insert(comment)
+            .then(commentDtoWeb => this.check(commentDtoWeb))
+            .then(()=> this.commentRepository.findAllByBookId(comment.bookId).then(comments => this.setState({comments})))
+            this.setState({errorMessage: <ErrorMessage message=""/>})
         }
-        if (comment.bookId === "") {
-            this.setState({errorMessage: <ErrorMessage message={this.bookMessage}/>})
-            return
-        }
-        this.setState({errorMessage: <ErrorMessage message=""/>})
-        fetch('/api/v1/comment/new', {
-            method: "POST",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(comment),
-            }
-        ).then(()=> fetch('/api/v1/comment?book_id=' + comment.bookId).then(response => response.json()).then(comments => this.setState({comments})))
+
     }
 
     getAuthors() {
         this.clearList()
         this.setState({title: this.authorsTitle})
         this.setState({columnName: "Fullname"})
-        fetch('/api/v1/authors').then(response => response.json()).then(authors => this.setState({authors}));
+        this.authorRepository.findAll().then(authors => this.setState({authors}));
     }
 
     getGenres() {
         this.clearList()
         this.setState({title: this.genresTitle})
         this.setState({columnName: "Name"})
-        fetch('/api/v1/genres').then(response => response.json()).then(genres => this.setState({genres}));
+        this.genreRepository.findAll().then(genres => this.setState({genres}));
     }
 
     getBookWithComments() {
         this.clearList()
         this.setState({title: this.commentsTitle})
         this.setState({columnName: "Text"})
-        fetch('/api/v1/book/all').then(response => response.json()).then(booksWithComments => this.setState({booksWithComments}))
+        this.bookRepository.findAll().then(booksWithComments => this.setState({booksWithComments}))
     }
 
     getComments(bookId){
@@ -284,8 +247,8 @@ export default class App extends React.Component {
         this.setState({title: this.commentTitle})
         this.setState({columnName: "Text"})
         this.setState({buttonForNewComment: <ButtonForNewComment addComment = {this.addComment}/>})
-        fetch('/api/v1/book/' + bookId).then(response => response.json()).then(currentBook => this.setState({currentBook}))
-        fetch('/api/v1/comment?book_id=' + bookId).then(response => response.json()).then(comments => this.setState({comments}))
+        this.bookRepository.findById(bookId).then(currentBook => this.setState({currentBook}))
+        this.commentRepository.findAllByBookId(bookId).then(comments => this.setState({comments}))
     }
 
     clearList() {
