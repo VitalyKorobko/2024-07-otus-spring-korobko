@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Комментарий N ' + ${comment.id}">Title</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+<main class="container">
+    <h3 th:text="'Комментарий N ' + ${comment.id}">Comment:</h3>
+    <form id="comment-form" action="comment.html" th:action="@{/comment/}" th:method="post"
+          th:object="${comment}">
+        <div class="row">
+            <label for="id-input">ID:</label>
+            <input id="id-input" type="text" readonly="readonly" name="id" th:value="*{id}" value="999"/>
+        </div>
+
+        <div class="row">
+            <label for="comment-text-input">Text:</label>
+            <input id="comment-text-input" name="text" type="text" th:value="*{text}" value="Some text"/>
+            <div class="errors" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Wrong comment</div>
+        </div>
+
+        <div class="row">
+            <label for="comment-book-id" th:text="'Выберите&nbsp;книгу'">Label</label>
+            <select th:field="*{bookId}" id="comment-book-id" name="bookId">
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.id} + ' ' + ${book.title}"></option>
+            </select>
+        </div>
+
+        <div class="row">
+            <button type="submit">Сохранить</button>
+            <a href="index.html" th:href="@{/comment/book(book_id=*{bookId})}">
+                <button type="button">Отменить</button>
+            </a>
+        </div>
+    </form>
+    <div class="row">
+        <form action="index.html" th:action="@{/comment/del/} + '' + ${comment.id}" th:method="post">
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>

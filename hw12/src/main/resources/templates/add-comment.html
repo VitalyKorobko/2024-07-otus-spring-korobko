@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Новый комментарий'">Title</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+<main class="container">
+    <h3 th:text="'Новый комментарий'">Comment:</h3>
+    <form id="comment-form" action="comment.html" th:action="@{/comment/new}" th:method="post">
+        <div class="row">
+            <label for="comment-text-input" th:text="'Текст&nbsp;комментария:'">Text:</label>
+            <input id="comment-text-input" th:value="${comment.text}" name="text" type="text" placeholder="Введите текст комментария"/>
+            <div class="errors" th:if="${error}" th:text="${message}">Wrong comment
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="comment-book-id" th:text="'Выберите&nbsp;книгу'">Label</label>
+            <select id="comment-book-id" th:field="${comment.bookId}" name="bookId">
+                <option value="0" selected>Выберите книгу</option>
+                <option th:each="book : ${books}" th:value="${book.id}"
+                        th:text="${book.id} + ' ' + ${book.title}"></option>
+            </select>
+        </div>
+
+        <div class="row">
+            <button type="submit">Сохранить</button>
+            <a href="index.html" th:href="@{/comment/all}">
+                <button type="button">Отменить</button>
+            </a>
+        </div>
+    </form>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>
