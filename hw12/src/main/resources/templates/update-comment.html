@@ -9,7 +9,7 @@
 <div th:replace="layouts/header :: header"></div>
 <main class="container">
     <h3 th:text="'Комментарий N ' + ${comment.id}">Comment:</h3>
-    <form id="comment-form" action="comment.html" th:action="@{/comment/}" th:method="post"
+    <form id="comment-form" action="comment.html" th:action="@{'/comment/' + ${comment.id}+'/update'}" th:method="post"
           th:object="${comment}">
         <div class="row">
             <label for="id-input">ID:</label>
@@ -19,7 +19,7 @@
         <div class="row">
             <label for="comment-text-input">Text:</label>
             <input id="comment-text-input" name="text" type="text" th:value="*{text}" value="Some text"/>
-            <div class="errors" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Wrong comment</div>
+            <div class="errors" th:if="${error}" th:text="${message}">Wrong comment</div>
         </div>
 
         <div class="row">

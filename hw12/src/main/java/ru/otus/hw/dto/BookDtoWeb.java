@@ -27,10 +27,4 @@ public class BookDtoWeb {
     @NotNull(message = "Выберите жанры для книги")
     private Set<Long> setGenresId;
 
-
-//    @Positive(message = "Выберите автора книги")
-//    private long authorId;
-//
-//    @Size(min = 1, message = "Выберите жанры для книги")
-//    private Set<Long> setGenresId;
 }

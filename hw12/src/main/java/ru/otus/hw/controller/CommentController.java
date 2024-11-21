@@ -54,12 +54,14 @@ public class CommentController {
         return "update-comment";
     }
 
-    @PostMapping("/")
+    @PostMapping("/{id}/update")
     public String updateComment(@Valid @ModelAttribute("comment") CommentDto comment,
                                 BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("comment", comment);
             model.addAttribute("books", bookService.findAll());
+            model.addAttribute("error", true);
+            model.addAttribute("message", bindingResult.getFieldError().getDefaultMessage());
             return "update-comment";
         }
         commentService.update(comment.getId(), comment.getText(), comment.getBookId());
