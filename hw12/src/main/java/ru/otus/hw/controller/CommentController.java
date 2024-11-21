@@ -16,7 +16,6 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.CommentService;
 
-import java.util.Map;
 
 @Controller
 @RequestMapping("/comment")

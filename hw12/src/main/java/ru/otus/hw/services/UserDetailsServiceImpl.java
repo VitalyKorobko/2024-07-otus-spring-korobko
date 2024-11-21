@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.mapper.UserMapper;
 import ru.otus.hw.repositories.UserRepository;
 
@@ -11,6 +12,7 @@ import ru.otus.hw.repositories.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository repository;
+
     private final UserMapper mapper;
 
     public UserDetailsServiceImpl(UserRepository repository, UserMapper mapper) {
@@ -21,7 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        return mapper.toUserDto(repository.findByUsername(username));
+        return repository.findByUsername(username).map(mapper::toUserDto)
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь %s не найден".formatted(username)));
     }
 
 

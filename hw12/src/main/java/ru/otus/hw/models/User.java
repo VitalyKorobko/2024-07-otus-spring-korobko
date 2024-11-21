@@ -1,13 +1,22 @@
 package ru.otus.hw.models;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
 import org.hibernate.annotations.Fetch;
+import jakarta.persistence.FetchType;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -34,7 +43,8 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
-    public User(String username, String password, boolean enabled, Set<Role> roles) {
+    public User(long id, String username, String password, boolean enabled, Set<Role> roles) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -90,5 +100,32 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User user)) {
+            return false;
+        }
+        return id == user.id && enabled == user.enabled &&
+                Objects.equals(username, user.username) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, enabled);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

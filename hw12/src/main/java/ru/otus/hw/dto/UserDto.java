@@ -1,19 +1,11 @@
 package ru.otus.hw.dto;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.otus.hw.models.Role;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UserDto implements UserDetails {
     private long id;

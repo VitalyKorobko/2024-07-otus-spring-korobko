@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.otus.hw.dto.AuthorDto;
@@ -12,6 +14,7 @@ import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.dto.BookDtoWeb;
 import ru.otus.hw.dto.GenreDto;
 import ru.otus.hw.mapper.BookMapper;
+import ru.otus.hw.security.SecurityConfiguration;
 import ru.otus.hw.services.AuthorService;
 import ru.otus.hw.services.BookService;
 import ru.otus.hw.services.GenreService;
@@ -31,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @WebMvcTest({BookController.class, BookMapper.class})
+@Import({SecurityConfiguration.class})
 public class BookControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -45,6 +49,7 @@ public class BookControllerTest {
     private AuthorService authorService;
 
     @Test
+    @WithMockUser
     @DisplayName("Должен возвращать страницу для редактирования книги")
     void shouldReturnEditBook() throws Exception {
         BookDto bookDto = new BookDto(
@@ -77,6 +82,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Должен возвращать страницу для добавления новой книги")
     void shouldReturnDataByNewBook() throws Exception {
         List<AuthorDto> authorDtoList = List.of(new AuthorDto(1, "author_111"));
@@ -96,6 +102,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Должен сохранять новую книгу и перенаправлять на страницу со списком книг")
     void shouldSaveNewBook() throws Exception {
         mvc.perform(post("/book/new")
@@ -111,6 +118,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Не должен сохранять новую книгу, если проверка для названия книги пустое поле")
     void shouldNotSaveNewBook() throws Exception {
         List<AuthorDto> authorDtoList = List.of(new AuthorDto(1, "author_111"),
@@ -140,6 +148,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Должен изменять существующую книгу и перенаправлять на страницу со списком книг")
     void shouldSaveExistBook() throws Exception {
         mvc.perform(post("/book/1/update")
@@ -154,6 +163,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Не должен сохранять существующую книгу, если проверка для названия книги пустое поле")
     void shouldNotSaveExistBook() throws Exception {
         List<AuthorDto> authorDtoList = List.of(new AuthorDto(1, "author_111"),
@@ -183,6 +193,7 @@ public class BookControllerTest {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("Должен удалять книгу")
     void shouldDeleteBook() throws Exception {
         mvc.perform(post("/book/del/1"))
