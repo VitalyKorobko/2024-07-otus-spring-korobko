@@ -23,8 +23,8 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/", "/book/**", "/authors", "/genres", "/comment/**").authenticated()
-                        .requestMatchers("/login").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/login", "/main.css").permitAll()
+                        .anyRequest().denyAll()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login").permitAll()

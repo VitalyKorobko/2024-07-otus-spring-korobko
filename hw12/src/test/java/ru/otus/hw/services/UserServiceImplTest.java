@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.exceptions.EntityNotFoundException;
-import ru.otus.hw.mapper.UserMapper;
 import ru.otus.hw.models.Role;
 
 import java.util.Objects;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Сервис для работы с пользователями ")
 @DataJpaTest
-@Import({UserDetailsServiceImpl.class, UserMapper.class})
+@Import({UserDetailsServiceImpl.class})
 @Transactional(propagation = Propagation.NEVER)
 public class UserServiceImplTest {
     private static final String PASSWORD = "$2y$13$H81FL5loLZN/s8baA6NcdOrXF1asdG4.tsf9no5a/UuVqrRtsy31i";

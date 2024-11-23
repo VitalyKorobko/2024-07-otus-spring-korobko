@@ -7,27 +7,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
+    private static final String PREFIX_TO_AUTHORITY = "ROLE_";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name")
     private String roleName;
-
-    public Role() {
-    }
-
-    public Role(long id, String roleName) {
-        this.id = id;
-        this.roleName = roleName;
-    }
 
     public Role(Role role) {
         this.id = role.getId();
@@ -36,7 +34,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return roleName;
+        return PREFIX_TO_AUTHORITY + roleName;
     }
 
 }
