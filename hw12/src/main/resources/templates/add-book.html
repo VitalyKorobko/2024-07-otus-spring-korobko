@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить книгу</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="layouts/header :: header"></div>
+
+<main class="container">
+    <h3>Добавить книгу</h3>
+    <form method="post" th:action="@{/book/new}">
+        <div class="row">
+            <input type="hidden" readonly="readonly" name="id" value="0"/>
+        </div>
+
+        <div>
+            <label for="title-book" th:text="'Введите&nbsp;название&nbsp;книги'">Book title</label>
+            <input id="title-book" th:value=${book.title} type="text" name="title" placeholder="Введите название книги"/>
+            <div class="errors" th:if="${error}" th:text="${message}">Wrong title</div>
+        </div>
+
+        <div class="row">
+            <label for="author-id" th:text="'Выберите&nbsp;имя&nbsp;автора&nbsp;книги'">Book author:</label>
+            <select id="author-id" th:field="${book.authorId}" name="authorId">
+                <option value="0" selected>Выберите автора</option>
+                <option th:each="author : ${authors}" th:value="${author.id}"
+                        th:text="${author.fullName}"></option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label for="genres-ids" th:text="'Выберите&nbsp;жанры&nbsp;для&nbsp;книги'">Book genres</label>
+            <select multiple th:field="${book.setGenresId}"   name="setGenresId" id="genres-ids">
+                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+            </select>
+        </div>
+        <button type="submit">Добавить</button>
+        <a href="index.html" th:href="@{/}" ><button type="button">Отменить</button></a>
+    </form>
+</main>
+<div th:replace="layouts/footer :: footer"></div>
+</body>
+</html>
