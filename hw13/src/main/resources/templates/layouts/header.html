@@ -1,0 +1,17 @@
+<header class="container" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/html"
+        th:fragment="header">
+    <span class="logo">HomeWork 12</span>
+    <nav>
+        <a href="/" th:href="@{/}">Книги</a>
+        <a href="/genres.html" th:href="@{/genres}">Жанры</a>
+        <a href="/authors.html" th:href="@{/authors}">Авторы</a>
+        <a href="/comments.html" th:href="@{/comment/all}">Комментарии</a>
+    </nav>
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Выйти</button>
+        </form>
+    </div>
+</header>
