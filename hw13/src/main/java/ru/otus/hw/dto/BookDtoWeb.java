@@ -14,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDtoWeb {
-
     private long id;
 
     @NotBlank(message = "Поле название книги не должно быть пустым")

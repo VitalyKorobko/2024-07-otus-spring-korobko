@@ -13,6 +13,7 @@
         <input type="text" name="username" placeholder="Введите логин">
         <input type="password" name="password" placeholder="Введите пароль">
         <div th:text="${error}" style="color: red"/>
+        <div th:text="${success}" style="color: red"/>
         <div><input class = "checkbox" type='checkbox' name='remember-me' placeholder="Запомнить логин и пароль."/><span>Запомнить логин и пароль.</span></div>
         <button type="submit">Войти</button>
     </form>

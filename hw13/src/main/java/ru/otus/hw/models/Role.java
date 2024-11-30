@@ -32,6 +32,10 @@ public class Role implements GrantedAuthority {
         this.roleName = role.getRoleName();
     }
 
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String getAuthority() {
         return PREFIX_TO_AUTHORITY + roleName;

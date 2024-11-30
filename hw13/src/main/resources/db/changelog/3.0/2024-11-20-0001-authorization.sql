@@ -1,16 +1,16 @@
 --changeset korobko:2024-11-22-001-users
 CREATE TABLE users (
     id bigserial,
-    username varchar(255),
-    password varchar(255),
-    enabled bit,
+    username VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    enabled BIT,
     PRIMARY KEY (id)
 );
 
 --changeset korobko:2024-11-22-001-roles
 CREATE TABLE roles (
     id bigserial,
-    name varchar(255),
+    name VARCHAR(255),
     PRIMARY KEY (id)
 );
 

@@ -22,6 +22,7 @@ public class SecurityConfiguration {
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/user/reg").permitAll()
                         .requestMatchers("/", "/book/**", "/authors", "/genres", "/comment/**").authenticated()
                         .requestMatchers("/login", "/main.css").permitAll()
                         .anyRequest().denyAll()
@@ -32,7 +33,7 @@ public class SecurityConfiguration {
                         .failureUrl("/login?error=username")
                 )
                 .logout((logout) ->
-                        logout.deleteCookies("hw12")
+                        logout.deleteCookies("hw13")
                                 .invalidateHttpSession(false)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/")

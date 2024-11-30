@@ -11,6 +11,10 @@ import java.util.Objects;
 @Controller
 public class MainController {
 
+    private static final String SUCCESS_MESSAGE_TEMPLATE = "Пользователь с именем %s успешно зарегистрирован";
+
+    private static final String WRONG_AUTHENTICATED_MESSAGE = "Логин или пароль введены неверно";
+
     private final BookService bookService;
 
     public MainController(BookService bookService) {
@@ -18,9 +22,16 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, @RequestParam(required = false, defaultValue = "") String error) {
+    public String login(Model model,
+                        @RequestParam(required = false, defaultValue = "") String error,
+                        @RequestParam(required = false) String success,
+                        @RequestParam(required = false) String username) {
         if (Objects.equals(error, "username")) {
-            model.addAttribute("error", "Логин или пароль введены неверно");
+            model.addAttribute("error", WRONG_AUTHENTICATED_MESSAGE);
+        }
+        if (Objects.equals(success, "ok")) {
+            model.addAttribute("success",
+                    SUCCESS_MESSAGE_TEMPLATE.formatted(username));
         }
         return "login";
     }
