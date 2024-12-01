@@ -1,18 +1,24 @@
 package ru.otus.hw.controller;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.otus.hw.dto.RoleDto;
 import ru.otus.hw.dto.UserDtoWeb;
+import ru.otus.hw.repositories.UserRepository;
 import ru.otus.hw.services.RoleService;
 import ru.otus.hw.services.UserService;
 
 import java.util.List;
 import java.util.Objects;
+
 
 @Controller
 @RequestMapping("/user")
@@ -29,12 +35,16 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(RoleService roleService, UserService userService) {
+    private final UserRepository userRepository;
+
+    public UserController(RoleService roleService, UserService userService, UserRepository userRepository) {
         this.roleService = roleService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/reg")
+    @PreAuthorize("!isAuthenticated()")
     public String getNewUserPage(Model model) {
         model.addAttribute("roles", roleService.findAll());
         return "add-user";
@@ -63,15 +73,13 @@ public class UserController {
             return "add-user";
         }
         userService.insert(userDtoWeb.getUsername(),
-                userDtoWeb.getPassword(), userDtoWeb.getAge(), userDtoWeb.getRoles());
+                userDtoWeb.getPassword(), userDtoWeb.getRoles());
         return REDIRECT_TEMPLATE.formatted(userDtoWeb.getUsername());
     }
 
-
-
     private boolean checkUsername(String username) {
-        return userService.findAll().stream()
-                .map(u->u.getUsername())
+        return userRepository.findAll().stream()
+                .map(u -> u.getUsername())
                 .toList()
                 .contains(username);
     }
@@ -80,7 +88,6 @@ public class UserController {
         model.addAttribute("error", message);
         model.addAttribute("roles", roles);
         model.addAttribute("username", userDtoWeb.getUsername());
-        model.addAttribute("age", userDtoWeb.getAge());
     }
 
     private boolean checkPassword(String password, String repeatPassword) {

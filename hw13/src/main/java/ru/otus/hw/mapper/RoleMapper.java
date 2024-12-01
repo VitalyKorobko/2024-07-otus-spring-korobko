@@ -14,4 +14,5 @@ public class RoleMapper {
     public RoleDto toRoleDto(Role role) {
         return new RoleDto(role.getId(), role.getName());
     }
+
 }

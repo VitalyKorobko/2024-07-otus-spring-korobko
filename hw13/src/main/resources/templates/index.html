@@ -35,7 +35,7 @@
     </div>
     <div class="items book-item">
         <a href="add-book.html" th:href="@{/book/new}">
-            <button sec:authorize="hasAnyRole('ADMIN', 'PUBLISHER')" class="edit-btn" type="button">Добавить книгу</button>
+            <button sec:authorize="hasAnyRole('ADMIN', 'USER')" class="edit-btn" type="button">Добавить книгу</button>
         </a>
     </div>
 </main>

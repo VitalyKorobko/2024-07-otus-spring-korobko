@@ -9,8 +9,7 @@ import ru.otus.hw.repositories.RoleRepository;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl implements RoleService{
-
+public class RoleServiceImpl implements RoleService {
     private final RoleRepository repository;
 
     private final RoleMapper roleMapper;
@@ -26,4 +25,5 @@ public class RoleServiceImpl implements RoleService{
         return repository.findAll().stream()
                 .map(roleMapper::toRoleDto).toList();
     }
+
 }

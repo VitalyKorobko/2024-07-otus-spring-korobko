@@ -23,9 +23,9 @@ public class JpaUserRepositoryTest {
     @Test
     @DisplayName("должен возвращать корректного пользователя по Username")
     void shouldReturnCorrectUserByUsername() {
-        var userOptional = userRepository.findByUsername("user");
-        var expectedUser = new User(1, "user", PASSWORD, true,
-                Set.of(new Role(1, "USER"), new Role(2, "ADMIN")));
+        var userOptional = userRepository.findByUsername("admin");
+        var expectedUser = new User(1, "admin", PASSWORD, true,
+                Set.of(new Role(2, "ADMIN")));
         assertThat(userOptional).isPresent().get()
                 .usingRecursiveComparison().isEqualTo(expectedUser);
 

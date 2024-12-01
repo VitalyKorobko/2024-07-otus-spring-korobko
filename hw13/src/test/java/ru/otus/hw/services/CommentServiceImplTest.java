@@ -5,7 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.acls.jdbc.BasicLookupStrategy;
+import org.springframework.security.acls.jdbc.JdbcMutableAclService;
+import org.springframework.security.acls.jdbc.LookupStrategy;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +47,9 @@ public class CommentServiceImplTest {
     private static final long FOURTH_COMMENT_ID = 4L;
 
     private static final long FIFTH_COMMENT_ID = 5L;
+
+    @MockBean
+    private AclServiceWrapperServiceImpl aclService;
 
     @Autowired
     private CommentServiceImpl commentService;
@@ -122,10 +130,10 @@ public class CommentServiceImplTest {
         assertThat(commentService.findById(THIRD_COMMENT_ID)).isNotPresent();
     }
 
-    @DisplayName(" должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
+    @DisplayName("должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
     @Test
     void shouldThrowExceptionWhenTryingToDeleteCommentWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> commentService.deleteById(5L));
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> commentService.deleteById(5L));
     }
 
     @DisplayName(" должен возвращать пустой Optional при попытке загрузки комментария с несуществующим Id")

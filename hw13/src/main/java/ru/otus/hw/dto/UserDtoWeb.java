@@ -1,6 +1,7 @@
 package ru.otus.hw.dto;
 
-import jakarta.validation.constraints.*;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,6 @@ public class UserDtoWeb {
 
     @Size(min = 4, message = "Пароль должен быть не менее 4 символов")
     private String repeatPassword;
-
-    @Min(value =1, message = "Возраст введен неверно")
-    @Max(value = 255, message = "Возраст введен неверно")
-    private short age;
 
     @Size(min = 1, message = "Выберите роль")
     @NotNull(message = "Выберите роль")

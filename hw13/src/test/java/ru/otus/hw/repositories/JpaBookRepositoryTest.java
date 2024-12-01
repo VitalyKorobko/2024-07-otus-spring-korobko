@@ -1,6 +1,5 @@
 package ru.otus.hw.repositories;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.util.CollectionUtils;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
@@ -55,7 +56,7 @@ class JpaBookRepositoryTest {
         var students = repositoryJpa.findAll();
         assertThat(students).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
                 .allMatch(b -> !b.getTitle().equals(""))
-                .allMatch(b -> CollectionUtils.isNotEmpty(b.getGenres()))
+                .allMatch(b -> !CollectionUtils.isEmpty(b.getGenres()))
                 .allMatch(b -> Objects.nonNull(b.getAuthor().getFullName()));
         System.out.println("\n====================================================================\n");
         assertThat(sessionFactory.getStatistics().getPrepareStatementCount()).isEqualTo(EXPECTED_QUERIES_COUNT);
@@ -65,13 +66,13 @@ class JpaBookRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveNewBook() {
-        var expectedBook = new Book(0, BOOK_TITLE, entityManager.find(Author.class, 1),
-                List.of(entityManager.find(Genre.class, 1), entityManager.find(Genre.class, 3)));
+        var expectedBook = new Book(0L, BOOK_TITLE, entityManager.find(Author.class, 1L),
+                List.of(entityManager.find(Genre.class, 1L), entityManager.find(Genre.class, 3L)));
         var returnedBook = repositoryJpa.save(expectedBook);
         assertThat(returnedBook).isNotNull()
                 .matches(book -> book.getId() > 0)
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> CollectionUtils.isNotEmpty(book.getGenres()))
+                .matches(book -> !CollectionUtils.isEmpty(book.getGenres()))
                 .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
@@ -83,8 +84,8 @@ class JpaBookRepositoryTest {
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void shouldSaveUpdatedBook() {
-        var expectedBook = new Book(1L, BOOK_TITLE, entityManager.find(Author.class, 2),
-                List.of(entityManager.find(Genre.class, 5), entityManager.find(Genre.class, 6)));
+        var expectedBook = new Book(1L, BOOK_TITLE, entityManager.find(Author.class, 2L),
+                List.of(entityManager.find(Genre.class, 5L), entityManager.find(Genre.class, 6L)));
 
         assertThat(entityManager.find(Book.class, expectedBook.getId()))
                 .isNotEqualTo(expectedBook);
@@ -93,7 +94,7 @@ class JpaBookRepositoryTest {
         assertThat(returnedBook).isNotNull()
                 .matches(book -> book.getId() > 0)
                 .matches(book -> book.getTitle().equals(BOOK_TITLE))
-                .matches(book -> CollectionUtils.isNotEmpty(book.getGenres()))
+                .matches(book -> !CollectionUtils.isEmpty(book.getGenres()))
                 .matches(book -> Objects.nonNull(book.getAuthor()))
                 .usingRecursiveComparison().isEqualTo(expectedBook);
 
@@ -112,10 +113,10 @@ class JpaBookRepositoryTest {
         assertThat(entityManager.find(Book.class, FIRST_BOOK_ID)).isNull();
     }
 
-    @DisplayName("не должен выбрасывать исключение при попытке удаления книги с несуществующим Id")
+    @DisplayName("должен выбрасывать исключение при попытке удаления книги с несуществующим Id")
     @Test
-    void shouldNotThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> repositoryJpa.deleteById(4L));
+    void shouldThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> repositoryJpa.deleteById(4L));
     }
 
     @DisplayName("должен возвращать пустой Optional при попытке загрузки книги с несуществующим Id")

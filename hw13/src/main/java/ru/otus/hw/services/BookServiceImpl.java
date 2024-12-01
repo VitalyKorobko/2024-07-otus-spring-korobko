@@ -16,7 +16,12 @@ import ru.otus.hw.repositories.GenreRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import static org.springframework.security.acls.domain.BasePermission.READ;
+import static org.springframework.security.acls.domain.BasePermission.WRITE;
+import static org.springframework.security.acls.domain.BasePermission.DELETE;
+import static org.springframework.security.acls.domain.BasePermission.ADMINISTRATION;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @RequiredArgsConstructor
@@ -30,8 +35,12 @@ public class BookServiceImpl implements BookService {
 
     private final BookMapper bookMapper;
 
+    private final AclServiceWrapperService aclServiceWrapperService;
+
+
     @Override
     @Transactional(readOnly = true)
+    @PreAuthorize("hasPermission(#id, 'ru.otus.hw.dto.BookDto', 'READ')")
     public Optional<BookDto> findById(long id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toBookDto);
@@ -42,26 +51,28 @@ public class BookServiceImpl implements BookService {
     @PostFilter("hasPermission(filterObject, 'READ')")
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream()
-                .map(bookMapper::toBookDto).toList();
+                .map(bookMapper::toBookDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    @PreAuthorize("hasAnyRole('ADMIN', 'PUBLISHER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     public BookDto insert(String title, long authorId, Set<Long> genresIds) {
-        return save(0L, title, authorId, genresIds);
+        var bookDto = save(0L, title, authorId, genresIds);
+        aclServiceWrapperService.createPermissions(bookDto, READ, WRITE, DELETE, ADMINISTRATION);
+        return bookDto;
     }
 
     @Override
     @Transactional
-    @PreAuthorize("hasAnyRole('ADMIN', 'PUBLISHER')")
+    @PreAuthorize("hasPermission(#id, 'ru.otus.hw.dto.BookDto', 'WRITE')")
     public BookDto update(long id, String title, long authorId, Set<Long> genresIds) {
         return save(id, title, authorId, genresIds);
     }
 
     @Override
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasPermission(#id, 'ru.otus.hw.dto.BookDto', 'DELETE')")
     public void deleteById(long id) {
         bookRepository.deleteById(id);
     }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,9 @@ public class BookServiceImplTest {
     private static final String FIRST_GENRE_NAME = "Genre_1";
 
     private static final String SECOND_GENRE_NAME = "Genre_2";
+
+    @MockBean
+    private AclServiceWrapperServiceImpl aclService;
 
     @Autowired
     private BookServiceImpl bookService;
@@ -129,8 +134,8 @@ public class BookServiceImplTest {
 
     @DisplayName(" должен выбрасывать исключение при попытке удаления книги с несуществующим Id")
     @Test
-    void shouldNotThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> bookService.deleteById(FIFTH_BOOK_ID));
+    void shouldThrowExceptionWhenTryingToDeleteBookWithNonExistentId() {
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> bookService.deleteById(FIFTH_BOOK_ID));
     }
 
     @DisplayName(" должен возвращать пустой Optional при попытке загрузки книги с несуществующим Id")

@@ -16,4 +16,7 @@ public class BookDto {
 
     private List<GenreDto> listDtoGenres;
 
+    public BookDto(long id) {
+        this.id = id;
+    }
 }

@@ -7,7 +7,6 @@ import ru.otus.hw.services.AuthorService;
 
 @Controller
 public class AuthorController {
-
     private final AuthorService authorService;
 
     public AuthorController(AuthorService authorService) {
@@ -19,4 +18,5 @@ public class AuthorController {
         model.addAttribute("authors", authorService.findAll());
         return "authors";
     }
+
 }

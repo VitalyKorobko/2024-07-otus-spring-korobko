@@ -13,7 +13,6 @@
     <input th:value="${username}"type="text" name="username" placeholder="Введите логин">
     <input type="password" name="password" placeholder="Введите пароль">
     <input type="password" name="repeatPassword" placeholder="Повторите пароль">
-    <input th:value="${age}" type="number" name="age" placeholder="Введите возраст">
     <select name="roles">
       <option selected disabled value={"default"}>--выберите роль--</option>
       <option th:each="roleDto : ${roles}" th:text="${roleDto.name}" th:value="${roleDto.name}"></option>

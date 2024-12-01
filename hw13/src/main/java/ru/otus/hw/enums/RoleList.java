@@ -3,9 +3,9 @@ package ru.otus.hw.enums;
 public enum RoleList {
     ADMIN("ADMIN"),
 
-    PUBLISHER("PUBLISHER"),
-
     USER("USER");
+
+    private static final String AUTHORITY_TEMPLATE = "ROLE_%s";
 
     private final String value;
 
@@ -15,5 +15,9 @@ public enum RoleList {
 
     public String getValue() {
         return value;
+    }
+
+    public String getAuthority() {
+        return AUTHORITY_TEMPLATE.formatted(value);
     }
 }

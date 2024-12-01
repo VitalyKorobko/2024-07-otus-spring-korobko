@@ -8,4 +8,4 @@ VALUES ('USER'), ('ADMIN');
 
 --changeset korobko:2024-11-22-0001-users-roles-data
 INSERT INTO users_roles(user_id, role_id)
-VALUES (1, 1), (1, 2);
+VALUES (1, 2);

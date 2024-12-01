@@ -1,5 +1,6 @@
 package ru.otus.hw.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class MainController {
     }
 
     @GetMapping("/login")
+    @PreAuthorize("!isAuthenticated()")
     public String login(Model model,
                         @RequestParam(required = false, defaultValue = "") String error,
                         @RequestParam(required = false) String success,

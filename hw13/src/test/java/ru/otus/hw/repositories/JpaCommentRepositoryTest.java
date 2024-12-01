@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -110,10 +111,10 @@ public class JpaCommentRepositoryTest {
         assertThat(entityManager.find(Comment.class, FIRST_COMMENT_ID)).isNull();
     }
 
-    @DisplayName("не должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
+    @DisplayName("должен выбрасывать исключение при попытке удаления комментария с несуществующим Id")
     @Test
-    void shouldNotThrowExceptionWhenTryingToDeleteCommentWithNonExistentId() {
-        Assertions.assertDoesNotThrow(() -> repositoryJpa.deleteById(4L));
+    void shouldThrowExceptionWhenTryingToDeleteCommentWithNonExistentId() {
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> repositoryJpa.deleteById(4L));
     }
 
     @DisplayName("должен возвращать пустой Optional при попытке загрузки комментария с несуществующим Id")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.hw.dto.AuthorDto;
@@ -39,6 +40,9 @@ public class MainControllerTest {
     @MockBean
     private BookService bookService;
 
+    @MockBean
+    private UserDetailsService userDetailsService;
+
     @Test
     @DisplayName("должен возвращать страницу авторизации")
     void shouldReturnAuthorizationPage() throws Exception {
@@ -49,7 +53,7 @@ public class MainControllerTest {
     }
 
     @Test
-    @DisplayName("должен возвращать сообщение обшибке на странице авторизации")
+    @DisplayName("должен возвращать сообщение об ошибке на странице авторизации")
     void shouldReturnErrorMessage() throws Exception {
         var result = mvc.perform(get("/login?error=username"))
                 .andExpect(status().isOk())
