@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Список книг</title>
@@ -34,7 +35,7 @@
     </div>
     <div class="items book-item">
         <a href="add-book.html" th:href="@{/book/new}">
-            <button class="edit-btn" type="button">Добавить книгу</button>
+            <button sec:authorize="hasAnyRole('ADMIN', 'PUBLISHER')" class="edit-btn" type="button">Добавить книгу</button>
         </a>
     </div>
 </main>

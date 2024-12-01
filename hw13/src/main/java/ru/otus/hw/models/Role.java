@@ -25,20 +25,20 @@ public class Role implements GrantedAuthority {
     private long id;
 
     @Column(name = "name")
-    private String roleName;
+    private String name;
 
     public Role(Role role) {
         this.id = role.getId();
-        this.roleName = role.getRoleName();
+        this.name = role.getName();
     }
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Role(String name) {
+        this.name = name;
     }
 
     @Override
     public String getAuthority() {
-        return PREFIX_TO_AUTHORITY + roleName;
+        return PREFIX_TO_AUTHORITY + name;
     }
 
 }

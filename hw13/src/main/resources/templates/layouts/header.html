@@ -9,13 +9,14 @@
         </form>
     </div>
     <nav>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/user/}">Список пользователей</a>
         <a href="/" th:href="@{/}">Книги</a>
         <a href="/genres.html" th:href="@{/genres}">Жанры</a>
         <a href="/authors.html" th:href="@{/authors}">Авторы</a>
         <a href="/comments.html" th:href="@{/comment/all}">Комментарии</a>
     </nav>
     <div>
-        <a class="edit-btn a" th:href="@{/user/reg}">
+        <a sec:authorize="!isAuthenticated()" class="edit-btn a" th:href="@{/user/reg}">
             Добавить пользователя
         </a>
     </div>

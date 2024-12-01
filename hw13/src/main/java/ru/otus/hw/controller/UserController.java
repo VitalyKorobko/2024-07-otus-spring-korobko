@@ -1,6 +1,7 @@
 package ru.otus.hw.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +40,14 @@ public class UserController {
         return "add-user";
     }
 
+    @GetMapping("/")
+    public String getUsers(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "users";
+    }
+
     @PostMapping("/reg")
+    @PreAuthorize("!isAuthenticated()")
     public String addNewUser(@Valid @ModelAttribute UserDtoWeb userDtoWeb,
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

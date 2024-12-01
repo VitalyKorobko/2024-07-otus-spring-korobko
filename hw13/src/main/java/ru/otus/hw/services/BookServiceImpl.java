@@ -1,6 +1,8 @@
 package ru.otus.hw.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookDto;
@@ -37,6 +39,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
+    @PostFilter("hasPermission(filterObject, 'READ')")
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toBookDto).toList();
@@ -44,18 +47,21 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
+    @PreAuthorize("hasAnyRole('ADMIN', 'PUBLISHER')")
     public BookDto insert(String title, long authorId, Set<Long> genresIds) {
         return save(0L, title, authorId, genresIds);
     }
 
     @Override
     @Transactional
+    @PreAuthorize("hasAnyRole('ADMIN', 'PUBLISHER')")
     public BookDto update(long id, String title, long authorId, Set<Long> genresIds) {
         return save(id, title, authorId, genresIds);
     }
 
     @Override
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(long id) {
         bookRepository.deleteById(id);
     }

@@ -1,5 +1,10 @@
 package ru.otus.hw.services;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +31,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+//    @PreAuthorize("if (getAuthentication()==null)) {return true} else {return false}" )
+//    @PreAuthorize("isAuthenticated()")
+//    @PostAuthorize("isAuthenticated()")
     public User insert(String username, String password, short age, Set<String> roles) {
         return userRepository.save(new User(0L, username,
-                encoder.encode(password), true, age, roleRepository.findAllByRoleNameIn(roles)));
+                encoder.encode(password), true, age, roleRepository.findAllByNameIn(roles)));
     }
 
     @Override
