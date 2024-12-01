@@ -1,6 +1,5 @@
 package ru.otus.hw;
 
-import org.h2.tools.Console;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.SQLException;
@@ -11,8 +10,6 @@ public class Application {
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(Application.class);
         System.out.println("http://localhost:8080\nadmin:password");
-
-        Console.main(args);
 
 
     }
