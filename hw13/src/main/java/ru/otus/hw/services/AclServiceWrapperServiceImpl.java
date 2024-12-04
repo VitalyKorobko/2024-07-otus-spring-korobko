@@ -9,7 +9,7 @@ import org.springframework.security.acls.model.Permission;
 import org.springframework.security.acls.model.MutableAcl;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.otus.hw.enums.RoleList;
+import ru.otus.hw.enums.RoleType;
 import ru.otus.hw.models.User;
 
 import static org.springframework.security.acls.domain.BasePermission.READ;
@@ -20,9 +20,9 @@ import static org.springframework.security.acls.domain.BasePermission.DELETE;
 
 @Service
 public class AclServiceWrapperServiceImpl implements AclServiceWrapperService {
-    private static final Sid ADMIN = new GrantedAuthoritySid(RoleList.ADMIN.getAuthority());
+    private static final Sid ADMIN = new GrantedAuthoritySid(RoleType.ADMIN.getAuthority());
 
-    private static final Sid USER = new GrantedAuthoritySid(RoleList.USER.getAuthority());
+    private static final Sid USER = new GrantedAuthoritySid(RoleType.USER.getAuthority());
 
     private final MutableAclService mutableAclService;
 

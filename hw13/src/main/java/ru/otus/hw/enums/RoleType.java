@@ -1,6 +1,6 @@
 package ru.otus.hw.enums;
 
-public enum RoleList {
+public enum RoleType {
     ADMIN("ADMIN"),
 
     USER("USER");
@@ -9,7 +9,7 @@ public enum RoleList {
 
     private final String value;
 
-    RoleList(String value) {
+    RoleType(String value) {
         this.value = value;
     }
 

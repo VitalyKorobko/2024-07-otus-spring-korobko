@@ -30,11 +30,9 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .antMatchers("/user/reg").permitAll()
-                        .antMatchers("/login").permitAll()
-                        .antMatchers("/", "/user/**", "/book/**", "/authors", "/genres", "/comment/**")
-                        .authenticated()
+                        .antMatchers("/user/reg", "/login").permitAll()
                         .antMatchers("/main.css").permitAll()
+                        .antMatchers("/**").authenticated()
                         .anyRequest().denyAll()
                 ).formLogin(formLogin -> formLogin
                         .loginPage("/login")
