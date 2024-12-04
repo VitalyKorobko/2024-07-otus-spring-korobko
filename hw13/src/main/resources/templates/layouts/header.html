@@ -1,0 +1,23 @@
+<header class="container" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/html"
+        th:fragment="header">
+    <span class="logo">HomeWork 13 ACL</span>
+    <div>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button class="edit-btn" type="submit">Выйти</button>
+        </form>
+    </div>
+    <nav>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/user/}">Список пользователей</a>
+        <a href="/" th:href="@{/}">Книги</a>
+        <a href="/genres.html" th:href="@{/genres}">Жанры</a>
+        <a href="/authors.html" th:href="@{/authors}">Авторы</a>
+        <a href="/comments.html" th:href="@{/comment/all}">Комментарии</a>
+    </nav>
+    <div>
+        <a sec:authorize="!isAuthenticated()" class="edit-btn a" th:href="@{/user/reg}">
+            Добавить пользователя
+        </a>
+    </div>
+</header>
