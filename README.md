@@ -34,7 +34,13 @@
         hw10\ //Делалось в ветке hw10
             src\
             pom.xml
+        hw11\ //Делалось в ветке hw11
+            src\
+            pom.xml
         hw12\ //Делалось в ветке hw12
+            src\
+            pom.xml
+        hw13\ //Делалось в ветке hw13
             src\
             pom.xml
             
