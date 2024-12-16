@@ -1,6 +1,6 @@
 package ru.otus.hw.exception;
 
-public class VocabularyReadException extends RuntimeException{
+public class VocabularyReadException extends RuntimeException {
 
     public VocabularyReadException() {
         super();

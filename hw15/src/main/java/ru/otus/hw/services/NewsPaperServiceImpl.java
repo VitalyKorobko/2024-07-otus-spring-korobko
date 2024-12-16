@@ -12,7 +12,7 @@ import java.util.Random;
 @Service
 @Slf4j
 public class NewsPaperServiceImpl implements NewsPaperService {
-    private final static String[] NAMES = {"BBC", "The New York Times", "Aif",
+    private static final String[] NAMES = {"BBC", "The New York Times", "Aif",
             "THE GUARDIAN", "Le Figaro", "TheTimes of India"};
 
     private final NewsPaperRepository repository;

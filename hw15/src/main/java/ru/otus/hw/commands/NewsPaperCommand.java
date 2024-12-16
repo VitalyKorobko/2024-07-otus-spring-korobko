@@ -3,6 +3,7 @@ package ru.otus.hw.commands;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.hw.services.ArticleService;
 import ru.otus.hw.services.NewsPaperService;
 import ru.otus.hw.services.WriterService;
 
@@ -16,6 +17,8 @@ public class NewsPaperCommand {
 
     private final NewsPaperService newsPaperService;
 
+    private final ArticleService articleService;
+
     @ShellMethod(value = "add NewsPapers: add <countNewsPapers>", key = "add")
     public void addNewsPapers(int countNewsPapers) {
         writerService.startWriterLoop(countNewsPapers);
@@ -25,4 +28,10 @@ public class NewsPaperCommand {
     public void printAllNewsPapers() {
         newsPaperService.findAll().forEach((out::println));
     }
+
+    @ShellMethod(value = "show all Articles", key = "art")
+    public void printAllArticles() {
+        articleService.findAll().forEach((out::println));
+    }
+
 }

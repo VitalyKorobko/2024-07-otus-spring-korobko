@@ -22,7 +22,7 @@ public class WriterServiceImpl implements WriterService {
 
     private static final short MIN_COUNT_ARTICLES = 5;
 
-    private static final short MAX_COUNT_ARTICLES = 10;
+    private static final short MAX_COUNT_ARTICLES = 12;
 
     private final ArticleGateway articleGateway;
 
@@ -30,7 +30,8 @@ public class WriterServiceImpl implements WriterService {
 
     private final VocabularyDao vocabularyDao;
 
-    public WriterServiceImpl(ArticleGateway articleGateway, NewsPaperGateway newsPaperGateway, VocabularyDao vocabularyDao) {
+    public WriterServiceImpl(ArticleGateway articleGateway,
+                             NewsPaperGateway newsPaperGateway, VocabularyDao vocabularyDao) {
         this.articleGateway = articleGateway;
         this.newsPaperGateway = newsPaperGateway;
         this.vocabularyDao = vocabularyDao;

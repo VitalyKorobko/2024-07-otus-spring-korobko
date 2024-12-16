@@ -37,7 +37,6 @@ public class CsvVocabularyDao implements VocabularyDao {
                 try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
                     return new CsvToBeanBuilder<WordDto>(inputStreamReader)
                             .withSkipLines(0)
-//                            .withSeparator(';')
                             .withType(WordDto.class)
                             .build()
                             .parse();

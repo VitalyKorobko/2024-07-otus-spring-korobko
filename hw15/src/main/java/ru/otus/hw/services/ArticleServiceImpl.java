@@ -59,4 +59,9 @@ public class ArticleServiceImpl implements ArticleService {
         log.info("SAVE Article {}", savedArticle);
         return savedArticle;
     }
+
+    @Override
+    public List<Article> findAll() {
+        return repository.findAll();
+    }
 }

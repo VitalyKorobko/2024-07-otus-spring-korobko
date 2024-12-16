@@ -3,17 +3,15 @@ package ru.otus.hw.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.dsl.*;
-import org.springframework.integration.scheduling.PollerMetadata;
-import org.springframework.scheduling.support.PeriodicTrigger;
+import org.springframework.integration.dsl.QueueChannelSpec;
+import org.springframework.integration.dsl.MessageChannels;
+import org.springframework.integration.dsl.PublishSubscribeChannelSpec;
+import org.springframework.integration.dsl.IntegrationFlow;
 import ru.otus.hw.domain.Article;
 import ru.otus.hw.domain.NewsPaper;
 import ru.otus.hw.services.ArticleService;
 import ru.otus.hw.services.NewsPaperService;
 import ru.otus.hw.services.WriterService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Configuration
@@ -26,25 +24,23 @@ public class IntegrationConfig {
     }
 
     @Bean
-    public PublishSubscribeChannelSpec<?> articleChannel() {
+    public PublishSubscribeChannelSpec<?> allowedArticlesChannel() {
+        return MessageChannels.publishSubscribe();
+    }
+
+    @Bean
+    public PublishSubscribeChannelSpec<?> badArticlesChannel() {
         return MessageChannels.publishSubscribe();
     }
 
     @Bean
     public QueueChannelSpec articlesChannel() {
-        return MessageChannels.queue(10);
+        return MessageChannels.queue(15);
     }
 
     @Bean
     public PublishSubscribeChannelSpec<?> newsPaperChannel() {
         return MessageChannels.publishSubscribe();
-    }
-
-    @Bean(name = PollerMetadata.DEFAULT_POLLER)
-    public PollerMetadata defaultPoller() {
-        PollerMetadata pollerMetadata = new PollerMetadata();
-        pollerMetadata.setTrigger(new PeriodicTrigger(1000));
-        return pollerMetadata;
     }
 
     @Bean
@@ -53,15 +49,27 @@ public class IntegrationConfig {
                 .from("writerChannel")
                 .handle(writerService, "create")
                 .handle(articleService, "create")
-                .channel("articleChannel")
+                .<Article, Boolean>route(article -> article.text().size() > 30,
+                        mapping -> mapping
+                                .subFlowMapping(true, sf -> sf.channel("allowedArticlesChannel"))
+                                .subFlowMapping(false, sf -> sf.channel("badArticlesChannel"))
+                )
                 .get();
     }
 
     @Bean
     public IntegrationFlow saveArticle(ArticleService articleService) {
         return IntegrationFlow
-                .from("articleChannel")
+                .from("allowedArticlesChannel")
                 .handle(articleService, "save")
+                .get();
+    }
+
+    @Bean
+    public IntegrationFlow badArticlesFlow() {
+        return IntegrationFlow
+                .from("badArticlesChannel")
+                .log()
                 .get();
     }
 
@@ -69,11 +77,6 @@ public class IntegrationConfig {
     public IntegrationFlow newsPaperFlow(NewsPaperService newsPaperService) {
         return IntegrationFlow
                 .from("articlesChannel")
-                .<List<Article>, List<Article>>transform(
-                        (list) -> list.stream()
-                                .filter((article -> article.text().size() > 30))
-                                .collect(Collectors.toList())
-                )
                 .split()
                 .<Article, Article>transform(article -> new Article(
                                 article.id(),
@@ -85,9 +88,12 @@ public class IntegrationConfig {
                 .aggregate()
                 .handle(newsPaperService, "get")
                 .<NewsPaper>filter((paper) -> {
-                    log.info("filter");
-                    return paper.articles().size() < 6;
+                    log.info("filter by size = :{} ", paper.articles().size());
+                    return paper.articles().size() > 6;
                 })
+                .<NewsPaper, NewsPaper>transform(paper -> new NewsPaper(paper.id(),
+                        paper.name().toUpperCase(),
+                        paper.articles()))
                 .channel("newsPaperChannel")
                 .get();
     }

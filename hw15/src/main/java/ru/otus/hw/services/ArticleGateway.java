@@ -8,7 +8,7 @@ import ru.otus.hw.domain.Article;
 @MessagingGateway
 public interface ArticleGateway {
 
-    @Gateway(requestChannel = "writerChannel", replyChannel = "articleChannel")
+    @Gateway(requestChannel = "writerChannel", replyChannel = "allowedArticlesChannel")
     Article create(String writerName);
 
 }
