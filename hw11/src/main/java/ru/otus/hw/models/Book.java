@@ -23,6 +23,6 @@ public class Book {
     private List<Genre> genres;
 
     public Book(String id) {
-        this(id, null, null, null);
+        this.id = id;
     }
 }
