@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.otus.hw.dao.VocabularyDao;
 import ru.otus.hw.domain.Article;
 import ru.otus.hw.domain.Writer;
+import ru.otus.hw.services.gates.ArticleGateway;
+import ru.otus.hw.services.gates.NewsPaperGateway;
 
 import java.util.List;
 import java.util.Random;

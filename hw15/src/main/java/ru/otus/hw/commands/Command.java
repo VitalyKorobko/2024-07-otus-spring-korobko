@@ -7,12 +7,11 @@ import ru.otus.hw.services.ArticleService;
 import ru.otus.hw.services.NewsPaperService;
 import ru.otus.hw.services.WriterService;
 
-
 import static java.lang.System.out;
 
 @AllArgsConstructor
 @ShellComponent
-public class NewsPaperCommand {
+public class Command {
     private final WriterService writerService;
 
     private final NewsPaperService newsPaperService;

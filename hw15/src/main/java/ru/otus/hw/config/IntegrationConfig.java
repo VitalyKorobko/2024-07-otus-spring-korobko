@@ -7,6 +7,8 @@ import org.springframework.integration.dsl.QueueChannelSpec;
 import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.integration.dsl.PublishSubscribeChannelSpec;
 import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.scheduling.PollerMetadata;
+import org.springframework.scheduling.support.PeriodicTrigger;
 import ru.otus.hw.domain.Article;
 import ru.otus.hw.domain.NewsPaper;
 import ru.otus.hw.services.ArticleService;
@@ -51,8 +53,10 @@ public class IntegrationConfig {
                 .handle(articleService, "create")
                 .<Article, Boolean>route(article -> article.text().size() > 30,
                         mapping -> mapping
-                                .subFlowMapping(true, sf -> sf.channel("allowedArticlesChannel"))
-                                .subFlowMapping(false, sf -> sf.channel("badArticlesChannel"))
+                                .subFlowMapping(true, sf ->
+                                        sf.channel("allowedArticlesChannel"))
+                                .subFlowMapping(false, sf ->
+                                        sf.channel("badArticlesChannel"))
                 )
                 .get();
     }
@@ -71,6 +75,13 @@ public class IntegrationConfig {
                 .from("badArticlesChannel")
                 .log()
                 .get();
+    }
+
+    @Bean(name = PollerMetadata.DEFAULT_POLLER)
+    public PollerMetadata defaultPoller() {
+        PollerMetadata pollerMetadata = new PollerMetadata();
+        pollerMetadata.setTrigger(new PeriodicTrigger(1000));
+        return pollerMetadata;
     }
 
     @Bean
