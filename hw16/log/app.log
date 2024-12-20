@@ -1,0 +1,185 @@
+20:06:52.149 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+20:06:52.185 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 14048 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+20:06:52.186 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+20:06:53.037 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:06:53.082 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 4 JPA repository interfaces.
+20:06:53.844 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+20:06:53.854 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+20:06:53.856 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+20:06:53.856 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+20:06:53.908 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+20:06:53.909 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1692 ms
+20:06:54.327 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:06:54.483 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+20:06:54.491 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:06:54.545 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+20:06:54.729 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+20:06:54.738 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+20:06:54.746 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+20:06:54.749 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+20:06:54.777 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+20:06:54.838 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:06:54.863 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+20:06:54.863 [main] INFO  liquibase.command - Using deploymentId: 4714414863
+20:06:54.864 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:06:54.872 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+20:06:54.881 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.882 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+20:06:54.885 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+20:06:54.887 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.887 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+20:06:54.888 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+20:06:54.892 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.892 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+20:06:54.893 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+20:06:54.896 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.897 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+20:06:54.898 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+20:06:54.901 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.901 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+20:06:54.902 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+20:06:54.904 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.904 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+20:06:54.905 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+20:06:54.906 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.907 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+20:06:54.908 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+20:06:54.909 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.909 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+20:06:54.910 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+20:06:54.913 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.913 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 2ms
+20:06:54.914 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+20:06:54.916 [main] INFO  liquibase.changelog - Custom SQL executed
+20:06:54.916 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+20:06:54.921 [main] INFO  liquibase.util - UPDATE SUMMARY
+20:06:54.921 [main] INFO  liquibase.util - Run:                         10
+20:06:54.922 [main] INFO  liquibase.util - Previously run:               0
+20:06:54.922 [main] INFO  liquibase.util - Filtered out:                 0
+20:06:54.922 [main] INFO  liquibase.util - -------------------------------
+20:06:54.922 [main] INFO  liquibase.util - Total change sets:           10
+20:06:54.922 [main] INFO  liquibase.util - Update summary generated
+20:06:54.924 [main] INFO  liquibase.command - Update command completed successfully.
+20:06:54.924 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+20:06:54.925 [main] INFO  liquibase.lockservice - Successfully released change log lock
+20:06:54.926 [main] INFO  liquibase.command - Command execution complete
+20:06:55.103 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+20:06:55.200 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+20:06:55.227 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+20:06:55.438 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+20:06:56.100 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:06:56.102 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:06:57.786 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+20:06:57.834 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+20:06:57.845 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+20:06:57.855 [main] INFO  ru.otus.hw.Application - Started Application in 5.956 seconds (process running for 6.33)
+20:07:00.022 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:07:00.022 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+20:07:00.024 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+20:07:00.058 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@6ce7d6ab call method findAll with args []
+20:07:00.149 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@6ce7d6ab return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+20:13:37.026 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+20:13:37.028 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+20:13:37.030 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+20:13:38.987 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+20:13:39.022 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 17872 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+20:13:39.023 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+20:13:39.823 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:13:39.868 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 4 JPA repository interfaces.
+20:13:40.571 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+20:13:40.579 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+20:13:40.581 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+20:13:40.581 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+20:13:40.633 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+20:13:40.634 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1579 ms
+20:13:41.030 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:13:41.178 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+20:13:41.179 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:13:41.232 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+20:13:41.410 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+20:13:41.419 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+20:13:41.426 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+20:13:41.428 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+20:13:41.456 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+20:13:41.515 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:13:41.541 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+20:13:41.541 [main] INFO  liquibase.command - Using deploymentId: 4714821541
+20:13:41.542 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:13:41.550 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+20:13:41.559 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.559 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 9ms
+20:13:41.563 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+20:13:41.564 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.565 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+20:13:41.566 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+20:13:41.569 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.569 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+20:13:41.571 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+20:13:41.574 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.575 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 4ms
+20:13:41.576 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+20:13:41.579 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.579 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+20:13:41.580 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+20:13:41.582 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.582 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+20:13:41.583 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+20:13:41.584 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.584 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+20:13:41.585 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+20:13:41.587 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.587 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+20:13:41.588 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+20:13:41.590 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.591 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+20:13:41.592 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+20:13:41.594 [main] INFO  liquibase.changelog - Custom SQL executed
+20:13:41.594 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+20:13:41.599 [main] INFO  liquibase.util - UPDATE SUMMARY
+20:13:41.599 [main] INFO  liquibase.util - Run:                         10
+20:13:41.599 [main] INFO  liquibase.util - Previously run:               0
+20:13:41.599 [main] INFO  liquibase.util - Filtered out:                 0
+20:13:41.600 [main] INFO  liquibase.util - -------------------------------
+20:13:41.600 [main] INFO  liquibase.util - Total change sets:           10
+20:13:41.600 [main] INFO  liquibase.util - Update summary generated
+20:13:41.602 [main] INFO  liquibase.command - Update command completed successfully.
+20:13:41.602 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+20:13:41.603 [main] INFO  liquibase.lockservice - Successfully released change log lock
+20:13:41.604 [main] INFO  liquibase.command - Command execution complete
+20:13:41.767 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+20:13:41.880 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+20:13:41.910 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+20:13:42.118 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+20:13:42.783 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:13:42.784 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:13:44.304 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+20:13:44.349 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+20:13:44.359 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+20:13:44.370 [main] INFO  ru.otus.hw.Application - Started Application in 5.628 seconds (process running for 6.002)
+20:13:48.538 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:13:48.538 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+20:13:48.539 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+20:13:48.580 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.GenreServiceImpl@1849d35a call method findAll with args []
+20:13:48.580 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.AuthorServiceImpl@78ba0a57 call method findAll with args []
+20:13:48.692 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.AuthorServiceImpl@78ba0a57 return value [AuthorDto(id=1, fullName=Author_1), AuthorDto(id=2, fullName=Author_2), AuthorDto(id=3, fullName=Author_3)]
+20:13:48.692 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.GenreServiceImpl@1849d35a return value [GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2), GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4), GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)]
+20:13:51.863 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method insert with args [asas, 2, [3, 4]]
+20:13:51.912 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - method insert of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value BookDto(id=4, title=asas, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)])
+20:13:51.928 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:13:51.947 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)]), BookDto(id=4, title=asas, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)])]
+20:14:12.200 [http-nio-8080-exec-6] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.GenreServiceImpl@1849d35a call method findAll with args []
+20:14:12.202 [http-nio-8080-exec-6] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.GenreServiceImpl@1849d35a return value [GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2), GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4), GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)]
+20:14:12.676 [http-nio-8080-exec-7] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.AuthorServiceImpl@78ba0a57 call method findAll with args []
+20:14:12.678 [http-nio-8080-exec-7] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.AuthorServiceImpl@78ba0a57 return value [AuthorDto(id=1, fullName=Author_1), AuthorDto(id=2, fullName=Author_2), AuthorDto(id=3, fullName=Author_3)]
+20:14:13.095 [http-nio-8080-exec-8] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:14:13.098 [http-nio-8080-exec-8] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)]), BookDto(id=4, title=asas, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)])]
+20:15:15.897 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:15:15.899 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)]), BookDto(id=4, title=asas, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)])]
+20:15:17.841 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method deleteById with args [4]
+20:15:17.846 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - method deleteById of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value null
+20:17:05.104 [http-nio-8080-exec-8] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:17:05.108 [http-nio-8080-exec-8] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+20:17:08.905 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:17:08.908 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+20:17:37.303 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5ded2dfc call method findAll with args []
+20:17:37.306 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5ded2dfc return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]

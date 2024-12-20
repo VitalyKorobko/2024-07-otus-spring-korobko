@@ -1,0 +1,123 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:maindb
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+  data:
+    rest:
+      basePath: /datarest
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+management:
+  endpoint:
+    logfile:
+      enabled: true
+      access: unrestricted
+      external-file: log/app.log
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      show-details: always #всегда показвать детали
+  health:
+    defaults:
+      enabled: true #показывать healthcheck
+
+  endpoints:
+    #    enabled-by-default: false
+    #    отлючаем все кроме info
+    web:
+      exposure:
+        #        include: health, info, env
+        include: "*"
+
+      #        include: *
+      #        exclude: env доступ ко всем кроме
+
+      #        exclude: * отключаем все точки
+
+      base-path: /monitor
+#      меняем URL доступа
+
+
+
+
+
+#  management.endpoint.logfile.access
+  
+#  Permitted level of access for the logfile endpoint.
+#  
+#  unrestricted
+#  
+#  management.endpoint.logfile.cache.time-to-live
+#  
+#  Maximum time that a response can be cached.
+#  
+#  0ms
+  
+#  management.endpoint.logfile.external-file
+  
+#  External Logfile to be accessed. Can be used if the logfile is written by output redirect and not by the logging system itself.
+#  
+#  management.endpoint.loggers.access
+#  
+#  Permitted level of access for the loggers endpoint.
+#  
+#  unrestricted
+  
+#  management.endpoint.loggers.cache.time-to-live
+  
+#  Maximum time that a response can be cached.
+  
+#  0ms
+
+
+
+
+#  management.health.defaults.enabled=false  отключение всех индикаторов
+#  management.health.diskspace.enabled=false  отключить отдельный
+#  Идентификатором любого HealthIndicator будет имя бина без суффикса
+#HealthIndicator:
+#  DiskSpaceHealthIndicator diskspace
+#  MongoHealthIndicator mongo
+#  CassandraHealthIndicator cassandra
+#  DataSourceHealthIndicator datasource
+#Статус отдельного компонента:
+#  http://localhost:8080/actuator/health/diskSpace
+
+
+
+#server:
+#  port: 7003
+
+
+logging:
+#  level:
+#    ROOT: ERROR
+#  file:
+#    name: application.log
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
+#  health:
+#    defaults:
+#      enabled: true
+#spring:
+#  jmx:
+#    enabled: true
+
