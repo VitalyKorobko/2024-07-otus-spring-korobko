@@ -19,7 +19,7 @@ export default class FormByUpdateBook extends React.Component {
             title: this.props.book.title,
             el: [],
             genres: this.getGenres(this.props.book.listDtoGenres),
-            author: this.props.book.authorDto.id,
+            author: this.props.book.authorDto.fullName,
             errorMessage: ""
         }
 
@@ -49,12 +49,12 @@ export default class FormByUpdateBook extends React.Component {
                 </div>
 
                 <div className="row">
-                    <label htmlFor="author-id">Выберите&nbsp;имя&nbsp;автора&nbsp;книги</label>
+                    <label htmlFor="author-fullName">Выберите&nbsp;имя&nbsp;автора&nbsp;книги</label>
                     <select value = {this.state.author}
-                        onChange = {e => this.setState({author: e.target.value})} id="author-id" name="authorId">
+                        onChange = {e => this.setState({author: e.target.value})} id="author-fullName" name="authorFullName">
                         {
                             this.state.storageAutors.map((author, i) => (
-                                <option value={author.id} key={i}>
+                                <option value={author.fullName} key={i}>
                                     {author.fullName}
                                 </option>
                                 )
@@ -70,7 +70,7 @@ export default class FormByUpdateBook extends React.Component {
                         onChange = {e => this.convertGenres(e.target.selectedOptions)} required>
                         {
                             this.state.storageGenres.map((genre, i) => (
-                                <option value={genre.id} key={i}>
+                                <option value={genre.name} key={i}>
                                     {genre.name}
                                 </option>
                                 )
@@ -84,7 +84,7 @@ export default class FormByUpdateBook extends React.Component {
     }
 
     getGenres(json){
-        var setGenres = json.map(el => {return el.id})
+        var setGenres = json.map(el => {return el.name})
         return setGenres
     }
 
@@ -98,8 +98,8 @@ export default class FormByUpdateBook extends React.Component {
         var bookData = {
             id: this.state.id,
             title: this.state.title,
-            authorId: this.state.author,
-            setGenresId: this.state.genres
+            authorFullName: this.state.author,
+            setGenreNames: this.state.genres
         }
         this.bookRepository.update(bookData)
         .then(bookDtoWeb => {if (!this.check(bookDtoWeb)) {return}})

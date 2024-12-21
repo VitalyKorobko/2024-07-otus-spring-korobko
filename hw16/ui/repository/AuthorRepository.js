@@ -1,6 +1,6 @@
 export default class AuthorRepository {
 
     findAll() {
-        return fetch('/api/v1/authors').then(response => response.json())
+        return fetch('/datarest/author').then(response => response.json()).then(json => json._embedded.authors)
     }
 }

@@ -80,8 +80,8 @@ public class BookServiceImplTest {
     void shouldSaveNewBook() {
         var returnedBookDto = bookService.insert(
                 BOOK_TITLE,
-                FIRST_AUTHOR_ID,
-                Set.of(SECOND_GENRE_ID)
+                AUTHOR_NAME,
+                Set.of(SECOND_GENRE_NAME)
         );
 
         assertThat(returnedBookDto).isNotNull()
@@ -104,8 +104,8 @@ public class BookServiceImplTest {
         var returnedBook = bookService.update(
                 THIRD_BOOK_ID,
                 BOOK_TITLE,
-                FIRST_AUTHOR_ID,
-                Set.of(FIRST_GENRE_ID)
+                AUTHOR_NAME,
+                Set.of(FIRST_GENRE_NAME)
         );
 
         assertThat(returnedBook).isNotNull()

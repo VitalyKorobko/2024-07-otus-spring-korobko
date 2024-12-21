@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с жанрами книг ")
 @DataJpaTest
-public class JpaGenreRepositoryTest {
+public class GenreRepositoryTest {
     @Autowired
     private GenreRepository repositoryJpa;
 
@@ -22,6 +22,15 @@ public class JpaGenreRepositoryTest {
     @Test
     void shouldReturnCorrectGenreListByIds() {
         var actualGenres = repositoryJpa.findAllByIdIn(Set.of(1L, 2L, 3L));
+        var expectedGenres = getDbGenres(1, 4);
+        assertThat(actualGenres).
+                isEqualTo(expectedGenres);
+    }
+
+    @DisplayName("должен загружать жанры по списку names жанров")
+    @Test
+    void shouldReturnCorrectGenreListByNames() {
+        var actualGenres = repositoryJpa.findAllByNameIn(Set.of("Genre_1", "Genre_2", "Genre_3"));
         var expectedGenres = getDbGenres(1, 4);
         assertThat(actualGenres).
                 isEqualTo(expectedGenres);

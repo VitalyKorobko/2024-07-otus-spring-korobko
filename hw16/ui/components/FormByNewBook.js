@@ -40,12 +40,12 @@ export default class FormByNewBook extends React.Component {
                 </div>
 
                 <div className="row">
-                    <label htmlFor="author-id">Выберите&nbsp;имя&nbsp;автора&nbsp;книги</label>
-                    <select defaultValue = {"default"}onChange = {e => this.setState({author: e.target.value})} id="author-id" name="authorId">
+                    <label htmlFor="author-fullName">Выберите&nbsp;имя&nbsp;автора&nbsp;книги</label>
+                    <select defaultValue = {"default"}onChange = {e => this.setState({author: e.target.value})} id="author-fullName" name="authorFullName">
                         <option disabled value={"default"}>--выберите автора--</option>
                         {
                             this.state.storageAutors.map((author, i) => (
-                                <option value={author.id} key={i}>
+                                <option value={author.fullName} key={i}>
                                     {author.fullName}
                                 </option>
                                 )
@@ -59,7 +59,7 @@ export default class FormByNewBook extends React.Component {
                     <select id="genres-ids" multiple={true} onChange = {e => this.setState({genres: this.getGenres(e.target.selectedOptions)})} required>
                         {
                             this.state.storageGenres.map((genre, i) => (
-                                <option value={genre.id} key={i}>
+                                <option value={genre.name} key={i}>
                                     {genre.name}
                                 </option>
                                 )
@@ -70,8 +70,8 @@ export default class FormByNewBook extends React.Component {
                 <button onClick={() =>this.props.addBook({
                         id: 0,
                         title: this.state.title,
-                        authorId: this.state.author,
-                        setGenresId: this.state.genres
+                        authorFullName: this.state.author,
+                        setGenreNames: this.state.genres
                     })
                 } type="button">Добавить</button>
             </form>

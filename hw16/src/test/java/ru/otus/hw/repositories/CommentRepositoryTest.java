@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с комментариями для книг")
 @DataJpaTest
-public class JpaCommentRepositoryTest {
+public class CommentRepositoryTest {
     private static final long FIRST_COMMENT_ID = 1L;
 
     private static final long BOOK_ID = 2L;

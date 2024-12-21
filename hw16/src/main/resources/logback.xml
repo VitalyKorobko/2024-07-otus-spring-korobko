@@ -1,4 +1,3 @@
-<!--<configuration debug="true">-->
 <configuration debug="false">
     <property name="LOG_DIR" value="log/"/>
     <appender name="OUTSTD" class="ch.qos.logback.core.ConsoleAppender">

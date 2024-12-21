@@ -1,7 +1,6 @@
 package ru.otus.hw.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,11 +17,11 @@ public class BookDtoWeb {
     @NotBlank(message = "Поле название книги не может быть пустым")
     private String title;
 
-    @Positive(message = "Выберите автора книги")
-    private long authorId;
+    @NotBlank(message = "Выберите автора книги")
+    private String authorFullName;
 
     @Size(min = 1, message = "Выберите жанры для книги")
-    private Set<Long> setGenresId;
+    private Set<String> setGenreNames;
 
     private String message;
 }

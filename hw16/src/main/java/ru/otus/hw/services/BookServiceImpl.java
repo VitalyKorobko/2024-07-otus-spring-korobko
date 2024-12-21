@@ -3,11 +3,13 @@ package ru.otus.hw.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import ru.otus.hw.dto.BookDto;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.logging.LogCustom;
 import ru.otus.hw.mapper.BookMapper;
 import ru.otus.hw.models.Book;
+import ru.otus.hw.models.Genre;
 import ru.otus.hw.repositories.AuthorRepository;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.GenreRepository;
@@ -15,6 +17,7 @@ import ru.otus.hw.repositories.GenreRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -48,14 +51,18 @@ public class BookServiceImpl implements BookService {
     @LogCustom
     @Override
     @Transactional
-    public BookDto insert(String title, long authorId, Set<Long> genresIds) {
+    public BookDto insert(String title, String authorFullName, Set<String> genreNames) {
+        var authorId = getAuthorId(authorFullName);
+        var genresIds = getGenreNames(genreNames);
         return save(0L, title, authorId, genresIds);
     }
 
     @LogCustom
     @Override
     @Transactional
-    public BookDto update(long id, String title, long authorId, Set<Long> genresIds) {
+    public BookDto update(long id, String title, String authorFullName, Set<String> genreNames) {
+        var authorId = getAuthorId(authorFullName);
+        var genresIds = getGenreNames(genreNames);
         return save(id, title, authorId, genresIds);
     }
 
@@ -81,5 +88,18 @@ public class BookServiceImpl implements BookService {
         var book = new Book(id, title, author, genres);
 
         return bookMapper.toBookDto(bookRepository.save(book));
+    }
+
+    private long getAuthorId(String authorFullName) {
+        var result = authorRepository.findByFullName(authorFullName);
+        if (CollectionUtils.isEmpty(result)) {
+            throw new EntityNotFoundException("author with FullName: %s not found".formatted(authorFullName));
+        }
+        return authorRepository.findByFullName(authorFullName).get(0).getId();
+    }
+
+    private Set<Long> getGenreNames(Set<String> genreNames) {
+        var genres = genreRepository.findAllByNameIn(genreNames);
+        return genres.stream().map(Genre::getId).collect(Collectors.toSet());
     }
 }

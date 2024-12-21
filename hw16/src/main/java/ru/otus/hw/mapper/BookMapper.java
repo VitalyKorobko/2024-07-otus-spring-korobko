@@ -36,8 +36,8 @@ public class BookMapper {
         return new BookDtoWeb(
                 bookDto.getId(),
                 bookDto.getTitle(),
-                bookDto.getAuthorDto().getId(),
-                bookDto.getListDtoGenres().stream().map(GenreDto::getId).collect(Collectors.toSet()),
+                bookDto.getAuthorDto().getFullName(),
+                bookDto.getListDtoGenres().stream().map(GenreDto::getName).collect(Collectors.toSet()),
                 message
         );
     }

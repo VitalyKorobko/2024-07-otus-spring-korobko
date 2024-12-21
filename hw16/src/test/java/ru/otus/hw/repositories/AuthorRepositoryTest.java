@@ -14,8 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с авторами книг ")
 @DataJpaTest
-public class JpaAuthorRepositoryTest {
+public class AuthorRepositoryTest {
     private static final long FIRST_AUTHOR_ID = 1L;
+
+    private static final String AUTHOR_FULL_NAME = "Author_1";
 
     @Autowired
     private AuthorRepository repositoryJpa;
@@ -31,6 +33,14 @@ public class JpaAuthorRepositoryTest {
         assertThat(optionalActualAuthor).isPresent()
                 .get()
                 .isEqualTo(expectedAuthor);
+    }
+
+    @DisplayName("должен загружать автора по FullName")
+    @Test
+    void shouldReturnCorrectAuthorByFullName() {
+        var actualAuthor = repositoryJpa.findByFullName(AUTHOR_FULL_NAME).get(0);
+        var expectedAuthor = entityManager.find(Author.class, FIRST_AUTHOR_ID);
+        assertThat(actualAuthor).isEqualTo(expectedAuthor);
     }
 
     @DisplayName("должен загружать список всех авторов")

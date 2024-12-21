@@ -7,11 +7,10 @@ import ru.otus.hw.models.Author;
 
 import java.util.List;
 
-@RepositoryRestResource(path = "auth")
+@RepositoryRestResource(path = "author")
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @RestResource(path = "names")
-//    @RestResource
     List<Author> findByFullName(String name);
 
 }

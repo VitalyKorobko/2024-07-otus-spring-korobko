@@ -48,14 +48,14 @@ public class BookController {
             return new BookDtoWeb(
                     0,
                     bookDtoWeb.getTitle(),
-                    bookDtoWeb.getAuthorId(),
-                    bookDtoWeb.getSetGenresId(),
+                    bookDtoWeb.getAuthorFullName(),
+                    bookDtoWeb.getSetGenreNames(),
                     bindingResult.getFieldError().getDefaultMessage());
         }
         return mapper.toBookDtoWeb(bookService.insert(
                         bookDtoWeb.getTitle(),
-                        bookDtoWeb.getAuthorId(),
-                        bookDtoWeb.getSetGenresId()
+                        bookDtoWeb.getAuthorFullName(),
+                        bookDtoWeb.getSetGenreNames()
                 ), bookDtoWeb.getMessage()
         );
     }
@@ -64,19 +64,22 @@ public class BookController {
     public BookDtoWeb updateBook(@Valid @RequestBody BookDtoWeb bookDtoWeb,
                                  BindingResult bindingResult, @PathVariable("id") long id) {
         if (bindingResult.hasErrors()) {
+            System.out.println("Genres");
+            System.out.println(bindingResult.getFieldError().getField().toString());
+            System.out.println(bookDtoWeb.getSetGenreNames().toString());
             return new BookDtoWeb(
                     0,
                     bookDtoWeb.getTitle(),
-                    bookDtoWeb.getAuthorId(),
-                    bookDtoWeb.getSetGenresId(),
+                    bookDtoWeb.getAuthorFullName(),
+                    bookDtoWeb.getSetGenreNames(),
                     bindingResult.getFieldError().getDefaultMessage()
             );
         }
         return mapper.toBookDtoWeb(bookService.update(
                 id,
                 bookDtoWeb.getTitle(),
-                bookDtoWeb.getAuthorId(),
-                bookDtoWeb.getSetGenresId()
+                bookDtoWeb.getAuthorFullName(),
+                bookDtoWeb.getSetGenreNames()
         ), bookDtoWeb.getMessage());
     }
 

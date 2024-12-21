@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с книгами ")
 @DataJpaTest
-class JpaBookRepositoryTest {
+class BookRepositoryTest {
     private static final int EXPECTED_NUMBER_OF_BOOKS = 3;
 
     private static final long FIRST_BOOK_ID = 1L;

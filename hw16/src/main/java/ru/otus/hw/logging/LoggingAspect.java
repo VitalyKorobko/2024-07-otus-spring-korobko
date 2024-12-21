@@ -36,6 +36,8 @@ public class LoggingAspect {
             LOG.error("{}: {}{}{}", e.getClass(), e.getMessage(), "\n" , stringBuilder);
         }
         logAfterMethod(joinPoint, result);
+
+
         return result;
     }
 

@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional(propagation = Propagation.NEVER)
 public class CommentServiceImplTest {
     private static final long FIRST_BOOK_ID = 1L;
+
     private static final long SECOND_BOOK_ID = 2L;
 
     private static final int EXPECTED_NUMBER_OF_COMMENTS = 3;

@@ -1,6 +1,9 @@
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
+  data:
+    rest:
+      basePath: /datarest
 
   liquibase:
     enabled: true
@@ -19,3 +22,4 @@ spring:
 logging:
   level:
     ROOT: ERROR
+
