@@ -19,6 +19,29 @@ spring:
       hibernate:
         format_sql: true
 
+management:
+  endpoint:
+    logfile:
+      enabled: true
+      access: unrestricted
+      external-file: log/app.log
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+
+
 logging:
   level:
     ROOT: ERROR

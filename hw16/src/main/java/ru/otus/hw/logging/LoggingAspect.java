@@ -17,7 +17,7 @@ public class LoggingAspect {
     private static final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 
     @Around("@annotation(ru.otus.hw.logging.LogCustom)")
-    public Object logAroundPersonDaoSimple(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logAroundServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
         logBeforeMethod(joinPoint);
         Object result = null;
         try {
@@ -28,15 +28,11 @@ public class LoggingAspect {
                     joinPoint.getSignature().getName(),
                     joinPoint.getArgs()
             );
-            var stringBuilder = new StringBuilder();
-            for (StackTraceElement el : e.getStackTrace()) {
-                stringBuilder.append(el.toString());
-                stringBuilder.append("\n");
-            }
-            LOG.error("{}: {}{}{}", e.getClass(), e.getMessage(), "\n" , stringBuilder);
+            log(e);
+        } catch (RuntimeException e) {
+            log(e);
         }
         logAfterMethod(joinPoint, result);
-
 
         return result;
     }
@@ -57,4 +53,18 @@ public class LoggingAspect {
                 Arrays.toString(joinPoint.getArgs())
         );
     }
+
+    private String getStackTrace(Exception e) {
+        var stringBuilder = new StringBuilder();
+        for (StackTraceElement el : e.getStackTrace()) {
+            stringBuilder.append(el.toString());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private void log(Exception e) {
+        LOG.error("{}: {}{}{}", e.getClass(), e.getMessage(), "\n", getStackTrace(e));
+    }
+
 }

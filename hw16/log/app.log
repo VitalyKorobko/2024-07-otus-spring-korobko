@@ -4951,3 +4951,978 @@
 04:08:53.664 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 04:13:13.392 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.controller.BookControllerTest]: BookControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
 04:13:13.497 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.controller.BookControllerTest
+18:51:36.418 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+18:51:36.451 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 16272 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+18:51:36.451 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+18:51:37.240 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:51:37.288 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+18:51:38.048 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+18:51:38.059 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+18:51:38.060 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:51:38.061 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+18:51:38.118 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:51:38.119 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1636 ms
+18:51:38.530 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+18:51:38.690 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+18:51:38.693 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+18:51:38.765 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+18:51:38.946 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+18:51:38.959 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+18:51:38.966 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+18:51:38.968 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+18:51:38.993 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+18:51:39.053 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:51:39.078 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+18:51:39.078 [main] INFO  liquibase.command - Using deploymentId: 5055499078
+18:51:39.079 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:51:39.087 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+18:51:39.096 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.097 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+18:51:39.101 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+18:51:39.103 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.103 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 1ms
+18:51:39.104 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+18:51:39.108 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.108 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+18:51:39.109 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+18:51:39.112 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.112 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 2ms
+18:51:39.114 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+18:51:39.116 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.116 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 2ms
+18:51:39.117 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+18:51:39.119 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.119 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+18:51:39.120 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+18:51:39.122 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.122 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+18:51:39.123 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+18:51:39.125 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.125 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+18:51:39.126 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+18:51:39.128 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.129 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+18:51:39.130 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+18:51:39.132 [main] INFO  liquibase.changelog - Custom SQL executed
+18:51:39.132 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+18:51:39.136 [main] INFO  liquibase.util - UPDATE SUMMARY
+18:51:39.137 [main] INFO  liquibase.util - Run:                         10
+18:51:39.137 [main] INFO  liquibase.util - Previously run:               0
+18:51:39.137 [main] INFO  liquibase.util - Filtered out:                 0
+18:51:39.137 [main] INFO  liquibase.util - -------------------------------
+18:51:39.137 [main] INFO  liquibase.util - Total change sets:           10
+18:51:39.137 [main] INFO  liquibase.util - Update summary generated
+18:51:39.139 [main] INFO  liquibase.command - Update command completed successfully.
+18:51:39.139 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+18:51:39.140 [main] INFO  liquibase.lockservice - Successfully released change log lock
+18:51:39.140 [main] INFO  liquibase.command - Command execution complete
+18:51:39.297 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:51:39.388 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+18:51:39.433 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+18:51:39.663 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:51:40.307 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+18:51:40.309 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:51:41.039 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+18:51:41.829 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+18:51:41.872 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+18:51:41.883 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+18:51:41.892 [main] INFO  ru.otus.hw.Application - Started Application in 5.721 seconds (process running for 6.096)
+18:52:17.278 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+18:52:17.278 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+18:52:17.279 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+18:52:17.318 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@23471b2f call method findAll with args []
+18:52:17.409 [http-nio-8080-exec-1] ERROR ru.otus.hw.logging.LoggingAspect - exception: [ru.otus.hw.logging.LoggingAspect.logAroundPersonDaoSimple(LoggingAspect.java:25), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627), org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379), org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720), ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>), ru.otus.hw.controller.BookController.getBooks(BookController.java:35), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255), org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188), org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831), org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87), org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089), org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979), org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014), org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564), org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344), org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389), org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63), org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904), org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741), org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52), org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190), org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659), org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63), java.base/java.lang.Thread.run(Thread.java:1589)]
+18:52:17.409 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@23471b2f return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+18:52:21.911 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@23471b2f call method findAll with args []
+18:52:21.914 [http-nio-8080-exec-4] ERROR ru.otus.hw.logging.LoggingAspect - exception: [ru.otus.hw.logging.LoggingAspect.logAroundPersonDaoSimple(LoggingAspect.java:25), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627), org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379), org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720), ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>), ru.otus.hw.controller.BookController.getBooks(BookController.java:35), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255), org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188), org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831), org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87), org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089), org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979), org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014), org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564), org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344), org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389), org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63), org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904), org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741), org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52), org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190), org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659), org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63), java.base/java.lang.Thread.run(Thread.java:1589)]
+18:52:21.914 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@23471b2f return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+18:52:40.946 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@23471b2f call method findAll with args []
+18:52:40.949 [http-nio-8080-exec-5] ERROR ru.otus.hw.logging.LoggingAspect - exception: [ru.otus.hw.logging.LoggingAspect.logAroundPersonDaoSimple(LoggingAspect.java:25), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637), org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627), org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379), org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97), org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184), org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768), org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720), ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>), ru.otus.hw.controller.BookController.getBooks(BookController.java:35), java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104), java.base/java.lang.reflect.Method.invoke(Method.java:578), org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255), org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188), org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926), org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831), org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87), org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089), org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979), org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014), org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564), org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885), jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201), org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344), org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389), org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63), org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904), org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741), org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52), org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190), org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659), org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63), java.base/java.lang.Thread.run(Thread.java:1589)]
+18:52:40.950 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@23471b2f return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+18:53:28.845 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:53:28.846 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+18:53:28.848 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+18:53:31.844 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+18:53:31.878 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 12352 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+18:53:31.879 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+18:53:32.713 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:53:32.761 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 4 JPA repository interfaces.
+18:53:33.490 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+18:53:33.500 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+18:53:33.501 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:53:33.502 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+18:53:33.554 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:53:33.554 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1645 ms
+18:53:33.948 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+18:53:34.097 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+18:53:34.098 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+18:53:34.153 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+18:53:34.323 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+18:53:34.332 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+18:53:34.339 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+18:53:34.341 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+18:53:34.369 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+18:53:34.430 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:53:34.454 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+18:53:34.455 [main] INFO  liquibase.command - Using deploymentId: 5055614455
+18:53:34.456 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:53:34.463 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+18:53:34.472 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.473 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+18:53:34.476 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+18:53:34.478 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.478 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+18:53:34.479 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+18:53:34.482 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.483 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+18:53:34.484 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+18:53:34.487 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.487 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+18:53:34.489 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+18:53:34.491 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.491 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 2ms
+18:53:34.492 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+18:53:34.493 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.494 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+18:53:34.495 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+18:53:34.496 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.496 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+18:53:34.497 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+18:53:34.499 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.499 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+18:53:34.500 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+18:53:34.503 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.503 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+18:53:34.504 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+18:53:34.506 [main] INFO  liquibase.changelog - Custom SQL executed
+18:53:34.506 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+18:53:34.511 [main] INFO  liquibase.util - UPDATE SUMMARY
+18:53:34.511 [main] INFO  liquibase.util - Run:                         10
+18:53:34.511 [main] INFO  liquibase.util - Previously run:               0
+18:53:34.511 [main] INFO  liquibase.util - Filtered out:                 0
+18:53:34.512 [main] INFO  liquibase.util - -------------------------------
+18:53:34.512 [main] INFO  liquibase.util - Total change sets:           10
+18:53:34.512 [main] INFO  liquibase.util - Update summary generated
+18:53:34.514 [main] INFO  liquibase.command - Update command completed successfully.
+18:53:34.514 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+18:53:34.515 [main] INFO  liquibase.lockservice - Successfully released change log lock
+18:53:34.516 [main] INFO  liquibase.command - Command execution complete
+18:53:34.670 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:53:34.738 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+18:53:34.777 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+18:53:34.993 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:53:35.662 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+18:53:35.664 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:53:36.415 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+18:53:37.371 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+18:53:37.423 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+18:53:37.444 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+18:53:37.454 [main] INFO  ru.otus.hw.Application - Started Application in 5.856 seconds (process running for 6.227)
+18:58:54.636 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:58:54.639 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+18:58:54.641 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+18:58:57.601 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+18:58:57.635 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 16916 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+18:58:57.636 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+18:58:58.418 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18:58:58.467 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+18:58:59.185 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+18:58:59.196 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+18:58:59.197 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+18:58:59.198 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+18:58:59.251 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+18:58:59.252 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1583 ms
+18:58:59.655 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+18:58:59.827 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+18:58:59.830 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+18:58:59.897 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+18:59:00.100 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+18:59:00.110 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+18:59:00.117 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+18:59:00.119 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+18:59:00.143 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+18:59:00.203 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:59:00.227 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+18:59:00.228 [main] INFO  liquibase.command - Using deploymentId: 5055940228
+18:59:00.229 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+18:59:00.236 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+18:59:00.248 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.248 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 11ms
+18:59:00.251 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+18:59:00.253 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.253 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 1ms
+18:59:00.254 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+18:59:00.258 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.258 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+18:59:00.259 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+18:59:00.263 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.263 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+18:59:00.264 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+18:59:00.267 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.267 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+18:59:00.268 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+18:59:00.269 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.269 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+18:59:00.270 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+18:59:00.272 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.272 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+18:59:00.273 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+18:59:00.274 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.274 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+18:59:00.275 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+18:59:00.278 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.279 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 2ms
+18:59:00.280 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+18:59:00.282 [main] INFO  liquibase.changelog - Custom SQL executed
+18:59:00.282 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+18:59:00.287 [main] INFO  liquibase.util - UPDATE SUMMARY
+18:59:00.287 [main] INFO  liquibase.util - Run:                         10
+18:59:00.287 [main] INFO  liquibase.util - Previously run:               0
+18:59:00.287 [main] INFO  liquibase.util - Filtered out:                 0
+18:59:00.287 [main] INFO  liquibase.util - -------------------------------
+18:59:00.287 [main] INFO  liquibase.util - Total change sets:           10
+18:59:00.288 [main] INFO  liquibase.util - Update summary generated
+18:59:00.289 [main] INFO  liquibase.command - Update command completed successfully.
+18:59:00.289 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+18:59:00.290 [main] INFO  liquibase.lockservice - Successfully released change log lock
+18:59:00.291 [main] INFO  liquibase.command - Command execution complete
+18:59:00.479 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+18:59:00.590 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+18:59:00.619 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+18:59:00.840 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+18:59:01.499 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+18:59:01.501 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:59:02.185 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+18:59:02.876 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+18:59:02.924 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+18:59:02.940 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+18:59:02.951 [main] INFO  ru.otus.hw.Application - Started Application in 5.601 seconds (process running for 5.971)
+18:59:07.705 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+18:59:07.705 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+18:59:07.706 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:03:04.017 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+19:03:04.019 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+19:03:04.021 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+19:03:06.958 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+19:03:06.990 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 20196 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+19:03:06.991 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+19:03:07.808 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:03:07.858 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 4 JPA repository interfaces.
+19:03:08.566 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+19:03:08.576 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+19:03:08.577 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+19:03:08.577 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+19:03:08.624 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+19:03:08.625 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1604 ms
+19:03:09.016 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+19:03:09.179 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+19:03:09.180 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+19:03:09.233 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+19:03:09.435 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+19:03:09.443 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+19:03:09.450 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+19:03:09.453 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+19:03:09.477 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+19:03:09.539 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:03:09.564 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+19:03:09.565 [main] INFO  liquibase.command - Using deploymentId: 5056189565
+19:03:09.566 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:03:09.573 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+19:03:09.583 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.584 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+19:03:09.588 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+19:03:09.590 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.590 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+19:03:09.591 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+19:03:09.595 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.595 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+19:03:09.597 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+19:03:09.600 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.600 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+19:03:09.601 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+19:03:09.604 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.604 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 2ms
+19:03:09.605 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+19:03:09.607 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.607 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+19:03:09.608 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+19:03:09.610 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.610 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+19:03:09.611 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+19:03:09.613 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.613 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+19:03:09.614 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+19:03:09.617 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.617 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+19:03:09.618 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+19:03:09.620 [main] INFO  liquibase.changelog - Custom SQL executed
+19:03:09.620 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+19:03:09.625 [main] INFO  liquibase.util - UPDATE SUMMARY
+19:03:09.625 [main] INFO  liquibase.util - Run:                         10
+19:03:09.625 [main] INFO  liquibase.util - Previously run:               0
+19:03:09.625 [main] INFO  liquibase.util - Filtered out:                 0
+19:03:09.625 [main] INFO  liquibase.util - -------------------------------
+19:03:09.625 [main] INFO  liquibase.util - Total change sets:           10
+19:03:09.626 [main] INFO  liquibase.util - Update summary generated
+19:03:09.627 [main] INFO  liquibase.command - Update command completed successfully.
+19:03:09.627 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+19:03:09.628 [main] INFO  liquibase.lockservice - Successfully released change log lock
+19:03:09.629 [main] INFO  liquibase.command - Command execution complete
+19:03:09.810 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+19:03:09.886 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+19:03:09.915 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+19:03:10.122 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+19:03:10.775 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:03:10.777 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:03:11.474 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+19:03:12.390 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+19:03:12.435 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+19:03:12.451 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+19:03:12.462 [main] INFO  ru.otus.hw.Application - Started Application in 5.756 seconds (process running for 6.123)
+19:04:05.871 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:04:05.871 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+19:04:05.872 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:04:05.901 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@3e03d75e call method findAll with args []
+19:04:05.989 [http-nio-8080-exec-1] ERROR ru.otus.hw.logging.LoggingAspect - exception: ru.otus.hw.logging.LoggingAspect.logAroundServiceMethods(LoggingAspect.java:26)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+ru.otus.hw.controller.BookController.getBooks(BookController.java:35)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+java.base/java.lang.Thread.run(Thread.java:1589)
+
+19:04:05.990 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@3e03d75e return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+19:04:52.714 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+19:04:52.715 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+19:04:52.717 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+19:04:55.634 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+19:04:55.671 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 20104 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+19:04:55.672 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+19:04:56.481 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:04:56.528 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 4 JPA repository interfaces.
+19:04:57.227 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+19:04:57.236 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+19:04:57.238 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+19:04:57.238 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+19:04:57.291 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+19:04:57.292 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1588 ms
+19:04:57.670 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+19:04:57.833 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+19:04:57.834 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+19:04:57.900 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+19:04:58.091 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+19:04:58.099 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+19:04:58.107 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+19:04:58.109 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+19:04:58.139 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+19:04:58.197 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:04:58.221 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+19:04:58.222 [main] INFO  liquibase.command - Using deploymentId: 5056298222
+19:04:58.223 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:04:58.230 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+19:04:58.240 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.240 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+19:04:58.244 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+19:04:58.245 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.245 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 1ms
+19:04:58.246 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+19:04:58.250 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.250 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+19:04:58.251 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+19:04:58.254 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.254 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+19:04:58.256 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+19:04:58.258 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.259 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+19:04:58.260 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+19:04:58.261 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.261 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+19:04:58.262 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+19:04:58.263 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.264 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+19:04:58.265 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+19:04:58.266 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.266 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+19:04:58.267 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+19:04:58.270 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.270 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 2ms
+19:04:58.271 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+19:04:58.273 [main] INFO  liquibase.changelog - Custom SQL executed
+19:04:58.273 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+19:04:58.278 [main] INFO  liquibase.util - UPDATE SUMMARY
+19:04:58.278 [main] INFO  liquibase.util - Run:                         10
+19:04:58.278 [main] INFO  liquibase.util - Previously run:               0
+19:04:58.278 [main] INFO  liquibase.util - Filtered out:                 0
+19:04:58.278 [main] INFO  liquibase.util - -------------------------------
+19:04:58.278 [main] INFO  liquibase.util - Total change sets:           10
+19:04:58.279 [main] INFO  liquibase.util - Update summary generated
+19:04:58.281 [main] INFO  liquibase.command - Update command completed successfully.
+19:04:58.281 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+19:04:58.282 [main] INFO  liquibase.lockservice - Successfully released change log lock
+19:04:58.282 [main] INFO  liquibase.command - Command execution complete
+19:04:58.428 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+19:04:58.519 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+19:04:58.579 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+19:04:58.803 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+19:04:59.467 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:04:59.469 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:05:00.168 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+19:05:01.053 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+19:05:01.103 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+19:05:01.120 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+19:05:01.130 [main] INFO  ru.otus.hw.Application - Started Application in 5.742 seconds (process running for 6.115)
+19:05:08.681 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:05:08.681 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+19:05:08.682 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:05:08.711 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@19d75d3c call method findAll with args []
+19:05:08.712 [http-nio-8080-exec-1] ERROR ru.otus.hw.logging.LoggingAspect - exception: ru.otus.hw.logging.LoggingAspect.logAroundServiceMethods(LoggingAspect.java:25)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+ru.otus.hw.controller.BookController.getBooks(BookController.java:35)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+java.base/java.lang.Thread.run(Thread.java:1589)
+
+19:05:08.712 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@19d75d3c return value null
+19:06:58.272 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+19:06:58.274 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+19:06:58.276 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+19:07:25.824 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+19:07:25.857 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 9264 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+19:07:25.858 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+19:07:26.655 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:07:26.701 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 4 JPA repository interfaces.
+19:07:27.385 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+19:07:27.395 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+19:07:27.396 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+19:07:27.396 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+19:07:27.449 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+19:07:27.450 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1559 ms
+19:07:27.854 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+19:07:27.998 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+19:07:27.999 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+19:07:28.047 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+19:07:28.246 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+19:07:28.255 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+19:07:28.262 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+19:07:28.264 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+19:07:28.292 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+19:07:28.351 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:07:28.376 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+19:07:28.376 [main] INFO  liquibase.command - Using deploymentId: 5056448376
+19:07:28.377 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:07:28.384 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+19:07:28.394 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.395 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+19:07:28.398 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+19:07:28.400 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.400 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+19:07:28.401 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+19:07:28.405 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.405 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+19:07:28.406 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+19:07:28.409 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.409 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 2ms
+19:07:28.411 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+19:07:28.413 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.414 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+19:07:28.415 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+19:07:28.416 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.416 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+19:07:28.417 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+19:07:28.419 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.419 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 2ms
+19:07:28.420 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+19:07:28.421 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.421 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+19:07:28.422 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+19:07:28.424 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.425 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+19:07:28.426 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+19:07:28.427 [main] INFO  liquibase.changelog - Custom SQL executed
+19:07:28.428 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+19:07:28.433 [main] INFO  liquibase.util - UPDATE SUMMARY
+19:07:28.433 [main] INFO  liquibase.util - Run:                         10
+19:07:28.433 [main] INFO  liquibase.util - Previously run:               0
+19:07:28.433 [main] INFO  liquibase.util - Filtered out:                 0
+19:07:28.433 [main] INFO  liquibase.util - -------------------------------
+19:07:28.433 [main] INFO  liquibase.util - Total change sets:           10
+19:07:28.433 [main] INFO  liquibase.util - Update summary generated
+19:07:28.435 [main] INFO  liquibase.command - Update command completed successfully.
+19:07:28.435 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+19:07:28.436 [main] INFO  liquibase.lockservice - Successfully released change log lock
+19:07:28.437 [main] INFO  liquibase.command - Command execution complete
+19:07:28.627 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+19:07:28.766 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+19:07:28.803 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+19:07:29.026 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+19:07:29.692 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:07:29.694 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:07:30.352 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+19:07:31.301 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+19:07:31.348 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+19:07:31.360 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+19:07:31.368 [main] INFO  ru.otus.hw.Application - Started Application in 5.793 seconds (process running for 6.164)
+19:07:34.848 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:07:34.848 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+19:07:34.849 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:07:34.881 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@49d658bf call method findAll with args []
+19:07:34.882 [http-nio-8080-exec-1] ERROR ru.otus.hw.logging.LoggingAspect - exception: ru.otus.hw.logging.LoggingAspect.logAroundServiceMethods(LoggingAspect.java:25)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+ru.otus.hw.controller.BookController.getBooks(BookController.java:35)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+java.base/java.lang.Thread.run(Thread.java:1589)
+
+19:07:34.882 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@49d658bf return value null
+19:09:44.152 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+19:09:44.153 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+19:09:44.155 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+19:09:47.145 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+19:09:47.180 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 4964 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+19:09:47.181 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+19:09:48.019 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:09:48.078 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+19:09:48.824 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+19:09:48.832 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+19:09:48.834 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+19:09:48.834 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+19:09:48.886 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+19:09:48.887 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1677 ms
+19:09:49.246 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+19:09:49.404 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+19:09:49.406 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+19:09:49.456 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+19:09:49.659 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+19:09:49.669 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+19:09:49.677 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+19:09:49.679 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+19:09:49.708 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+19:09:49.769 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:09:49.796 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+19:09:49.796 [main] INFO  liquibase.command - Using deploymentId: 5056589796
+19:09:49.797 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:09:49.806 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+19:09:49.816 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.816 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 9ms
+19:09:49.820 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+19:09:49.822 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.822 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+19:09:49.823 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+19:09:49.826 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.827 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+19:09:49.828 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+19:09:49.831 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.831 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+19:09:49.833 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+19:09:49.837 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.837 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 4ms
+19:09:49.838 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+19:09:49.839 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.840 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+19:09:49.841 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+19:09:49.842 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.842 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+19:09:49.843 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+19:09:49.845 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.845 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+19:09:49.846 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+19:09:49.848 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.849 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+19:09:49.850 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+19:09:49.851 [main] INFO  liquibase.changelog - Custom SQL executed
+19:09:49.851 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 1ms
+19:09:49.856 [main] INFO  liquibase.util - UPDATE SUMMARY
+19:09:49.857 [main] INFO  liquibase.util - Run:                         10
+19:09:49.857 [main] INFO  liquibase.util - Previously run:               0
+19:09:49.857 [main] INFO  liquibase.util - Filtered out:                 0
+19:09:49.857 [main] INFO  liquibase.util - -------------------------------
+19:09:49.857 [main] INFO  liquibase.util - Total change sets:           10
+19:09:49.857 [main] INFO  liquibase.util - Update summary generated
+19:09:49.859 [main] INFO  liquibase.command - Update command completed successfully.
+19:09:49.859 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+19:09:49.860 [main] INFO  liquibase.lockservice - Successfully released change log lock
+19:09:49.860 [main] INFO  liquibase.command - Command execution complete
+19:09:50.024 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+19:09:50.105 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+19:09:50.155 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+19:09:50.394 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+19:09:51.066 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:09:51.067 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:09:51.747 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+19:09:52.714 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+19:09:52.766 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+19:09:52.777 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+19:09:52.787 [main] INFO  ru.otus.hw.Application - Started Application in 5.89 seconds (process running for 6.262)
+19:09:58.745 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:09:58.745 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+19:09:58.746 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:09:58.778 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@7cc8fd4b call method findAll with args []
+19:09:58.779 [http-nio-8080-exec-1] ERROR ru.otus.hw.logging.LoggingAspect - class java.lang.IllegalArgumentException: exception
+ru.otus.hw.logging.LoggingAspect.logAroundServiceMethods(LoggingAspect.java:25)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+ru.otus.hw.services.BookServiceImpl$$SpringCGLIB$$0.findAll(<generated>)
+ru.otus.hw.controller.BookController.getBooks(BookController.java:35)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:578)
+org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:113)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+java.base/java.lang.Thread.run(Thread.java:1589)
+
+19:09:58.779 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@7cc8fd4b return value null
+19:12:48.811 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+19:12:48.812 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+19:12:48.814 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+19:23:56.176 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.controller.BookControllerTest]: BookControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:23:56.287 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.controller.BookControllerTest
+19:39:57.060 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+19:39:57.094 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 16760 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+19:39:57.095 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+19:39:57.906 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:39:57.953 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+19:39:58.666 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+19:39:58.675 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+19:39:58.677 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+19:39:58.677 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+19:39:58.730 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+19:39:58.731 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1605 ms
+19:39:59.120 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+19:39:59.275 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+19:39:59.277 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+19:39:59.328 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+19:39:59.508 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+19:39:59.517 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+19:39:59.524 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+19:39:59.526 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+19:39:59.555 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+19:39:59.617 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:39:59.642 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+19:39:59.643 [main] INFO  liquibase.command - Using deploymentId: 5058399643
+19:39:59.644 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+19:39:59.651 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+19:39:59.661 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.662 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 9ms
+19:39:59.665 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+19:39:59.667 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.667 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+19:39:59.668 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+19:39:59.671 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.671 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+19:39:59.673 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+19:39:59.676 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.677 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 4ms
+19:39:59.678 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+19:39:59.681 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.681 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+19:39:59.682 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+19:39:59.683 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.684 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+19:39:59.685 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+19:39:59.686 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.686 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+19:39:59.687 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+19:39:59.689 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.689 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+19:39:59.690 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+19:39:59.692 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.693 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+19:39:59.694 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+19:39:59.696 [main] INFO  liquibase.changelog - Custom SQL executed
+19:39:59.696 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+19:39:59.700 [main] INFO  liquibase.util - UPDATE SUMMARY
+19:39:59.701 [main] INFO  liquibase.util - Run:                         10
+19:39:59.701 [main] INFO  liquibase.util - Previously run:               0
+19:39:59.701 [main] INFO  liquibase.util - Filtered out:                 0
+19:39:59.701 [main] INFO  liquibase.util - -------------------------------
+19:39:59.701 [main] INFO  liquibase.util - Total change sets:           10
+19:39:59.701 [main] INFO  liquibase.util - Update summary generated
+19:39:59.703 [main] INFO  liquibase.command - Update command completed successfully.
+19:39:59.703 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+19:39:59.704 [main] INFO  liquibase.lockservice - Successfully released change log lock
+19:39:59.704 [main] INFO  liquibase.command - Command execution complete
+19:39:59.846 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+19:39:59.967 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+19:39:59.999 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+19:40:00.216 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+19:40:00.924 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:40:00.926 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:40:01.654 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+19:40:02.680 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+19:40:02.724 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+19:40:02.736 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+19:40:02.746 [main] INFO  ru.otus.hw.Application - Started Application in 5.935 seconds (process running for 6.307)
+19:40:09.482 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:40:09.482 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+19:40:09.483 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+19:40:09.564 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@21f8aa9c call method findAll with args []
+19:40:09.660 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@21f8aa9c return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+19:40:27.993 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@21f8aa9c call method findAll with args []
+19:40:27.995 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@21f8aa9c return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+19:52:24.625 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:52:24.719 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+19:56:52.944 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:56:53.039 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+19:58:49.279 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:58:49.373 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:00:54.465 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:00:54.558 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:02:11.792 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:02:11.893 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:04:57.006 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:04:57.095 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:05:50.065 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:05:50.158 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:08:02.671 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+20:08:02.673 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+20:08:02.675 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

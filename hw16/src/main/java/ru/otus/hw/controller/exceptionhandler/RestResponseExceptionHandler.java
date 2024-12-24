@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 
 @ControllerAdvice
-public class Advice {
+public class RestResponseExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> entityNotFound(EntityNotFoundException exception) {
         return ResponseEntity.badRequest()

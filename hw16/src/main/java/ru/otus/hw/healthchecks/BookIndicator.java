@@ -20,7 +20,7 @@ public class BookIndicator implements HealthIndicator {
         if (amount == 0) {
             return Health.down()
                     .status(Status.DOWN)
-                    .withDetail("message", "Не найдено на одной книги!")
+                    .withDetail("message", "Не найдено ни одной книги!")
                     .build();
         } else {
             return Health.up()
