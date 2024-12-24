@@ -5926,3 +5926,397 @@ java.base/java.lang.Thread.run(Thread.java:1589)
 20:08:02.671 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 20:08:02.673 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 20:08:02.675 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+20:56:42.253 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:56:42.344 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+20:56:47.913 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+20:56:47.943 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 16648 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+20:56:47.944 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+20:56:48.736 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:56:48.783 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 4 JPA repository interfaces.
+20:56:49.532 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+20:56:49.542 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+20:56:49.544 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+20:56:49.545 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+20:56:49.599 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+20:56:49.600 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1625 ms
+20:56:50.010 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:56:50.174 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+20:56:50.178 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:56:50.240 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+20:56:50.408 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+20:56:50.416 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+20:56:50.423 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+20:56:50.426 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+20:56:50.451 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+20:56:50.512 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:56:50.537 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+20:56:50.537 [main] INFO  liquibase.command - Using deploymentId: 5063010537
+20:56:50.538 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+20:56:50.546 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+20:56:50.555 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.556 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+20:56:50.560 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+20:56:50.562 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.562 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+20:56:50.563 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+20:56:50.566 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.567 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 3ms
+20:56:50.568 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+20:56:50.571 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.571 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+20:56:50.573 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+20:56:50.575 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.575 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 2ms
+20:56:50.576 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+20:56:50.578 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.578 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+20:56:50.579 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+20:56:50.580 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.580 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+20:56:50.581 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+20:56:50.583 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.583 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+20:56:50.584 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+20:56:50.586 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.587 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+20:56:50.588 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+20:56:50.589 [main] INFO  liquibase.changelog - Custom SQL executed
+20:56:50.590 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+20:56:50.595 [main] INFO  liquibase.util - UPDATE SUMMARY
+20:56:50.595 [main] INFO  liquibase.util - Run:                         10
+20:56:50.595 [main] INFO  liquibase.util - Previously run:               0
+20:56:50.595 [main] INFO  liquibase.util - Filtered out:                 0
+20:56:50.595 [main] INFO  liquibase.util - -------------------------------
+20:56:50.595 [main] INFO  liquibase.util - Total change sets:           10
+20:56:50.595 [main] INFO  liquibase.util - Update summary generated
+20:56:50.597 [main] INFO  liquibase.command - Update command completed successfully.
+20:56:50.597 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+20:56:50.598 [main] INFO  liquibase.lockservice - Successfully released change log lock
+20:56:50.599 [main] INFO  liquibase.command - Command execution complete
+20:56:50.782 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+20:56:50.915 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+20:56:50.952 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+20:56:51.169 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+20:56:51.815 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:56:51.816 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:56:52.487 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+20:56:53.385 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+20:56:53.442 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+20:56:53.453 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+20:56:53.462 [main] INFO  ru.otus.hw.Application - Started Application in 5.798 seconds (process running for 6.167)
+21:02:37.054 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:02:37.145 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:03:49.830 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+21:03:49.832 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+21:03:49.834 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+21:16:03.208 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:16:03.306 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:18:41.712 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:18:41.799 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:27:59.168 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:27:59.262 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:30:52.822 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:30:52.909 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:31:52.285 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:31:52.371 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:32:07.107 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:32:07.191 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:35:26.562 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:35:26.661 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:36:14.077 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:36:14.178 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+21:36:30.008 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:36:30.107 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:23:56.600 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:23:56.694 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:24:13.864 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:24:13.964 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:24:55.678 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:24:55.763 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:26:26.832 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:26:26.921 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:27:28.486 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:27:28.573 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:28:05.778 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:28:05.869 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:30:01.511 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+22:30:01.548 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 2020 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+22:30:01.549 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+22:30:02.357 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+22:30:02.405 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 4 JPA repository interfaces.
+22:30:03.118 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+22:30:03.128 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+22:30:03.129 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:30:03.129 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+22:30:03.183 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:30:03.184 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1603 ms
+22:30:03.609 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+22:30:03.780 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+22:30:03.782 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+22:30:03.837 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+22:30:04.031 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+22:30:04.040 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+22:30:04.048 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+22:30:04.050 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+22:30:04.076 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+22:30:04.138 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:30:04.164 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+22:30:04.165 [main] INFO  liquibase.command - Using deploymentId: 5068604165
+22:30:04.166 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:30:04.173 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+22:30:04.183 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.183 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+22:30:04.187 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+22:30:04.188 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.189 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 1ms
+22:30:04.190 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+22:30:04.193 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.194 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+22:30:04.196 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+22:30:04.199 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.199 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+22:30:04.200 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+22:30:04.203 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.203 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+22:30:04.204 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+22:30:04.205 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.205 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+22:30:04.207 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+22:30:04.208 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.208 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+22:30:04.210 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+22:30:04.212 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.212 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+22:30:04.213 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+22:30:04.215 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.216 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+22:30:04.217 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+22:30:04.218 [main] INFO  liquibase.changelog - Custom SQL executed
+22:30:04.219 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+22:30:04.223 [main] INFO  liquibase.util - UPDATE SUMMARY
+22:30:04.223 [main] INFO  liquibase.util - Run:                         10
+22:30:04.223 [main] INFO  liquibase.util - Previously run:               0
+22:30:04.223 [main] INFO  liquibase.util - Filtered out:                 0
+22:30:04.223 [main] INFO  liquibase.util - -------------------------------
+22:30:04.223 [main] INFO  liquibase.util - Total change sets:           10
+22:30:04.224 [main] INFO  liquibase.util - Update summary generated
+22:30:04.225 [main] INFO  liquibase.command - Update command completed successfully.
+22:30:04.225 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+22:30:04.227 [main] INFO  liquibase.lockservice - Successfully released change log lock
+22:30:04.228 [main] INFO  liquibase.command - Command execution complete
+22:30:04.422 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+22:30:04.557 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+22:30:04.621 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+22:30:04.860 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+22:30:05.549 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+22:30:05.551 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+22:30:06.257 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+22:30:07.150 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+22:30:07.192 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+22:30:07.202 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+22:30:07.213 [main] INFO  ru.otus.hw.Application - Started Application in 5.954 seconds (process running for 6.343)
+22:30:28.305 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:30:28.305 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:30:28.306 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+22:30:28.339 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@68893394 call method findAll with args []
+22:30:28.424 [http-nio-8080-exec-1] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@68893394 return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+22:30:36.258 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@68893394 call method findAll with args []
+22:30:36.262 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@68893394 return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+22:31:08.559 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@68893394 call method findAll with args []
+22:31:08.562 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@68893394 return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+22:31:16.761 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+22:31:16.762 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+22:31:16.764 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+22:32:15.496 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+22:32:15.533 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 1260 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+22:32:15.534 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+22:32:16.372 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+22:32:16.419 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+22:32:17.132 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+22:32:17.144 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+22:32:17.146 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:32:17.146 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+22:32:17.198 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:32:17.198 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1630 ms
+22:32:17.608 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+22:32:17.765 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+22:32:17.767 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+22:32:17.821 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+22:32:18.016 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+22:32:18.025 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+22:32:18.033 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+22:32:18.035 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+22:32:18.064 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+22:32:18.125 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:32:18.151 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+22:32:18.152 [main] INFO  liquibase.command - Using deploymentId: 5068738151
+22:32:18.153 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:32:18.160 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+22:32:18.170 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.171 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+22:32:18.174 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+22:32:18.175 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.176 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+22:32:18.177 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+22:32:18.181 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.181 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+22:32:18.183 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+22:32:18.185 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.185 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 2ms
+22:32:18.187 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+22:32:18.189 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.189 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 2ms
+22:32:18.191 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+22:32:18.193 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.193 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 2ms
+22:32:18.194 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+22:32:18.195 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.195 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+22:32:18.196 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+22:32:18.198 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.198 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 1ms
+22:32:18.199 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+22:32:18.201 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.202 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 3ms
+22:32:18.203 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+22:32:18.204 [main] INFO  liquibase.changelog - Custom SQL executed
+22:32:18.205 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 2ms
+22:32:18.210 [main] INFO  liquibase.util - UPDATE SUMMARY
+22:32:18.210 [main] INFO  liquibase.util - Run:                         10
+22:32:18.210 [main] INFO  liquibase.util - Previously run:               0
+22:32:18.210 [main] INFO  liquibase.util - Filtered out:                 0
+22:32:18.210 [main] INFO  liquibase.util - -------------------------------
+22:32:18.210 [main] INFO  liquibase.util - Total change sets:           10
+22:32:18.210 [main] INFO  liquibase.util - Update summary generated
+22:32:18.212 [main] INFO  liquibase.command - Update command completed successfully.
+22:32:18.212 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+22:32:18.213 [main] INFO  liquibase.lockservice - Successfully released change log lock
+22:32:18.214 [main] INFO  liquibase.command - Command execution complete
+22:32:18.402 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+22:32:18.520 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+22:32:18.590 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+22:32:18.818 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+22:32:19.488 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+22:32:19.489 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+22:32:20.138 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+22:32:20.998 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+22:32:21.043 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+22:32:21.054 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+22:32:21.064 [main] INFO  ru.otus.hw.Application - Started Application in 5.813 seconds (process running for 6.191)
+22:32:23.659 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+22:32:23.661 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+22:32:23.663 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+22:32:28.136 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:32:28.226 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:33:23.930 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:33:24.015 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:33:48.482 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:33:48.569 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:34:33.050 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:34:33.139 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:34:45.436 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:34:45.525 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:34:58.687 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:34:58.792 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:35:46.872 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+22:35:46.907 [main] INFO  ru.otus.hw.Application - Starting Application using Java 19.0.1 with PID 13804 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\hw16)
+22:35:46.908 [main] INFO  ru.otus.hw.Application - No active profile set, falling back to 1 default profile: "default"
+22:35:47.742 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+22:35:47.790 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 4 JPA repository interfaces.
+22:35:48.511 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+22:35:48.521 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+22:35:48.522 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:35:48.522 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+22:35:48.573 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:35:48.573 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1633 ms
+22:35:48.962 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+22:35:49.116 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:maindb user=SA
+22:35:49.117 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+22:35:49.173 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+22:35:49.354 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2024-09-17--0001-first-version.sql
+22:35:49.362 [main] INFO  liquibase.changelog - Reading resource: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql
+22:35:49.369 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-17--0001-filling-tables.sql
+22:35:49.371 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2024-09-22--0001-filling-comments.sql
+22:35:49.398 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+22:35:49.460 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:35:49.486 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+22:35:49.486 [main] INFO  liquibase.command - Using deploymentId: 5068949486
+22:35:49.487 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+22:35:49.495 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko
+22:35:49.504 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.505 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-authors::korobko ran successfully in 10ms
+22:35:49.509 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko
+22:35:49.511 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.511 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-genres::korobko ran successfully in 2ms
+22:35:49.512 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko
+22:35:49.515 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.516 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books::korobko ran successfully in 4ms
+22:35:49.517 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko
+22:35:49.520 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.520 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2024-09-17--0001-first-version.sql::2024-09-17-001-books_genres::korobko ran successfully in 3ms
+22:35:49.522 [main] INFO  liquibase.ui - Running Changeset: db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko
+22:35:49.524 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.525 [main] INFO  liquibase.changelog - ChangeSet db/changelog/2.0/2024-09-22--0001-add-comments-table.sql::2024-09-22-001-comments::korobko ran successfully in 3ms
+22:35:49.526 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko
+22:35:49.527 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.527 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-authors::korobko ran successfully in 1ms
+22:35:49.529 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko
+22:35:49.530 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.530 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-genres::korobko ran successfully in 1ms
+22:35:49.531 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko
+22:35:49.533 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.533 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books::korobko ran successfully in 2ms
+22:35:49.534 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko
+22:35:49.536 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.536 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-17--0001-filling-tables.sql::2024-07-17-0001-books_genres::korobko ran successfully in 2ms
+22:35:49.538 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko
+22:35:49.539 [main] INFO  liquibase.changelog - Custom SQL executed
+22:35:49.539 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2024-09-22--0001-filling-comments.sql::2024-09-22-0001-comments::korobko ran successfully in 1ms
+22:35:49.544 [main] INFO  liquibase.util - UPDATE SUMMARY
+22:35:49.544 [main] INFO  liquibase.util - Run:                         10
+22:35:49.544 [main] INFO  liquibase.util - Previously run:               0
+22:35:49.544 [main] INFO  liquibase.util - Filtered out:                 0
+22:35:49.544 [main] INFO  liquibase.util - -------------------------------
+22:35:49.544 [main] INFO  liquibase.util - Total change sets:           10
+22:35:49.545 [main] INFO  liquibase.util - Update summary generated
+22:35:49.546 [main] INFO  liquibase.command - Update command completed successfully.
+22:35:49.546 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 31
+22:35:49.547 [main] INFO  liquibase.lockservice - Successfully released change log lock
+22:35:49.548 [main] INFO  liquibase.command - Command execution complete
+22:35:49.702 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+22:35:49.784 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+22:35:49.816 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+22:35:50.025 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+22:35:50.687 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+22:35:50.689 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+22:35:51.384 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+22:35:52.280 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 18 endpoints beneath base path '/monitor'
+22:35:52.324 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+22:35:52.340 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+22:35:52.352 [main] INFO  ru.otus.hw.Application - Started Application in 5.759 seconds (process running for 6.134)
+22:35:53.021 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:35:53.021 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:35:53.022 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+22:35:53.095 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5522f9b call method findAll with args []
+22:35:53.188 [http-nio-8080-exec-2] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5522f9b return value [BookDto(id=1, title=BookTitle_1, authorDto=AuthorDto(id=1, fullName=Author_1), listDtoGenres=[GenreDto(id=1, name=Genre_1), GenreDto(id=2, name=Genre_2)]), BookDto(id=2, title=BookTitle_2, authorDto=AuthorDto(id=2, fullName=Author_2), listDtoGenres=[GenreDto(id=3, name=Genre_3), GenreDto(id=4, name=Genre_4)]), BookDto(id=3, title=BookTitle_3, authorDto=AuthorDto(id=3, fullName=Author_3), listDtoGenres=[GenreDto(id=5, name=Genre_5), GenreDto(id=6, name=Genre_6)])]
+22:35:54.805 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5522f9b call method deleteById with args [1]
+22:35:54.817 [http-nio-8080-exec-3] INFO  ru.otus.hw.logging.LoggingAspect - method deleteById of object ru.otus.hw.services.BookServiceImpl@5522f9b return value null
+22:35:55.399 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5522f9b call method deleteById with args [2]
+22:35:55.401 [http-nio-8080-exec-4] INFO  ru.otus.hw.logging.LoggingAspect - method deleteById of object ru.otus.hw.services.BookServiceImpl@5522f9b return value null
+22:35:55.974 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5522f9b call method deleteById with args [3]
+22:35:55.976 [http-nio-8080-exec-5] INFO  ru.otus.hw.logging.LoggingAspect - method deleteById of object ru.otus.hw.services.BookServiceImpl@5522f9b return value null
+22:35:58.435 [http-nio-8080-exec-10] INFO  ru.otus.hw.logging.LoggingAspect - Object ru.otus.hw.services.BookServiceImpl@5522f9b call method findAll with args []
+22:35:58.437 [http-nio-8080-exec-10] INFO  ru.otus.hw.logging.LoggingAspect - method findAll of object ru.otus.hw.services.BookServiceImpl@5522f9b return value []
+22:37:37.687 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:37:37.773 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:38:16.334 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:38:16.422 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:39:06.198 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:39:06.285 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
+22:39:42.814 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+22:39:42.816 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+22:39:42.818 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+22:40:24.159 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.controller.BookControllerTest]: BookControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:40:24.270 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.controller.BookControllerTest
+22:45:58.670 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ru.otus.hw.healthchecks.BookIndicatorTest]: BookIndicatorTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:45:58.753 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ru.otus.hw.Application for test class ru.otus.hw.healthchecks.BookIndicatorTest
