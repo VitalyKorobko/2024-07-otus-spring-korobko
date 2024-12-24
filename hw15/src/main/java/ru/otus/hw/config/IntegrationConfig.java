@@ -51,7 +51,7 @@ public class IntegrationConfig {
                 .from("writerChannel")
                 .handle(writerService, "create")
                 .handle(articleService, "create")
-                .<Article, Boolean>route(article -> article.text().size() > 30,
+                .<Article, Boolean>route(this::filterArticleByTextSize,
                         mapping -> mapping
                                 .subFlowMapping(true, sf ->
                                         sf.channel("allowedArticlesChannel"))
@@ -115,6 +115,11 @@ public class IntegrationConfig {
                 .from("newsPaperChannel")
                 .handle(newsPaperService, "save")
                 .get();
+    }
+
+    private Boolean filterArticleByTextSize(Article article) {
+        log.info("Выбираем статьи с количеством слов больше 30");
+        return article.text().size() > 30;
     }
 
 
