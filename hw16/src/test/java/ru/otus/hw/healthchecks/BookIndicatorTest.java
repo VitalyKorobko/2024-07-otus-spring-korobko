@@ -34,9 +34,6 @@ public class BookIndicatorTest {
     @MockBean
     private BookService service;
 
-    @Autowired
-    ApplicationContext context;
-
     @Test
     @DisplayName(" должен возвращать ожидаемое сообщение, если количество книг равно 0")
     void shouldReturnExpectedValueIfBookAmountEqual0() throws Exception {
