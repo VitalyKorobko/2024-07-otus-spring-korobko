@@ -12,8 +12,8 @@ services:
       - postgres-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/books_db
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DATASOURCE_USERNAME=post
+      - SPRING_DATASOURCE_PASSWORD=gres
     deploy:
       resources:
         limits:
@@ -29,11 +29,10 @@ services:
     ports:
       - "32769:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=post
+      - POSTGRES_PASSWORD=gres
       - POSTGRES_DB=books_db
     volumes:
-#      - ./src/main/resources/create_books_db.sql:/docker-entrypoint-initdb.d/create_books_db.sql
       - db-data:/var/lib/postgresql/data
     deploy:
       resources:

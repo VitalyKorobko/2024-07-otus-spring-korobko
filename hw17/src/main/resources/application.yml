@@ -8,9 +8,7 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
-#    url: jdbc:postgresql://localhost:5433/books_db
-#    user: postgres
-#    password: postgres
+
   data:
     rest:
       basePath: /datarest
