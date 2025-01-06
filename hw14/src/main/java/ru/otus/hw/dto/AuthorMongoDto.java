@@ -5,11 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CommentDto {
-    private long id;
+public class AuthorMongoDto {
+    private String id;
 
-    private String text;
-
-    private long bookId;
+    private String fullName;
 
 }

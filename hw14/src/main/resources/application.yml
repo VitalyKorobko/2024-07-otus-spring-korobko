@@ -1,12 +1,32 @@
 spring:
   datasource:
     url: jdbc:h2:mem:maindb
+
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
+
   data:
-    rest:
-      basePath: /datarest
+    mongodb:
+      host: localhost
+      port: 27017
+      #      port: 0
+      database: mainDB14
+
+  batch:
+    job:
+      enabled: false
+
+  shell:
+    interactive:
+      enabled: true
+    noninteractive:
+      enabled: false
+
+    command:
+      version:
+        enabled: false
+
 
   jpa:
     open-in-view: false
@@ -16,32 +36,7 @@ spring:
 
     show-sql: true
 
-management:
-  endpoint:
-    logfile:
-      enabled: true
-      access: unrestricted
-      external-file: log/app.log
-    shutdown:
-      enabled: true
-    info:
-      enabled: true
-    health:
-      show-details: always
-  health:
-    defaults:
-      enabled: true
-
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-      base-path: /monitor
 
 logging:
-#  level:
-#    ROOT: ERROR
-#  file:
-#    name: application.log
-
-
+  level:
+    ROOT: ERROR

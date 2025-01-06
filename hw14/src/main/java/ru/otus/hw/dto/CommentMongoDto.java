@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CommentDto {
-    private long id;
+public class CommentMongoDto {
+    private String id;
 
     private String text;
 
-    private long bookId;
+    private BookMongoDto bookMongoDto;
 
 }

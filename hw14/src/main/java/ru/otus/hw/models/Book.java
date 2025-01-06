@@ -23,10 +23,10 @@ import org.hibernate.annotations.FetchMode;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
 @Table(name = "books")
 @NamedEntityGraph(name = "book-entity-graph",
         attributeNodes = {@NamedAttributeNode("author")})
@@ -39,13 +39,13 @@ public class Book {
     private String title;
 
     @ManyToOne(cascade = {CascadeType.MERGE},
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "books_genres",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id")
@@ -53,7 +53,15 @@ public class Book {
     private List<Genre> genres;
 
     public Book(long id) {
-        this(id, null, null, null);
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 
     @Override

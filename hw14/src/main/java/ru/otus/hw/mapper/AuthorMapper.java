@@ -1,16 +1,18 @@
 package ru.otus.hw.mapper;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 import ru.otus.hw.dto.AuthorDto;
+import ru.otus.hw.dto.AuthorMongoDto;
 import ru.otus.hw.models.Author;
 
 @Component
 public class AuthorMapper {
 
-    public Author toAuthor(AuthorDto authorDto) {
-        return new Author(
-                authorDto.getId(),
-                authorDto.getFullName()
+    public AuthorMongoDto toDto(Author author) {
+        return new AuthorMongoDto(
+                new ObjectId().toString(),
+                author.getFullName()
         );
     }
 

@@ -1,16 +1,18 @@
 package ru.otus.hw.mapper;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 import ru.otus.hw.dto.GenreDto;
+import ru.otus.hw.dto.GenreMongoDto;
 import ru.otus.hw.models.Genre;
 
 @Component
 public class GenreMapper {
 
-    public Genre toGenre(GenreDto genreDto) {
-        return new Genre(
-                genreDto.getId(),
-                genreDto.getName()
+    public GenreMongoDto toDto(Genre genre) {
+        return new GenreMongoDto(
+                new ObjectId().toString(),
+                genre.getName()
         );
     }
 

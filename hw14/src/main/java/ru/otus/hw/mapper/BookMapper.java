@@ -1,25 +1,39 @@
 package ru.otus.hw.mapper;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 import ru.otus.hw.dto.AuthorDto;
 import ru.otus.hw.dto.BookDto;
-import ru.otus.hw.dto.BookDtoWeb;
+import ru.otus.hw.dto.BookMongoDto;
 import ru.otus.hw.dto.GenreDto;
-import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
+import ru.otus.hw.repositories.MongoAuthorRepository;
+import ru.otus.hw.repositories.MongoGenreRepository;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
 @Component
 public class BookMapper {
-    public Book toBook(BookDto bookDto) {
-        return new Book(
-                bookDto.getId(),
-                bookDto.getTitle(),
-                new Author(bookDto.getAuthorDto().getId(), bookDto.getAuthorDto().getFullName()),
-                bookDto.getListDtoGenres().stream().map(gDto -> new Genre(gDto.getId(), gDto.getName())).toList()
+
+    private final MongoAuthorRepository mongoAuthorRepository;
+
+    private final MongoGenreRepository mongoGenreRepository;
+
+
+    public BookMapper(MongoAuthorRepository mongoAuthorRepository, MongoGenreRepository mongoGenreRepository) {
+        this.mongoAuthorRepository = mongoAuthorRepository;
+        this.mongoGenreRepository = mongoGenreRepository;
+    }
+
+    public BookMongoDto toDto(Book book) {
+        return new BookMongoDto(
+                new ObjectId().toString(),
+                book.getTitle(),
+                mongoAuthorRepository.findByFullName(book.getAuthor().getFullName()).get(0),
+                mongoGenreRepository.findAllByNameIn(getSetGenres(book))
         );
     }
 
@@ -32,14 +46,10 @@ public class BookMapper {
         );
     }
 
-    public BookDtoWeb toBookDtoWeb(BookDto bookDto, String message) {
-        return new BookDtoWeb(
-                bookDto.getId(),
-                bookDto.getTitle(),
-                bookDto.getAuthorDto().getFullName(),
-                bookDto.getListDtoGenres().stream().map(GenreDto::getName).collect(Collectors.toSet()),
-                message
-        );
+    private Set<String> getSetGenres(Book book) {
+        return book.getGenres().stream()
+                .map(Genre::getName)
+                .collect(Collectors.toSet());
     }
 
 

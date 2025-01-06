@@ -1,19 +1,8 @@
 spring-shell.log
 HELP.md
 /target/
-/log/
-/node/
-/node_modules/
 !.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -21,15 +10,4 @@ HELP.md
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
 
-### VS Code ###
-.vscode/
-
-spring-shell.log
