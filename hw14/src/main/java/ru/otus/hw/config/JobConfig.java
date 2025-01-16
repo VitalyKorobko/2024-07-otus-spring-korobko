@@ -7,11 +7,13 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.data.MongoItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
@@ -35,6 +37,8 @@ import ru.otus.hw.models.Genre;
 
 @Configuration
 public class JobConfig {
+    private static final String CLEAR_DB_STEP = "ClearDb";
+
     private static final String JOB_NAME = "MigrationToMongo";
 
     private static final String AUTHOR_STEP_NAME = "transformAuthorStep";
@@ -68,6 +72,7 @@ public class JobConfig {
 
     @Bean
     public Job toMongoMigrateJob(
+            Step clearDbStep,
             Step transformGenreStep,
             Step transformAuthorStep,
             Step transformBookStep,
@@ -75,10 +80,23 @@ public class JobConfig {
     ) {
         return new JobBuilder(JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .start(transformAuthorStep)
+                .start(clearDbStep)
+                .next(transformAuthorStep)
                 .next(transformGenreStep)
                 .next(transformBookStep)
                 .next(transformCommentStep)
+                .build();
+    }
+
+    @Bean
+    public TaskletStep clearDbStep(MongoDatabaseFactory mongoDatabaseFactory) {
+        return new StepBuilder(CLEAR_DB_STEP, jobRepository)
+                .allowStartIfComplete(false)
+                .tasklet(((contribution, chunkContext) -> {
+                            mongoDatabaseFactory.getMongoDatabase().drop();
+                            return RepeatStatus.FINISHED;
+                        }),
+                        platformTransactionManager)
                 .build();
     }
 

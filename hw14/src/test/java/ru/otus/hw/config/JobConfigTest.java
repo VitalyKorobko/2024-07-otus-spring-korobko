@@ -20,6 +20,7 @@ import ru.otus.hw.repositories.MongoCommentRepository;
 import ru.otus.hw.repositories.MongoGenreRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -77,90 +78,44 @@ class JobConfigTest {
         assertThat(getBooks())
                 .isNotEmpty()
                 .hasSize(3)
-                .contains(expectedBookMongoDto(1),
-                        expectedBookMongoDto(2), expectedBookMongoDto(3));
+                .allMatch(bookMongoDto -> Objects.nonNull(bookMongoDto.getId()))
+                .anyMatch(bookMongoDto -> Objects.equals(bookMongoDto.getTitle(), "BookTitle_1")
+                        && Objects.equals(bookMongoDto.getAuthorMongoDto().getFullName(), "Author_1")
+                        && bookMongoDto.getGenreMongoDtoList().stream().map(GenreMongoDto::getName).toList()
+                        .containsAll(List.of("Genre_1", "Genre_2"))
+                )
+                .anyMatch(bookMongoDto -> Objects.equals(bookMongoDto.getTitle(), "BookTitle_2")
+                        && Objects.equals(bookMongoDto.getAuthorMongoDto().getFullName(), "Author_2")
+                        && bookMongoDto.getGenreMongoDtoList().stream().map(GenreMongoDto::getName).toList()
+                        .containsAll(List.of("Genre_3", "Genre_4"))
+                )
+                .anyMatch(bookMongoDto -> Objects.equals(bookMongoDto.getTitle(), "BookTitle_3")
+                        && Objects.equals(bookMongoDto.getAuthorMongoDto().getFullName(), "Author_3")
+                        && bookMongoDto.getGenreMongoDtoList().stream().map(GenreMongoDto::getName).toList()
+                        .containsAll(List.of("Genre_5", "Genre_6"))
+                );
 
         assertThat(getComments())
                 .isNotEmpty()
                 .hasSize(3)
-                .contains(expectedCommentMongoDto(1),
-                        expectedCommentMongoDto(2), expectedCommentMongoDto(3));
-    }
-
-    private CommentMongoDto expectedCommentMongoDto(int num) {
-        if (num == 1) {
-            return new CommentMongoDto(
-                    "",
-                    "Comment_1",
-                    expectedBookMongoDto(1)
-            );
-        } else if (num == 2) {
-            return new CommentMongoDto(
-                    "",
-                    "Comment_2",
-                    expectedBookMongoDto(1)
-            );
-        } else if (num == 3) {
-            return new CommentMongoDto(
-                    "",
-                    "Comment_2",
-                    expectedBookMongoDto(1)
-            );
-        }
-        return null;
+                .allMatch(commentMongoDto -> Objects.nonNull(commentMongoDto.getId()))
+                .anyMatch(commentMongoDto -> Objects.equals(commentMongoDto.getText(), "Comment_1")
+                        && Objects.equals(commentMongoDto.getBookMongoDto().getTitle(), "BookTitle_1")
+                )
+                .anyMatch(commentMongoDto -> Objects.equals(commentMongoDto.getText(), "Comment_2")
+                        && Objects.equals(commentMongoDto.getBookMongoDto().getTitle(), "BookTitle_1")
+                )
+                .anyMatch(commentMongoDto -> Objects.equals(commentMongoDto.getText(), "Comment_3")
+                        && Objects.equals(commentMongoDto.getBookMongoDto().getTitle(), "BookTitle_1")
+                );
     }
 
     private List<CommentMongoDto> getComments() {
-        return mongoCommentRepository.findAll().stream()
-                .peek(c -> {
-                    c.setId("");
-                    c.getBookMongoDto().setId("");
-                    c.getBookMongoDto().setId("");
-                    c.getBookMongoDto().getAuthorMongoDto().setId("");
-                    c.getBookMongoDto().getGenreMongoDtoList().forEach(g -> g.setId(""));
-                    c.getBookMongoDto().getGenreMongoDtoList().sort((o1, o2) ->
-                            String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName()));
-
-                })
-                .toList();
-    }
-
-    private BookMongoDto expectedBookMongoDto(int num) {
-        if (num == 1) {
-            return new BookMongoDto(
-                    "",
-                    "BookTitle_1",
-                    new AuthorMongoDto("", "Author_1"),
-                    List.of(new GenreMongoDto("", "Genre_1"), new GenreMongoDto("", "Genre_2"))
-            );
-        } else if (num == 2) {
-            return new BookMongoDto(
-                    "",
-                    "BookTitle_2",
-                    new AuthorMongoDto("", "Author_2"),
-                    List.of(new GenreMongoDto("", "Genre_3"), new GenreMongoDto("", "Genre_4"))
-            );
-        } else if (num == 3) {
-            return new BookMongoDto(
-                    "",
-                    "BookTitle_3",
-                    new AuthorMongoDto("", "Author_3"),
-                    List.of(new GenreMongoDto("", "Genre_5"), new GenreMongoDto("", "Genre_6"))
-            );
-        }
-        return null;
+        return mongoCommentRepository.findAll();
     }
 
     private List<BookMongoDto> getBooks() {
-        return mongoBookRepository.findAll().stream()
-                .peek(b -> {
-                    b.setId("");
-                    b.getAuthorMongoDto().setId("");
-                    b.getGenreMongoDtoList().forEach(g -> g.setId(""));
-                    b.getGenreMongoDtoList().sort((o1, o2) ->
-                            String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName()));
-                })
-                .toList();
+        return mongoBookRepository.findAll();
     }
 
     private List<String> getGenresName() {
