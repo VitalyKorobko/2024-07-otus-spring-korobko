@@ -43,10 +43,19 @@
         hw13\ //Делалось в ветке hw13
             src\
             pom.xml
+        hw14\ //Делалось в ветке hw14
+            src\
+            pom.xml
         hw15\ //Делалось в ветке hw15
             src\
             pom.xml
         hw16\ //Делалось в ветке hw16
             src\
-            pom.xml            
+            pom.xml
+        hw17\ //Делалось в ветке hw17
+            src\
+            pom.xml
+        hw18\ //Делалось в ветке hw18
+            src\
+            pom.xml      
             
