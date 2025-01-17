@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:maindb
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      #      port: 0
+      database: mainDB14
+
+  batch:
+    job:
+      enabled: false
+
+  shell:
+    interactive:
+      enabled: true
+    noninteractive:
+      enabled: false
+
+    command:
+      version:
+        enabled: false
+
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+
+logging:
+  level:
+    ROOT: ERROR
