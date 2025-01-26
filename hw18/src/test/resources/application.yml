@@ -19,14 +19,6 @@ spring:
       hibernate:
         format_sql: true
 
-#resilience4j:
-#  ratelimiter:
-#    instances:
-#      myRateLimiter:
-#        limit-for-period: 2
-#        limit-refresh-period: 1s
-#        timeout-duration: 0
-
 management:
   endpoint:
     logfile:
