@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  data:
+    rest:
+      basePath: /datarest
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+
+#resilience4j:
+#  ratelimiter:
+#    instances:
+#      myRateLimiter:
+#        limit-for-period: 2
+#        limit-refresh-period: 1s
+#        timeout-duration: 0
+
+management:
+  endpoint:
+    logfile:
+      enabled: true
+      access: unrestricted
+      external-file: log/app.log
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+
+
+logging:
+  level:
+    ROOT: ERROR
+
