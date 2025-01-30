@@ -1,3 +1,51 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      getAllAuthorsCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAllGenresCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAllBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAnyBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      createBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      updateBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      getCommentsByBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      updateCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      createCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/books_db

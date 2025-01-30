@@ -1,7 +1,7 @@
 package ru.otus.hw.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.otus.hw.dto.GenreDto;
@@ -17,19 +17,14 @@ public class GenreController {
 
     private final GenreService genreService;
 
-    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
-
-    public GenreController(GenreService genreService, Resilience4JCircuitBreakerFactory circuitBreakerFactory) {
+    public GenreController(GenreService genreService) {
         this.genreService = genreService;
-        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
+    @CircuitBreaker(name = "getAllGenresCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetAllGenres")
     @GetMapping("/api/v1/genres")
     public List<GenreDto> getGenres() {
-        return circuitBreakerFactory.create("getAllGenresCircuitBreaker").run(
-                genreService::findAll,
-                this::circuitBreakerFallBackToGetAllGenres
-        );
+        return genreService.findAll();
     }
 
     private List<GenreDto> circuitBreakerFallBackToGetAllGenres(Throwable e) {

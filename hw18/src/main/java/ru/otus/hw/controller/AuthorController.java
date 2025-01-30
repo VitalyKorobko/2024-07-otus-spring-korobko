@@ -1,7 +1,7 @@
 package ru.otus.hw.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.otus.hw.dto.AuthorDto;
@@ -17,20 +17,14 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
-
-
-    public AuthorController(AuthorService authorService, Resilience4JCircuitBreakerFactory circuitBreakerFactory) {
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
-        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
+    @CircuitBreaker(name = "getAllAuthorsCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetAllAuthors")
     @GetMapping("/api/v1/authors")
     public List<AuthorDto> getAuthors() {
-        return circuitBreakerFactory.create("getAllAuthorsCircuitBreaker").run(
-                authorService::findAll,
-                this::circuitBreakerFallBackToGetAllAuthors
-        );
+        return authorService.findAll();
     }
 
     private List<AuthorDto> circuitBreakerFallBackToGetAllAuthors(Throwable e) {

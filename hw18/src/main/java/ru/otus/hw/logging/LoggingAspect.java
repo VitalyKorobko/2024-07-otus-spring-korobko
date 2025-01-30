@@ -23,7 +23,7 @@ public class LoggingAspect {
         try {
             result = joinPoint.proceed();
         } catch (EntityNotFoundException e) {
-            LOG.error("{} call method {} and can't find book with args {}",
+            LOG.error("{} call method {} and can't get book with args {}",
                     joinPoint.getThis(),
                     joinPoint.getSignature().getName(),
                     joinPoint.getArgs()

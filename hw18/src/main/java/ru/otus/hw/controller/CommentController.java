@@ -1,8 +1,8 @@
 package ru.otus.hw.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,33 +32,25 @@ public class CommentController {
 
     private final CommentMapper commentMapper;
 
-    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
-
-
-    public CommentController(CommentService commentService, CommentMapper commentMapper,
-                             Resilience4JCircuitBreakerFactory circuitBreakerFactory) {
+    public CommentController(CommentService commentService, CommentMapper commentMapper) {
         this.commentService = commentService;
         this.commentMapper = commentMapper;
-        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
+    @CircuitBreaker(name = "getCommentsByBookCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetComments")
     @GetMapping(value = "/api/v1/comment")
     public List<CommentDto> getCommentsByBook(@RequestParam("book_id") long bookId) {
-        return circuitBreakerFactory.create("getCommentsByBookCircuitBreaker").run(
-                () -> commentService.findAllCommentsByBookId(bookId),
-                throwable -> circuitBreakerFallBackToGetComments(bookId, throwable)
-        );
+        return commentService.findAllCommentsByBookId(bookId);
     }
 
+    @CircuitBreaker(name = "getCommentCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetComment")
     @GetMapping("/api/v1/comment/{id}")
     public CommentDto getComment(@PathVariable("id") long id) {
-        return circuitBreakerFactory.create("getCommentCircuitBreaker").run(
-                () -> commentService.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException("Комментарий с id = %d не найден".formatted(id))),
-                throwable -> circuitBreakerFallBackToGetComment(id, throwable)
-        );
+        return commentService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Комментарий с id = %d не найден".formatted(id)));
     }
 
+    @CircuitBreaker(name = "updateCommentCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToUpdateComment")
     @PatchMapping("/api/v1/comment/{id}")
     public CommentDtoWeb updateComment(@Valid @RequestBody CommentDtoWeb commentDtoWeb,
                                        BindingResult bindingResult, @PathVariable("id") long id) {
@@ -71,14 +63,12 @@ public class CommentController {
             );
         }
         return commentMapper.commentDtoWeb(
-                circuitBreakerFactory.create("updateCommentCircuitBreaker").run(
-                        () -> commentService.update(id, commentDtoWeb.getText(), commentDtoWeb.getBookId()),
-                        throwable -> circuitBreakerFallBackToUpdateComment(commentDtoWeb, throwable)
-                ),
+                commentService.update(id, commentDtoWeb.getText(), commentDtoWeb.getBookId()),
                 commentDtoWeb.getMessage()
         );
     }
 
+    @CircuitBreaker(name = "createCommentCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToCreateComment")
     @PostMapping("/api/v1/comment")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentDtoWeb addComment(@Valid @RequestBody CommentDtoWeb commentDtoWeb, BindingResult bindingResult) {
@@ -91,14 +81,10 @@ public class CommentController {
             );
         }
         return commentMapper.commentDtoWeb(
-                circuitBreakerFactory.create("createCommentCircuitBreakerFactory").run(
-                        () -> commentService.insert(commentDtoWeb.getText(), commentDtoWeb.getBookId()),
-                        throwable -> circuitBreakerFallBackToCreateComment(commentDtoWeb, throwable)
-                ),
+                commentService.insert(commentDtoWeb.getText(), commentDtoWeb.getBookId()),
                 commentDtoWeb.getMessage()
         );
     }
-
 
     @DeleteMapping("/api/v1/comment/{id}")
     public void deleteComment(@PathVariable long id) {
@@ -121,13 +107,15 @@ public class CommentController {
         }
     }
 
-    private CommentDto circuitBreakerFallBackToCreateComment(CommentDtoWeb commentDtoWeb, Throwable e) {
+    private CommentDtoWeb circuitBreakerFallBackToCreateComment(CommentDtoWeb commentDtoWeb,
+                                                             BindingResult bindingResult, Throwable e) {
         log.error("circuit breaker got open state when creating new comment: {}. Err: {}:{}",
                 commentDtoWeb, e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
-    private CommentDto circuitBreakerFallBackToUpdateComment(CommentDtoWeb commentDtoWeb, Throwable e) {
+    private CommentDtoWeb circuitBreakerFallBackToUpdateComment(CommentDtoWeb commentDtoWeb,
+                                                                BindingResult bindingResult, long id, Throwable e) {
         log.error("circuit breaker got open state when updating comment: {}. Err: {}:{}",
                 commentDtoWeb, e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);

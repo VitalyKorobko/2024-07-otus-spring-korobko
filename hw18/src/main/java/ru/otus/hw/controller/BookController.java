@@ -1,8 +1,8 @@
 package ru.otus.hw.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,29 +31,26 @@ public class BookController {
 
     private final BookMapper mapper;
 
-    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
 
-    public BookController(BookService bookService, BookMapper mapper,
-                          Resilience4JCircuitBreakerFactory circuitBreakerFactory) {
+    public BookController(BookService bookService, BookMapper mapper) {
         this.bookService = bookService;
         this.mapper = mapper;
-        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
+    @CircuitBreaker(name = "getAllBookCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetAllBook")
     @GetMapping("/api/v1/book")
     public List<BookDto> getBooks() {
-        return circuitBreakerFactory.create("getAllBookCircuitBreaker")
-                .run(bookService::findAll, this::circuitBreakerFallBackToGetAllBook);
+        return bookService.findAll();
     }
 
+    @CircuitBreaker(name = "getAnyBookCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToGetBook")
     @GetMapping("/api/v1/book/{id}")
     public BookDto getBook(@PathVariable("id") long id) {
-        return circuitBreakerFactory.create("getAnyBookCircuitBreaker").run(() -> bookService.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException("Книга с id = %d не найдена".formatted(id))),
-                throwable -> circuitBreakerFallBackToGetBook(id, throwable)
-        );
+        return bookService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Книга с id = %d не найдена".formatted(id)));
     }
 
+    @CircuitBreaker(name = "createBookCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToCreateBook")
     @PostMapping("/api/v1/book")
     @ResponseStatus(HttpStatus.CREATED)
     public BookDtoWeb saveBook(@Valid @RequestBody BookDtoWeb bookDtoWeb, BindingResult bindingResult) {
@@ -66,18 +63,15 @@ public class BookController {
                     bindingResult.getFieldError().getDefaultMessage());
         }
         return mapper.toBookDtoWeb(
-                circuitBreakerFactory.create("createBookCircuitBreaker").run(
-                        () ->
-                                bookService.insert(
-                                        bookDtoWeb.getTitle(),
-                                        bookDtoWeb.getAuthorFullName(),
-                                        bookDtoWeb.getSetGenreNames()
-                                ),
-                        throwable -> circuitBreakerFallBackToCreateBook(bookDtoWeb, throwable)
-                ), bookDtoWeb.getMessage()
+                bookService.insert(
+                        bookDtoWeb.getTitle(),
+                        bookDtoWeb.getAuthorFullName(),
+                        bookDtoWeb.getSetGenreNames()),
+                bookDtoWeb.getMessage()
         );
     }
 
+    @CircuitBreaker(name = "updateBookCircuitBreaker", fallbackMethod = "circuitBreakerFallBackToUpdateBook")
     @PatchMapping("/api/v1/book/{id}")
     public BookDtoWeb updateBook(@Valid @RequestBody BookDtoWeb bookDtoWeb,
                                  BindingResult bindingResult, @PathVariable("id") long id) {
@@ -91,17 +85,13 @@ public class BookController {
             );
         }
         return mapper.toBookDtoWeb(
-                circuitBreakerFactory.create("updateBookCircuitBreaker").run(
-                        () ->
-                                bookService.update(
-                                        id,
-                                        bookDtoWeb.getTitle(),
-                                        bookDtoWeb.getAuthorFullName(),
-                                        bookDtoWeb.getSetGenreNames()
-                                ),
-                        throwable -> circuitBreakerFallBackToUpdateBook(bookDtoWeb, throwable)
-
-                ), bookDtoWeb.getMessage());
+                bookService.update(
+                        id,
+                        bookDtoWeb.getTitle(),
+                        bookDtoWeb.getAuthorFullName(),
+                        bookDtoWeb.getSetGenreNames()),
+                bookDtoWeb.getMessage()
+        );
     }
 
     @DeleteMapping("/api/v1/book/{id}")
@@ -124,13 +114,15 @@ public class BookController {
         }
     }
 
-    private BookDto circuitBreakerFallBackToCreateBook(BookDtoWeb bookDtoWeb, Throwable e) {
+    private BookDtoWeb circuitBreakerFallBackToCreateBook(BookDtoWeb bookDtoWeb,
+                                                       BindingResult bindingResult, Throwable e) {
         log.error("circuit breaker got open state when creating new book: {}. Err: {}: {}",
                 bookDtoWeb, e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
-    private BookDto circuitBreakerFallBackToUpdateBook(BookDtoWeb bookDtoWeb, Throwable e) {
+    private BookDtoWeb circuitBreakerFallBackToUpdateBook(BookDtoWeb bookDtoWeb,
+                                                          BindingResult bindingResult, long id, Throwable e) {
         log.error("circuit breaker got open state when updating book: {}. Err: {}: {}", bookDtoWeb, e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
