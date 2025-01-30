@@ -1,0 +1,7 @@
+.git
+.idea
+**/*.class
+
+/log/
+/node/
+/node_modules/
