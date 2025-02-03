@@ -1,0 +1,100 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      getAllAuthorsCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAllGenresCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAllBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getAnyBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      createBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      updateBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      getCommentsByBookCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      updateCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+      createCommentCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/books_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  data:
+    rest:
+      basePath: /datarest
+
+  jpa:
+    database: postgresql
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+management:
+  endpoint:
+    logfile:
+      enabled: true
+      access: unrestricted
+      external-file: log/app.log
+    shutdown:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+
+logging:
+#  level:
+#    ROOT: ERROR
+#  file:
+#    name: application.log
+
+
