@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+<!--    <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>-->
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<div class="presentation">
+    <img th:src="@{/images/763029_6.svg}" alt="маркет">
+    <h2>Come visit us </h2>
+    <p>welcome...</p>
+</div>
+<main class="container">
+        <div class="items" th:if="${!products.isEmpty()}">
+            <div th:each="el : ${products}">
+                <a th:href="'/product/' + ${el.id}"><img th:src="${el.image}" th:alt="${el.title}"></a>
+                <h3 th:text="${el.title}"/>
+                <p th:text="${el.ref}"/><br>
+                <span th:text="${el.price} + '$'"/>
+            </div>
+        </div>
+        <div th:if="${products.isEmpty()}" class="block">
+            <p>Нет товаров</p>
+        </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+<script>
+
+<!--    $(function () {-->
+<!--        $.get('http://localhost:7773/api/v1/order').done(function (persons) {-->
+<!--            const items = document.getElementById("prods")-->
+<!--            persons.forEach(function (person) {-->
+<!--            items.innerHTML += `<div>-->
+<!--                                    <div>${person.id}</div>-->
+<!--                                    <div>${person.name}</div>-->
+<!--                                    <div>${person.description}</div>-->
+<!--                                    <div>${person.price}</div>-->
+<!--                                </div>`-->
+<!--            });-->
+<!--        })-->
+<!--    });-->
+
+
+</script>
+</body>
+</html>

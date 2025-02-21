@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h1>Корзина</h1><br>
+    <!--    <p>Привет, <span sec:authentication="name"></span></p><br>-->
+    <div sec:authorize="hasAuthority('ROLE_USER')" th:if="${!mapProducts.isEmpty()}">
+        <h3>перечень товаров к корзине:</h3>
+        <div class="block2" th:each="el : ${mapProducts.keySet()}">
+            <a th:href="'/order/' + ${el.id}"><h3 th:text="${el.title}"/></a>
+            <p th:text="'цена: ' + ${el.price}"/>
+            <p th:text="'количество: '"/>
+            <input type="number" form="recount" name="count" style="font-size: 16px"
+                   placeholder=" Введите количество" th:value="${mapProducts.get(el)}">
+            <input type="hidden" form="recount" name="product_id" placeholder="product_id" th:value="${el.id}">
+            <p th:text="'стоимость: ' + ${el.price} * ${mapProducts.get(el)}"/>
+            <form method="post" id="delete" th:action="@{'/cart/delete/' + ${order.id}}">
+                <input type="hidden" name="product_id" placeholder="product_id" th:value="${el.id}">
+                <button type="submit">удалить</button>
+            </form>
+        </div>
+        <div class="block2">
+            <p th:text="'итого: ' + ${total}"/>
+            <form method="post" id="recount" th:action="@{'/cart/' + ${order.id}}">
+                <button type="submit">пересчитать</button>
+            </form>
+        </div>
+        <div class="block2">
+            <form method="post" id="place_an_order" th:action="@{'/cart/place_an_order/' + ${order.id}}">
+                <input type="hidden" name="order_id" placeholder="order_id" th:value="${order.id}">
+                <button type="submit">оформить заказ</button>
+            </form>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('ROLE_USER')" th:if="${mapProducts.isEmpty()}">
+        <p>корзина пуста</p>
+    </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

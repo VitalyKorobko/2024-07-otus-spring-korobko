@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Кабинет пользователя</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h1>Кабинет пользователя</h1><br>
+    <p>Привет, <span sec:authentication="name"></span></p><br>
+    <p th:switch="${roles.iterator().next()}">
+        <span th:case="${ADMIN}">Вы зарегистрированы в качестве Администратора</span>
+        <span th:case="${SELLER}">Вы зарегистрированы в качестве Издателя</span>
+        <span th:case="${USER}">Вы зарегистрированы в качестве Покупателя</span>
+    </p><br>
+    <div sec:authorize="hasAuthority('ROLE_SELLER')" th:if="${!products.isEmpty()}">
+        <h3>Ваши товары:</h3>
+        <div class="block2" th:each="el : ${products}">
+            <a th:href="'/product/' + ${el.id}"><h3 th:text="${el.title}"/></a>
+            <p th:text="${el.ref}"/>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('ROLE_USER')" th:if="${!orders.isEmpty()}">
+        <h3>Ваши заказы:</h3>
+        <div class="block2" th:each="el : ${orders}">
+            <a th:href="'/order/' + ${el.id}">
+                <span th:switch="${el.status}">
+                    <h3 th:case="${CURRENT}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: текущий(корзина)'"/>
+                    <h3 th:case="${ISSUED}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: оформлен'"/>
+                    <h3 th:case="${PAID}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: оплачен'"/>
+                    <h3 th:case="${COMPLETED}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: завершен'"/>
+                </span>
+            </a>
+        </div>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Выйти</button>
+    </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

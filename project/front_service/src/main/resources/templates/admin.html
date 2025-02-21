@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+        <h2>Все администраторы:</h2>
+        <div th:if="${!admins.isEmpty()}">
+            <div class="block2" th:each="el : ${admins}">
+                <h2>Администратор: <span th:text="${el.getUsername()}"/></h2>
+                <span>Email: </span>
+                <span th:text="${el.getEmail()}"/>
+                <span>.</span>
+                <span>Роль на сайте: </span>
+                <span th:switch="${el.getRoles().iterator().next()}">
+                    <span th:case="${ADMIN}">Администратор</span>
+                    <span th:case="${SELLER}">Продавец</span>
+                    <span th:case="${USER}">Покупатель</span>
+                </span>
+            </div>
+        </div>
+        <h2>Все издатели:</h2>
+        <div th:if="${!sellers.isEmpty()}">
+            <div class="block2" th:each="el : ${sellers}">
+                <a th:href="'/admin/update/user-' + ${el.getId()}">
+                    <h2>Продавец: <span th:text="${el.getUsername()}"/></h2>
+                </a>
+                <span>Email: </span>
+                <span th:text="${el.getEmail()}"/>
+                <span>.</span>
+                <span>Роль на сайте: </span>
+                <span th:switch="${el.getRoles().iterator().next()}">
+                    <span th:case="${ADMIN}">Администратор</span>
+                    <span th:case="${SELLER}">Продавец</span>
+                    <span th:case="${USER}">Покупатель</span>
+                </span>
+                <a th:href="'/admin/seller-' + ${el.getId()}">
+                    <div class="btn-item"><span style="color: white">Все товары продавца</span></div>
+                </a>
+            </div>
+        </div>
+        <h2>Все покупатели:</h2>
+        <div th:if="${!users.isEmpty()}">
+            <div class="block2" th:each="el : ${users}">
+                <a th:href="'/admin/update/user-' + ${el.getId()}">
+                    <h2>Покупатель: <span th:text="${el.getUsername()}"/></h2>
+                </a>
+                <span>Email: </span>
+                <span th:text="${el.getEmail()}"/>
+                <span>.</span>
+                <span>Роль на сайте: </span>
+                <span th:switch="${el.getRoles().iterator().next()}">
+                    <span th:case="${ADMIN}">Администратор</span>
+                    <span th:case="${SELLER}">Продавец</span>
+                    <span th:case="${USER}">Покупатель</span>
+                </span>
+                <a th:href="'/admin/user-' + ${el.id}">
+                    <div class="btn-item"><span style="color: white">Все заказы покупателя</span></div>
+                </a>
+            </div>
+        </div>
+        <div th:if="${admins.isEmpty()} and ${sellers.isEmpty() and ${users.isEmpty()}}" class="block">
+            <p>Пользователи не найдены</p>
+        </div>
+    </div>
+    <div sec:authorize="!hasAuthority('ROLE_ADMIN')">
+        <div class="block">
+            <h1>Доступ запрещён</h1>
+            <p>Эта страница доступна только администраторам</p>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

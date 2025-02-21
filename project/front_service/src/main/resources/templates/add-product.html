@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить продукт</title>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+  <h1>Добавить товар</h1>
+  <form method="post" th:action="@{/product/add}">
+    <input type="hidden" name="id" th:value="${product.id}">
+    <input type="text" name="title" th:value="${product.title}" placeholder="Введите название продукта">
+    <input type="text" name="ref" th:value="${product.ref}" placeholder="Введите артикул продукта">
+    <input type="text" name="image" th:value="${product.image}" placeholder="Введите URL фото">
+    <input type="number" name="price" th:value="${product.price}" placeholder="Укажите стоимость">
+    <textarea name="description" th:value="${product.description}" placeholder="Введите описание"></textarea>
+    <div class="errors" th:if="${error}" th:text="${message}">Wrong title</div>
+    <button type="submit">Добавить</button>
+  </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

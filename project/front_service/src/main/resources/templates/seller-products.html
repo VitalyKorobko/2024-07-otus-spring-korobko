@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Товры продавца</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h3 th:text="'Все товары продавца ' + ${user.username}+':'"/><br>
+    <div class="items" th:if="${!products.isEmpty()}">
+        <div th:each="el : ${products}">
+            <a th:href="'/product/' + ${el.id}"><img th:src="${el.image}" th:alt="${el.title}"></a>
+            <h3 th:text="${el.title}"/>
+            <p th:text="${el.ref}"/>
+            <p th:text="${el.description}"/>
+            <span th:text="${el.price} + '$'"/>
+        </div>
+    </div>
+    <div th:if="${products.isEmpty()}" class="block">
+        <p>Нет товаров</p>
+    </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

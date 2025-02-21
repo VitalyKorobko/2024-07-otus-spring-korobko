@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница авторизации</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h3>Авторизация</h3>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Введите логин">
+        <input type="password" name="password" placeholder="Введите пароль">
+        <div th:text="${error}" style="color: red"/>
+        <div><input class = "checkbox" type='checkbox' name='remember-me' placeholder="Запомнить логин и пароль."/><span>Запомнить логин и пароль.</span></div>
+        <button type="submit">Войти</button>
+    </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

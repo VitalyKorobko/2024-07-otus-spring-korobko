@@ -1,0 +1,64 @@
+server:
+  port: 7772
+  error:
+    path: /error
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/front_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  jpa:
+    database: postgresql
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+    #      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+
+#  datasource:
+#    url: jdbc:h2:mem:maindb
+#    url: jdbc:mysql://localhost:3306/spring_book_shop_db?useUnicode=true&serverTimezone=UTC
+
+    #    url: jdbc:mysql://localhost:3306/spring_book_shop_db?useUnicode=true&serverTimezone=UTC
+#    username: root
+#    password:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:maindb
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:/db/changelog/db.changelog-master.yaml
+#
+#  jpa:
+#    open-in-view: false
+#    generate-ddl: false
+#    hibernate:
+#      ddl-auto: none
+#
+#    show-sql: true
+
+logging:
+  level:
+    ROOT: INFO

@@ -1,0 +1,53 @@
+----changeset korobko:2025-02-17-0001-users-data
+--insert into users(username, password, email, enabled)
+--values ('user', '$2y$13$H81FL5loLZN/s8baA6NcdOrXF1asdG4.tsf9no5a/UuVqrRtsy31i', 'email@email.com', true),
+--       ('prod', '$2y$13$H81FL5loLZN/s8baA6NcdOrXF1asdG4.tsf9no5a/UuVqrRtsy31i', 'prod@prod.com', true);
+----changeset korobko:2025-02-17-0001-roles-data
+--insert into roles(name)
+--values ('USER'), ('ADMIN'), ('SELLER');
+--
+----changeset korobko:2025-02-17-0001-users-roles-data
+--insert into users_roles(user_id, role_id)
+--values (1,2);
+
+----changeset korobko:2025-02-17-001-users
+--CREATE TABLE users (
+--    id bigserial,
+--    email varchar(255),
+--    enabled bit(1),
+--    password varchar(255),
+--    username varchar(255),
+--    PRIMARY KEY (id)
+--);
+--
+----changeset korobko:2025-02-17-001-users
+--CREATE TABLE user_role (
+--    user_id bigserial REFERENCES users (id),
+--    roles varchar(255)
+--);
+
+
+----changeset korobko:2025-02-13-001-users
+--CREATE TABLE users (
+--    id bigserial,
+--    username varchar(255),
+--    password varchar(255),
+--    email varchar(255),
+--    enabled boolean,
+--    PRIMARY KEY (id)
+--);
+--
+----changeset korobko:2025-02-13-001-roles
+--CREATE TABLE roles (
+--    id bigserial,
+--    name varchar(255),
+--    PRIMARY KEY (id)
+--);
+--
+----changeset korobko:2025-02-13-001-users_roles
+--CREATE TABLE users_roles (
+--    user_id bigint REFERENCES users(id) ON DELETE CASCADE,
+--    role_id bigint REFERENCES roles(id) ON DELETE CASCADE,
+--    PRIMARY KEY (user_id, role_id)
+--);
+
