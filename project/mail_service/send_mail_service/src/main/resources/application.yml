@@ -29,7 +29,7 @@ spring:
 #    username:
 #    password:
     username: korobkovn3
-    password:
+    password: vptcyurvhmqtnncs
     protocol: smtps
     properties:
       mail:

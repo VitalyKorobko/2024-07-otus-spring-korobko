@@ -77,23 +77,13 @@ public class OrderServiceImpl implements OrderService {
                 .body(orderMapper.toOrderDtoForMail(returnedOrder))
                 .retrieve();
 //                .body(OrderDtoForMail.class);
-        if (isNull(orderDtoForMail)) {
-            throw new ImpossibleSaveEntityException("impossible to save order!");
-        }
+//        if (isNull(orderDtoForMail)) {
+//            throw new ImpossibleSaveEntityException("impossible to save order!");
+//        }
 //        var customer = returnedOrder.getUser();
 //        return orderRepository.update(orderMapper.toOrder(orderDtoForMail, customer));
         return returnedOrder;
     }
-
-//    @Override
-//    public Order create(Order order) {
-//        return orderRepository.create(order);
-//    }
-//
-//    @Override
-//    public Order update(Order order) {
-//        return orderRepository.update(order);
-//    }
 
     @Override
     public Order findByUserAndStatus(User user, Status status) {

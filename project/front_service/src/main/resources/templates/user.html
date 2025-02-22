@@ -14,7 +14,7 @@
     <p>Привет, <span sec:authentication="name"></span></p><br>
     <p th:switch="${roles.iterator().next()}">
         <span th:case="${ADMIN}">Вы зарегистрированы в качестве Администратора</span>
-        <span th:case="${SELLER}">Вы зарегистрированы в качестве Издателя</span>
+        <span th:case="${SELLER}">Вы зарегистрированы в качестве Продавца</span>
         <span th:case="${USER}">Вы зарегистрированы в качестве Покупателя</span>
     </p><br>
     <div sec:authorize="hasAuthority('ROLE_SELLER')" th:if="${!products.isEmpty()}">

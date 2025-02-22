@@ -25,7 +25,7 @@
                 </span>
             </div>
         </div>
-        <h2>Все издатели:</h2>
+        <h2>Все продавцы:</h2>
         <div th:if="${!sellers.isEmpty()}">
             <div class="block2" th:each="el : ${sellers}">
                 <a th:href="'/admin/update/user-' + ${el.getId()}">

@@ -16,10 +16,6 @@ public interface OrderService {
 
     Order findById(String id);
 
-//    Order create(Order order);
-//
-//    Order update(Order order);
-
     Order save(Order order);
 
 

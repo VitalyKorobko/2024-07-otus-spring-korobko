@@ -13,7 +13,7 @@ import java.util.List;
 @ChangeLog(order = "001")
 @RequiredArgsConstructor
 public class DatabaseChangelog {
-    private static final int COUNT_OF_PRODUCTS = 100;
+//    private static final int COUNT_OF_PRODUCTS = 100;
 
 //    private final ProductFactory productFactory;
 

@@ -1,0 +1,226 @@
+version: '3.9'
+
+services:
+
+  front_service:
+    build:
+      context: ..
+      dockerfile: ./project/front_service/Dockerfile
+    ports:
+      - "32772:7772"
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/books_db
+      - SPRING_DATASOURCE_USERNAME=post
+      - SPRING_DATASOURCE_PASSWORD=gres
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  mail_client:
+    build:
+      context: ..
+      dockerfile: ./project/mail_service/Dockerfile
+    ports:
+      - "32775:7775"
+    depends_on:
+      - broker
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+#  send_mail_service:
+#    build:
+#      context: ..
+#      dockerfile: ./project/mail_service/send_mail_service/Dockerfile
+#    ports:
+#      - "32777:7777"
+#    depends_on:
+#      - mail_client
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 2G
+#    networks:
+#      - my_net_1
+#    restart: unless-stopped
+
+  order_service:
+    build:
+      context: ..
+      dockerfile: ./project/order_service/Dockerfile
+    ports:
+      - "32778:7778"
+    depends_on:
+      - mongo-db
+    environment:
+      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=orderDB
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  product_service:
+    build:
+      context: ..
+      dockerfile: ./project/product_service/Dockerfile
+    ports:
+      - "32773:7773"
+    depends_on:
+      - mongo-db
+    environment:
+      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=productDB
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  storage_service:
+    build:
+      context: ..
+      dockerfile: ./project/storage_service/Dockerfile
+    ports:
+      - "32774:7774"
+    depends_on:
+      - mongo-db
+    environment:
+      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=storageDB
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  mongo-db:
+    image: "mongo:4.2"
+    ports:
+      - "32873:27017"
+    volumes:
+      - mongo-db-data:/var/lib/mongodb/data
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#      - ./config/mongodb/mongodb.conf:/etc/mongodb.conf
+#      - ./data/mongodb/db:/data/db                         # volume for data
+#      - ./data/mongodb/configdb:/data/configdb             # volume for config
+#      - ./data/mongodb:/var/lib/mongodb
+#      - ./log/mongodb:/var/log/mongodb/mongod.log          # log mongodb
+#    environment:
+#      - MONGO_VERSION=latest
+#      - MONGO_INITDB_ROOT_PASSWORD=password
+#      - MONGO_INITDB_ROOT_USERNAME=root
+#      - MONGO_INITDB_ROOT_HOST=mongodb
+#      - MONGO_DATABASE=laradock_mongodb
+#      - MONGO_USER=laradock
+#      - MONGO_PASSWORD=password
+#    environment:
+#      - MONGO_INITDB_ROOT_HOST=3b2c1b3b7fc1
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - my_net_1
+    restart: always
+
+  postgres-db:
+    image: "postgres:13"
+    ports:
+      - "35432:5432"
+    environment:
+      - POSTGRES_USER=post
+      - POSTGRES_PASSWORD=gres
+      - POSTGRES_DB=books_db
+    volumes:
+      - postgres-db-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=login@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=pass
+    ports:
+      - "32080:80"
+    volumes:
+      - pgadmin-db-data:/var/lib/pgadmin/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.2.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-kafka:7.0.0
+    container_name: broker
+    ports:
+      - "32092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
+networks:
+  my_net_1:
+    driver: bridge
+
+volumes:
+  mongo-db-data:
+  postgres-db-data:
+  pgadmin-db-data:
+
+
+
+
+
+
