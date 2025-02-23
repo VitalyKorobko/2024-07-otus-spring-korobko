@@ -77,7 +77,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public List<Product> findAllByUser(User user) {
         List<ProductDto> productDtoList = productRestClient.get()
                 .uri("/api/v1/product")
-//                .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
+                .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<ProductDto>>() {
                     @Override

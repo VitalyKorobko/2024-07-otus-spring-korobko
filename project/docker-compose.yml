@@ -1,19 +1,12 @@
 version: '3.9'
 
 services:
-
-  front_service:
+  auth_service:
     build:
       context: ..
-      dockerfile: ./project/front_service/Dockerfile
+      dockerfile: ./project/auth_service/Dockerfile
     ports:
-      - "32772:7772"
-    depends_on:
-      - postgres-db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/books_db
-      - SPRING_DATASOURCE_USERNAME=post
-      - SPRING_DATASOURCE_PASSWORD=gres
+      - "7771:7771"
     deploy:
       resources:
         limits:
@@ -23,31 +16,18 @@ services:
       - my_net_1
     restart: unless-stopped
 
-  mail_client:
-    build:
-      context: ..
-      dockerfile: ./project/mail_service/Dockerfile
-    ports:
-      - "32775:7775"
-    depends_on:
-      - broker
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 2G
-    networks:
-      - my_net_1
-    restart: unless-stopped
-
-#  send_mail_service:
+#  front_service:
 #    build:
 #      context: ..
-#      dockerfile: ./project/mail_service/send_mail_service/Dockerfile
+#      dockerfile: ./project/front_service/Dockerfile
 #    ports:
-#      - "32777:7777"
+#      - "37772:7772"
 #    depends_on:
-#      - mail_client
+#      - postgres-db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/front_db
+#      - SPRING_DATASOURCE_USERNAME=post
+#      - SPRING_DATASOURCE_PASSWORD=gres
 #    deploy:
 #      resources:
 #        limits:
@@ -57,16 +37,77 @@ services:
 #      - my_net_1
 #    restart: unless-stopped
 
+  mail_client2:
+    build:
+      context: ..
+      dockerfile: ./project/mail_client2/Dockerfile
+    ports:
+      - "7775:7775"
+    depends_on:
+      - broker
+    environment:
+      - APPLICATION_PROCESSOR_URL=http://localhost:7776
+      - APPLICATION_KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+#      - APPLICATION_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+#      - KAFKA_SERVER=broker:9092
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  mail_processor:
+    build:
+      context: ..
+      dockerfile: ./project/mail_processor/Dockerfile
+    ports:
+      - "7776:7776"
+    depends_on:
+      - broker
+    environment:
+      - APPLICATION_SOURCE_URL=http://localhost:7777
+#      - APPLICATION_KAFKA_BOOTSTRAP_SERVERS=broker:29092
+      - APPLICATION_KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+#      - KAFKA_SERVER=broker:9092
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  send_mail_service:
+    build:
+      context: ..
+      dockerfile: ./project/send_mail_service/Dockerfile
+    ports:
+      - "7777:7777"
+#    depends_on:
+#      - broker
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
   order_service:
     build:
       context: ..
       dockerfile: ./project/order_service/Dockerfile
     ports:
-      - "32778:7778"
+      - "7778:7778"
     depends_on:
       - mongo-db
     environment:
-      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_HOST=4662b3594ca1
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=orderDB
     deploy:
@@ -83,11 +124,11 @@ services:
       context: ..
       dockerfile: ./project/product_service/Dockerfile
     ports:
-      - "32773:7773"
+      - "7773:7773"
     depends_on:
       - mongo-db
     environment:
-      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_HOST=4662b3594ca1
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=productDB
     deploy:
@@ -104,11 +145,11 @@ services:
       context: ..
       dockerfile: ./project/storage_service/Dockerfile
     ports:
-      - "32774:7774"
+      - "7774:7774"
     depends_on:
       - mongo-db
     environment:
-      - SPRING_DATA_MONGODB_HOST=32e8c23009fd
+      - SPRING_DATA_MONGODB_HOST=4662b3594ca1
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_DATABASE=storageDB
     deploy:
@@ -123,7 +164,7 @@ services:
   mongo-db:
     image: "mongo:4.2"
     ports:
-      - "32873:27017"
+      - "27017:27017"
     volumes:
       - mongo-db-data:/var/lib/mongodb/data
 #    volumes:
@@ -152,11 +193,11 @@ services:
   postgres-db:
     image: "postgres:13"
     ports:
-      - "35432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_USER=post
       - POSTGRES_PASSWORD=gres
-      - POSTGRES_DB=books_db
+      - POSTGRES_DB=front_db
     volumes:
       - postgres-db-data:/var/lib/postgresql/data
     deploy:
@@ -167,6 +208,26 @@ services:
     networks:
       - my_net_1
     restart: unless-stopped
+
+#  postgres-db2:
+#    image: "postgres:13"
+#    ports:
+#      - "5433:5432"
+#    environment:
+#      - POSTGRES_USER=post
+#      - POSTGRES_PASSWORD=gres
+#      - POSTGRES_DB=user_db
+#      - PGHOST=postgres
+#    volumes:
+#      - postgres-db2-data:/var/lib/postgresql/data2
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 4G
+#    networks:
+#      - my_net_2
+#    restart: unless-stopped
 
 
   pgadmin:
@@ -193,12 +254,14 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - my_net_1
 
   broker:
     image: confluentinc/cp-kafka:7.0.0
     container_name: broker
     ports:
-      - "32092:9092"
+      - "9092:9092"
     depends_on:
       - zookeeper
     environment:
@@ -209,6 +272,8 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - my_net_1
 
 networks:
   my_net_1:

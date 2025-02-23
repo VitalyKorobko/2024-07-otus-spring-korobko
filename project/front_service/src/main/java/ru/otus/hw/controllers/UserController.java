@@ -70,6 +70,7 @@ public class UserController {
     public String setToken(Authentication authentication) {
         tokenStorage.setToken(tokenService.getToken(authentication));
         log.info("was created token: \n%s".formatted(tokenStorage.getToken()));
+        System.out.println("\n===========================success=====================================\n");
         return "redirect:/user";
 
     }

@@ -11,11 +11,13 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>mail_client2</module>
+        <module>mail_processor</module>
+        <module>send_mail_service</module>
         <module>auth_service</module>
         <module>product_service</module>
         <module>front_service</module>
         <module>storage_service</module>
-        <module>mail_service</module>
         <module>order_service</module>
 
     </modules>

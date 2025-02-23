@@ -1,22 +1,22 @@
-23:45:44.168 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-23:45:44.204 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 11428 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
-23:45:44.205 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
-23:45:44.808 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-23:45:44.856 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 1 JPA repository interface.
-23:45:45.362 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
-23:45:45.370 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
-23:45:45.373 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-23:45:45.373 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-23:45:45.425 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-23:45:45.426 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1186 ms
-23:45:45.543 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-23:45:46.630 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-23:45:46.635 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
-23:45:46.646 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+00:40:36.235 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+00:40:36.265 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 17172 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
+00:40:36.265 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
+00:40:36.901 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:40:36.964 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 57 ms. Found 1 JPA repository interface.
+00:40:37.505 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
+00:40:37.516 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
+00:40:37.518 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:40:37.519 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+00:40:37.578 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:40:37.579 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1279 ms
+00:40:37.649 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class org.h2.Driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@4d7e1886
+00:40:37.650 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Failed to instantiate [liquibase.integration.spring.SpringLiquibase]: Factory method 'liquibase' threw exception with message: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+00:40:37.652 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+00:40:37.666 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-23:45:46.661 [main] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
+00:40:37.679 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Failed to instantiate [liquibase.integration.spring.SpringLiquibase]: Factory method 'liquibase' threw exception with message: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:326)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954)
@@ -28,9 +28,12 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
 	at ru.otus.hw.AuthService.main(AuthService.java:13)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Failed to instantiate [liquibase.integration.spring.SpringLiquibase]: Factory method 'liquibase' threw exception with message: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
@@ -38,218 +41,100 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
 	... 10 common frames omitted
-Caused by: liquibase.exception.UnexpectedLiquibaseException: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:259)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
-	... 17 common frames omitted
-Caused by: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:251)
-	at liquibase.Scope.lambda$child$0(Scope.java:190)
-	at liquibase.Scope.child(Scope.java:199)
-	at liquibase.Scope.child(Scope.java:189)
-	at liquibase.Scope.child(Scope.java:168)
-	at liquibase.Scope.child(Scope.java:256)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:242)
-	... 19 common frames omitted
-Caused by: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2837)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:317)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
-	at org.postgresql.Driver.makeConnection(Driver.java:446)
-	at org.postgresql.Driver.connect(Driver.java:298)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:246)
-	... 25 common frames omitted
-23:47:05.370 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-23:47:05.404 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 24680 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
-23:47:05.405 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
-23:47:05.995 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-23:47:06.040 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 1 JPA repository interface.
-23:47:06.545 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
-23:47:06.554 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
-23:47:06.556 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-23:47:06.556 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-23:47:06.606 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-23:47:06.607 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1168 ms
-23:47:06.723 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-23:47:07.806 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-23:47:07.810 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
-23:47:07.818 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-23:47:07.831 [main] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
-	at ru.otus.hw.AuthService.main(AuthService.java:13)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [liquibase.integration.spring.SpringLiquibase]: Factory method 'liquibase' threw exception with message: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:178)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644)
+	... 20 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
-	... 10 common frames omitted
-Caused by: liquibase.exception.UnexpectedLiquibaseException: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:259)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
-	... 17 common frames omitted
-Caused by: liquibase.exception.DatabaseException: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:251)
-	at liquibase.Scope.lambda$child$0(Scope.java:190)
-	at liquibase.Scope.child(Scope.java:199)
-	at liquibase.Scope.child(Scope.java:189)
-	at liquibase.Scope.child(Scope.java:168)
-	at liquibase.Scope.child(Scope.java:256)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:242)
-	... 19 common frames omitted
-Caused by: org.postgresql.util.PSQLException: FATAL: database "user_db" does not exist
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2837)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:175)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:317)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
-	at org.postgresql.Driver.makeConnection(Driver.java:446)
-	at org.postgresql.Driver.connect(Driver.java:298)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:246)
-	... 25 common frames omitted
-23:48:09.938 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-23:48:09.966 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 27632 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
-23:48:09.966 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
-23:48:10.542 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-23:48:10.588 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 1 JPA repository interface.
-23:48:11.084 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
-23:48:11.098 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
-23:48:11.099 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-23:48:11.100 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-23:48:11.152 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-23:48:11.153 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1155 ms
-23:48:11.268 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-23:48:11.391 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7d2c9361
-23:48:11.392 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-23:48:11.499 [main] INFO  liquibase.database - Set default schema name to public
-23:48:11.670 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
-23:48:11.677 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
-23:48:11.707 [main] INFO  liquibase.changelog - Creating database history table with name: public.databasechangelog
-23:48:11.740 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
-23:48:11.778 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
-23:48:11.779 [main] INFO  liquibase.command - Using deploymentId: 0170891778
-23:48:11.780 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
-23:48:11.787 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll
-23:48:11.814 [main] INFO  liquibase.changelog - Custom SQL executed
-23:48:11.815 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll ran successfully in 27ms
-23:48:11.820 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko
-23:48:11.825 [main] INFO  liquibase.changelog - Custom SQL executed
-23:48:11.825 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko ran successfully in 5ms
-23:48:11.827 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko
-23:48:11.830 [main] INFO  liquibase.changelog - Custom SQL executed
-23:48:11.831 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko ran successfully in 4ms
-23:48:11.837 [main] INFO  liquibase.util - UPDATE SUMMARY
-23:48:11.837 [main] INFO  liquibase.util - Run:                          3
-23:48:11.837 [main] INFO  liquibase.util - Previously run:               0
-23:48:11.837 [main] INFO  liquibase.util - Filtered out:                 0
-23:48:11.837 [main] INFO  liquibase.util - -------------------------------
-23:48:11.837 [main] INFO  liquibase.util - Total change sets:            3
-23:48:11.838 [main] INFO  liquibase.util - Update summary generated
-23:48:11.840 [main] INFO  liquibase.command - Update command completed successfully.
-23:48:11.841 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 7
-23:48:11.842 [main] INFO  liquibase.lockservice - Successfully released change log lock
-23:48:11.844 [main] INFO  liquibase.command - Command execution complete
-23:48:11.933 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-23:48:11.974 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-23:48:12.002 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-23:48:12.217 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-23:48:12.248 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-23:48:12.846 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-23:48:12.848 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-23:48:13.247 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
-23:48:13.322 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
-23:48:13.805 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
-23:48:13.814 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
-23:48:13.822 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 4.165 seconds (process running for 4.572)
-23:48:13.824 [main] INFO  ru.otus.hw.AuthService - Auth_service have been started. View by link: http://localhost:7771 
-23:48:23.070 [http-nio-7771-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-23:48:23.070 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-23:48:23.071 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-23:48:31.100 [http-nio-7771-exec-5] WARN  r.o.h.controller.page.MainController - failed to send token
-23:48:48.798 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-23:48:48.800 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-23:48:48.801 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-18:36:15.805 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-18:36:15.841 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 16648 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
-18:36:15.841 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
-18:36:16.408 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-18:36:16.460 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
-18:36:16.968 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
-18:36:16.976 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
-18:36:16.978 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-18:36:16.978 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-18:36:17.039 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-18:36:17.040 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1162 ms
-18:36:17.154 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-18:36:17.267 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7fef0b40
-18:36:17.269 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-18:36:17.394 [main] INFO  liquibase.database - Set default schema name to public
-18:36:17.561 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
-18:36:17.570 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
-18:36:17.629 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
-18:36:17.652 [main] INFO  liquibase.ui - Database is up to date, no changesets to execute
-18:36:17.653 [main] INFO  liquibase.changelog - Reading from public.databasechangelog
-18:36:17.659 [main] INFO  liquibase.util - UPDATE SUMMARY
-18:36:17.659 [main] INFO  liquibase.util - Run:                          0
-18:36:17.659 [main] INFO  liquibase.util - Previously run:               3
-18:36:17.659 [main] INFO  liquibase.util - Filtered out:                 0
-18:36:17.659 [main] INFO  liquibase.util - -------------------------------
-18:36:17.659 [main] INFO  liquibase.util - Total change sets:            3
-18:36:17.660 [main] INFO  liquibase.util - Update summary generated
-18:36:17.675 [main] INFO  liquibase.lockservice - Successfully released change log lock
-18:36:17.676 [main] INFO  liquibase.command - Command execution complete
-18:36:17.756 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-18:36:17.800 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-18:36:17.827 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-18:36:18.045 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-18:36:18.076 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-18:36:18.692 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-18:36:18.693 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-18:36:19.134 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
-18:36:19.205 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
-18:36:19.656 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
-18:36:19.665 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
-18:36:19.672 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 4.205 seconds (process running for 4.664)
-18:36:19.676 [main] INFO  ru.otus.hw.AuthService - Auth_service have been started. View by link: http://localhost:7771 
-18:36:24.406 [http-nio-7771-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-18:36:24.406 [http-nio-7771-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-18:36:24.407 [http-nio-7771-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-18:36:31.687 [http-nio-7771-exec-7] WARN  r.o.h.controller.page.MainController - failed to send token
-18:41:14.687 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-18:41:14.689 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-18:41:14.691 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$DependencyObjectProvider.getIfUnique(DefaultListableBeanFactory.java:2153)
+	at org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration$LiquibaseConfiguration.liquibase(LiquibaseAutoConfiguration.java:102)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:146)
+	... 21 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:178)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644)
+	... 37 common frames omitted
+Caused by: java.lang.RuntimeException: Failed to load driver class org.h2.Driver in either of HikariConfig class loader or Thread context classloader
+	at com.zaxxer.hikari.HikariConfig.setDriverClassName(HikariConfig.java:494)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperty.set(DataSourceBuilder.java:479)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.set(DataSourceBuilder.java:373)
+	at org.springframework.boot.jdbc.DataSourceBuilder.build(DataSourceBuilder.java:183)
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration.createDataSource(DataSourceConfiguration.java:59)
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari.dataSource(DataSourceConfiguration.java:117)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:146)
+	... 38 common frames omitted
+00:42:01.554 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+00:42:01.583 [main] INFO  ru.otus.hw.AuthService - Starting AuthService using Java 19.0.1 with PID 20432 (C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project\auth_service\target\classes started by kvn in C:\Users\korob\IdeaProjects\otus\prod\2024-07-otus-spring-korobko\project)
+00:42:01.584 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
+00:42:02.256 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:42:02.303 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 1 JPA repository interface.
+00:42:02.894 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
+00:42:02.903 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
+00:42:02.906 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+00:42:02.906 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+00:42:02.972 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+00:42:02.973 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1351 ms
+00:42:03.112 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+00:42:03.311 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:userdb user=SA
+00:42:03.313 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+00:42:03.366 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+00:42:03.584 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
+00:42:03.594 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
+00:42:03.633 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+00:42:03.701 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+00:42:03.734 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+00:42:03.736 [main] INFO  liquibase.command - Using deploymentId: 0260523735
+00:42:03.737 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+00:42:03.745 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll
+00:42:03.760 [main] INFO  liquibase.changelog - Custom SQL executed
+00:42:03.761 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll ran successfully in 15ms
+00:42:03.765 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko
+00:42:03.767 [main] INFO  liquibase.changelog - Custom SQL executed
+00:42:03.767 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko ran successfully in 2ms
+00:42:03.769 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko
+00:42:03.770 [main] INFO  liquibase.changelog - Custom SQL executed
+00:42:03.770 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko ran successfully in 1ms
+00:42:03.775 [main] INFO  liquibase.util - UPDATE SUMMARY
+00:42:03.775 [main] INFO  liquibase.util - Run:                          3
+00:42:03.775 [main] INFO  liquibase.util - Previously run:               0
+00:42:03.775 [main] INFO  liquibase.util - Filtered out:                 0
+00:42:03.775 [main] INFO  liquibase.util - -------------------------------
+00:42:03.775 [main] INFO  liquibase.util - Total change sets:            3
+00:42:03.775 [main] INFO  liquibase.util - Update summary generated
+00:42:03.779 [main] INFO  liquibase.command - Update command completed successfully.
+00:42:03.779 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 7
+00:42:03.780 [main] INFO  liquibase.lockservice - Successfully released change log lock
+00:42:03.781 [main] INFO  liquibase.command - Command execution complete
+00:42:03.903 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+00:42:03.954 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+00:42:03.981 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+00:42:04.232 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+00:42:04.268 [main] WARN  org.hibernate.dialect.Dialect - HHH000511: The 2.2.220 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 12.0.0. Check the community dialects project for available legacy versions.
+00:42:04.271 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+00:42:04.943 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:42:04.945 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:42:05.413 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+00:42:05.482 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+00:42:05.932 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
+00:42:05.948 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
+00:42:05.956 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 4.721 seconds (process running for 5.162)
+00:42:05.959 [main] INFO  ru.otus.hw.AuthService - Auth_service have been started. View by link: http://localhost:7771 
+00:42:08.855 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+00:42:08.856 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+00:42:08.857 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
