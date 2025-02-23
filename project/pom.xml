@@ -11,7 +11,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>mail_client2</module>
+        <module>config-server</module>
+        <module>facade-gateway</module>
+        <module>service-discovery-server</module>
+        <module>mail_client</module>
         <module>mail_processor</module>
         <module>send_mail_service</module>
         <module>auth_service</module>

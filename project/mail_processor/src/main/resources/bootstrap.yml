@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mail_processor
+  cloud:
+    config:
+      fail-fast: true

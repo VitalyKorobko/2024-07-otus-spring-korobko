@@ -1,0 +1,30 @@
+#server:
+#  port: 7771
+#
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:userdb
+#
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:/db/changelog/db.changelog-master.yaml
+#
+#  jpa:
+#    database: postgresql
+#    open-in-view: false
+#    generate-ddl: false
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#
+#
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework.web: INFO
+#    org.springframework.security: INFO
+##    org.springframework.boot.autoconfigure: DEBUG
+#
+#jwt:
+#  private.key: classpath:app.key
+#  public.key: classpath:app.pub

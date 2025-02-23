@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: auth_service
+  cloud:
+    config:
+      fail-fast: true

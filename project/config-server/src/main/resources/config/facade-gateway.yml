@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+
+
+
+
+
+
+
+#server:
+#  port: 8080
+
+#eureka:
+#  client:
+#    fetch-registry: true
+#
+#zuul:
+#  prefix: "/api"
+#  strip-prefix: true
+#  routes:
+#    auth:
+#      serviceId: auth_service
+#      strip-prefix: false
+#    order:
+#      serviceId: order_service
+#      strip-prefix: false
+#    product:
+#      serviceId: product_service
+#      strip-prefix: false
+#    send_mail:
+#      serviceId: send_mail_service
+#      strip-prefix: false
+#    storage:
+#      serviceId: storage_service
+#      strip-prefix: false
+#    greetings:
+#      serviceId: greeting-microservice
+#      strip-prefix: false
+#    names:
+#      serviceId: names-microservice
+#      strip-prefix: false
+
+#greeting: А я api-gateway

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: send_mail_service
+  cloud:
+    config:
+      fail-fast: true

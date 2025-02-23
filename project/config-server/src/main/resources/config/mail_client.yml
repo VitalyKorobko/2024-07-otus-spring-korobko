@@ -1,0 +1,10 @@
+server:
+  port: 7775
+
+application:
+  processor:
+    url: http://localhost:7776
+  kafka-bootstrap-servers: localhost:9092
+  kafka-group-id: clientConsumerGroup
+  topic-request: request
+  topic-response: response

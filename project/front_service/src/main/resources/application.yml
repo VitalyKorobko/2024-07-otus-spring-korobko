@@ -6,8 +6,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/front_db
-    username: post
-    password: gres
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
   liquibase:

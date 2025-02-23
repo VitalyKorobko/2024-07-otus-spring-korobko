@@ -1,0 +1,29 @@
+server:
+  port: 7777
+
+eureka:
+  client:
+    fetch-registry: true
+
+app:
+  # адрес почты, через которую сервер отправляет письма
+#  server-email: ${server.email}
+  server-email: korobkovn3@yandex.ru
+
+
+spring:
+
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    # логин и пароль для почты, через которую сервер отправляет письма
+#    username:
+#    password:
+    username: korobkovn3
+    password: vptcyurvhmqtnncs
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
