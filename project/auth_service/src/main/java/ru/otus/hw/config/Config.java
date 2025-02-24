@@ -6,7 +6,6 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 public class Config {
-
     @Bean
     TokenStorage getToken() {
         return new TokenStorage();
@@ -16,4 +15,6 @@ public class Config {
     RestClient getClient() {
         return RestClient.create();
     }
+
+
 }

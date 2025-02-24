@@ -1,6 +1,6 @@
 spring:
   application:
-    name: send_mail_service
+    name: notification_service
   cloud:
     config:
       fail-fast: true

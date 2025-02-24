@@ -16,7 +16,7 @@ public interface UserService {
 
     List<User> findAll();
 
-    User insert(String username, String password, String email, boolean enabled, Set<Role> roles);
+    User create(String username, String password, String email, boolean enabled, Set<Role> roles);
 
     User update(long id, String username, String password, String email, boolean enabled, Set<Role> roles);
 

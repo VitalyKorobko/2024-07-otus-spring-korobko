@@ -1,17 +1,10 @@
 package ru.otus.hw.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import ru.otus.hw.model.Role;
-
-import java.util.Set;
 
 @Data
 @AllArgsConstructor

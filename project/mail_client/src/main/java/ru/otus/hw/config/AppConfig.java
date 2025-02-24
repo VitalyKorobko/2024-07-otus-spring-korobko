@@ -121,4 +121,9 @@ public class AppConfig {
                 response -> orderValueStorage.put(response.data().requestId(), response.data()));
     }
 
+    @Bean
+    TokenStorage getToken() {
+        return new TokenStorage();
+    }
+
 }

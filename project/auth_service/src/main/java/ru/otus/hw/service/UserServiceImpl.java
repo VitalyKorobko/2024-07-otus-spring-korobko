@@ -23,9 +23,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        System.out.println("\n==================================\n");
-        UserDetails userDetails = findUser(username);
-        System.out.println(userDetails);
         return findUser(username);
     }
 
@@ -38,13 +35,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User findByEmail(String email) {
         return repository.findByEmail(email)
-                .orElseThrow(()-> new EntityNotFoundException("Пользователь с email: %s не найден".formatted(email)));
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с email: %s не найден".formatted(email)));
     }
 
     @Override
     public User findById(long id) {
         return repository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Пользователь с id %d не найден".formatted(id)));
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с id %d не найден".formatted(id)));
     }
 
     @Override
@@ -53,7 +50,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User insert(String username, String password, String email, boolean enabled, Set<Role> roles) {
+    public User create(String username, String password, String email, boolean enabled, Set<Role> roles) {
         return save(0, username, password, email, enabled, roles);
     }
 
@@ -77,7 +74,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь %s не найден".formatted(username)));
     }
 
-    private User save (long id, String username, String password, String email, boolean enabled, Set<Role> roles) {
+    private User save(long id, String username, String password, String email, boolean enabled, Set<Role> roles) {
         var user = new User(id, username, password, email, enabled, roles);
         return repository.save(user);
     }

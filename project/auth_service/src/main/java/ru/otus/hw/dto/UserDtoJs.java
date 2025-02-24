@@ -2,13 +2,11 @@ package ru.otus.hw.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.otus.hw.enums.RoleStorage;
-import ru.otus.hw.model.Role;
 
 import java.util.Collection;
 import java.util.Set;

@@ -10,4 +10,4 @@ import lombok.NoArgsConstructor;
 public class TokenStorage {
     private String token;
 
-}
+};

@@ -6,7 +6,7 @@ import ru.otus.hw.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-public class RegServiceImpl implements RegService{
+public class RegServiceImpl implements RegService {
     private final UserRepository userRepository;
 
     @Override

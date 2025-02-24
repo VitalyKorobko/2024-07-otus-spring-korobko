@@ -16,7 +16,7 @@
         <module>service-discovery-server</module>
         <module>mail_client</module>
         <module>mail_processor</module>
-        <module>send_mail_service</module>
+        <module>notification_service</module>
         <module>auth_service</module>
         <module>product_service</module>
         <module>front_service</module>

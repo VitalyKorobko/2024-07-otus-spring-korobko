@@ -61,5 +61,10 @@ public class ApplConfig {
         return Schedulers.newSingle("mail-scheduler");
     }
 
+    @Bean
+    TokenStorage getToken() {
+        return new TokenStorage();
+    }
+
 
 }

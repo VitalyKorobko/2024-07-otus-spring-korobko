@@ -141,4 +141,9 @@ public class ApplicationConfig {
                         )
                         .subscribe());
     }
+
+    @Bean
+    TokenStorage getToken() {
+        return new TokenStorage();
+    }
 }

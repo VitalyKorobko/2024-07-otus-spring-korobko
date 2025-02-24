@@ -43,10 +43,6 @@ public class SecurityConfiguration{
                 .cors(corsSpec -> corsSpec.configurationSource(corsConfigurationSource))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange((exchanges) -> exchanges
-//                        .pathMatchers( HttpMethod.GET, "/authenticated.html" ).authenticated()
-//                        .pathMatchers( "/person" ).hasAnyRole( "USER" )
-//                                .pathMatchers(HttpMethod.GET, "/main.css", "/", "/api/v1/token").permitAll()
-//                                .pathMatchers("/api/v1/product").permitAll()
                                 .pathMatchers("/**").authenticated()
                                 .anyExchange().denyAll()
                 )

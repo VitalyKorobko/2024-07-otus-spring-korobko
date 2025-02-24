@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestClient;
 import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.service.TokenService;
 
@@ -17,11 +16,10 @@ import java.util.Objects;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-    private final TokenService tokenService;
 
     private final TokenStorage tokenStorage;
 
-    private final RestClient client;
+    private final TokenService tokenService;
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false, defaultValue = "") String error) {
@@ -31,8 +29,6 @@ public class MainController {
         return "login";
     }
 
-
-
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {
         reg(authentication);
@@ -41,24 +37,17 @@ public class MainController {
 
     private void reg(Authentication authentication) {
         tokenStorage.setToken(tokenService.getToken(authentication));
-        sendToken(tokenStorage.getToken());
-
-        System.out.println("\n=====================SUCCESS========================\n");
-        System.out.println(tokenStorage.getToken());
+        sendToken();
     }
 
-    private void sendToken(String token) {
-        try {
-            client
-                    .post()
-                    .uri("http://localhost:7778/api/v1/token")
-                    .header("Authorization", "Bearer " + tokenStorage.getToken())
-                    .body(tokenStorage.getToken())
-                    .retrieve();
-        } catch (Exception ex) {
-            //todo retry
-            log.warn("failed to send token");
-        }
+    private void sendToken() {
+        log.info(tokenStorage.getToken());
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7773/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7774/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7775/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7776/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7777/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7778/api/v1/token");
     }
 
 
