@@ -1,6 +1,6 @@
-spring-shell.log
 HELP.md
 /target/
+/log/
 /node/
 /node_modules/
 !.mvn/wrapper/maven-wrapper.jar

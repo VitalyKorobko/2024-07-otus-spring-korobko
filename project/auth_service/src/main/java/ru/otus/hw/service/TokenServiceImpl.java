@@ -1,7 +1,7 @@
 package ru.otus.hw.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -16,11 +16,8 @@ import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class TokenServiceImpl implements TokenService {
-    private static final int EXPIRY_TIME = 86000;
-
     private static final String AUTHORIZATION = "Authorization";
 
     private static final String BEARER = "Bearer ";
@@ -30,6 +27,17 @@ public class TokenServiceImpl implements TokenService {
     private final RestClient client;
 
     private final TokenStorage tokenStorage;
+
+    private final int jwtExpire;
+
+    public TokenServiceImpl(JwtEncoder encoder, RestClient client,
+                            TokenStorage tokenStorage,
+                            @Value("${jwt.expire}") int jwtExpire) {
+        this.encoder = encoder;
+        this.client = client;
+        this.tokenStorage = tokenStorage;
+        this.jwtExpire = jwtExpire;
+    }
 
     @Override
     public String getToken(Authentication authentication) {
@@ -42,7 +50,7 @@ public class TokenServiceImpl implements TokenService {
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
-                .expiresAt(now.plusSeconds(EXPIRY_TIME))
+                .expiresAt(now.plusSeconds(jwtExpire))
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();

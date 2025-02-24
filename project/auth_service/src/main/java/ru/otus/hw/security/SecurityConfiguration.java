@@ -27,14 +27,13 @@ import java.security.interfaces.RSAPublicKey;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    @Value("${jwt.public.key}")
-    private RSAPublicKey publicKey;
-
-    @Value("${jwt.private.key}")
-    private RSAPrivateKey privateKey;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   @Value("${app.expire}") int expireTime,
+                                                   @Value("${app.remember-me-key}") String rememberMeKey,
+                                                   @Value("${app.remember-me-name}") String rememberMeName,
+                                                   JwtDecoder jwtDecoder) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
@@ -46,17 +45,17 @@ public class SecurityConfiguration {
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error=username")
                 ).logout((logout) ->
-                        logout.deleteCookies("SomeKey")
+                        logout.deleteCookies(rememberMeName)
                                 .invalidateHttpSession(false)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/")
                 ).oauth2ResourceServer((oauth2ResourceServer) ->
                         oauth2ResourceServer
                                 .jwt((jwt) ->
-                                        jwt.decoder(jwtDecoder())
+                                        jwt.decoder(jwtDecoder)
                                 )
-                ).rememberMe(rm -> rm.key("SomeKey").rememberMeCookieName("marketplace")
-                        .tokenValiditySeconds(86_400));
+                ).rememberMe(rm -> rm.key(rememberMeKey).rememberMeCookieName(rememberMeName)
+                        .tokenValiditySeconds(expireTime));
         return http.build();
     }
 
@@ -66,13 +65,14 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.publicKey).build();
+    JwtDecoder jwtDecoder(@Value("${jwt.public.key}") RSAPublicKey publicKey) {
+        return NimbusJwtDecoder.withPublicKey(publicKey).build();
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.publicKey).privateKey(this.privateKey).build();
+    JwtEncoder jwtEncoder(@Value("${jwt.public.key}") RSAPublicKey publicKey,
+                          @Value("${jwt.private.key}") RSAPrivateKey privateKey) {
+        JWK jwk = new RSAKey.Builder(publicKey).privateKey(privateKey).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }

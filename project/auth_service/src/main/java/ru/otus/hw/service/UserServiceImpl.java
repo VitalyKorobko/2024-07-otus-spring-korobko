@@ -33,43 +33,51 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findByEmail(String email) {
         return repository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь с email: %s не найден".formatted(email)));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findById(long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь с id %d не найден".formatted(id)));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAll() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public User create(String username, String password, String email, boolean enabled, Set<Role> roles) {
         return save(0, username, password, email, enabled, roles);
     }
 
     @Override
+    @Transactional
     public User update(long id, String username, String password, String email, boolean enabled, Set<Role> roles) {
         return save(id, username, password, email, enabled, roles);
     }
 
     @Override
+    @Transactional
     public void deleteById(long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAllByRoles(Set<Role> roles) {
         return repository.findAllByRoles(roles);
     }
 
     private User findUser(String username) {
+        System.out.println(username);
         return repository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь %s не найден".formatted(username)));
     }

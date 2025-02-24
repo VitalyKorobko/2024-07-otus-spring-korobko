@@ -1,5 +1,7 @@
 #server:
 #  port: 7771
+#  error:
+#    path: /error
 #
 #spring:
 #  datasource:
@@ -10,7 +12,6 @@
 #    change-log: classpath:/db/changelog/db.changelog-master.yaml
 #
 #  jpa:
-#    database: postgresql
 #    open-in-view: false
 #    generate-ddl: false
 #    hibernate:

@@ -1,5 +1,7 @@
 server:
   port: 7771
+  error:
+    path: /error
 
 eureka:
   client:
@@ -14,12 +16,16 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
   jpa:
-    database: postgresql
     open-in-view: false
     generate-ddl: false
     hibernate:
       ddl-auto: none
     show-sql: true
+
+app:
+  expire: 86400
+  remember-me-key: SomeKey
+  remember-me-name: marketplace
 
 
 logging:
@@ -32,3 +38,4 @@ logging:
 jwt:
   private.key: classpath:app.key
   public.key: classpath:app.pub
+  expire: 86400

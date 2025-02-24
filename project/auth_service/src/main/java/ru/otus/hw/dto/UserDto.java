@@ -13,7 +13,7 @@ public class UserDto {
     @Size(
             min = 5,
             max = 15,
-            message = "Длина логина не должна быть мене 3 символов и не более 15")
+            message = "Длина логина не должна быть не менее 3 символов и не более 15")
     @Pattern(
             regexp = "(^[a-z0-9](-?[a-z0-9])*$)",
             message = "Неверный формат логина, логин должен содержать только буквы и цифры"
@@ -32,7 +32,6 @@ public class UserDto {
     )
     private String email;
 
-//    @NotBlank(message = "Выберите роль")
     private RoleDto role;
 
 }
