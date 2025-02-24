@@ -11,6 +11,7 @@ import static org.apache.kafka.clients.producer.ProducerConfig.LINGER_MS_CONFIG;
 import static org.apache.kafka.clients.producer.ProducerConfig.MAX_BLOCK_MS_CONFIG;
 import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.otus.hw.model.DataForSending;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -20,8 +21,6 @@ import java.util.Properties;
 import java.util.function.Consumer;
 
 import org.apache.kafka.common.serialization.LongSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.kafka.sender.KafkaSender;
@@ -29,15 +28,34 @@ import reactor.kafka.sender.SenderOptions;
 import reactor.kafka.sender.SenderRecord;
 import reactor.kafka.sender.SenderResult;
 
+@Slf4j
 public class ReactiveSender<D, T extends DataForSending<D>> {
-    private static final Logger log = LoggerFactory.getLogger(ReactiveSender.class);
-
     private final KafkaSender<Long, T> sender;
 
     private final String topicName;
 
     public ReactiveSender(String bootstrapServers, Scheduler schedulerKafka, String topicName) {
         this.topicName = topicName;
+        Properties props = getProps(bootstrapServers);
+
+        SenderOptions<Long, T> senderOptions =
+                SenderOptions.<Long, T>create(props)
+                        .maxInFlight(10)
+                        .scheduler(schedulerKafka);
+
+        sender = KafkaSender.create(senderOptions);
+
+        var shutdownHook =
+                new Thread(
+                        () -> {
+                            log.info("closing kafka sender");
+                            sender.close();
+                        });
+
+        Runtime.getRuntime().addShutdownHook(shutdownHook);
+    }
+
+    private Properties getProps(String bootstrapServers) {
         var props = new Properties();
         props.put(CLIENT_ID_CONFIG, "KafkaReactiveSender");
         props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -53,23 +71,7 @@ public class ReactiveSender<D, T extends DataForSending<D>> {
         var objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         props.put(JsonSerializer.OBJECT_MAPPER, objectMapper);
-
-        //todo ??
-
-        SenderOptions<Long, T> senderOptions =
-                SenderOptions.<Long, T>create(props)
-                        .maxInFlight(10)
-                        .scheduler(schedulerKafka);
-
-        sender = KafkaSender.create(senderOptions);
-
-        var shutdownHook =
-                new Thread(
-                        () -> {
-                            log.info("closing kafka sender");
-                            sender.close();
-                        });
-        Runtime.getRuntime().addShutdownHook(shutdownHook);
+        return props;
     }
 
     public Mono<SenderResult<T>> send(T data, Consumer<T> sendAsk) {

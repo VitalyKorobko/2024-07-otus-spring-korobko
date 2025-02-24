@@ -4,6 +4,6 @@ public enum OrderStatus {
     CURRENT,
     ISSUED,
     PAID,
-    COMPLETED;;
+    COMPLETED;
 
 }

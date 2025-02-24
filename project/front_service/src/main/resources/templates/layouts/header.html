@@ -3,7 +3,7 @@
     <span class="logo">Market</span>
     <nav>
         <a href="/">Главная</a>
-        <a href="/about-us">О нас</a>
+        <a href="/about-us" sec:authorize="isAuthenticated()">О нас</a>
         <span sec:authorize="!isAuthenticated()">
       <a href="/login">Авторизоваться</a>
       <a href="/reg">Регистрация</a>

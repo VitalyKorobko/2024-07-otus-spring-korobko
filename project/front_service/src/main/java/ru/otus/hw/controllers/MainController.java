@@ -18,7 +18,8 @@ public class MainController {
     private final RestClient prodClient;
 
     public MainController(UserServiceImpl userService,
-                          @Qualifier("productRestClient") RestClient prodClient, ObjectMapper mapper, ProductService productService) {
+                          @Qualifier("productRestClient") RestClient prodClient,
+                          ObjectMapper mapper, ProductService productService) {
         this.userService = userService;
         this.prodClient = prodClient;
         this.productService = productService;

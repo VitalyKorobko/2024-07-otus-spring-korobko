@@ -24,7 +24,8 @@ public class OrderToEmailTransformerImpl implements OrderToEmailTransformer {
 
     private String createText(Order order) {
         if (order.status() == OrderStatus.ISSUED) {
-            return "Hello, %s!%n Your order %s was created.%nOrder info: %s.%n Order status is %s. %n Best regards, Market"
+            return ("Hello, %s!%n Your order %s was created.%n" +
+                    "Order info: %s.%n Order status is %s. %n Best regards, Market")
                     .formatted(order.userEmail(), order.id(), order.orderField(), order.status().name());
         } else {
             return "Hello, %s!%n Status of your order: %s was changed: %s. %n Best regards, Market"

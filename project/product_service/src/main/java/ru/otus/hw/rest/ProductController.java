@@ -75,19 +75,17 @@ public class ProductController {
                 .zipWhen(productDto -> productRepository.findById(id)
                         .switchIfEmpty(Mono.error(new EntityNotFoundException("product with id = %s not found"
                                 .formatted(id)))))
-                .flatMap(tuple ->
-                        productRepository.save(
-                                new Product(id,
-                                        tuple.getT1().getTitle(),
-                                        tuple.getT1().getRef(),
-                                        tuple.getT1().getImage(),
-                                        tuple.getT1().getDescription(),
-                                        tuple.getT1().getPrice(),
-                                        tuple.getT1().getSellerId())))
+                .flatMap(tuple -> productRepository.save(
+                        new Product(id,
+                                tuple.getT1().getTitle(),
+                                tuple.getT1().getRef(),
+                                tuple.getT1().getImage(),
+                                tuple.getT1().getDescription(),
+                                tuple.getT1().getPrice(),
+                                tuple.getT1().getSellerId())))
                 .map(product -> productMapper.toProductDtoWeb(product, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
-                        Mono.just(new ProductDtoWeb(
-                                id,
+                        Mono.just(new ProductDtoWeb(id,
                                 ex.getFieldValue("title").toString(),
                                 ex.getFieldValue("ref").toString(),
                                 ex.getFieldValue("image").toString(),

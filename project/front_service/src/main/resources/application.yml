@@ -25,39 +25,12 @@ spring:
 jwt:
   private.key: classpath:app.key
   public.key: classpath:app.pub
+  expire: 86400
 
-#spring:
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-    #      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQL8Dialect
-
-#  datasource:
-#    url: jdbc:h2:mem:maindb
-#    url: jdbc:mysql://localhost:3306/spring_book_shop_db?useUnicode=true&serverTimezone=UTC
-
-    #    url: jdbc:mysql://localhost:3306/spring_book_shop_db?useUnicode=true&serverTimezone=UTC
-#    username: root
-#    password:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-
-#spring:
-#  datasource:
-#    url: jdbc:h2:mem:maindb
-#  liquibase:
-#    enabled: true
-#    change-log: classpath:/db/changelog/db.changelog-master.yaml
-#
-#  jpa:
-#    open-in-view: false
-#    generate-ddl: false
-#    hibernate:
-#      ddl-auto: none
-#
-#    show-sql: true
+app:
+  expire: 86400
+  remember-me-key: SomeKey
+  remember-me-name: marketplace
 
 logging:
   level:

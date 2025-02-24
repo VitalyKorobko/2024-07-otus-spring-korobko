@@ -5,7 +5,8 @@ import ru.otus.hw.models.Product;
 import ru.otus.hw.models.Order;
 import ru.otus.hw.models.User;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public interface OrderService {
     Order findByUserAndStatus(User user, Status status);
@@ -18,10 +19,9 @@ public interface OrderService {
 
     Order save(Order order);
 
-
     Map<Product, Integer> getProductsByOrder(Order order);
 
-    Order saveOrderAsJson(Order order, List<String> product_id, List<Integer> count);
+    Order saveOrderAsJson(Order order, List<String> productId, List<Integer> count);
 
     Order addProductInCart(Order currentOrder, String productId, User user);
 

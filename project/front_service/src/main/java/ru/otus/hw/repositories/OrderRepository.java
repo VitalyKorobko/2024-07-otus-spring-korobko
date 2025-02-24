@@ -6,7 +6,7 @@ import ru.otus.hw.models.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderRepository{
+public interface OrderRepository {
 
     List<Order> findByUser(User user);
 

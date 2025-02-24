@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.hw.services.UserService;
 
 
-import java.security.Principal;
 import java.util.Map;
 import java.util.Set;
 
@@ -111,9 +110,7 @@ public class UserController {
             model.addAttribute("userDto", userDto);
             model.addAllAttributes(Map.of(
                             "message", bindingResult.getFieldError().getDefaultMessage(),
-                            "error", true
-                    )
-            );
+                            "error", true));
             return "reg";
         }
         if (!checkService.checkUsernameByDuplicate(userDto.getUsername())) {
@@ -128,13 +125,9 @@ public class UserController {
             return "redirect:/reg?error=differentPassword&username=%s&email=%s"
                     .formatted(userDto.getUsername(), userDto.getEmail());
         }
-        userService.insert(
-                userDto.getUsername(),
-                passwordEncoder.encode(userDto.getPassword()),
-                userDto.getEmail(),
-                true,
-                Set.of(Role.valueOf(userDto.getRole().getRoleName()))
-        );
+        userService.insert(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()),
+                userDto.getEmail(), true,
+                Set.of(Role.valueOf(userDto.getRole().getRoleName())));
         return "redirect:/login";
     }
 

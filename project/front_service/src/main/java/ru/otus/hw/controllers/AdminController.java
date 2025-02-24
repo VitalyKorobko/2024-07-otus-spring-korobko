@@ -1,9 +1,7 @@
 package ru.otus.hw.controllers;
 
 import lombok.RequiredArgsConstructor;
-import ru.otus.hw.models.Order;
 import ru.otus.hw.models.Role;
-import ru.otus.hw.models.User;
 import ru.otus.hw.enums.Status;
 import ru.otus.hw.services.ProductService;
 import ru.otus.hw.services.OrderService;
@@ -58,8 +56,8 @@ public class AdminController {
 
     //Отслеживание перехода на страницу пользователя
     @GetMapping("/admin/user-{id}")
-    public String getUserOrders(@PathVariable(value = "id") String user_id, Model model) {
-        var user = userService.findById(Long.parseLong(user_id));
+    public String getUserOrders(@PathVariable(value = "id") String userId, Model model) {
+        var user = userService.findById(Long.parseLong(userId));
         var orders = orderService.findByUser(user);
         model.addAttribute("orders", orders);
         model.addAttribute("user", user);
@@ -73,13 +71,13 @@ public class AdminController {
     //по этому адресу получаем форму изменения учетных данных пользователя
     @GetMapping("/admin/update/user-{id}")
     public String getUserUpdatePage(@RequestParam(name = "error", defaultValue = "", required = false) String error,
-                             @RequestParam(name = "username", required = false) String username,
-                             @RequestParam(name = "email", required = false) String email,
-                             @PathVariable(value = "id") String user_id,
-                             Model model) {
-        var user = userService.findById(Long.parseLong(user_id));
+                                    @RequestParam(name = "username", required = false) String username,
+                                    @RequestParam(name = "email", required = false) String email,
+                                    @PathVariable(value = "id") String userId,
+                                    Model model) {
+        var user = userService.findById(Long.parseLong(userId));
         if (user == null) {
-            model.addAttribute("error", "Пользователь c id = " + user_id + " не найден");
+            model.addAttribute("error", "Пользователь c id = " + userId + " не найден");
         }
         if (error.equals("username")) {
             model.addAttribute("error", "Пользователь <<" + username + ">> уже существует");
@@ -102,26 +100,27 @@ public class AdminController {
 
     //по этому адресу обрабатываем изменение учетных данных пользователя
     @PostMapping("/admin/update/user-{id}")
-    String userUpdate(@PathVariable(value = "id") Long user_id,
+    String userUpdate(@PathVariable(value = "id") Long userId,
                       @RequestParam("username") String username,
                       @RequestParam("email") String email,
                       @RequestParam("password") String password,
                       @RequestParam("repeatPassword") String repeatPassword,
                       @RequestParam("enabled") String enabled,
                       @RequestParam("roles") Set<Role> roles) {
-        if (!checkService.checkUsernameByDuplicate(username, user_id)) {
-            return "redirect:/admin/update/user-" + user_id + "?error=username&username=" + username;
+        if (!checkService.checkUsernameByDuplicate(username, userId)) {
+            return "redirect:/admin/update/user-" + userId + "?error=username&username=" + username;
         }
-        if (!checkService.checkEmailByDuplicate(email, user_id)) {
-            return "redirect:/admin/update/user-" + user_id + "?error=emailDuplicate&email=" + email;
+        if (!checkService.checkEmailByDuplicate(email, userId)) {
+            return "redirect:/admin/update/user-" + userId + "?error=emailDuplicate&email=" + email;
         }
         if (!checkService.checkPasswords(password, repeatPassword)) {
-            return "redirect:/admin/update/user-" + user_id + "?error=differentPassword";
+            return "redirect:/admin/update/user-" + userId + "?error=differentPassword";
         }
-        var user = userService.findById(user_id);
+        var user = userService.findById(userId);
         user.setUsername(username);
         user.setEmail(email);
-        if (!password.equals(user.getPassword())) {//проверяем если пароль был изменён,то устанавливаем новый
+        //проверяем если пароль был изменён,то устанавливаем новый
+        if (!password.equals(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(password));
         }
         user.setRoles(roles);

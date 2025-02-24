@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import ru.otus.hw.enums.Status;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

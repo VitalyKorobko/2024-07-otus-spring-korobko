@@ -2,6 +2,7 @@ package ru.otus.hw.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.client.RestClient;
 import ru.otus.hw.exception.EntityNotFoundException;
@@ -13,13 +14,12 @@ import org.springframework.stereotype.Service;
 import ru.otus.hw.repositories.ProductRepository;
 import ru.otus.hw.services.check.CheckService;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
@@ -64,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(String id) {
         return productRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("product with id %d not found".formatted(id)));
+                .orElseThrow(() -> new EntityNotFoundException("product with id %d not found".formatted(id)));
     }
 
     @Override
@@ -73,14 +73,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //проверка длины строки в поле ввода, для полей varchar(255) в бд
-    //todo заменить!
     @Override
     public boolean checkFieldLength(String string) {
         return checkService.checkFieldLength(string);
     }
 
     //проверка ответа URL, ссылка на фото товара
-    //todo заменить!
     @Override
     public boolean checkUrl(String stringUrl) {
         try {
@@ -92,9 +90,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //проверка,что товар уже есть в корзине
-    //todo заменить!
     @Override
-    public boolean checkProductByCart(String product_id, User user) {
+    public boolean checkProductByCart(String productId, User user) {
         Order currentOrder = orderService.findByUserAndStatus(user, Status.CURRENT);
         boolean contains = false;
         if (currentOrder != null) {
@@ -103,17 +100,17 @@ public class ProductServiceImpl implements ProductService {
             try {
                 map = objectMapper.readValue(jsonString, HashMap.class);
             } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
+                log.error("Error when deserializing order with id: %s".formatted(currentOrder.getId()));
+                throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                        .formatted(currentOrder.getId()));
             }
-            if (map.containsKey(product_id)) {
+            if (map.containsKey(productId)) {
                 contains = true;
             }
         }
         return contains;
     }
 
-    //проверка что передается число
-    //todo заменить!
     @Override
     public boolean checkPrice(String price) {
         return checkService.checkValue(price);

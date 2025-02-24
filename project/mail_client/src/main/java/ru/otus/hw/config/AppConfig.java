@@ -30,11 +30,12 @@ public class AppConfig {
 
     private static final int KAFKA_POOL_SIZE = 1;
 
-    @Bean(name ="serverThreadEventLoop", destroyMethod = "close")
+    @Bean(name = "serverThreadEventLoop", destroyMethod = "close")
     public NioEventLoopGroup serverThreadEventLoop() {
         return new NioEventLoopGroup(THREAD_POOL_SIZE,
                 new ThreadFactory() {
                     private final AtomicLong threadIdGenerator = new AtomicLong(0);
+
                     @Override
                     public Thread newThread(@NonNull Runnable task) {
                         return new Thread(task, "in-cl-server-thread-" + threadIdGenerator.incrementAndGet());
@@ -43,13 +44,14 @@ public class AppConfig {
     }
 
     @Bean
-    public ReactiveWebServerFactory reactiveWebServerFactory(@Qualifier("serverThreadEventLoop") NioEventLoopGroup serverThreadEventLoop) {
+    public ReactiveWebServerFactory reactiveWebServerFactory(@Qualifier("serverThreadEventLoop")
+                                                             NioEventLoopGroup serverThreadEventLoop) {
         var factory = new NettyReactiveWebServerFactory();
         factory.addServerCustomizers(builder -> builder.runOn(serverThreadEventLoop));
         return factory;
     }
 
-    @Bean(name ="clientThreadEventLoop", destroyMethod = "close")
+    @Bean(name = "clientThreadEventLoop", destroyMethod = "close")
     public NioEventLoopGroup clientThreadEventLoop() {
         return new NioEventLoopGroup(THREAD_POOL_SIZE,
                 new ThreadFactory() {
@@ -63,7 +65,8 @@ public class AppConfig {
     }
 
     @Bean
-    public ReactorResourceFactory reactorResourceFactory(@Qualifier("clientThreadEventLoop") NioEventLoopGroup clientThreadEventLoop) {
+    public ReactorResourceFactory reactorResourceFactory(@Qualifier("clientThreadEventLoop")
+                                                         NioEventLoopGroup clientThreadEventLoop) {
         var resourceFactory = new ReactorResourceFactory();
         resourceFactory.setLoopResources(loopResources -> clientThreadEventLoop);
         resourceFactory.setUseGlobalResources(false);
@@ -94,9 +97,10 @@ public class AppConfig {
     }
 
     @Bean(destroyMethod = "close")
-    public ReactiveSender<Order, Request> requestSender(@Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
-                                                       @Value("${application.topic-request}") String topicRequest,
-                                                       @Qualifier("kafkaScheduler") Scheduler kafkaScheduler
+    public ReactiveSender<Order, Request> requestSender(
+            @Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
+            @Value("${application.topic-request}") String topicRequest,
+            @Qualifier("kafkaScheduler") Scheduler kafkaScheduler
     ) {
         return new ReactiveSender<Order, Request>(bootstrapServers, kafkaScheduler, topicRequest);
     }
@@ -107,11 +111,12 @@ public class AppConfig {
     }
 
     @Bean(destroyMethod = "close")
-    public ReactiveReceiver<Response> responseReceiver(@Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
-                                                       @Value("${application.topic-response}") String topicResponse,
-                                                       @Value("${application.kafka-group-id}") String groupId,
-                                                       @Qualifier("responseReceiverScheduler") Scheduler responseReceiverScheduler,
-                                                       OrderValueStorage orderValueStorage) {
+    public ReactiveReceiver<Response> responseReceiver(
+            @Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
+            @Value("${application.topic-response}") String topicResponse,
+            @Value("${application.kafka-group-id}") String groupId,
+            @Qualifier("responseReceiverScheduler") Scheduler responseReceiverScheduler,
+            OrderValueStorage orderValueStorage) {
         return new ReactiveReceiver<>(
                 bootstrapServers,
                 Response.class,
@@ -122,7 +127,7 @@ public class AppConfig {
     }
 
     @Bean
-    TokenStorage getToken() {
+    TokenStorage tokenStorage() {
         return new TokenStorage();
     }
 

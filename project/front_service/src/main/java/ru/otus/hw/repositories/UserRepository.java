@@ -1,7 +1,6 @@
 package ru.otus.hw.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import ru.otus.hw.models.Role;
 import ru.otus.hw.models.User;
 

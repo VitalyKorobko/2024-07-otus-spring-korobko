@@ -6,20 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.dto.OrderDto;
-import ru.otus.hw.dto.OrderDto;
-import ru.otus.hw.dto.ProductDto;
-import ru.otus.hw.enums.Status;
 import ru.otus.hw.exception.EntityNotFoundException;
 import ru.otus.hw.exception.ImpossibleSaveEntityException;
 import ru.otus.hw.mapper.OrderMapper;
-import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.models.Order;
-import ru.otus.hw.models.Product;
 import ru.otus.hw.models.User;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static java.util.Objects.isNull;
@@ -58,9 +52,9 @@ public class OrderRepositoryImpl implements OrderRepository {
                         return super.getType();
                     }
                 });
-        return orderDtoList.stream().
+        return orderDtoList != null ? orderDtoList.stream().
                 map((orderDto -> orderMapper.toOrder(orderDto, user)))
-                .toList();
+                .toList() : null;
     }
 
     @Override

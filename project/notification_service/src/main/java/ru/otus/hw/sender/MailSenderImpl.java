@@ -1,9 +1,7 @@
 package ru.otus.hw.sender;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import reactor.core.scheduler.Scheduler;
@@ -13,9 +11,8 @@ import ru.otus.hw.service.OrderToEmailTransformer;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class MailSenderImpl implements MailSender<Order> {
-    private static final Logger log = LoggerFactory.getLogger(MailSenderImpl.class);
-
     private final JavaMailSender javaMailSender;
 
     private final OrderToEmailTransformer transformer;

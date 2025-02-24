@@ -1,31 +1,27 @@
 package ru.otus.hw.rest;
 
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.model.Order;
 import ru.otus.hw.sender.MailSender;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
+@Slf4j
 public class
-SourceDataController {
-    private static final Logger log = LoggerFactory.getLogger(SourceDataController.class);
-
+NotificationController {
     private final MailSender<Order> mailSender;
 
     private final Executor blockingExecutor;
 
 
-    public SourceDataController(MailSender<Order> mailSender,
-                                @Qualifier("blockingExecutor") Executor blockingExecutor) {
+    public NotificationController(MailSender<Order> mailSender,
+                                  @Qualifier("blockingExecutor") Executor blockingExecutor) {
         this.mailSender = mailSender;
         this.blockingExecutor = blockingExecutor;
     }

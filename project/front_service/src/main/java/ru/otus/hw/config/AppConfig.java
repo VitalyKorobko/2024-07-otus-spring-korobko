@@ -39,7 +39,7 @@ public class AppConfig {
     }
 
     @Bean
-    TokenStorage getToken(TokenService tokenService) {
+    TokenStorage tokenStorage(TokenService tokenService) {
         return new TokenStorage();
     }
 }

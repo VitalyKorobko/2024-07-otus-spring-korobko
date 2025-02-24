@@ -1,11 +1,15 @@
 package ru.otus.hw.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.BodyInserters;
-import ru.otus.hw.model.*;
-import ru.otus.hw.processor.DataProcessor;
+import ru.otus.hw.model.OrderValue;
+import ru.otus.hw.model.Request;
+import ru.otus.hw.model.Response;
+import ru.otus.hw.model.RequestId;
+import ru.otus.hw.model.ResponseId;
+import ru.otus.hw.model.Order;
+import ru.otus.hw.processor.MailProcessor;
 import io.netty.channel.nio.NioEventLoopGroup;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
@@ -24,10 +28,8 @@ import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
 
 @Configuration
-@SuppressWarnings("java:S2095")
+@Slf4j
 public class ApplicationConfig {
-    private static final Logger log = LoggerFactory.getLogger(ApplicationConfig.class);
-
     private static final int THREAD_POOL_SIZE = 2;
 
     private static final int REQUEST_RECEIVER_POOL_SIZE = 1;
@@ -50,7 +52,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public ReactiveWebServerFactory reactiveWebServerFactory(@Qualifier("serverThreadEventLoop") NioEventLoopGroup serverThreadEventLoop) {
+    public ReactiveWebServerFactory reactiveWebServerFactory(
+            @Qualifier("serverThreadEventLoop") NioEventLoopGroup serverThreadEventLoop) {
         var factory = new NettyReactiveWebServerFactory();
         factory.addServerCustomizers(builder -> builder.runOn(serverThreadEventLoop));
         return factory;
@@ -70,7 +73,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public ReactorResourceFactory reactorResourceFactory(@Qualifier("clientThreadEventLoop") NioEventLoopGroup clientThreadEventLoop) {
+    public ReactorResourceFactory reactorResourceFactory(
+            @Qualifier("clientThreadEventLoop") NioEventLoopGroup clientThreadEventLoop) {
         var resourceFactory = new ReactorResourceFactory();
         resourceFactory.setLoopResources(b -> clientThreadEventLoop);
         resourceFactory.setUseGlobalResources(false);
@@ -107,21 +111,23 @@ public class ApplicationConfig {
     }
 
     @Bean(destroyMethod = "close")
-    public ReactiveSender<OrderValue, Response> responseSender(@Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
-                                                               @Value("${application.topic-response}") String topicResponse,
-                                                               @Qualifier("kafkaScheduler") Scheduler kafkaScheduler
+    public ReactiveSender<OrderValue, Response> responseSender(
+            @Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
+            @Value("${application.topic-response}") String topicResponse,
+            @Qualifier("kafkaScheduler") Scheduler kafkaScheduler
     ) {
         return new ReactiveSender<>(bootstrapServers, kafkaScheduler, topicResponse);
     }
 
     @Bean(destroyMethod = "close")
-    public ReactiveReceiver<Request> requestReceiver(@Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
-                                                     @Value("${application.topic-request}") String topicRequest,
-                                                     @Value("${application.kafka-group-id}") String groupId,
-                                                     @Qualifier("requestReceiverScheduler") Scheduler responseReceiverScheduler,
-                                                     ReactiveSender<OrderValue, Response> responseSender,
-                                                     @Qualifier("dataProcessorMono") DataProcessor<Order> dataProcessor,
-                                                     WebClient webClient) {
+    public ReactiveReceiver<Request> requestReceiver(
+            @Value("${application.kafka-bootstrap-servers}") String bootstrapServers,
+            @Value("${application.topic-request}") String topicRequest,
+            @Value("${application.kafka-group-id}") String groupId,
+            @Qualifier("requestReceiverScheduler") Scheduler responseReceiverScheduler,
+            ReactiveSender<OrderValue, Response> responseSender,
+            MailProcessor<Order> mailProcessor,
+            WebClient webClient) {
 
         return new ReactiveReceiver<>(
                 bootstrapServers,
@@ -133,17 +139,18 @@ public class ApplicationConfig {
                         .body(BodyInserters.fromValue(request.data()))
                         .retrieve()
                         .bodyToMono(Order.class)
-                        .map(dataProcessor::process)
+                        .map(mailProcessor::process)
                         .flatMap(order ->
                                 responseSender.send(new Response(new ResponseId(responseIdGenerator.incrementAndGet()),
                                                 new OrderValue(new RequestId(request.id()), order)),
-                                        stringValueDataForSending -> log.info("response send:{}", stringValueDataForSending))
+                                        stringValueDataForSending ->
+                                                log.info("response send:{}", stringValueDataForSending))
                         )
                         .subscribe());
     }
 
     @Bean
-    TokenStorage getToken() {
+    TokenStorage tokenStorage() {
         return new TokenStorage();
     }
 }

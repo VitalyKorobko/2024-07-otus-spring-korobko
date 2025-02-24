@@ -7,7 +7,7 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class Config {
     @Bean
-    TokenStorage getToken() {
+    TokenStorage tokenStorage() {
         return new TokenStorage();
     }
 

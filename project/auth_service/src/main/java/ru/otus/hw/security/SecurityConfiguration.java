@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                                                    @Value("${app.remember-me-key}") String rememberMeKey,
                                                    @Value("${app.remember-me-name}") String rememberMeName,
                                                    JwtDecoder jwtDecoder) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http
                 .cors(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize

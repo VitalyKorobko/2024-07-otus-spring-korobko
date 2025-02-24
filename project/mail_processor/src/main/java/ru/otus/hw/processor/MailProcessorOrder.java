@@ -1,15 +1,14 @@
 package ru.otus.hw.processor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.model.Order;
 
 import java.util.Date;
 
-@Service("dataProcessorMono")
-public class DataProcessorOrderReactorMono implements DataProcessor<Order> {
-    private static final Logger log = LoggerFactory.getLogger(DataProcessorOrderReactorMono.class);
+@Service
+@Slf4j
+public class MailProcessorOrder implements MailProcessor<Order> {
 
     @Override
     public Order process(Order order) {

@@ -1,10 +1,11 @@
 package ru.otus.hw.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.otus.hw.config.OrderValueStorage;
 import ru.otus.hw.config.ReactiveSender;
-import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.model.Order;
 import ru.otus.hw.model.OrderValue;
 import ru.otus.hw.model.Request;
@@ -12,22 +13,20 @@ import ru.otus.hw.model.RequestId;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
 
 
 @RestController
 @Slf4j
-public class ClientDataController {
+public class MailClientController {
     private final AtomicLong idGenerator = new AtomicLong(0);
 
     private final ReactiveSender<Order, Request> requestSender;
 
     private final OrderValueStorage orderValueStorage;
 
-    public ClientDataController(ReactiveSender<Order, Request> requestSender,
+    public MailClientController(ReactiveSender<Order, Request> requestSender,
                                 OrderValueStorage orderValueStorage) {
         this.requestSender = requestSender;
         this.orderValueStorage = orderValueStorage;

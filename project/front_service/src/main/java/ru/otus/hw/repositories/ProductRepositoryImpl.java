@@ -103,10 +103,6 @@ public class ProductRepositoryImpl implements ProductRepository {
                         return super.getType();
                     }
                 });
-        System.out.println("\n==================repository findAll START==========================\n");
-        System.out.println(productDtoList);
-        System.out.println("\n==================repository findAll END==========================\n");
-
         return productDtoList.stream().
                 map((productDto -> productMapper.toProduct(productDto, null)))
                 .toList();
@@ -114,8 +110,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Optional<Product> findById(String id) {
-        System.out.println("\n==============================================\n");
-        System.out.println(tokenStorage.getToken());
         ProductDto productDto = productRestClient.get()
                 .uri("/api/v1/product/%s".formatted(id))
                 .header(AUTHORIZATION, BEARER + tokenStorage.getToken())

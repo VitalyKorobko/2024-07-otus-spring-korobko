@@ -2,55 +2,38 @@ package ru.otus.hw.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestClient;
-import ru.otus.hw.config.TokenStorage;
-import ru.otus.hw.dto.OrderDto;
-import ru.otus.hw.dto.OrderDtoForMail;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ru.otus.hw.exception.EntityNotFoundException;
-import ru.otus.hw.exception.ImpossibleSaveEntityException;
-import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.models.Product;
 import ru.otus.hw.models.Order;
 import ru.otus.hw.models.User;
 import ru.otus.hw.enums.Status;
 import org.springframework.stereotype.Service;
+import ru.otus.hw.repositories.MailRepository;
 import ru.otus.hw.repositories.OrderRepository;
 import ru.otus.hw.repositories.ProductRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.HashMap;
+import java.util.Date;
 
 import static java.util.Objects.isNull;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-    private static final String AUTHORIZATION = "Authorization";
-
-    private static final String BEARER = "Bearer ";
 
     private final OrderRepository orderRepository;
 
     private final ProductRepository productRepository;
 
+    private final MailRepository mailRepository;
+
     private final ObjectMapper objectMapper;
-
-    private final RestClient mailRestClient;
-
-    private final TokenStorage tokenStorage;
-
-    private final OrderMapper orderMapper;
-
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository,
-                            ObjectMapper objectMapper, @Qualifier("mailRestClient") RestClient mailRestClient,
-                            TokenStorage tokenStorage, OrderMapper orderMapper) {
-        this.orderRepository = orderRepository;
-        this.productRepository = productRepository;
-        this.objectMapper = objectMapper;
-        this.mailRestClient = mailRestClient;
-        this.tokenStorage = tokenStorage;
-        this.orderMapper = orderMapper;
-    }
 
     @Override
     public Order findById(String id) {
@@ -59,7 +42,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional
     public Order save(Order order) {
         Order returnedOrder;
         if (isNull(order.getId())) {
@@ -67,21 +49,11 @@ public class OrderServiceImpl implements OrderService {
         } else {
             returnedOrder = orderRepository.update(order);
         }
-        if (returnedOrder.getStatus()==Status.CURRENT) {
+        if (returnedOrder.getStatus() == Status.CURRENT) {
             return returnedOrder;
         }
-        //todo здесь отправляем сообщение mail-client
-        var orderDtoForMail = mailRestClient.post()
-                .uri("/api/v1/order")
-                .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
-                .body(orderMapper.toOrderDtoForMail(returnedOrder))
-                .retrieve();
-//                .body(OrderDtoForMail.class);
-//        if (isNull(orderDtoForMail)) {
-//            throw new ImpossibleSaveEntityException("impossible to save order!");
-//        }
-//        var customer = returnedOrder.getUser();
-//        return orderRepository.update(orderMapper.toOrder(orderDtoForMail, customer));
+        //здесь отправляем сообщение mail-client
+        mailRepository.save(returnedOrder);
         return returnedOrder;
     }
 
@@ -116,17 +88,19 @@ public class OrderServiceImpl implements OrderService {
 
     //сохраняем данные о заказе в формате json
     @Override
-    public Order saveOrderAsJson(Order order, List<String> product_id, List<Integer> count) {
+    public Order saveOrderAsJson(Order order, List<String> productId, List<Integer> count) {
         Map<String, Integer> map;
         String jsonString;
         try {
             map = objectMapper.readValue(order.getOrderField(), HashMap.class);
-            for (int i = 0; i < product_id.size(); i++) {
-                map.put(product_id.get(i), count.get(i));
+            for (int i = 0; i < productId.size(); i++) {
+                map.put(productId.get(i), count.get(i));
             }
             jsonString = objectMapper.writeValueAsString(map);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Error when deserializing order with id: %s".formatted(order.getId()));
+            throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                    .formatted(order.getId()));
         }
         order.setOrderField(jsonString);
         return order;
@@ -143,26 +117,17 @@ public class OrderServiceImpl implements OrderService {
             try {
                 jsonString = objectMapper.writeValueAsString(map);
             } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
+                log.error("Error when deserializing order with id: %s".formatted(currentOrder.getId()));
+                throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                        .formatted(currentOrder.getId()));
             }
         } else {
-            try {
-                map = objectMapper.readValue(currentOrder.getOrderField(), HashMap.class);
-                int count;
-                if (map.get(String.valueOf(productId)) == null) {
-                    count = 0;
-                } else {
-                    count = map.get(String.valueOf(productId));
-                }
-                map.put(String.valueOf(productId), ++count);
-                jsonString = objectMapper.writeValueAsString(map);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+            jsonString = serializeOrder(currentOrder, productId, user);
         }
         currentOrder.setOrderField(jsonString);
         return currentOrder;
     }
+
 
     //удаляем позицию из корзины
     @Override
@@ -174,7 +139,9 @@ public class OrderServiceImpl implements OrderService {
             map.remove(productId);
             jsonString = objectMapper.writeValueAsString(map);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Error when deserializing order with id: %s".formatted(order.getId()));
+            throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                    .formatted(order.getId()));
         }
         order.setOrderField(jsonString);
         return order;
@@ -193,15 +160,17 @@ public class OrderServiceImpl implements OrderService {
         try {
             map = objectMapper.readValue(jsonString, HashMap.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Error when deserializing order with id: %s".formatted(order.getId()));
+            throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                    .formatted(order.getId()));
         }
         Map<Product, Integer> mapProducts = new HashMap<>();
-        for (String product_id : map.keySet()) {
-            var key = productRepository.findById(product_id);
+        for (String productId : map.keySet()) {
+            var key = productRepository.findById(productId);
             if (key.isPresent()) {
-                mapProducts.put(productRepository.findById(product_id)
+                mapProducts.put(productRepository.findById(productId)
                         .orElseThrow(() -> new EntityNotFoundException("product with id %s not found"
-                                .formatted(product_id))), map.get(product_id));
+                                .formatted(productId))), map.get(productId));
             }
         }
         return mapProducts;
@@ -211,10 +180,33 @@ public class OrderServiceImpl implements OrderService {
     private int getTotal(Map<Product, Integer> mapProducts) {
         int total = 0;
         for (Product product : mapProducts.keySet()) {
-            if (product == null) continue;
+            if (product == null) {
+                continue;
+            }
             total += product.getPrice() * mapProducts.get(product);
         }
         return total;
+    }
+
+    private String serializeOrder(Order order, String productId, User user) {
+        Map<String, Integer> map = new HashMap<>();
+        String jsonString;
+        try {
+            map = objectMapper.readValue(order.getOrderField(), HashMap.class);
+            int count;
+            if (map.get(String.valueOf(productId)) == null) {
+                count = 0;
+            } else {
+                count = map.get(String.valueOf(productId));
+            }
+            map.put(String.valueOf(productId), ++count);
+            jsonString = objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            log.error("Error when deserializing order with id: %s".formatted(order.getId()));
+            throw new EntityNotFoundException("Error when deserializing order with id: %s"
+                    .formatted(order.getId()));
+        }
+        return jsonString;
     }
 }
 

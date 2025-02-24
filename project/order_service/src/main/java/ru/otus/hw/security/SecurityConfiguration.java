@@ -18,10 +18,7 @@ import java.security.interfaces.RSAPublicKey;
 
 @EnableWebFluxSecurity
 @Configuration
-public class SecurityConfiguration{
-
-    @Value("${jwt.public.key}")
-    RSAPublicKey key;
+public class SecurityConfiguration {
 
     @Bean
     CorsConfiguration corsConfiguration() {
@@ -38,18 +35,20 @@ public class SecurityConfiguration{
     }
 
     @Bean
-    public SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http, CorsConfigurationSource corsConfigurationSource) {
+    public SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http,
+                                                       ReactiveJwtDecoder jwtDecoder,
+                                                       CorsConfigurationSource corsConfigurationSource) {
         return http
                 .cors(corsSpec -> corsSpec.configurationSource(corsConfigurationSource))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange((exchanges) -> exchanges
-                                .pathMatchers("/**").authenticated()
-                                .anyExchange().denyAll()
+                        .pathMatchers("/**").authenticated()
+                        .anyExchange().denyAll()
                 )
                 .oauth2ResourceServer((oauth2ResourceServer) ->
                         oauth2ResourceServer
                                 .jwt((jwt) ->
-                                        jwt.jwtDecoder(jwtDecoder())
+                                        jwt.jwtDecoder(jwtDecoder)
                                 )
                 )
                 .exceptionHandling((exceptions) -> exceptions
@@ -60,8 +59,8 @@ public class SecurityConfiguration{
     }
 
     @Bean
-    ReactiveJwtDecoder jwtDecoder() {
-        return NimbusReactiveJwtDecoder.withPublicKey(this.key).build();
+    ReactiveJwtDecoder jwtDecoder(@Value("${jwt.public.key}") RSAPublicKey key) {
+        return NimbusReactiveJwtDecoder.withPublicKey(key).build();
     }
 
 

@@ -29,49 +29,13 @@ import java.security.interfaces.RSAPublicKey;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    //todo вынести в application.yml
-    private final static int ONE_DAY = 86_400;
-
-    private final static String REMEMBER_ME_KEY = "SomeKey";
-
-    private final static String REMEMBER_ME_NAME = "marketplace";
-
-    @Value("${jwt.public.key}")
-    private RSAPublicKey publicKey;
-
-    @Value("${jwt.private.key}")
-    private RSAPrivateKey privateKey;
-
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/**").permitAll()
-                        .requestMatchers("/login",
-                                "/error",
-                                "/main.css",
-                                "/*",
-                                "/images/763029_6.svg",
-                                "/about-us",
-                                "/reg").permitAll()
-                        .requestMatchers("/user", "/token").authenticated()
-                        .requestMatchers("/product/*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER")
-                        .requestMatchers("/product/*/update").hasAnyAuthority("ROLE_ADMIN", "ROLE_SELLER")
-                        .requestMatchers("/order/*").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                        .requestMatchers("/admin/*",
-                                "/admin",
-                                "/product/*",
-                                "/product/*/delete",
-                                "/order/*/status",
-                                "/admin/update/*").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/cart",
-                                "/cart/*",
-                                "/cart/place_an_order/*",
-                                "/cart/delete/*",
-                                "/added/*"
-                                ).hasAuthority("ROLE_USER")
-                        .anyRequest().denyAll()
-                )
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                      @Value("${app.expire}") int expireTime,
+                                                      @Value("${app.remember-me-key}") String rememberMeKey,
+                                                      @Value("${app.remember-me-name}") String rememberMeName,
+                                                      JwtDecoder jwtDecoder) throws Exception {
+        return authorizeHttpRequests(http)
                 .formLogin(
                         formLogin -> formLogin
                                 .loginPage("/login").permitAll()
@@ -79,7 +43,7 @@ public class SecurityConfiguration {
                                 .failureUrl("/login?error=username")
                 )
                 .logout((logout) ->
-                        logout.deleteCookies(REMEMBER_ME_NAME)
+                        logout.deleteCookies(rememberMeName)
                                 .invalidateHttpSession(false)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/")
@@ -87,14 +51,13 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer((oauth2ResourceServer) ->
                         oauth2ResourceServer
                                 .jwt((jwt) ->
-                                        jwt.decoder(jwtDecoder())
+                                        jwt.decoder(jwtDecoder)
                                 )
                 )
-                .rememberMe(rm -> rm.key(REMEMBER_ME_KEY).rememberMeCookieName(REMEMBER_ME_NAME)
-                        .tokenValiditySeconds(ONE_DAY)
+                .rememberMe(rm -> rm.key(rememberMeKey).rememberMeCookieName(rememberMeName)
+                        .tokenValiditySeconds(expireTime)
                 )
                 .build();
-
     }
 
     @Bean
@@ -103,15 +66,36 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.publicKey).build();
+    JwtDecoder jwtDecoder(@Value("${jwt.public.key}") RSAPublicKey publicKey) {
+        return NimbusJwtDecoder.withPublicKey(publicKey).build();
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.publicKey).privateKey(this.privateKey).build();
+    JwtEncoder jwtEncoder(@Value("${jwt.public.key}") RSAPublicKey publicKey,
+                          @Value("${jwt.private.key}") RSAPrivateKey privateKey) {
+        JWK jwk = new RSAKey.Builder(publicKey).privateKey(privateKey).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
+    }
+
+    private HttpSecurity authorizeHttpRequests(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/login", "/error", "/main.css",
+                                "/*", "/images/763029_6.svg", "/reg").permitAll()
+                        .requestMatchers("/user", "/token", "/about-us").authenticated()
+                        .requestMatchers("/product/*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER")
+                        .requestMatchers("/product/*/update").hasAnyAuthority("ROLE_ADMIN", "ROLE_SELLER")
+                        .requestMatchers("/order/*").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                        .requestMatchers("/admin/*", "/admin", "/product/*", "/product/*/delete",
+                                "/order/*/status", "/admin/update/*").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/cart", "/cart/*", "/cart/place_an_order/*", "/cart/delete/*",
+                                "/added/*"
+                        ).hasAuthority("ROLE_USER")
+                        .anyRequest().denyAll()
+                );
+        return http;
     }
 
 

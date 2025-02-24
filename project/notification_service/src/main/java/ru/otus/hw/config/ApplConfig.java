@@ -20,16 +20,17 @@ import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
 
 @Configuration
-@SuppressWarnings("java:S2095")
 public class ApplConfig {
     private static final int THREAD_POOL_SIZE = 2;
+
     private static final int BLOCKING_THREAD_POOL_SIZE = 2;
 
-    @Bean(name ="serverThreadEventLoop", destroyMethod = "close")
+    @Bean(name = "serverThreadEventLoop", destroyMethod = "close")
     public NioEventLoopGroup serverThreadEventLoop() {
         return new NioEventLoopGroup(THREAD_POOL_SIZE,
                 new ThreadFactory() {
                     private final AtomicLong threadIdGenerator = new AtomicLong(0);
+
                     @Override
                     public Thread newThread(@NonNull Runnable task) {
                         return new Thread(task, "in-source-server-thread-" + threadIdGenerator.incrementAndGet());
@@ -38,13 +39,14 @@ public class ApplConfig {
     }
 
     @Bean
-    public ReactiveWebServerFactory reactiveWebServerFactory(@Qualifier("serverThreadEventLoop") NioEventLoopGroup serverThreadEventLoop) {
+    public ReactiveWebServerFactory reactiveWebServerFactory(
+            @Qualifier("serverThreadEventLoop") NioEventLoopGroup serverThreadEventLoop) {
         var factory = new NettyReactiveWebServerFactory();
         factory.addServerCustomizers(builder -> builder.runOn(serverThreadEventLoop));
         return factory;
     }
 
-    @Bean(name= "blockingExecutor", destroyMethod = "close")
+    @Bean(name = "blockingExecutor", destroyMethod = "close")
     public Executor blockingExecutor() {
         var id = new AtomicLong(0);
         return Executors.newFixedThreadPool(BLOCKING_THREAD_POOL_SIZE,
@@ -57,12 +59,12 @@ public class ApplConfig {
     }
 
     @Bean("mailScheduler")
-    public Scheduler mailScheduler(){
+    public Scheduler mailScheduler() {
         return Schedulers.newSingle("mail-scheduler");
     }
 
     @Bean
-    TokenStorage getToken() {
+    TokenStorage tokenStorage() {
         return new TokenStorage();
     }
 

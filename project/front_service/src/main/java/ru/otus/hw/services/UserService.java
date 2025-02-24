@@ -4,7 +4,6 @@ import ru.otus.hw.models.Role;
 import ru.otus.hw.models.User;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {

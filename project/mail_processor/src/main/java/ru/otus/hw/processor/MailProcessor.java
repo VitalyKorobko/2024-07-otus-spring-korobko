@@ -1,6 +1,6 @@
 package ru.otus.hw.processor;
 
-public interface DataProcessor<T> {
+public interface MailProcessor<T> {
 
     T process(T data);
 }

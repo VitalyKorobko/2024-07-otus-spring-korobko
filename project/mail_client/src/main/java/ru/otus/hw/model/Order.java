@@ -3,7 +3,6 @@ package ru.otus.hw.model;
 import ru.otus.hw.enums.OrderStatus;
 
 import java.util.Date;
-import java.util.List;
 
 public record Order(
         String id,

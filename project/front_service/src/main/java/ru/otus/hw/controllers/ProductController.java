@@ -9,18 +9,17 @@ import ru.otus.hw.models.Product;
 import ru.otus.hw.models.Role;
 import ru.otus.hw.models.User;
 import ru.otus.hw.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ru.otus.hw.services.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.security.Principal;
 import java.util.Map;
-import java.util.Objects;
 
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 @Controller
 @RequiredArgsConstructor
@@ -73,14 +72,15 @@ public class ProductController {
 
     //страница просмотра информармации по товару
     @GetMapping("/product/{num}")
-    public String showProduct(@PathVariable(value = "num") String product_id,
+    public String showProduct(@PathVariable(value = "num") String productId,
                               @AuthenticationPrincipal User user,
                               Model model) {
-        Product product = productService.findById(product_id);
+        Product product = productService.findById(productId);
         if (isNull(product)) {
             return "product-has-been-removed";
         }
-        model.addAttribute("contains", productService.checkProductByCart(product_id, user));//если товар уже есть в корзине передаем true, иначе false
+        //если товар уже есть в корзине передаем true, иначе false
+        model.addAttribute("contains", productService.checkProductByCart(productId, user));
         model.addAttribute("user", user);
         model.addAttribute("ADMIN", Role.ADMIN);
         model.addAttribute("product", product);

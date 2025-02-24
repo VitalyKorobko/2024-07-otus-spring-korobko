@@ -1,9 +1,7 @@
 package ru.otus.hw.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import ru.otus.hw.models.Product;
-import ru.otus.hw.models.Order;
 import ru.otus.hw.enums.Status;
 import ru.otus.hw.models.User;
 import ru.otus.hw.services.OrderServiceImpl;
@@ -15,7 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
+import java.util.Map;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,7 +26,8 @@ public class OrderController {
     String cart(Model model,
                 @AuthenticationPrincipal User user) {
         var currentOrder = orderService.findByUserAndStatus(user, Status.CURRENT);
-        Map<Product, Integer> mapProducts = orderService.getMapProductsByCart(currentOrder);//получаем мапу товар - количество для корзины
+        //получаем мапу товар - количество для корзины
+        Map<Product, Integer> mapProducts = orderService.getMapProductsByCart(currentOrder);
         model.addAttribute("mapProducts", mapProducts);
         model.addAttribute("total", orderService.getTotalByCartOrOrder(mapProducts));//передаем общую стоимость корзины
         model.addAttribute("order", currentOrder);
@@ -38,7 +38,8 @@ public class OrderController {
     @GetMapping("/order/{order_id}")
     String getOrder(Model model, @PathVariable(value = "order_id") String orderId) {
         var order = orderService.findById(orderId);
-        Map<Product, Integer> mapProducts = orderService.getProductsByOrder(order);//получаем мапу товар - количество для сформированного заказа
+        //получаем мапу товар - количество для сформированного заказа
+        Map<Product, Integer> mapProducts = orderService.getProductsByOrder(order);
         model.addAttribute("mapProducts", mapProducts);
         model.addAttribute("order", order);
         model.addAttribute("total", orderService.getTotalByCartOrOrder(mapProducts)); //передаем общую стоимость заказа
@@ -71,19 +72,19 @@ public class OrderController {
 
     //по этому адресу сохраняем данные из корзины в БД
     @PostMapping("/cart/{order_id}")
-    String changeCart(@PathVariable(value = "order_id") String order_id,
-                      @RequestParam List<String> product_id,
+    String changeCart(@PathVariable(value = "order_id") String orderId,
+                      @RequestParam(name = "product_id") List<String> productId,
                       @RequestParam List<Integer> count) {
-        var order = orderService.findById(order_id);
-        order = orderService.saveOrderAsJson(order, product_id, count);//сохраняем данные из корзины в объект order
+        var order = orderService.findById(orderId);
+        order = orderService.saveOrderAsJson(order, productId, count);//сохраняем данные из корзины в объект order
         orderService.save(order);//сохраняем данные в бд
         return "redirect:/cart";
     }
 
     //на этой странице обрабатываем событие "оформить заказ"
     @PostMapping("/cart/place_an_order/{order_id}")
-    String placeAnOrder(@PathVariable(value = "order_id") String order_id) {
-        var order = orderService.findById(order_id);
+    String placeAnOrder(@PathVariable(value = "order_id") String orderId) {
+        var order = orderService.findById(orderId);
         order.setStatus(Status.ISSUED);
         orderService.save(order);
         return "redirect:/user";
@@ -91,21 +92,21 @@ public class OrderController {
 
     //на этой странице обрабатываем удаление какой-либо позиции из корзины
     @PostMapping("/cart/delete/{order_id}")
-    String deleteProductFromCart(@PathVariable(value = "order_id") String order_id,
-                                 @RequestParam String product_id) {
-        var order = orderService.findById(order_id);
-        order = orderService.deleteProductFromCart(order, product_id);
+    String deleteProductFromCart(@PathVariable(value = "order_id") String orderId,
+                                 @RequestParam(name = "product_id") String productId) {
+        var order = orderService.findById(orderId);
+        order = orderService.deleteProductFromCart(order, productId);
         orderService.save(order);
         return "redirect:/cart";
     }
 
     //на этой странице обрабатываем добавление позиции к корзину
     @PostMapping("/added/{num}")
-    String addProduct(@PathVariable(value = "num") String product_id,
+    String addProduct(@PathVariable(value = "num") String productId,
                       @AuthenticationPrincipal User user) {
         var currentOrder = orderService.findByUserAndStatus(user, Status.CURRENT);
-        currentOrder = orderService.addProductInCart(currentOrder, product_id, user);//добавляем позицию в корзину
+        currentOrder = orderService.addProductInCart(currentOrder, productId, user);//добавляем позицию в корзину
         orderService.save(currentOrder);
-        return "redirect:/product/" + product_id;
+        return "redirect:/product/" + productId;
     }
 }
