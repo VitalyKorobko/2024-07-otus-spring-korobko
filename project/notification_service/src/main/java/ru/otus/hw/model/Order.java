@@ -1,16 +1,15 @@
 package ru.otus.hw.model;
 
 import ru.otus.hw.enums.OrderStatus;
-import java.util.Date;
 
 public record Order(
         String id,
 
         OrderStatus status,
 
-        Date startDate,
+        String startDate,
 
-        Date endDate,
+        String endDate,
 
         String orderField,
 

@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.otus.hw.enums.Status;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 public class OrderDtoForMail {
@@ -15,9 +13,9 @@ public class OrderDtoForMail {
 
     private Status status;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
     private String orderField;
 
@@ -30,8 +28,8 @@ public class OrderDtoForMail {
     @JsonCreator
     public OrderDtoForMail(@JsonProperty("id") String id,
                            @JsonProperty("status") Status status,
-                           @JsonProperty("startDate") Date startDate,
-                           @JsonProperty("endDate") Date endDate,
+                           @JsonProperty("startDate") String startDate,
+                           @JsonProperty("endDate") String endDate,
                            @JsonProperty("orderField") String orderField,
                            @JsonProperty("customerId") long customerId,
                            @JsonProperty("userEmail") String userEmail,

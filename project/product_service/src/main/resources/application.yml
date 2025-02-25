@@ -1,6 +1,10 @@
 server:
   port: 7773
 
+eureka:
+  client:
+    fetch-registry: true
+
 spring:
   data:
     mongodb:
@@ -11,7 +15,7 @@ spring:
 
 mongock:
   runner-type: "ApplicationRunner" # default
-#  runner-type: "InitializingBean"
+  #  runner-type: "InitializingBean"
   change-logs-scan-package:
     - ru.otus.hw.mongock.changelog
   mongo-db:

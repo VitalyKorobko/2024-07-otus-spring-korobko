@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class ProductDtoWeb {
     private String id;
 
-
     private String title;
 
     private String ref;

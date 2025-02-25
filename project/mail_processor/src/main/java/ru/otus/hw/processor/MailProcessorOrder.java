@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.model.Order;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 @Slf4j
@@ -17,7 +17,7 @@ public class MailProcessorOrder implements MailProcessor<Order> {
                 order.id(),
                 order.status(),
                 order.startDate(),
-                new Date(),
+                LocalDateTime.now().toString(),
                 order.orderField(),
                 order.customerId(),
                 order.userEmail(),

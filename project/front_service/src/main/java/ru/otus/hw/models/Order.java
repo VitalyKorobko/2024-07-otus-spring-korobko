@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @AllArgsConstructor
@@ -17,15 +17,15 @@ public class Order {
 
     private Status status;
 
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
     private String orderField;
 
     private User user;
 
-    public Order(Status status, Date startDate, Date endDate, User user) {
+    public Order(Status status, LocalDateTime startDate, LocalDateTime endDate, User user) {
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;

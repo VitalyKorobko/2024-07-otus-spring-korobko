@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.HashMap;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static java.util.Objects.isNull;
 
@@ -112,7 +112,7 @@ public class OrderServiceImpl implements OrderService {
         Map<String, Integer> map = new HashMap<>();
         String jsonString;
         if (currentOrder == null) {
-            currentOrder = new Order(Status.CURRENT, new Date(), null, user);
+            currentOrder = new Order(Status.CURRENT, LocalDateTime.now(), LocalDateTime.now(), user);
             map.put(String.valueOf(productId), 1);
             try {
                 jsonString = objectMapper.writeValueAsString(map);

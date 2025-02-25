@@ -81,7 +81,7 @@ public class SecurityConfiguration {
     private HttpSecurity authorizeHttpRequests(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/**").permitAll()
+//                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/login", "/error", "/main.css",
                                 "/*", "/images/763029_6.svg", "/reg").permitAll()
                         .requestMatchers("/user", "/token", "/about-us").authenticated()
@@ -93,7 +93,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/cart", "/cart/*", "/cart/place_an_order/*", "/cart/delete/*",
                                 "/added/*"
                         ).hasAuthority("ROLE_USER")
-                        .anyRequest().denyAll()
+                        .anyRequest().authenticated()
                 );
         return http;
     }

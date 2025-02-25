@@ -2,6 +2,7 @@ package ru.otus.hw.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ProductController {
     private final ProductRepository productRepository;
 
@@ -71,6 +73,7 @@ public class ProductController {
     @PatchMapping("/api/v1/product/{id}")
     public Mono<ProductDtoWeb> update(@Valid @RequestBody Mono<ProductDto> monoProductDto,
                                       @PathVariable("id") String id) {
+        log.info("update product: %s".formatted(id));
         return monoProductDto
                 .zipWhen(productDto -> productRepository.findById(id)
                         .switchIfEmpty(Mono.error(new EntityNotFoundException("product with id = %s not found"
@@ -92,14 +95,15 @@ public class ProductController {
                                 ex.getFieldValue("description").toString(),
                                 Integer.parseInt(ex.getFieldValue("price").toString()),
                                 Long.parseLong(ex.getFieldValue("sellerId").toString()),
-                                ex.getFieldError().getDefaultMessage()))
-                );
+                                ex.getFieldError().getDefaultMessage())));
     }
 
     @DeleteMapping("/api/v1/product/{id}")
     public Mono<Void> delete(@PathVariable String id) {
         return productRepository.deleteById(id);
     }
+
+
 
 
 }

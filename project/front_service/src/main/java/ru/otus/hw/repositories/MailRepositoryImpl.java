@@ -31,6 +31,10 @@ public class MailRepositoryImpl implements MailRepository {
     }
 
     public OrderDtoForMail save(Order order) {
+        System.out.println("\n===============================================\n");
+        System.out.println(order);
+        System.out.println(orderMapper.toOrderDtoForMail(order));
+        System.out.println();
         OrderDtoForMail dto;
         try {
             dto = mailRestClient.post()
@@ -42,7 +46,7 @@ public class MailRepositoryImpl implements MailRepository {
         } catch (Exception e) {
             log.warn("email about order: %s wasn't sent, task was planed".formatted(order.toString()));
             throw new ImpossibleSaveEntityException("email about order: %s wasn't sent, task was planed"
-                    .formatted(order.toString()));
+                    .formatted(order.toString()) + e.getMessage());
         }
         return dto;
 

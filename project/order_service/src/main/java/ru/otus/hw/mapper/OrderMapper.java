@@ -5,6 +5,8 @@ import ru.otus.hw.dto.OrderDto;
 import ru.otus.hw.dto.OrderDtoWeb;
 import ru.otus.hw.domain.Order;
 
+import java.time.ZoneOffset;
+
 
 @Component
 public class OrderMapper {
@@ -12,9 +14,9 @@ public class OrderMapper {
     public OrderDto toOrderDto(Order order) {
         return new OrderDto(
                 order.getId(),
-                order.getStatus(),
-                order.getStartDate(),
-                order.getEndDate(),
+                order.getStatus().name(),
+                order.getStartDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
+                order.getEndDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
                 order.getOrderField(),
                 order.getUserId()
         );
@@ -24,8 +26,8 @@ public class OrderMapper {
         return new OrderDtoWeb(
                 order.getId(),
                 order.getStatus(),
-                order.getStartDate(),
-                order.getEndDate(),
+                order.getStartDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
+                order.getEndDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
                 order.getOrderField(),
                 order.getUserId(),
                 message

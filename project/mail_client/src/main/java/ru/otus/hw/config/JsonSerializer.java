@@ -33,7 +33,7 @@ public class JsonSerializer<T> implements Serializer<T> {
                 return mapper.writeValueAsString(data).getBytes(encoding);
             }
         } catch (Exception e) {
-            throw new SerializationException("Error when serializing StringValue to byte[] ", e);
+            throw new SerializationException("Error when serializing OrderValue to byte[] ", e);
         }
     }
 

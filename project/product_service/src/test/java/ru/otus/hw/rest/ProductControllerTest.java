@@ -18,8 +18,10 @@
 //import reactor.core.publisher.Flux;
 //import reactor.core.publisher.Mono;
 //import reactor.test.StepVerifier;
+//import ru.otus.hw.dto.ProductDto;
 //import ru.otus.hw.mapper.ProductMapper;
-//import ru.otus.hw.repositories.AuthorRepository;
+//import ru.otus.hw.model.Product;
+//import ru.otus.hw.repository.ProductRepository;
 //
 //import java.time.Duration;
 //import java.util.List;
@@ -30,21 +32,13 @@
 //import static org.mockito.BDDMockito.given;
 //import static org.mockito.Mockito.verify;
 //import static org.mockito.Mockito.times;
-//import static org.springframework.http.MediaType.APPLICATION_JSON;
 //
 //@SpringBootTest(classes = {ProductController.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@Import({ProductRepository.class, GenreRepository.class, AuthorRepository.class,
-//        ProductMapper.class, AuthorMapper.class, GenreMapper.class})
+//@Import({ProductRepository.class, ProductMapper.class})
 //@EnableAutoConfiguration
 //public class ProductControllerTest {
 //    @MockBean
 //    private ProductRepository productRepository;
-//
-//    @MockBean
-//    private AuthorRepository authorRepository;
-//
-//    @MockBean
-//    private GenreRepository genreRepository;
 //
 //    @LocalServerPort
 //    private int port;
@@ -53,27 +47,25 @@
 //    private ProductMapper productMapper;
 //
 //    @Autowired
-//    private AuthorMapper authorMapper;
-//
-//    @Autowired
-//    private GenreMapper genreMapper;
-//
-//    @Autowired
 //    private WebTestClient webTestClient;
 //
 //    @Test
 //    @DisplayName("должен возвращать корректный список всех товаров")
 //    void shouldReturnCorrectProductsList() {
-//        List<ProductDto> productDtoList = List.of(
-//                new ProductDto(
+//        List<Product> products = List.of(
+//                new Product(
 //                        "1",
-//                        "title_111",
-//                        new AuthorDto("1", "author_111"),
-//                        List.of(new GenreDto("1", "genre_111")))
+//                        "title",
+//                        "ref",
+//                        "http://",
+//                        "description",
+//                        100,
+//                        1
+//                )
 //        );
 //
-//        var authorFlux = Flux.fromIterable(productDtoList);
-//        given(productRepository.findAll()).willReturn(authorFlux.map(productMapper::toProduct));
+//        var productFlux = Flux.fromIterable(products);
+//        given(productRepository.findAll()).willReturn(productFlux);
 //
 //        var result = webTestClient
 //                .get().uri("/api/v1/product")
@@ -85,110 +77,110 @@
 //
 //        var step = StepVerifier.create(result);
 //        StepVerifier.Step<ProductDto> stepResult = null;
-//        for (ProductDto dto : productDtoList) {
+//        for (ProductDto dto : products.stream().map(p -> productMapper.toProductDto(p)).toList()) {
 //            stepResult = step.expectNext(dto);
 //        }
 //        stepResult.verifyComplete();
 //
 //    }
-//
-//    @Test
-//    @DisplayName("должен возвращать корректный товар по id")
-//    void shouldReturnCorrectProductById() {
-//        var productDto = new ProductDto(
-//                "1",
-//                "title_111",
-//                new AuthorDto("1", "author_111"),
-//                List.of(new GenreDto("1", "genre_111"))
-//        );
-//
-//        var productMono = Mono.just(productDto);
-//        given(productRepository.findById("1")).willReturn(productMono.map(productMapper::toProduct));
-//
-//        var client = WebClient.create(String.format("http://localhost:%d", port));
-//
-//        var result = client
-//                .get().uri("/api/v1/product/1")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToMono(ProductDto.class)
-//                .timeout(Duration.ofSeconds(3))
-//                .block();
-//
-//        assertThat(result).isEqualTo(productDto);
-//    }
-//
-//    @Test
-//    @DisplayName("должен корректно сохранять новый товар")
-//    void shouldCorrectSaveNewProduct() {
-//        var authorDto = new AuthorDto("1", "author_111");
-//        var setGenreDto = List.of(new GenreDto("1", "genre_111"));
-//        var productDto = new ProductDto(
-//                "1",
-//                "title_111",
-//                authorDto,
-//                setGenreDto
-//        );
-//
-//        var productMono = Mono.just(productMapper.toProduct(productDto));
-//        given(productRepository.findById("1")).willReturn(productMono);
-//        given(authorRepository.findById("1")).willReturn(Mono.just(authorMapper.toAuthor(authorDto)));
-//        given(genreRepository.findAllByIdIn(Set.of("1"))).willReturn(Flux.fromIterable(
-//                setGenreDto.stream().map(genreDto -> genreMapper.toGenre(genreDto)).collect(Collectors.toSet())
-//        ));
-//        given(productRepository.save(any())).willReturn(Mono.just(productMapper.toProduct(productDto)));
-//
-//        var result = webTestClient
-//                .post().uri("/api/v1/product")
-//                .contentType(APPLICATION_JSON)
-//                .body(BodyInserters.fromValue(productMapper.toProductDtoWeb(productDto, null)))
-//                .exchange()
-//                .expectStatus()
-//                .isCreated()
-//                .returnResult(ProductDtoWeb.class)
-//                .getResponseBody();
-//
-//        assertThat(result.blockLast()).isEqualTo(productMapper.toProductDtoWeb(productDto, null));
-//    }
-//
-//
-//    @Test
-//    @DisplayName("должен корректно обновлять товар")
-//    void shouldCorrectUpdateProduct() throws Exception {
-//        var authorDto = new AuthorDto("1", "author_111");
-//        var setGenreDto = List.of(new GenreDto("1", "genre_111"));
-//        var productDto = new ProductDto(
-//                "1",
-//                "title_111",
-//                authorDto,
-//                setGenreDto
-//        );
-//        var expectedProductDto = new ProductDto(
-//                "1",
-//                "title_222",
-//                new AuthorDto("2", "author_222"),
-//                List.of(new GenreDto("2", "genre_222"))
-//        );
-//        var productMono = Mono.just(productMapper.toProduct(productDto));
-//        given(productRepository.findById("1")).willReturn(productMono);
-//        given(authorRepository.findById("1")).willReturn(Mono.just(authorMapper.toAuthor(authorDto)));
-//        given(genreRepository.findAllByIdIn(Set.of("1"))).willReturn(Flux.fromIterable(
-//                setGenreDto.stream().map(genreDto -> genreMapper.toGenre(genreDto)).collect(Collectors.toSet())
-//        ));
-//        given(productRepository.save(any())).willReturn(Mono.just(productMapper.toProduct(expectedProductDto)));
-//
-//        var result = webTestClient
-//                .patch().uri("/api/v1/product/1")
-//                .contentType(APPLICATION_JSON)
-//                .body(BodyInserters.fromValue(productMapper.toProductDtoWeb(productDto, null)))
-//                .exchange()
-//                .expectStatus()
-//                .isOk()
-//                .returnResult(ProductDtoWeb.class)
-//                .getResponseBody();
-//
-//        assertThat(result.blockLast()).isEqualTo(productMapper.toProductDtoWeb(expectedProductDto, null));
-//    }
+////
+////    @Test
+////    @DisplayName("должен возвращать корректный товар по id")
+////    void shouldReturnCorrectProductById() {
+////        var productDto = new ProductDto(
+////                "1",
+////                "title_111",
+////                new AuthorDto("1", "author_111"),
+////                List.of(new GenreDto("1", "genre_111"))
+////        );
+////
+////        var productMono = Mono.just(productDto);
+////        given(productRepository.findById("1")).willReturn(productMono.map(productMapper::toProduct));
+////
+////        var client = WebClient.create(String.format("http://localhost:%d", port));
+////
+////        var result = client
+////                .get().uri("/api/v1/product/1")
+////                .accept(MediaType.APPLICATION_JSON)
+////                .retrieve()
+////                .bodyToMono(ProductDto.class)
+////                .timeout(Duration.ofSeconds(3))
+////                .block();
+////
+////        assertThat(result).isEqualTo(productDto);
+////    }
+////
+////    @Test
+////    @DisplayName("должен корректно сохранять новый товар")
+////    void shouldCorrectSaveNewProduct() {
+////        var authorDto = new AuthorDto("1", "author_111");
+////        var setGenreDto = List.of(new GenreDto("1", "genre_111"));
+////        var productDto = new ProductDto(
+////                "1",
+////                "title_111",
+////                authorDto,
+////                setGenreDto
+////        );
+////
+////        var productMono = Mono.just(productMapper.toProduct(productDto));
+////        given(productRepository.findById("1")).willReturn(productMono);
+////        given(authorRepository.findById("1")).willReturn(Mono.just(authorMapper.toAuthor(authorDto)));
+////        given(genreRepository.findAllByIdIn(Set.of("1"))).willReturn(Flux.fromIterable(
+////                setGenreDto.stream().map(genreDto -> genreMapper.toGenre(genreDto)).collect(Collectors.toSet())
+////        ));
+////        given(productRepository.save(any())).willReturn(Mono.just(productMapper.toProduct(productDto)));
+////
+////        var result = webTestClient
+////                .post().uri("/api/v1/product")
+////                .contentType(APPLICATION_JSON)
+////                .body(BodyInserters.fromValue(productMapper.toProductDtoWeb(productDto, null)))
+////                .exchange()
+////                .expectStatus()
+////                .isCreated()
+////                .returnResult(ProductDtoWeb.class)
+////                .getResponseBody();
+////
+////        assertThat(result.blockLast()).isEqualTo(productMapper.toProductDtoWeb(productDto, null));
+////    }
+////
+////
+////    @Test
+////    @DisplayName("должен корректно обновлять товар")
+////    void shouldCorrectUpdateProduct() throws Exception {
+////        var authorDto = new AuthorDto("1", "author_111");
+////        var setGenreDto = List.of(new GenreDto("1", "genre_111"));
+////        var productDto = new ProductDto(
+////                "1",
+////                "title_111",
+////                authorDto,
+////                setGenreDto
+////        );
+////        var expectedProductDto = new ProductDto(
+////                "1",
+////                "title_222",
+////                new AuthorDto("2", "author_222"),
+////                List.of(new GenreDto("2", "genre_222"))
+////        );
+////        var productMono = Mono.just(productMapper.toProduct(productDto));
+////        given(productRepository.findById("1")).willReturn(productMono);
+////        given(authorRepository.findById("1")).willReturn(Mono.just(authorMapper.toAuthor(authorDto)));
+////        given(genreRepository.findAllByIdIn(Set.of("1"))).willReturn(Flux.fromIterable(
+////                setGenreDto.stream().map(genreDto -> genreMapper.toGenre(genreDto)).collect(Collectors.toSet())
+////        ));
+////        given(productRepository.save(any())).willReturn(Mono.just(productMapper.toProduct(expectedProductDto)));
+////
+////        var result = webTestClient
+////                .patch().uri("/api/v1/product/1")
+////                .contentType(APPLICATION_JSON)
+////                .body(BodyInserters.fromValue(productMapper.toProductDtoWeb(productDto, null)))
+////                .exchange()
+////                .expectStatus()
+////                .isOk()
+////                .returnResult(ProductDtoWeb.class)
+////                .getResponseBody();
+////
+////        assertThat(result.blockLast()).isEqualTo(productMapper.toProductDtoWeb(expectedProductDto, null));
+////    }
 //
 //
 //    @Test

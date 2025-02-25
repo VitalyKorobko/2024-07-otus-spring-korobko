@@ -25,6 +25,7 @@ public class OrderController {
     @GetMapping("/cart")
     String cart(Model model,
                 @AuthenticationPrincipal User user) {
+        System.out.println(user);
         var currentOrder = orderService.findByUserAndStatus(user, Status.CURRENT);
         //получаем мапу товар - количество для корзины
         Map<Product, Integer> mapProducts = orderService.getMapProductsByCart(currentOrder);

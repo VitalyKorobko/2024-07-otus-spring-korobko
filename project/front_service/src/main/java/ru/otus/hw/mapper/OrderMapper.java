@@ -6,14 +6,17 @@ import ru.otus.hw.dto.OrderDtoForMail;
 import ru.otus.hw.models.Order;
 import ru.otus.hw.models.User;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 @Component
 public class OrderMapper {
     public OrderDto toOrderDto(Order order) {
         return new OrderDto(
                 order.getId(),
                 order.getStatus(),
-                order.getStartDate(),
-                order.getEndDate(),
+                order.getStartDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
+                order.getEndDate().toInstant(ZoneOffset.UTC).getEpochSecond(),
                 order.getOrderField(),
                 order.getUser().getId()
         );
@@ -23,8 +26,8 @@ public class OrderMapper {
         return new Order(
                 orderDto.getId(),
                 orderDto.getStatus(),
-                orderDto.getStartDate(),
-                orderDto.getEndDate(),
+                LocalDateTime.ofEpochSecond(orderDto.getStartDate(), 0, ZoneOffset.UTC),
+                LocalDateTime.ofEpochSecond(orderDto.getEndDate(), 0, ZoneOffset.UTC),
                 orderDto.getOrderField(),
                 seller
         );
@@ -34,8 +37,8 @@ public class OrderMapper {
         return new OrderDtoForMail(
                 order.getId(),
                 order.getStatus(),
-                order.getStartDate(),
-                order.getEndDate(),
+                order.getStartDate().toString(),
+                order.getEndDate().toString(),
                 order.getOrderField(),
                 order.getUser().getId(),
                 order.getUser().getEmail(),
@@ -43,14 +46,4 @@ public class OrderMapper {
         );
     }
 
-    public Order toOrder(OrderDtoForMail orderDtoForMail, User customer) {
-        return new Order(
-                orderDtoForMail.getId(),
-                orderDtoForMail.getStatus(),
-                orderDtoForMail.getStartDate(),
-                orderDtoForMail.getEndDate(),
-                orderDtoForMail.getOrderField(),
-                customer
-        );
-    }
 }
