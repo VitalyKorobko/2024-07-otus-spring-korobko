@@ -28,6 +28,9 @@ public class AppConfig {
                 .route(p -> p.path("/auth/api/v1/auth/*")
                         .filters(f -> f.rewritePath("/auth/api/v1/auth/(?<segment>.*)",
                                 "/api/v1/auth/${segment}")).uri("%s:%s/".formatted(host, authPort)))
+                .route(p -> p.path("/auth/api/v1/token")
+                        .filters(f -> f.rewritePath("/auth/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, authPort)))
                 //product_service
                 .route(p -> p.path("/product/api/v1/product")
                         .filters(f -> f.rewritePath("/product/api/v1/product", "/api/v1/product")
@@ -35,6 +38,9 @@ public class AppConfig {
                 .route(p -> p.path("/product/api/v1/product/*")
                         .filters(f -> f.rewritePath("/product/api/v1/product/(?<segment>.*)",
                                 "/api/v1/product/${segment}")).uri("%s:%s/".formatted(host, productPort)))
+                .route(p -> p.path("/product/api/v1/token")
+                        .filters(f -> f.rewritePath("/product/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, productPort)))
                 //order_service
                 .route(p -> p.path("/order/api/v1/order")
                         .filters(f -> f.rewritePath("/order/api/v1/order", "/api/v1/order")
@@ -42,6 +48,9 @@ public class AppConfig {
                 .route(p -> p.path("/order/api/v1/order/*")
                         .filters(f -> f.rewritePath("/order/api/v1/order/(?<segment>.*)",
                                 "/api/v1/order/${segment}")).uri("%s:%s/".formatted(host, orderPort)))
+                .route(p -> p.path("/order/api/v1/token")
+                        .filters(f -> f.rewritePath("/order/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, orderPort)))
                 //storage_service
                 .route(p -> p.path("/storage/api/v1/quantity")
                         .filters(f -> f.rewritePath("/storage/api/v1/quantity", "/api/v1/quantity")
@@ -49,6 +58,9 @@ public class AppConfig {
                 .route(p -> p.path("/storage/api/v1/quantity/*")
                         .filters(f -> f.rewritePath("/storage/api/v1/quantity/(?<segment>.*)",
                                 "/api/v1/quantity/${segment}")).uri("%s:%s/".formatted(host, storagePort)))
+                .route(p -> p.path("/storage/api/v1/token")
+                        .filters(f -> f.rewritePath("/storage/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, storagePort)))
                 //mail_client
                 .route(p -> p.path("/mail_client/api/v1/order")
                         .filters(f -> f.rewritePath("/mail_client/api/v1/order", "/api/v1/order")
@@ -56,6 +68,9 @@ public class AppConfig {
                 .route(p -> p.path("/mail_client/api/v1/order/*")
                         .filters(f -> f.rewritePath("/mail_client/api/v1/order/(?<segment>.*)",
                                 "/api/v1/order/${segment}")).uri("%s:%s/".formatted(host, mailClientPort)))
+                .route(p -> p.path("/mail_client/api/v1/token")
+                        .filters(f -> f.rewritePath("/mail_client/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, mailClientPort)))
                 //mail_processor
                 .route(p -> p.path("/mail_processor/api/v1/order")
                         .filters(f -> f.rewritePath("/mail_processor/api/v1/order", "/api/v1/order")
@@ -63,6 +78,9 @@ public class AppConfig {
                 .route(p -> p.path("/mail_processor/api/v1/order/*")
                         .filters(f -> f.rewritePath("/mail_processor/api/v1/order/(?<segment>.*)",
                                 "/api/v1/order/${segment}")).uri("%s:%s/".formatted(host, mailProcessorPort)))
+                .route(p -> p.path("/mail_processor/api/v1/token")
+                        .filters(f -> f.rewritePath("/mail_processor/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, mailProcessorPort)))
                 //notification_service
                 .route(p -> p.path("/notification/api/v1/order")
                         .filters(f -> f.rewritePath("/notification/api/v1/order", "/api/v1/order")
@@ -70,6 +88,9 @@ public class AppConfig {
                 .route(p -> p.path("/notification/api/v1/order/*")
                         .filters(f -> f.rewritePath("/notification/api/v1/order/(?<segment>.*)",
                                 "/api/v1/order/${segment}")).uri("%s:%s/".formatted(host, notificationPort)))
+                .route(p -> p.path("/notification/api/v1/token")
+                        .filters(f -> f.rewritePath("/notification/api/v1/token", "/api/v1/token")
+                        ).uri("%s:%s/".formatted(host, notificationPort)))
                 .build();
 
     }

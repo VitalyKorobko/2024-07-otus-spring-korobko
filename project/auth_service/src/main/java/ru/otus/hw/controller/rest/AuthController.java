@@ -32,6 +32,7 @@ public class AuthController {
 
     @PostMapping("/api/v1/auth")
     public void regService(Authentication authentication, @RequestBody String token) {
+        tokenStorage.setToken(tokenService.getToken(authentication));
         send(token);
     }
 

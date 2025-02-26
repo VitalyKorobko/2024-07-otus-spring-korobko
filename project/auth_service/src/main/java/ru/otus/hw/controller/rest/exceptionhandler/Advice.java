@@ -15,7 +15,7 @@ public class Advice {
     }
 
     @ExceptionHandler(TokenException.class)
-    public ResponseEntity<ErrorResponse> entityNotFound(TokenException exception) {
+    public ResponseEntity<ErrorResponse> tokenWasNotSent(TokenException exception) {
         return ResponseEntity.badRequest()
                 .body(new ErrorResponse(exception.getMessage()));
     }

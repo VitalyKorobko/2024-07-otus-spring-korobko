@@ -36,7 +36,7 @@ app:
     auth-path: /auth
     product-path: /product
     storage-path: /storage
-    notification-path: /notification
+    notification-path: /mail_client
     order-path: /order
 
 logging:
