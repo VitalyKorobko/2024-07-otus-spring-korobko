@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+eureka:
+  client:
+    fetch-registry: true
+
 jwt:
   public.key: classpath:app.pub
 

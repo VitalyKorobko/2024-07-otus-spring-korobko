@@ -1,6 +1,10 @@
 server:
   port: 7775
 
+eureka:
+  client:
+    fetch-registry: true
+
 application:
   processor:
     url: http://localhost:7776
