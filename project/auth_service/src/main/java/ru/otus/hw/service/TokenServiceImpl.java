@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import ru.otus.hw.exception.TokenException;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class TokenServiceImpl implements TokenService {
                     .retrieve();
         } catch (Exception ex) {
             log.warn("error sending token for {}", uri);
-            throw new RuntimeException(ex);
+            throw new TokenException("token wasn't sent to %s".formatted(uri));
         }
         log.info("token was sent to the service {}", uri);
     }

@@ -12,7 +12,7 @@ public class AuthService {
     public static void main(String[] args) {
         SpringApplication.run(AuthService.class);
 
-        log.info("Auth_service have been started. View by link: http://localhost:7771 ");
+        log.info("http://localhost:7771 ");
 
 
     }

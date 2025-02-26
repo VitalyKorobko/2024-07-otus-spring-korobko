@@ -3,3 +3,13 @@ server:
 
 jwt:
   public.key: classpath:app.pub
+
+app:
+  host: http://localhost
+  auth-port: 7771
+  order-port: 7778
+  product-port: 7773
+  storage-port: 7774
+  mail-client-port: 7775
+  mail-processor-port: 7776
+  notification-port: 7777

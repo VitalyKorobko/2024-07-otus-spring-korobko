@@ -5,6 +5,7 @@
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -22,7 +23,10 @@
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http,
 //                                                   JwtDecoder jwtDecoder) throws Exception {
-//        http
+//        http.authorizeHttpRequests((authorize) -> authorize
+//                        .requestMatchers("/product/**", "/order/**", "/storage/**").authenticated()
+//                        .requestMatchers("/api/*").denyAll()
+//                )
 //                .cors(withDefaults())
 //                .oauth2ResourceServer((oauth2ResourceServer) ->
 //                        oauth2ResourceServer

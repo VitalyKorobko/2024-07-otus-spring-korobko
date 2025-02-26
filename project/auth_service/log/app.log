@@ -9517,3 +9517,1174 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
 08:44:16.061 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+12:58:57.097 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+12:58:58.330 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Fetching config from server at : http://localhost:8888
+12:58:58.421 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Located environment: name=auth_service, profiles=[default], label=null, version=null, state=null
+12:58:58.422 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-configClient'}, BootstrapPropertySource {name='bootstrapProperties-classpath:/config/auth_service.yml'}]
+12:58:58.436 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
+12:58:58.850 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+12:58:58.946 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 92 ms. Found 1 JPA repository interface.
+12:58:59.140 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=d6c2bd58-1e52-3409-8368-2c194962e8eb
+12:58:59.243 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+12:58:59.245 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+12:58:59.488 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
+12:58:59.497 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
+12:58:59.502 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+12:58:59.502 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+12:58:59.562 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12:58:59.563 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1117 ms
+12:58:59.703 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+12:58:59.868 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:userdb user=SA
+12:58:59.870 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+12:58:59.917 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+12:59:00.099 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
+12:59:00.107 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
+12:59:00.146 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+12:59:00.218 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+12:59:00.244 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+12:59:00.245 [main] INFO  liquibase.command - Using deploymentId: 0563940245
+12:59:00.246 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+12:59:00.252 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll
+12:59:00.267 [main] INFO  liquibase.changelog - Custom SQL executed
+12:59:00.267 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll ran successfully in 13ms
+12:59:00.271 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko
+12:59:00.273 [main] INFO  liquibase.changelog - Custom SQL executed
+12:59:00.274 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko ran successfully in 2ms
+12:59:00.275 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko
+12:59:00.276 [main] INFO  liquibase.changelog - Custom SQL executed
+12:59:00.277 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko ran successfully in 2ms
+12:59:00.282 [main] INFO  liquibase.util - UPDATE SUMMARY
+12:59:00.282 [main] INFO  liquibase.util - Run:                          3
+12:59:00.282 [main] INFO  liquibase.util - Previously run:               0
+12:59:00.282 [main] INFO  liquibase.util - Filtered out:                 0
+12:59:00.282 [main] INFO  liquibase.util - -------------------------------
+12:59:00.282 [main] INFO  liquibase.util - Total change sets:            3
+12:59:00.282 [main] INFO  liquibase.util - Update summary generated
+12:59:00.284 [main] INFO  liquibase.command - Update command completed successfully.
+12:59:00.284 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 7
+12:59:00.285 [main] INFO  liquibase.lockservice - Successfully released change log lock
+12:59:00.286 [main] INFO  liquibase.command - Command execution complete
+12:59:00.384 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+12:59:00.457 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+12:59:00.498 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+12:59:00.742 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+12:59:01.405 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12:59:01.406 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:59:01.843 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+12:59:01.894 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+12:59:02.403 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+12:59:02.437 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+12:59:02.454 [main] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+12:59:02.472 [main] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+12:59:02.474 [main] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+12:59:02.480 [main] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+12:59:02.481 [main] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+12:59:02.583 [main] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+12:59:02.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+12:59:02.586 [main] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+12:59:02.587 [main] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1740563942587 with initial instances count: 2
+12:59:02.590 [main] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTH_SERVICE with eureka with status UP
+12:59:02.590 [main] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740563942590, current=UP, previous=STARTING]
+12:59:02.591 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
+12:59:02.592 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+12:59:02.605 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
+12:59:02.605 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 7771
+12:59:02.617 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration status: 204
+12:59:02.656 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 6.928 seconds (process running for 7.428)
+12:59:02.658 [main] INFO  ru.otus.hw.AuthService - Auth_service have been started. View by link: http://localhost:7771 
+13:04:02.486 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:06:57.251 [http-nio-7771-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:06:57.251 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+13:06:57.253 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+13:06:57.351 [http-nio-7771-exec-1] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:06:57.372 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:06:57.498 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:06:57.633 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:06:57.763 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:06:57.924 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:06:57.940 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:07:05.445 [http-nio-7771-exec-2] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:07:05.450 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:07:05.455 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:07:05.463 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:07:05.469 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:07:05.474 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:07:05.479 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:07:13.517 [http-nio-7771-exec-3] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:07:13.524 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:07:13.530 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:07:13.535 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:07:13.540 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:07:13.545 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:07:13.551 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:07:15.930 [http-nio-7771-exec-4] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:07:15.935 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:07:15.940 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:07:15.945 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:07:15.950 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:07:15.955 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:07:15.960 [http-nio-7771-exec-4] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:09:02.502 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:12:17.815 [http-nio-7771-exec-6] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:12:17.822 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:12:17.828 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:12:17.834 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:12:17.840 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:12:17.848 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:12:17.853 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:13:46.129 [http-nio-7771-exec-8] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:13:46.134 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:13:46.139 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:13:46.148 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:13:46.153 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:13:46.159 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:13:46.163 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:13:48.370 [http-nio-7771-exec-9] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMDQxNiwiaWF0IjoxNzQwNTY0NDE2LCJzY29wZSI6IlJPTEVfVVNFUiJ9.mvZGkxWSr9Vxu4vNF7JmArS90EDXOZs_1fgAbKEYPeOYUtEPblBpw3z3V65dX6v0e2prn-7Fjn32LWHXm9rIArlyRAMxGWTwtcnTFDasRN5iuoePsOzU6sBCPt_8W9QxC0DphU2VOD5wq8Qecb71XohK2lCEoVj8ZWYWTjILMgVEAzG5f2GIiQDDhcWD8KAQVjXepnxBwhtueMEtyCU0084AX1IfKNhumMYh2OflbCsXHLEIub-5yr3Ljl2DSSOxKdb3doehO0SJbC9bnoYLE_GdHxIQOqRgio8nE8l_9jhwvtnD_r-_RXODNLO-4JUl2nCuG98KZP-HWtL9R6H_gA
+13:13:48.376 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:13:48.381 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:13:48.387 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:13:48.392 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:13:48.397 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:13:48.403 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:14:02.510 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:15:25.170 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTH_SERVICE with eureka with status DOWN
+13:15:25.170 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740564925170, current=DOWN, previous=UP]
+13:15:25.170 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+13:15:25.177 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration status: 204
+13:15:25.275 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+13:15:25.277 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+13:15:25.279 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+13:15:25.279 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+13:15:28.286 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+13:15:28.293 [SpringApplicationShutdownHook] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 37 more
+
+13:15:28.293 [SpringApplicationShutdownHook] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+13:15:28.331 [SpringApplicationShutdownHook] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 38 more
+
+13:15:28.331 [SpringApplicationShutdownHook] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+13:15:28.331 [SpringApplicationShutdownHook] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - de-registration failedCannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+13:15:28.333 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+13:17:40.447 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+13:17:41.680 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Fetching config from server at : http://localhost:8888
+13:17:41.778 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Located environment: name=auth_service, profiles=[default], label=null, version=null, state=null
+13:17:41.779 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-configClient'}, BootstrapPropertySource {name='bootstrapProperties-classpath:/config/auth_service.yml'}]
+13:17:41.796 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
+13:17:42.263 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+13:17:42.363 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 94 ms. Found 1 JPA repository interface.
+13:17:42.581 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=d6c2bd58-1e52-3409-8368-2c194962e8eb
+13:17:42.744 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+13:17:42.746 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+13:17:43.019 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
+13:17:43.027 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
+13:17:43.029 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+13:17:43.029 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+13:17:43.098 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+13:17:43.099 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1292 ms
+13:17:43.238 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+13:17:43.385 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:userdb user=SA
+13:17:43.386 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+13:17:43.429 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+13:17:43.615 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
+13:17:43.624 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
+13:17:43.663 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+13:17:43.734 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+13:17:43.762 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+13:17:43.763 [main] INFO  liquibase.command - Using deploymentId: 0565063763
+13:17:43.764 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+13:17:43.772 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll
+13:17:43.786 [main] INFO  liquibase.changelog - Custom SQL executed
+13:17:43.787 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll ran successfully in 15ms
+13:17:43.791 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko
+13:17:43.793 [main] INFO  liquibase.changelog - Custom SQL executed
+13:17:43.794 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko ran successfully in 2ms
+13:17:43.795 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko
+13:17:43.797 [main] INFO  liquibase.changelog - Custom SQL executed
+13:17:43.797 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko ran successfully in 2ms
+13:17:43.804 [main] INFO  liquibase.util - UPDATE SUMMARY
+13:17:43.804 [main] INFO  liquibase.util - Run:                          3
+13:17:43.804 [main] INFO  liquibase.util - Previously run:               0
+13:17:43.804 [main] INFO  liquibase.util - Filtered out:                 0
+13:17:43.804 [main] INFO  liquibase.util - -------------------------------
+13:17:43.804 [main] INFO  liquibase.util - Total change sets:            3
+13:17:43.804 [main] INFO  liquibase.util - Update summary generated
+13:17:43.806 [main] INFO  liquibase.command - Update command completed successfully.
+13:17:43.806 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 7
+13:17:43.807 [main] INFO  liquibase.lockservice - Successfully released change log lock
+13:17:43.808 [main] INFO  liquibase.command - Command execution complete
+13:17:43.924 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+13:17:44.029 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+13:17:44.058 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+13:17:44.294 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+13:17:44.987 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+13:17:44.990 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+13:17:45.407 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+13:17:45.453 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+13:17:45.936 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+13:17:45.963 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+13:17:45.979 [main] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+13:17:45.996 [main] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+13:17:45.998 [main] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+13:17:46.004 [main] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+13:17:46.099 [main] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+13:17:46.100 [main] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+13:17:46.101 [main] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+13:17:46.102 [main] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1740565066102 with initial instances count: 2
+13:17:46.104 [main] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTH_SERVICE with eureka with status UP
+13:17:46.105 [main] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740565066105, current=UP, previous=STARTING]
+13:17:46.106 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
+13:17:46.107 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+13:17:46.119 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
+13:17:46.120 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 7771
+13:17:46.131 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration status: 204
+13:17:46.166 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 7.307 seconds (process running for 8.195)
+13:17:46.168 [main] INFO  ru.otus.hw.AuthService - Auth_service have been started. View by link: http://localhost:7771 
+13:17:58.970 [http-nio-7771-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:17:58.970 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+13:17:58.971 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+13:17:59.062 [http-nio-7771-exec-1] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:17:59.082 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:17:59.214 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:17:59.339 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:17:59.462 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:17:59.614 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:17:59.630 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:18:39.271 [http-nio-7771-exec-2] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:18:39.278 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:18:39.284 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:18:39.290 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:18:39.296 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:18:39.302 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:18:39.308 [http-nio-7771-exec-2] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:18:42.050 [http-nio-7771-exec-3] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:18:42.055 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:18:42.060 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:18:42.065 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:18:42.071 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:18:42.077 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:18:42.082 [http-nio-7771-exec-3] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:22:46.019 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:23:58.550 [http-nio-7771-exec-5] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:23:58.556 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:23:58.562 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:23:58.696 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:23:58.702 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:23:58.709 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:23:58.715 [http-nio-7771-exec-5] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:27:46.032 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:32:46.044 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:37:46.049 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:41:58.533 [http-nio-7771-exec-6] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:41:58.538 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:41:58.543 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:41:58.549 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:41:58.555 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:41:58.561 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:41:58.566 [http-nio-7771-exec-6] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:42:06.570 [http-nio-7771-exec-8] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTc0MDYwMTA3OCwiaWF0IjoxNzQwNTY1MDc4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.sdJz3e0mSDCMGCYvHs3q3MD3UJ1--v7AmnWHFXdP1TuiU6FCMgPSEIc5qjwOHTNCQjuyHNT1WTqQOHOUgNQO6MDwwxvc17g6lAxSJzGadKW_JelpuVDVjsVrentG6wnpVY8xxjFqhabGPMJ4-wpYrRyRdIIoOE1jojmXTxtfr1k3CvotvHUjiDfytDT8x0n7-I0McWriqzzN8m-1-NsWyFwBVsRXpABIKIyjcVrVzGtcvgQ70VKTQdGAy3rpwD21Lc5MDrxkp-GwVACp56ddQhbdK359k69Tpjai3VgmTGlAFo5Vw1713gexGUV2-JFyKh7HNXNK-tKfPZOBMVhemw
+13:42:06.574 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:42:06.580 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:42:06.585 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:42:06.590 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:42:06.595 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:42:06.600 [http-nio-7771-exec-8] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:42:25.389 [http-nio-7771-exec-9] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoia29yb2JrbyIsImV4cCI6MTc0MDYwMjU0NSwiaWF0IjoxNzQwNTY2NTQ1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.A3MmIjiJXi4wu4YC-SHteRRdgkVSDnD0E8xqZ976z64iUQdAxW2VaSeKiqZJ9btArYG_CEpBBrLGtRWmjHfWHvZrCF2BO6iiqpYaVXX84oBF7C387uAYharI2KoGXPY781GH4wwMvRfPqVthezbk6RPD4hB0evtq01DwSjPpfzgqGGJsvzmnaI3Olal7rgXQLpIk2p-I83ZS0xZ7ceG6gLps4Z2k-ibWQz2WdDUQA9zZ8Dl8AIpuZggv96nzqy4mtAKM7G3CuWnw8SZPvo4t7vRAQa2qC52_-v5tKWoOe2Bc28n4AXCcnYAXff7BRxsLC5Jkq1aaLvAbjHk9UXZfZg
+13:42:25.393 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:42:25.398 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:42:25.404 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:42:25.410 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:42:25.415 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:42:25.419 [http-nio-7771-exec-9] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:42:30.660 [http-nio-7771-exec-10] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoia29yb2JrbyIsImV4cCI6MTc0MDYwMjU0NSwiaWF0IjoxNzQwNTY2NTQ1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.A3MmIjiJXi4wu4YC-SHteRRdgkVSDnD0E8xqZ976z64iUQdAxW2VaSeKiqZJ9btArYG_CEpBBrLGtRWmjHfWHvZrCF2BO6iiqpYaVXX84oBF7C387uAYharI2KoGXPY781GH4wwMvRfPqVthezbk6RPD4hB0evtq01DwSjPpfzgqGGJsvzmnaI3Olal7rgXQLpIk2p-I83ZS0xZ7ceG6gLps4Z2k-ibWQz2WdDUQA9zZ8Dl8AIpuZggv96nzqy4mtAKM7G3CuWnw8SZPvo4t7vRAQa2qC52_-v5tKWoOe2Bc28n4AXCcnYAXff7BRxsLC5Jkq1aaLvAbjHk9UXZfZg
+13:42:30.665 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:42:30.669 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:42:30.674 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:42:30.679 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:42:30.685 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:42:30.690 [http-nio-7771-exec-10] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:42:46.061 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:42:46.828 [http-nio-7771-exec-1] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoia29yb2JrbyIsImV4cCI6MTc0MDYwMjU0NSwiaWF0IjoxNzQwNTY2NTQ1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.A3MmIjiJXi4wu4YC-SHteRRdgkVSDnD0E8xqZ976z64iUQdAxW2VaSeKiqZJ9btArYG_CEpBBrLGtRWmjHfWHvZrCF2BO6iiqpYaVXX84oBF7C387uAYharI2KoGXPY781GH4wwMvRfPqVthezbk6RPD4hB0evtq01DwSjPpfzgqGGJsvzmnaI3Olal7rgXQLpIk2p-I83ZS0xZ7ceG6gLps4Z2k-ibWQz2WdDUQA9zZ8Dl8AIpuZggv96nzqy4mtAKM7G3CuWnw8SZPvo4t7vRAQa2qC52_-v5tKWoOe2Bc28n4AXCcnYAXff7BRxsLC5Jkq1aaLvAbjHk9UXZfZg
+13:42:46.832 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7773/api/v1/token
+13:42:46.836 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7774/api/v1/token
+13:42:46.843 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7775/api/v1/token
+13:42:46.848 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7776/api/v1/token
+13:42:46.853 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7777/api/v1/token
+13:42:46.857 [http-nio-7771-exec-1] INFO  ru.otus.hw.service.TokenServiceImpl - token was sent to the service http://localhost:7778/api/v1/token
+13:47:46.071 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:52:46.081 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+13:57:46.091 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:02:46.106 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:07:46.122 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:12:46.130 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:17:46.146 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:22:46.146 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:27:46.161 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:32:46.173 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:37:46.186 [AsyncResolver-bootstrap-executor-%d] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+14:42:07.693 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTH_SERVICE with eureka with status DOWN
+14:42:07.693 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740570127693, current=DOWN, previous=UP]
+14:42:07.693 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+14:42:07.707 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.core5.http.NoHttpResponseException: localhost:8761 failed to respond
+	at org.apache.hc.core5.http.impl.io.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:306)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:175)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:218)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager$InternalConnectionEndpoint.execute(PoolingHttpClientConnectionManager.java:717)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute(InternalExecRuntime.java:216)
+	at org.apache.hc.client5.http.impl.classic.MainClientExec.execute(MainClientExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:188)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 21 more
+
+14:42:07.707 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond
+14:42:07.742 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:313)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:340)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:789)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1025)
+	at org.apache.hc.core5.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:149)
+	at org.apache.hc.core5.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280)
+	at org.apache.hc.core5.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:247)
+	at org.apache.hc.core5.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:54)
+	at org.apache.hc.core5.http.impl.io.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:304)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:175)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:218)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager$InternalConnectionEndpoint.execute(PoolingHttpClientConnectionManager.java:717)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute(InternalExecRuntime.java:216)
+	at org.apache.hc.client5.http.impl.classic.MainClientExec.execute(MainClientExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:188)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 22 more
+
+14:42:07.742 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset
+14:42:07.743 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+14:42:07.746 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.discovery.InstanceInfoReplicator - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+14:42:07.824 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+14:42:07.830 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+14:42:07.833 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+14:42:07.834 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+14:42:10.836 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+14:42:10.852 [SpringApplicationShutdownHook] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 38 more
+
+14:42:10.852 [SpringApplicationShutdownHook] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+14:42:10.852 [SpringApplicationShutdownHook] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - de-registration failedCannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+14:42:10.853 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+15:06:39.068 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+15:06:40.323 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Fetching config from server at : http://localhost:8888
+15:06:40.409 [main] INFO  o.s.c.c.c.ConfigServicePropertySourceLocator - Located environment: name=auth_service, profiles=[default], label=null, version=null, state=null
+15:06:40.410 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-configClient'}, BootstrapPropertySource {name='bootstrapProperties-classpath:/config/auth_service.yml'}]
+15:06:40.423 [main] INFO  ru.otus.hw.AuthService - No active profile set, falling back to 1 default profile: "default"
+15:06:40.830 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+15:06:40.925 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 90 ms. Found 1 JPA repository interface.
+15:06:41.129 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=d6c2bd58-1e52-3409-8368-2c194962e8eb
+15:06:41.254 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+15:06:41.255 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+15:06:41.495 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 7771 (http)
+15:06:41.504 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-7771"]
+15:06:41.507 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:06:41.507 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+15:06:41.575 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:06:41.576 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1144 ms
+15:06:41.691 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+15:06:41.874 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:userdb user=SA
+15:06:41.876 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+15:06:41.921 [main] INFO  liquibase.database - Set default schema name to PUBLIC
+15:06:42.111 [main] INFO  liquibase.changelog - Reading resource: db/changelog/1.0/2025-02-13-0001-authorization.sql
+15:06:42.120 [main] INFO  liquibase.changelog - Reading resource: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql
+15:06:42.153 [main] INFO  liquibase.changelog - Creating database history table with name: PUBLIC.DATABASECHANGELOG
+15:06:42.218 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+15:06:42.245 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+15:06:42.246 [main] INFO  liquibase.command - Using deploymentId: 0571602246
+15:06:42.247 [main] INFO  liquibase.changelog - Reading from PUBLIC.DATABASECHANGELOG
+15:06:42.255 [main] INFO  liquibase.ui - Running Changeset: db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll
+15:06:42.271 [main] INFO  liquibase.changelog - Custom SQL executed
+15:06:42.271 [main] INFO  liquibase.changelog - ChangeSet db/changelog/1.0/2025-02-13-0001-authorization.sql::raw::includeAll ran successfully in 15ms
+15:06:42.275 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko
+15:06:42.278 [main] INFO  liquibase.changelog - Custom SQL executed
+15:06:42.278 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-005-users-data::korobko ran successfully in 3ms
+15:06:42.281 [main] INFO  liquibase.ui - Running Changeset: db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko
+15:06:42.283 [main] INFO  liquibase.changelog - Custom SQL executed
+15:06:42.283 [main] INFO  liquibase.changelog - ChangeSet db/changelog/data/2025-02-13--0001-filling-athorization-data.sql::2025-02-17-006-roles-data::korobko ran successfully in 2ms
+15:06:42.289 [main] INFO  liquibase.util - UPDATE SUMMARY
+15:06:42.289 [main] INFO  liquibase.util - Run:                          3
+15:06:42.289 [main] INFO  liquibase.util - Previously run:               0
+15:06:42.289 [main] INFO  liquibase.util - Filtered out:                 0
+15:06:42.289 [main] INFO  liquibase.util - -------------------------------
+15:06:42.289 [main] INFO  liquibase.util - Total change sets:            3
+15:06:42.289 [main] INFO  liquibase.util - Update summary generated
+15:06:42.291 [main] INFO  liquibase.command - Update command completed successfully.
+15:06:42.291 [main] INFO  liquibase.ui - Liquibase: Update has been successful. Rows affected: 7
+15:06:42.293 [main] INFO  liquibase.lockservice - Successfully released change log lock
+15:06:42.294 [main] INFO  liquibase.command - Command execution complete
+15:06:42.409 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+15:06:42.475 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+15:06:42.505 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+15:06:42.726 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+15:06:43.399 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+15:06:43.401 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+15:06:43.893 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+15:06:43.950 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+15:06:44.501 [main] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+15:06:44.537 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+15:06:44.553 [main] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+15:06:44.577 [main] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+15:06:44.579 [main] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+15:06:44.585 [main] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+15:06:44.709 [main] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+15:06:44.710 [main] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+15:06:44.713 [main] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+15:06:44.714 [main] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1740571604713 with initial instances count: 6
+15:06:44.716 [main] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTH_SERVICE with eureka with status UP
+15:06:44.716 [main] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740571604716, current=UP, previous=STARTING]
+15:06:44.718 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+15:06:44.718 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-7771"]
+15:06:44.734 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 7771 (http) with context path '/'
+15:06:44.734 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 7771
+15:06:44.745 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration status: 204
+15:06:44.786 [main] INFO  ru.otus.hw.AuthService - Started AuthService in 7.132 seconds (process running for 7.827)
+15:06:44.788 [main] INFO  ru.otus.hw.AuthService - http://localhost:7771 
+15:06:58.741 [http-nio-7771-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:06:58.742 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:06:58.742 [http-nio-7771-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+15:06:58.838 [http-nio-7771-exec-1] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoia29yb2JrbyIsImV4cCI6MTc0MDYwNzYxOCwiaWF0IjoxNzQwNTcxNjE4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.JfaLqkoib7zerepvWvilxGSoIIDxq2QyOKoxUv_p9fXaHyW--yT22u1GYAvgvh5MzNNqHrmU1MthGnz7A7Qy0sIC3U8uHbj_N88GnYTIq7kfGQ7UI5rEOmOzU6vMIC1E1eGZDd_-mAt9p7-N-8Wpz8xXgMX9XYleHG2Tpy9rN02t7lgYs1Zcnj8lPGEwwNX254hoTjADDMTXcQ1tzIUQcT_h_bfjLxu1qK0yrnNhypw_j1vckka9sDq2d_ScLgGtHiXUo3ebF9iEiqB7vAM0FR_Izq9WvGByxRflcWChnOsc2MnDFr7qLlDdQmnWZvGMQ4l2WtAb9q3yGwAvRcD8PQ
+15:06:58.841 [http-nio-7771-exec-1] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:07:05.899 [http-nio-7771-exec-2] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoia29yb2JrbyIsImV4cCI6MTc0MDYwNzYxOCwiaWF0IjoxNzQwNTcxNjE4LCJzY29wZSI6IlJPTEVfVVNFUiJ9.JfaLqkoib7zerepvWvilxGSoIIDxq2QyOKoxUv_p9fXaHyW--yT22u1GYAvgvh5MzNNqHrmU1MthGnz7A7Qy0sIC3U8uHbj_N88GnYTIq7kfGQ7UI5rEOmOzU6vMIC1E1eGZDd_-mAt9p7-N-8Wpz8xXgMX9XYleHG2Tpy9rN02t7lgYs1Zcnj8lPGEwwNX254hoTjADDMTXcQ1tzIUQcT_h_bfjLxu1qK0yrnNhypw_j1vckka9sDq2d_ScLgGtHiXUo3ebF9iEiqB7vAM0FR_Izq9WvGByxRflcWChnOsc2MnDFr7qLlDdQmnWZvGMQ4l2WtAb9q3yGwAvRcD8PQ
+15:07:05.900 [http-nio-7771-exec-2] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:07:30.034 [http-nio-7771-exec-3] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic2VsbGVyIiwiZXhwIjoxNzQwNjA3NjQ5LCJpYXQiOjE3NDA1NzE2NDksInNjb3BlIjoiUk9MRV9TRUxMRVIifQ.Z-zF6uCuR7U3dFZi66j-Jew77I7DZOcxnUo7mtV8RdePhnhH217ogfrqFXDjkhLvoyLXDpxMYMzgs8jzN2LQaiaAFuySxjruiQt8I-_Wp5pkjCvJOhxtZTfj0YADhkA3yG-kia0kfvzkiI2fAHg9gPvbyJFkrr_w0a6u0zYdlD4LcAU9Y4BMbNY6igB-cYCmVipQo3WvyaVDVGWxUt_Rr-DzqG1yyyRt7e3CG4NupnbQjCX9SsyyYS4kc4cs5YsKSIWvtqmKlvbBV_tfBMGbfOGZwVNxyx8MJ61x-qdPZVeTzGVnfT1AVPdnn-dfJtxjhLlflDTonc5jFsdojkyW0w
+15:07:30.035 [http-nio-7771-exec-3] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:07:50.290 [http-nio-7771-exec-4] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic2VsbGVyIiwiZXhwIjoxNzQwNjA3NjQ5LCJpYXQiOjE3NDA1NzE2NDksInNjb3BlIjoiUk9MRV9TRUxMRVIifQ.Z-zF6uCuR7U3dFZi66j-Jew77I7DZOcxnUo7mtV8RdePhnhH217ogfrqFXDjkhLvoyLXDpxMYMzgs8jzN2LQaiaAFuySxjruiQt8I-_Wp5pkjCvJOhxtZTfj0YADhkA3yG-kia0kfvzkiI2fAHg9gPvbyJFkrr_w0a6u0zYdlD4LcAU9Y4BMbNY6igB-cYCmVipQo3WvyaVDVGWxUt_Rr-DzqG1yyyRt7e3CG4NupnbQjCX9SsyyYS4kc4cs5YsKSIWvtqmKlvbBV_tfBMGbfOGZwVNxyx8MJ61x-qdPZVeTzGVnfT1AVPdnn-dfJtxjhLlflDTonc5jFsdojkyW0w
+15:07:50.291 [http-nio-7771-exec-4] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:08:04.051 [http-nio-7771-exec-5] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic2VsbGVyIiwiZXhwIjoxNzQwNjA3NjQ5LCJpYXQiOjE3NDA1NzE2NDksInNjb3BlIjoiUk9MRV9TRUxMRVIifQ.Z-zF6uCuR7U3dFZi66j-Jew77I7DZOcxnUo7mtV8RdePhnhH217ogfrqFXDjkhLvoyLXDpxMYMzgs8jzN2LQaiaAFuySxjruiQt8I-_Wp5pkjCvJOhxtZTfj0YADhkA3yG-kia0kfvzkiI2fAHg9gPvbyJFkrr_w0a6u0zYdlD4LcAU9Y4BMbNY6igB-cYCmVipQo3WvyaVDVGWxUt_Rr-DzqG1yyyRt7e3CG4NupnbQjCX9SsyyYS4kc4cs5YsKSIWvtqmKlvbBV_tfBMGbfOGZwVNxyx8MJ61x-qdPZVeTzGVnfT1AVPdnn-dfJtxjhLlflDTonc5jFsdojkyW0w
+15:08:04.051 [http-nio-7771-exec-5] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:08:08.584 [http-nio-7771-exec-6] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoic2VsbGVyIiwiZXhwIjoxNzQwNjA3NjQ5LCJpYXQiOjE3NDA1NzE2NDksInNjb3BlIjoiUk9MRV9TRUxMRVIifQ.Z-zF6uCuR7U3dFZi66j-Jew77I7DZOcxnUo7mtV8RdePhnhH217ogfrqFXDjkhLvoyLXDpxMYMzgs8jzN2LQaiaAFuySxjruiQt8I-_Wp5pkjCvJOhxtZTfj0YADhkA3yG-kia0kfvzkiI2fAHg9gPvbyJFkrr_w0a6u0zYdlD4LcAU9Y4BMbNY6igB-cYCmVipQo3WvyaVDVGWxUt_Rr-DzqG1yyyRt7e3CG4NupnbQjCX9SsyyYS4kc4cs5YsKSIWvtqmKlvbBV_tfBMGbfOGZwVNxyx8MJ61x-qdPZVeTzGVnfT1AVPdnn-dfJtxjhLlflDTonc5jFsdojkyW0w
+15:08:08.585 [http-nio-7771-exec-6] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:08:19.171 [http-nio-7771-exec-7] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDA2MDc2OTksImlhdCI6MTc0MDU3MTY5OSwic2NvcGUiOiJST0xFX0FETUlOIn0.rTZWw8bi41Zvj7u1FXn64DnX3fMfscDQ0GioV3cErLEib6E68PSTps7PebrB0Iy34ku9gNK92v6z2cy479M9W6JmFdL0lSB4GX9Xe21tyd-O_NI6b_Hc9ZGmF_78h8jMHvQSrjwrmikppbt-tEDejN6ojiwAYlzcpqlzbaiGj_CokvNzu0-Jnj6ZcMnOm02N4KF_JOxfbPuvsSPcsNYs-t1JsDbnM1uNt0b_ZtSvycIojbz-i92IncmTS_4YO9YnkrKUoIirKLvfipQw9U5NsWcI0Hm9XJg3THydEpsEapi1f_Z0TjvUWnMNPrYmhmX4SGX1-UjEY7WPDi_toEnZkw
+15:08:19.172 [http-nio-7771-exec-7] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:08:52.403 [http-nio-7771-exec-8] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDA2MDc2OTksImlhdCI6MTc0MDU3MTY5OSwic2NvcGUiOiJST0xFX0FETUlOIn0.rTZWw8bi41Zvj7u1FXn64DnX3fMfscDQ0GioV3cErLEib6E68PSTps7PebrB0Iy34ku9gNK92v6z2cy479M9W6JmFdL0lSB4GX9Xe21tyd-O_NI6b_Hc9ZGmF_78h8jMHvQSrjwrmikppbt-tEDejN6ojiwAYlzcpqlzbaiGj_CokvNzu0-Jnj6ZcMnOm02N4KF_JOxfbPuvsSPcsNYs-t1JsDbnM1uNt0b_ZtSvycIojbz-i92IncmTS_4YO9YnkrKUoIirKLvfipQw9U5NsWcI0Hm9XJg3THydEpsEapi1f_Z0TjvUWnMNPrYmhmX4SGX1-UjEY7WPDi_toEnZkw
+15:08:52.404 [http-nio-7771-exec-8] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:08:56.681 [http-nio-7771-exec-9] INFO  r.o.h.controller.rest.AuthController - token was sent: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDA2MDc2OTksImlhdCI6MTc0MDU3MTY5OSwic2NvcGUiOiJST0xFX0FETUlOIn0.rTZWw8bi41Zvj7u1FXn64DnX3fMfscDQ0GioV3cErLEib6E68PSTps7PebrB0Iy34ku9gNK92v6z2cy479M9W6JmFdL0lSB4GX9Xe21tyd-O_NI6b_Hc9ZGmF_78h8jMHvQSrjwrmikppbt-tEDejN6ojiwAYlzcpqlzbaiGj_CokvNzu0-Jnj6ZcMnOm02N4KF_JOxfbPuvsSPcsNYs-t1JsDbnM1uNt0b_ZtSvycIojbz-i92IncmTS_4YO9YnkrKUoIirKLvfipQw9U5NsWcI0Hm9XJg3THydEpsEapi1f_Z0TjvUWnMNPrYmhmX4SGX1-UjEY7WPDi_toEnZkw
+15:08:56.682 [http-nio-7771-exec-9] WARN  ru.otus.hw.service.TokenServiceImpl - error sending token for http://localhost:8080/product/api/v1/token
+15:09:18.038 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTH_SERVICE with eureka with status DOWN
+15:09:18.039 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1740571758039, current=DOWN, previous=UP]
+15:09:18.039 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771: registering service...
+15:09:18.044 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.core5.http.NoHttpResponseException: localhost:8761 failed to respond
+	at org.apache.hc.core5.http.impl.io.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:306)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:175)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:218)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager$InternalConnectionEndpoint.execute(PoolingHttpClientConnectionManager.java:717)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute(InternalExecRuntime.java:216)
+	at org.apache.hc.client5.http.impl.classic.MainClientExec.execute(MainClientExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:188)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 21 more
+
+15:09:18.044 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": localhost:8761 failed to respond
+15:09:18.089 [DiscoveryClient-InstanceInfoReplicator-%d] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:313)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:340)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:789)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1025)
+	at org.apache.hc.core5.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:149)
+	at org.apache.hc.core5.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280)
+	at org.apache.hc.core5.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:247)
+	at org.apache.hc.core5.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:54)
+	at org.apache.hc.core5.http.impl.io.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:304)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:175)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:218)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager$InternalConnectionEndpoint.execute(PoolingHttpClientConnectionManager.java:717)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute(InternalExecRuntime.java:216)
+	at org.apache.hc.client5.http.impl.classic.MainClientExec.execute(MainClientExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:188)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 22 more
+
+15:09:18.090 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/AUTH_SERVICE": Connection reset
+15:09:18.090 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+15:09:18.092 [DiscoveryClient-InstanceInfoReplicator-%d] WARN  c.n.discovery.InstanceInfoReplicator - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+15:09:18.146 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+15:09:18.149 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+15:09:18.150 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+15:09:18.151 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+15:09:21.162 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+15:09:21.210 [SpringApplicationShutdownHook] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 38 more
+
+15:09:21.210 [SpringApplicationShutdownHook] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/AUTH_SERVICE/192.168.56.1:auth_service:7771": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+15:09:21.210 [SpringApplicationShutdownHook] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTH_SERVICE/192.168.56.1:auth_service:7771 - de-registration failedCannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+15:09:21.212 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

@@ -1,7 +1,7 @@
 package ru.otus.hw.controller.page;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +14,26 @@ import java.util.Objects;
 
 @Slf4j
 @Controller
-@RequiredArgsConstructor
 public class MainController {
 
     private final TokenStorage tokenStorage;
 
     private final TokenService tokenService;
+
+    private final String host;
+
+    private final String port;
+
+    public MainController(TokenStorage tokenStorage,
+                          TokenService tokenService,
+                          @Value("${app.gateway.host}") String host,
+                          @Value("${app.gateway.port}") String port) {
+        this.tokenStorage = tokenStorage;
+        this.tokenService = tokenService;
+        this.host = host;
+        this.port = port;
+    }
+
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false, defaultValue = "") String error) {
@@ -42,12 +56,12 @@ public class MainController {
 
     private void sendToken() {
         log.info(tokenStorage.getToken());
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7773/api/v1/token");
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7774/api/v1/token");
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7775/api/v1/token");
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7776/api/v1/token");
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7777/api/v1/token");
-        tokenService.sendToken(tokenStorage.getToken(), "http://localhost:7778/api/v1/token");
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/product/api/v1/token".formatted(host, port));
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/order/api/v1/token".formatted(host, port));
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/storage/api/v1/token".formatted(host, port));
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/mail_client/api/v1/token".formatted(host, port));
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/mail_processor/api/v1/token".formatted(host, port));
+        tokenService.sendToken(tokenStorage.getToken(), "%s:%s/notification/api/v1/token".formatted(host, port));
     }
 
 
