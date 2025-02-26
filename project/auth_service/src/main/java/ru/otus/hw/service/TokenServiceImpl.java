@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import ru.otus.hw.config.TokenStorage;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
@@ -26,16 +25,12 @@ public class TokenServiceImpl implements TokenService {
 
     private final RestClient client;
 
-    private final TokenStorage tokenStorage;
-
     private final int jwtExpire;
 
     public TokenServiceImpl(JwtEncoder encoder, RestClient client,
-                            TokenStorage tokenStorage,
                             @Value("${jwt.expire}") int jwtExpire) {
         this.encoder = encoder;
         this.client = client;
-        this.tokenStorage = tokenStorage;
         this.jwtExpire = jwtExpire;
     }
 
@@ -64,11 +59,12 @@ public class TokenServiceImpl implements TokenService {
             client
                     .post()
                     .uri(uri)
-                    .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
-                    .body(tokenStorage.getToken())
+                    .header(AUTHORIZATION, BEARER + token)
+                    .body(token)
                     .retrieve();
         } catch (Exception ex) {
             log.warn("error sending token for {}", uri);
+            throw new RuntimeException(ex);
         }
         log.info("token was sent to the service {}", uri);
     }

@@ -30,6 +30,10 @@ import reactor.util.annotation.NonNull;
 @Configuration
 @Slf4j
 public class ApplicationConfig {
+    private static final String AUTHORIZATION = "Authorization";
+
+    private static final String BEARER = "Bearer ";
+
     private static final int THREAD_POOL_SIZE = 2;
 
     private static final int REQUEST_RECEIVER_POOL_SIZE = 1;
@@ -37,6 +41,7 @@ public class ApplicationConfig {
     private static final int KAFKA_POOL_SIZE = 1;
 
     private final AtomicLong responseIdGenerator = new AtomicLong(0);
+
 
     @Bean(name = "serverThreadEventLoop", destroyMethod = "close")
     public NioEventLoopGroup serverThreadEventLoop() {
@@ -127,7 +132,8 @@ public class ApplicationConfig {
             @Qualifier("requestReceiverScheduler") Scheduler responseReceiverScheduler,
             ReactiveSender<OrderValue, Response> responseSender,
             MailProcessor<Order> mailProcessor,
-            WebClient webClient) {
+            WebClient webClient,
+            TokenStorage tokenStorage) {
 
         return new ReactiveReceiver<>(
                 bootstrapServers,
@@ -137,6 +143,7 @@ public class ApplicationConfig {
                 groupId,
                 request -> webClient.post().uri(String.format("/api/v1/order"))
                         .body(BodyInserters.fromValue(request.data()))
+                        .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
                         .retrieve()
                         .bodyToMono(Order.class)
                         .map(mailProcessor::process)

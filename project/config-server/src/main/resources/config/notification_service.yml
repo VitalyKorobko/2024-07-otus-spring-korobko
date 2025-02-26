@@ -27,3 +27,6 @@ spring:
         smtp:
           auth: true
           starttls.enable: true
+
+jwt:
+  public.key: classpath:app.pub

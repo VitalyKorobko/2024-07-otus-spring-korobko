@@ -12,9 +12,11 @@ import ru.otus.hw.models.Order;
 import ru.otus.hw.models.Role;
 import ru.otus.hw.models.User;
 import ru.otus.hw.enums.Status;
-import ru.otus.hw.services.ProductService;
+import ru.otus.hw.services.AuthService;
 import ru.otus.hw.services.OrderService;
+import ru.otus.hw.services.ProductService;
 import ru.otus.hw.services.TokenService;
+import ru.otus.hw.services.UserService;
 import ru.otus.hw.services.check.CheckService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.otus.hw.services.UserService;
 
 
 import java.util.Map;
@@ -47,6 +48,8 @@ public class UserController {
 
     private final TokenService tokenService;
 
+    private final AuthService authService;
+
     //отслеживание перехода на страницу личного кабинета, выводим информацию в зависмости от роли пользователя
     @GetMapping("/user")
     public String user(@AuthenticationPrincipal User user,  Model model) {
@@ -62,6 +65,7 @@ public class UserController {
         model.addAttribute("ISSUED", Status.ISSUED);
         model.addAttribute("PAID", Status.PAID);
         model.addAttribute("COMPLETED", Status.COMPLETED);
+        authService.reg(tokenStorage.getToken());
         return "user";
     }
 

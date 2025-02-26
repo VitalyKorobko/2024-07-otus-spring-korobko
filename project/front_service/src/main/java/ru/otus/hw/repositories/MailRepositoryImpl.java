@@ -31,10 +31,6 @@ public class MailRepositoryImpl implements MailRepository {
     }
 
     public OrderDtoForMail save(Order order) {
-        System.out.println("\n===============================================\n");
-        System.out.println(order);
-        System.out.println(orderMapper.toOrderDtoForMail(order));
-        System.out.println();
         OrderDtoForMail dto;
         try {
             dto = mailRestClient.post()

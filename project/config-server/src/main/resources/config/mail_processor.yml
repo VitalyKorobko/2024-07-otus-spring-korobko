@@ -8,3 +8,6 @@ application:
   kafka-group-id: processorConsumerGroup
   topic-request: request
   topic-response: response
+
+jwt:
+  public.key: classpath:app.pub
