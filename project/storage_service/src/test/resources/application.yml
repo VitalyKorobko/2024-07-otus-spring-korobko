@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       port: 0
-      database: storageDB
+      database: testDB
 
 de:
   flapdoodle:
@@ -21,4 +21,7 @@ mongock:
     read-concern: local
 
 server:
-  port: 8080
+  port: 7774
+
+jwt:
+  public.key: classpath:app.pub

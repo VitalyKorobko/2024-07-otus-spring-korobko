@@ -25,7 +25,7 @@ public class OrderDto {
     @Positive(message = "дата изменения в секундах от 1970-01-01T00:00:00, макс. значение 365241780471")
     private long endDate;
 
-    @Size(message = "Поле orderField не должно быть пустым")
+    @Size(min = 1, message = "Поле orderField не должно быть пустым")
     private String orderField;
 
     @PositiveOrZero(message = "Должно быть целое положительное число")

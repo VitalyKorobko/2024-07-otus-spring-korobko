@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ProductDto {
     private String id;
 
-    @Size(min = 3, message = "имя продукта более 3 сиволов")
+    @Size(min = 3, message = "название продукта должно быть более 3 сиволов")
     private String title;
 
     @Size(min = 4, message = "введите артикул продукта, минимум 4 сивола")
