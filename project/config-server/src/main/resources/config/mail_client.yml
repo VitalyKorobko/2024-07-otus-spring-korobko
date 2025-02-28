@@ -15,3 +15,25 @@ application:
 
 jwt:
   public.key: classpath:app.pub
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      mailSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+
+
+

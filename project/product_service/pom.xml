@@ -29,10 +29,18 @@
         <mongock.version>4.3.8</mongock.version>
         <flapdoodle.version>4.7.0</flapdoodle.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <resilience4j.version>3.1.2</resilience4j.version>
+
 
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>

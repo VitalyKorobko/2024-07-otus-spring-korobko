@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.otus.hw.exception.EntityNotFoundException;
+import ru.otus.hw.exception.NotAvailableException;
 import ru.otus.hw.exception.TokenException;
 
 @ControllerAdvice
@@ -18,6 +19,12 @@ public class Advice {
     public ResponseEntity<ErrorResponse> tokenWasNotSent(TokenException exception) {
         return ResponseEntity.badRequest()
                 .body(new ErrorResponse(exception.getMessage()));
+    }
+
+    @ExceptionHandler(NotAvailableException.class)
+    public ResponseEntity<ErrorResponse> tokenWasNotSent(NotAvailableException exception) {
+        return ResponseEntity.badRequest()
+                .body(new ErrorResponse("service not available: " + exception.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)

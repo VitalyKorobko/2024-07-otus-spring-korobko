@@ -1,6 +1,6 @@
 package ru.otus.hw.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,7 @@ import ru.otus.hw.dto.OrderDto;
 import ru.otus.hw.dto.OrderDtoWeb;
 import ru.otus.hw.enums.Status;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.exceptions.ParseDateException;
 import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.repository.OrderRepository;
@@ -35,25 +36,28 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class OrderController {
+    private static final String NOT_AVAILABLE_MESSAGE = "service not available";
+
     private final OrderRepository orderRepository;
 
     private final OrderMapper orderMapper;
 
-    private final ObjectMapper objectMapper;
-
     @GetMapping("/api/v1/order")
+    @CircuitBreaker(name = "getAllOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllOrder")
     public Flux<OrderDto> getAll() {
         return orderRepository.findAll().map(orderMapper::toOrderDto);
     }
 
 
     @GetMapping("/api/v1/order/{id}")
+    @CircuitBreaker(name = "getOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackOrder")
     public Mono<OrderDto> get(@PathVariable("id") String id) {
         return orderRepository.findById(id).map(orderMapper::toOrderDto);
     }
 
     @PostMapping("/api/v1/order")
     @ResponseStatus(HttpStatus.CREATED)
+    @CircuitBreaker(name = "createOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackCreateOrder")
     public Mono<OrderDtoWeb> create(@Valid @RequestBody Mono<OrderDto> monoOrderDto) {
         return monoOrderDto
                 .flatMap(orderDto ->
@@ -78,6 +82,7 @@ public class OrderController {
     }
 
     @PatchMapping("/api/v1/order/{id}")
+    @CircuitBreaker(name = "updateOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackUpdateOrder")
     public Mono<OrderDtoWeb> update(@Valid @RequestBody Mono<OrderDto> monoOrderDto,
                                     @PathVariable("id") String id) {
         return monoOrderDto
@@ -128,6 +133,26 @@ public class OrderController {
             throw new ParseDateException("Неверный формат даты: ");
         }
         return  Long.parseLong(epochTime);
+    }
+
+    private Flux<OrderDto> circuitBreakerFallBackAllOrder(Throwable e) {
+        log.error("circuit breaker got open state when get all order: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<OrderDto> circuitBreakerFallBackOrder(String id, Throwable e) {
+        log.error("circuit breaker got open state when get order with id={}: Err: {}:{}", id, e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<OrderDtoWeb> circuitBreakerFallBackCreateOrder(Mono<OrderDto> monoOrderDto, Throwable e) {
+        log.error("circuit breaker got open state when create order: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<OrderDtoWeb> circuitBreakerFallBackUpdateOrder(Mono<OrderDto> monoOrderDto, Throwable e) {
+        log.error("circuit breaker got open state when update order: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
 

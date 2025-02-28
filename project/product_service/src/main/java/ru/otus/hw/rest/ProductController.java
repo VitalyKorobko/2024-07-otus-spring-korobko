@@ -1,5 +1,6 @@
 package ru.otus.hw.rest;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import reactor.core.publisher.Mono;
 import ru.otus.hw.dto.ProductDto;
 import ru.otus.hw.dto.ProductDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.mapper.ProductMapper;
 import ru.otus.hw.model.Product;
 import ru.otus.hw.repository.ProductRepository;
@@ -29,22 +31,27 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductController {
+    private static final String NOT_AVAILABLE_MESSAGE = "service not available";
+
     private final ProductRepository productRepository;
 
     private final ProductMapper productMapper;
 
     @GetMapping("/api/v1/product")
+    @CircuitBreaker(name = "getAllProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllProduct")
     public Flux<ProductDto> getAll() {
         return productRepository.findAll().map(productMapper::toProductDto);
     }
 
     @GetMapping("/api/v1/product/{id}")
+    @CircuitBreaker(name = "getProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackProduct")
     public Mono<ProductDto> get(@PathVariable("id") String id) {
         return productRepository.findById(id).map(productMapper::toProductDto);
     }
 
     @PostMapping("/api/v1/product")
     @ResponseStatus(HttpStatus.CREATED)
+    @CircuitBreaker(name = "createProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackCreateProduct")
     public Mono<ProductDtoWeb> create(@Valid @RequestBody Mono<ProductDto> monoProductDto) {
         return monoProductDto
                 .flatMap(productDto ->
@@ -71,6 +78,7 @@ public class ProductController {
     }
 
     @PatchMapping("/api/v1/product/{id}")
+    @CircuitBreaker(name = "updateProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackUpdateProduct")
     public Mono<ProductDtoWeb> update(@Valid @RequestBody Mono<ProductDto> monoProductDto,
                                       @PathVariable("id") String id) {
         log.info("update product: %s".formatted(id));
@@ -101,6 +109,26 @@ public class ProductController {
     @DeleteMapping("/api/v1/product/{id}")
     public Mono<Void> delete(@PathVariable String id) {
         return productRepository.deleteById(id);
+    }
+
+    private Flux<ProductDto> circuitBreakerFallBackAllProduct(Throwable e) {
+        log.error("circuit breaker got open state when get all product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<ProductDto> circuitBreakerFallBackProduct(String id, Throwable e) {
+        log.error("circuit breaker got open state when get product with id={}: Err: {}:{}", id, e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<ProductDtoWeb> circuitBreakerFallBackCreateProduct(Mono<ProductDto> monoProductDto, Throwable e) {
+        log.error("circuit breaker got open state when create product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<ProductDtoWeb> circuitBreakerFallBackUpdateProduct(Mono<ProductDto> monoProductDto, Throwable e) {
+        log.error("circuit breaker got open state when update product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
 

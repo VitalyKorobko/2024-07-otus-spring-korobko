@@ -1,5 +1,6 @@
 package ru.otus.hw.controller.rest;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.otus.hw.config.TokenStorage;
+import ru.otus.hw.exception.NotAvailableException;
 import ru.otus.hw.service.TokenService;
 
 import java.util.concurrent.ThreadPoolExecutor;
@@ -14,6 +16,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 @RestController
 @Slf4j
 public class AuthController {
+    private static final String NOT_AVAILABLE_MESSAGE = "service not available";
+
     private final TokenService tokenService;
 
     private final TokenStorage tokenStorage;
@@ -36,6 +40,7 @@ public class AuthController {
         this.executor = executor;
     }
 
+    @CircuitBreaker(name = "setTokenCircuitBreaker", fallbackMethod = "circuitBreakerFallBack")
     @PostMapping("/api/v1/auth")
     public void regService(Authentication authentication, @RequestBody String token) {
         tokenStorage.setToken(tokenService.getToken(authentication));
@@ -56,5 +61,11 @@ public class AuthController {
                 tokenService.sendToken(token, "%s:%s/mail_processor/api/v1/token".formatted(host, port)));
         executor.execute(() ->
                 tokenService.sendToken(token, "%s:%s/notification/api/v1/token".formatted(host, port)));
+    }
+
+    private void circuitBreakerFallBack(Authentication authentication,
+                                                @RequestBody String token, Throwable e) {
+        log.error("circuit breaker got open state: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 }

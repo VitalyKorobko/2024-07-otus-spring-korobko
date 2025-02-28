@@ -2,6 +2,8 @@ package ru.otus.hw.repositories;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.otus.hw.config.TokenStorage;
@@ -42,6 +44,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Product create(Product product) {
         ProductDto productDto = productRestClient.post()
                 .uri("/api/v1/product")
@@ -59,6 +64,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Product update(Product product) {
         ProductDto productDto = productRestClient.patch()
                 .uri("/api/v1/product/%s".formatted(product.getId()))
@@ -74,6 +82,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public List<Product> findAllByUser(User user) {
         List<ProductDto> productDtoList = productRestClient.get()
                 .uri("/api/v1/product")
@@ -92,6 +103,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public List<Product> findAll() {
         List<ProductDto> productDtoList = productRestClient.get()
                 .uri("/api/v1/product")
@@ -109,6 +123,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Optional<Product> findById(String id) {
         ProductDto productDto = productRestClient.get()
                 .uri("/api/v1/product/%s".formatted(id))
@@ -123,6 +140,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public void delete(Product product) {
         productRestClient.delete()
                 .uri("/api/v1/product/%s".formatted(product.getId()))

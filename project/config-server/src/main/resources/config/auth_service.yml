@@ -30,6 +30,22 @@ app:
     host: http://localhost
     port: 8080
 
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      setTokenCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+
 logging:
   level:
     root: INFO

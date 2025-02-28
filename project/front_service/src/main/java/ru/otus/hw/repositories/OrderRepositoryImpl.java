@@ -2,6 +2,8 @@ package ru.otus.hw.repositories;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.otus.hw.config.TokenStorage;
@@ -41,6 +43,9 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public List<Order> findByUser(User user) {
         List<OrderDto> orderDtoList = orderRestClient.get()
                 .uri("/api/v1/order")
@@ -58,6 +63,9 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
+    @Retryable(retryFor = {Exception.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Optional<Order> findById(String id) {
         OrderDto orderDto = orderRestClient.get()
                 .uri("/api/v1/order/%s".formatted(id))
@@ -72,6 +80,9 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
+    @Retryable(retryFor = {ImpossibleSaveEntityException.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Order create(Order order) {
         OrderDto orderDto = orderRestClient.post()
                 .uri("/api/v1/order")
@@ -87,6 +98,9 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
+    @Retryable(retryFor = {ImpossibleSaveEntityException.class}, noRetryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public Order update(Order order) {
         OrderDto orderDto = orderRestClient.patch()
                 .uri("/api/v1/order/%s".formatted(order.getId()))

@@ -2,6 +2,8 @@ package ru.otus.hw.repositories;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import ru.otus.hw.config.TokenStorage;
@@ -9,6 +11,8 @@ import ru.otus.hw.dto.OrderDtoForMail;
 import ru.otus.hw.exception.ImpossibleSaveEntityException;
 import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.models.Order;
+
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -30,6 +34,9 @@ public class MailRepositoryImpl implements MailRepository {
         this.orderMapper = orderMapper;
     }
 
+    @Retryable(retryFor = {ImpossibleSaveEntityException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
     public OrderDtoForMail save(Order order) {
         OrderDtoForMail dto;
         try {
@@ -40,10 +47,11 @@ public class MailRepositoryImpl implements MailRepository {
                     .retrieve()
                     .body(OrderDtoForMail.class);
         } catch (Exception e) {
-            log.warn("email about order: %s wasn't sent, task was planed".formatted(order.toString()));
+            log.warn("email about order: {} wasn't sent, task was planed", order.toString());
             throw new ImpossibleSaveEntityException("email about order: %s wasn't sent, task was planed"
                     .formatted(order.toString()) + e.getMessage());
         }
+        log.info("email about order: {} was sent", order);
         return dto;
 
 

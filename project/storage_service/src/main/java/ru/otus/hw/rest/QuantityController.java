@@ -1,7 +1,9 @@
 package ru.otus.hw.rest;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import reactor.core.publisher.Mono;
 import ru.otus.hw.dto.QuantityDto;
 import ru.otus.hw.dto.QuantityDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
+import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.mapper.QuantityMapper;
 import ru.otus.hw.model.Quantity;
 import ru.otus.hw.repository.QuantityRepository;
@@ -26,23 +29,30 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class QuantityController {
+
+    private static final String NOT_AVAILABLE_MESSAGE = "service not available";
+
     private final QuantityRepository repository;
 
     private final QuantityMapper mapper;
 
     @GetMapping("/api/v1/quantity")
+    @CircuitBreaker(name = "getAllQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllQuantity")
     public Flux<QuantityDto> getAll() {
         return repository.findAll().map(mapper::toQuantityDto);
     }
 
     @GetMapping("/api/v1/quantity/{id}")
+    @CircuitBreaker(name = "getQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackQuantity")
     public Mono<QuantityDto> get(@PathVariable("id") String id) {
         return repository.findByProductId(id).map(mapper::toQuantityDto);
     }
 
     @PostMapping("/api/v1/quantity")
     @ResponseStatus(HttpStatus.CREATED)
+    @CircuitBreaker(name = "createQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackCreateQuantity")
     public Mono<QuantityDtoWeb> create(@Valid @RequestBody Mono<QuantityDto> monoQuantityDto) {
         return monoQuantityDto
                 .flatMap(quantityDto ->
@@ -64,6 +74,7 @@ public class QuantityController {
     }
 
     @PatchMapping("/api/v1/quantity/{id}")
+    @CircuitBreaker(name = "updateQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackUpdateQuantity")
     public Mono<QuantityDtoWeb> update(@Valid @RequestBody Mono<QuantityDto> monoQuantityDto,
                                        @PathVariable("id") String id) {
         return monoQuantityDto
@@ -89,6 +100,26 @@ public class QuantityController {
     @DeleteMapping("/api/v1/quantity/{id}")
     public Mono<Void> delete(@PathVariable String id) {
         return repository.deleteById(id);
+    }
+
+    private Flux<QuantityDto> circuitBreakerFallBackAllQuantity(Throwable e) {
+        log.error("circuit breaker got open state when get all product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<QuantityDto> circuitBreakerFallBackQuantity(String id, Throwable e) {
+        log.error("circuit breaker got open state when get product with id={}: Err: {}:{}", id, e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<QuantityDtoWeb> circuitBreakerFallBackCreateQuantity(Mono<QuantityDto> monoQuantityDto, Throwable e) {
+        log.error("circuit breaker got open state when create product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Mono<QuantityDtoWeb> circuitBreakerFallBackUpdateQuantity(Mono<QuantityDto> monoQuantityDto, Throwable e) {
+        log.error("circuit breaker got open state when update product: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
 
