@@ -12,8 +12,6 @@ import ru.otus.hw.exception.ImpossibleSaveEntityException;
 import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.models.Order;
 
-import java.util.Objects;
-
 @Slf4j
 @Component
 public class MailRepositoryImpl implements MailRepository {

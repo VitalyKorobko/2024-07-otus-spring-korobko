@@ -9,11 +9,10 @@ jwt:
   public.key: classpath:app.pub
 
 app:
-  host: http://localhost
-  auth-port: 7771
-  order-port: 7778
-  product-port: 7773
-  storage-port: 7774
-  mail-client-port: 7775
-  mail-processor-port: 7776
-  notification-port: 7777
+  auth_service: auth_service
+  mail_client: mail_client
+  mail_processor: mail_processor
+  notification_service: notification_service
+  order_service: order_service
+  product_service: product_service
+  storage_service: storage_service

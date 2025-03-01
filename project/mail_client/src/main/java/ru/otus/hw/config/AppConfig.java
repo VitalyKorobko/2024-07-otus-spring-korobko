@@ -16,7 +16,6 @@ import org.springframework.http.client.reactive.ReactorResourceFactory;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
@@ -86,14 +85,6 @@ public class AppConfig {
     @Bean("kafkaScheduler")
     public Scheduler kafkaScheduler() {
         return Schedulers.newParallel("kafka-scheduler", KAFKA_POOL_SIZE);
-    }
-
-    @Bean
-    public WebClient webClient(WebClient.Builder builder,
-                               @Value("${application.processor.url}") String url) {
-        return builder
-                .baseUrl(url)
-                .build();
     }
 
     @Bean(destroyMethod = "close")

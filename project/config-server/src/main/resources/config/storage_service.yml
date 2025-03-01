@@ -1,11 +1,14 @@
 server:
   port: 7774
+#  port: 0
 
 eureka:
   client:
     fetch-registry: true
 
 spring:
+  application:
+    name: storage_service
   data:
     mongodb:
       host: localhost

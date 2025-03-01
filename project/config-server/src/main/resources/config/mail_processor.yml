@@ -1,13 +1,18 @@
 server:
   port: 7776
+#  port: 0
 
 eureka:
   client:
     fetch-registry: true
+spring:
+  application:
+    name: mail_processor
 
 application:
-  source:
-    url: http://localhost:7777
+  notification:
+    name: notification_service
+#    url: http://localhost:7777
   kafka-bootstrap-servers: localhost:9092
   kafka-group-id: processorConsumerGroup
   topic-request: request

@@ -26,6 +26,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
+import ru.otus.hw.service.DiscoveryService;
 
 @Configuration
 @Slf4j
@@ -109,7 +110,10 @@ public class ApplicationConfig {
 
     @Bean
     public WebClient webClient(WebClient.Builder builder,
-                               @Value("${application.source.url}") String url) {
+                               @Value("${application.notification.name}") String serviceName,
+                               DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
         return builder
                 .baseUrl(url)
                 .build();
