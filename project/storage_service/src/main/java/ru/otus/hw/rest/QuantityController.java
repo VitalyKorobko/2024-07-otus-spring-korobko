@@ -22,7 +22,7 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.mapper.QuantityMapper;
 import ru.otus.hw.model.Quantity;
-import ru.otus.hw.repository.QuantityRepository;
+import ru.otus.hw.services.QuantityService;
 
 import java.util.UUID;
 
@@ -34,20 +34,20 @@ public class QuantityController {
 
     private static final String NOT_AVAILABLE_MESSAGE = "service not available";
 
-    private final QuantityRepository repository;
+    private final QuantityService service;
 
     private final QuantityMapper mapper;
 
     @GetMapping("/api/v1/quantity")
     @CircuitBreaker(name = "getAllQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllQuantity")
     public Flux<QuantityDto> getAll() {
-        return repository.findAll().map(mapper::toQuantityDto);
+        return service.findAll().map(mapper::toQuantityDto);
     }
 
     @GetMapping("/api/v1/quantity/{id}")
     @CircuitBreaker(name = "getQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackQuantity")
     public Mono<QuantityDto> get(@PathVariable("id") String id) {
-        return repository.findByProductId(id).map(mapper::toQuantityDto);
+        return service.findByProductId(id).map(mapper::toQuantityDto);
     }
 
     @PostMapping("/api/v1/quantity")
@@ -56,7 +56,7 @@ public class QuantityController {
     public Mono<QuantityDtoWeb> create(@Valid @RequestBody Mono<QuantityDto> monoQuantityDto) {
         return monoQuantityDto
                 .flatMap(quantityDto ->
-                        repository.save(
+                        service.save(
                                 new Quantity(UUID.randomUUID().toString(),
                                         quantityDto.getProductCount(),
                                         quantityDto.getProductId())
@@ -78,11 +78,11 @@ public class QuantityController {
     public Mono<QuantityDtoWeb> update(@Valid @RequestBody Mono<QuantityDto> monoQuantityDto,
                                        @PathVariable("id") String id) {
         return monoQuantityDto
-                .zipWhen(quantityDto -> repository.findById(id)
+                .zipWhen(quantityDto -> service.findById(id)
                         .switchIfEmpty(Mono.error(new EntityNotFoundException("quantity with id = %s not found"
                                 .formatted(id)))))
                 .flatMap(tuple ->
-                        repository.save(
+                        service.save(
                                 new Quantity(id,
                                         tuple.getT1().getProductCount(),
                                         tuple.getT1().getProductId())))
@@ -99,7 +99,7 @@ public class QuantityController {
 
     @DeleteMapping("/api/v1/quantity/{id}")
     public Mono<Void> delete(@PathVariable String id) {
-        return repository.deleteById(id);
+        return service.deleteById(id);
     }
 
     private Flux<QuantityDto> circuitBreakerFallBackAllQuantity(Throwable e) {

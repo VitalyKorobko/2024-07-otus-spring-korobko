@@ -5,7 +5,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.reactive.server.ReactiveWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -15,11 +17,15 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
+import ru.otus.hw.service.DiscoveryService;
 
 @Configuration
+@Slf4j
 public class ApplConfig {
     private static final int THREAD_POOL_SIZE = 2;
 
@@ -64,9 +70,24 @@ public class ApplConfig {
     }
 
     @Bean
-    TokenStorage tokenStorage() {
-        return new TokenStorage();
+    public WebClient webClient(WebClient.Builder builder,
+                               @Value("${application.auth_service.name}") String serviceName,
+                               DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
+        return builder
+                .baseUrl(url)
+                .build();
     }
 
+    @Bean
+    public RestClient authWebClient(@Value("${application.auth_service.name}") String serviceName,
+                                    DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
+        return RestClient.builder()
+                .baseUrl(url)
+                .build();
+    }
 
 }

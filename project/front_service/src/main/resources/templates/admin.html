@@ -40,7 +40,7 @@
                     <span th:case="${SELLER}">Продавец</span>
                     <span th:case="${USER}">Покупатель</span>
                 </span>
-                <a th:href="'/admin/seller-' + ${el.getId()}">
+                <a th:href="'/admin/seller/' + ${el.getId()}">
                     <div class="btn-item"><span style="color: white">Все товары продавца</span></div>
                 </a>
             </div>

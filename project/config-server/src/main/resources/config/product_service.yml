@@ -36,6 +36,10 @@ logging:
 jwt:
   public.key: classpath:app.pub
 
+application:
+  auth_service:
+    name: auth_service
+
 resilience4j:
   circuitbreaker:
     configs:
@@ -61,5 +65,8 @@ resilience4j:
         baseConfig: default
         slidingWindowSize: 25
       tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokensSendCircuitBreaker:
         baseConfig: default
         slidingWindowSize: 25

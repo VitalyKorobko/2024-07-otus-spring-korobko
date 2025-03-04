@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderService {
+public class OrderApp {
     public static void main(String[] args) {
-        SpringApplication.run(OrderService.class);
+        SpringApplication.run(OrderApp.class);
 
         System.out.println("http://localhost:7778");
 

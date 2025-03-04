@@ -26,6 +26,10 @@ mongock:
       journal: false
     read-concern: local
 
+application:
+  auth_service:
+    name: auth_service
+
 logging:
   level:
     root: INFO
@@ -61,5 +65,8 @@ resilience4j:
         baseConfig: default
         slidingWindowSize: 25
       tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokensSendCircuitBreaker:
         baseConfig: default
         slidingWindowSize: 25

@@ -9,10 +9,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongock
 @SpringBootApplication
 @EnableMongoRepositories
-public class ProductService {
+public class ProductApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductService.class);
+        SpringApplication.run(ProductApp.class);
 
         System.out.println("http://localhost:7773");
 

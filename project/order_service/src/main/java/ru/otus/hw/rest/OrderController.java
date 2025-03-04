@@ -24,7 +24,7 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.exceptions.ParseDateException;
 import ru.otus.hw.mapper.OrderMapper;
-import ru.otus.hw.repository.OrderRepository;
+import ru.otus.hw.services.OrderService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -38,21 +38,21 @@ import java.util.UUID;
 public class OrderController {
     private static final String NOT_AVAILABLE_MESSAGE = "service not available";
 
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     private final OrderMapper orderMapper;
 
     @GetMapping("/api/v1/order")
     @CircuitBreaker(name = "getAllOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllOrder")
     public Flux<OrderDto> getAll() {
-        return orderRepository.findAll().map(orderMapper::toOrderDto);
+        return orderService.findAll().map(orderMapper::toOrderDto);
     }
 
 
     @GetMapping("/api/v1/order/{id}")
     @CircuitBreaker(name = "getOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackOrder")
     public Mono<OrderDto> get(@PathVariable("id") String id) {
-        return orderRepository.findById(id).map(orderMapper::toOrderDto);
+        return orderService.findById(id).map(orderMapper::toOrderDto);
     }
 
     @PostMapping("/api/v1/order")
@@ -61,7 +61,7 @@ public class OrderController {
     public Mono<OrderDtoWeb> create(@Valid @RequestBody Mono<OrderDto> monoOrderDto) {
         return monoOrderDto
                 .flatMap(orderDto ->
-                        orderRepository.save(
+                        orderService.save(
                                 new Order(UUID.randomUUID().toString(),
                                         Status.valueOf(orderDto.getStatus()),
                                         LocalDateTime.ofEpochSecond(orderDto.getStartDate(), 0, ZoneOffset.UTC),
@@ -86,11 +86,11 @@ public class OrderController {
     public Mono<OrderDtoWeb> update(@Valid @RequestBody Mono<OrderDto> monoOrderDto,
                                     @PathVariable("id") String id) {
         return monoOrderDto
-                .zipWhen(orderDto -> orderRepository.findById(id)
+                .zipWhen(orderDto -> orderService.findById(id)
                         .switchIfEmpty(Mono.error(new EntityNotFoundException("order with id = %s not found"
                                 .formatted(id)))))
                 .flatMap(tuple ->
-                        orderRepository.save(
+                        orderService.save(
                                 new Order(id,
                                         Status.valueOf(tuple.getT1().getStatus()),
                                         LocalDateTime.ofEpochSecond(tuple.getT1().getStartDate(), 0, ZoneOffset.UTC),
@@ -113,7 +113,7 @@ public class OrderController {
 
     @DeleteMapping("/api/v1/order/{id}")
     public Mono<Void> delete(@PathVariable String id) {
-        return orderRepository.deleteById(id);
+        return orderService.deleteById(id);
     }
 
     private Status getStatus(String status) {

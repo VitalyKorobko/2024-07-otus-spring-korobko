@@ -9,7 +9,6 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,6 +19,9 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -28,18 +30,33 @@ import java.security.interfaces.RSAPublicKey;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+
+    @Bean
+    CorsConfiguration corsConfiguration() {
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.applyPermitDefaultValues();
+        return cors;
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(CorsConfiguration corsConfiguration) {
+        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        return corsConfigurationSource;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    @Value("${app.expire}") int expireTime,
                                                    @Value("${app.remember-me-key}") String rememberMeKey,
                                                    @Value("${app.remember-me-name}") String rememberMeName,
-                                                   JwtDecoder jwtDecoder) throws Exception {
+                                                   JwtDecoder jwtDecoder,
+                                                   CorsConfigurationSource corsConfigurationSource) throws Exception {
         http
-                .cors(Customizer.withDefaults())
+                .cors(corsSpec -> corsSpec.configurationSource(corsConfigurationSource))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/v1/token").authenticated()
-                        .requestMatchers("/main.css", "/login", "/reg").permitAll()
+                        .requestMatchers("/main.css", "/login", "/reg", "/api/v1/auth/service/*").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin(formLogin -> formLogin.loginPage("/login").permitAll()
                         .defaultSuccessUrl("/")
@@ -51,9 +68,7 @@ public class SecurityConfiguration {
                                 .logoutSuccessUrl("/")
                 ).oauth2ResourceServer((oauth2ResourceServer) ->
                         oauth2ResourceServer
-                                .jwt((jwt) ->
-                                        jwt.decoder(jwtDecoder)
-                                )
+                                .jwt((jwt) -> jwt.decoder(jwtDecoder))
                 ).rememberMe(rm -> rm.key(rememberMeKey).rememberMeCookieName(rememberMeName)
                         .tokenValiditySeconds(expireTime));
         return http.build();

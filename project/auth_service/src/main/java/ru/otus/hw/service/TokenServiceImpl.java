@@ -2,6 +2,9 @@ package ru.otus.hw.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -9,10 +12,11 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.exception.TokenException;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -23,24 +27,23 @@ public class TokenServiceImpl implements TokenService {
 
     private static final String BEARER = "Bearer ";
 
+    private final List<String> tokens = new ArrayList<>();
+
     private final JwtEncoder encoder;
 
     private final RestClient client;
 
     private final int jwtExpire;
 
-    private final TokenStorage tokenStorage;
-
     public TokenServiceImpl(JwtEncoder encoder, RestClient client,
-                            @Value("${jwt.expire}") int jwtExpire, TokenStorage tokenStorage) {
+                            @Value("${jwt.expire}") int jwtExpire) {
         this.encoder = encoder;
         this.client = client;
         this.jwtExpire = jwtExpire;
-        this.tokenStorage = tokenStorage;
     }
 
     @Override
-    public String getToken(Authentication authentication) {
+    public String add(Authentication authentication) {
         Instant now = Instant.now();
         // @formatter:off
         String scope = authentication.getAuthorities().stream()
@@ -54,12 +57,17 @@ public class TokenServiceImpl implements TokenService {
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
+        var token = this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        tokens.add(token);
+        return token;
         // @formatter:on
-        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 
     @Override
-    public void sendToken(String token, String uri) {
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
+    public void send(String token, String uri) {
         try {
             client
                     .post()
@@ -72,6 +80,26 @@ public class TokenServiceImpl implements TokenService {
             throw new TokenException("token wasn't sent to %s".formatted(uri));
         }
         log.info("token was sent to the service {}", uri);
+    }
+
+    @Override
+    @Retryable(retryFor = {Exception.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 2000, multiplier = 3))
+    public void sendAll(String uri) {
+        try {
+            client
+                    .post()
+                    .uri(uri)
+                    .header(AUTHORIZATION, BEARER + tokens.get(0))
+                    .body(tokens)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve();
+        } catch (Exception e) {
+            log.warn("error sending tokens for {}: {} : {}", uri, e, e.getMessage());
+            throw new TokenException("tokens wasn't sent to %s".formatted(uri));
+        }
+        log.info("tokens was sent to the service {}", uri);
     }
 
 

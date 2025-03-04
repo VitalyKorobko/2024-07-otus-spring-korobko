@@ -17,6 +17,8 @@ application:
   kafka-group-id: processorConsumerGroup
   topic-request: request
   topic-response: response
+  auth_service:
+    name: auth_service
 
 jwt:
   public.key: classpath:app.pub
@@ -37,5 +39,8 @@ resilience4j:
         baseConfig: default
         slidingWindowSize: 25
       tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokensSendCircuitBreaker:
         baseConfig: default
         slidingWindowSize: 25

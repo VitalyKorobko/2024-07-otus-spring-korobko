@@ -22,7 +22,7 @@ import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.mapper.ProductMapper;
 import ru.otus.hw.model.Product;
-import ru.otus.hw.repository.ProductRepository;
+import ru.otus.hw.services.ProductService;
 
 import java.util.UUID;
 
@@ -33,20 +33,20 @@ import java.util.UUID;
 public class ProductController {
     private static final String NOT_AVAILABLE_MESSAGE = "service not available";
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     private final ProductMapper productMapper;
 
     @GetMapping("/api/v1/product")
     @CircuitBreaker(name = "getAllProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllProduct")
     public Flux<ProductDto> getAll() {
-        return productRepository.findAll().map(productMapper::toProductDto);
+        return productService.findAll().map(productMapper::toProductDto);
     }
 
     @GetMapping("/api/v1/product/{id}")
     @CircuitBreaker(name = "getProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackProduct")
     public Mono<ProductDto> get(@PathVariable("id") String id) {
-        return productRepository.findById(id).map(productMapper::toProductDto);
+        return productService.findById(id).map(productMapper::toProductDto);
     }
 
     @PostMapping("/api/v1/product")
@@ -55,7 +55,7 @@ public class ProductController {
     public Mono<ProductDtoWeb> create(@Valid @RequestBody Mono<ProductDto> monoProductDto) {
         return monoProductDto
                 .flatMap(productDto ->
-                        productRepository.save(
+                        productService.save(
                                 new Product(UUID.randomUUID().toString(),
                                         productDto.getTitle(),
                                         productDto.getRef(),
@@ -83,10 +83,10 @@ public class ProductController {
                                       @PathVariable("id") String id) {
         log.info("update product: %s".formatted(id));
         return monoProductDto
-                .zipWhen(productDto -> productRepository.findById(id)
+                .zipWhen(productDto -> productService.findById(id)
                         .switchIfEmpty(Mono.error(new EntityNotFoundException("product with id = %s not found"
                                 .formatted(id)))))
-                .flatMap(tuple -> productRepository.save(
+                .flatMap(tuple -> productService.save(
                         new Product(id,
                                 tuple.getT1().getTitle(),
                                 tuple.getT1().getRef(),
@@ -108,7 +108,7 @@ public class ProductController {
 
     @DeleteMapping("/api/v1/product/{id}")
     public Mono<Void> delete(@PathVariable String id) {
-        return productRepository.deleteById(id);
+        return productService.deleteById(id);
     }
 
     private Flux<ProductDto> circuitBreakerFallBackAllProduct(Throwable e) {

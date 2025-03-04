@@ -1,6 +1,7 @@
 package ru.otus.hw.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import ru.otus.hw.model.OrderValue;
 import ru.otus.hw.model.Request;
@@ -27,6 +28,7 @@ import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
 import ru.otus.hw.service.DiscoveryService;
+import ru.otus.hw.service.TokenStorageService;
 
 @Configuration
 @Slf4j
@@ -109,12 +111,22 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public WebClient webClient(WebClient.Builder builder,
-                               @Value("${application.notification.name}") String serviceName,
-                               DiscoveryService discoveryService) {
+    public WebClient notificationWebClient(WebClient.Builder builder,
+                                           @Value("${application.notification.name}") String serviceName,
+                                           DiscoveryService discoveryService) {
         var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
         log.info("URL: %s".formatted(url));
         return builder
+                .baseUrl(url)
+                .build();
+    }
+
+    @Bean
+    public RestClient authWebClient(@Value("${application.auth_service.name}") String serviceName,
+                                    DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
+        return RestClient.builder()
                 .baseUrl(url)
                 .build();
     }
@@ -136,8 +148,8 @@ public class ApplicationConfig {
             @Qualifier("requestReceiverScheduler") Scheduler responseReceiverScheduler,
             ReactiveSender<OrderValue, Response> responseSender,
             MailProcessor<Order> mailProcessor,
-            WebClient webClient,
-            TokenStorage tokenStorage) {
+            @Qualifier("notificationWebClient") WebClient webClient,
+            TokenStorageService tokenStorageService) {
 
         return new ReactiveReceiver<>(
                 bootstrapServers,
@@ -147,21 +159,18 @@ public class ApplicationConfig {
                 groupId,
                 request -> webClient.post().uri(String.format("/api/v1/order"))
                         .body(BodyInserters.fromValue(request.data()))
-                        .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
+                        .header(AUTHORIZATION, BEARER + tokenStorageService
+                                .findByUsername(request.data().username()))
                         .retrieve()
                         .bodyToMono(Order.class)
                         .map(mailProcessor::process)
                         .flatMap(order ->
                                 responseSender.send(new Response(new ResponseId(responseIdGenerator.incrementAndGet()),
                                                 new OrderValue(new RequestId(request.id()), order)),
-                                        stringValueDataForSending ->
-                                                log.info("response send:{}", stringValueDataForSending))
+                                        orderValueDataForSending ->
+                                                log.info("response send:{}", orderValueDataForSending))
                         )
                         .subscribe());
     }
 
-    @Bean
-    TokenStorage tokenStorage() {
-        return new TokenStorage();
-    }
 }

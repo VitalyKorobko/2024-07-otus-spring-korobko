@@ -1,5 +1,8 @@
 package ru.otus.hw.config;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
 import ru.otus.hw.model.Order;
 import ru.otus.hw.model.Request;
 import ru.otus.hw.model.Response;
@@ -19,8 +22,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
+import ru.otus.hw.service.DiscoveryService;
 
 @Configuration
+@Slf4j
 //@SuppressWarnings("java:S2095")
 public class AppConfig {
     private static final int THREAD_POOL_SIZE = 4;
@@ -28,6 +33,7 @@ public class AppConfig {
     private static final int RESPONSE_RECEIVER_POOL_SIZE = 1;
 
     private static final int KAFKA_POOL_SIZE = 1;
+
 
     @Bean(name = "serverThreadEventLoop", destroyMethod = "close")
     public NioEventLoopGroup serverThreadEventLoop() {
@@ -118,8 +124,24 @@ public class AppConfig {
     }
 
     @Bean
-    TokenStorage tokenStorage() {
-        return new TokenStorage();
+    public WebClient webClient(WebClient.Builder builder,
+                               @Value("${application.auth_service.name}") String serviceName,
+                               DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
+        return builder
+                .baseUrl(url)
+                .build();
+    }
+
+    @Bean
+    public RestClient authWebClient(@Value("${application.auth_service.name}") String serviceName,
+                                    DiscoveryService discoveryService) {
+        var url = "http://" + discoveryService.getHostName(serviceName) + ":" + discoveryService.getPort(serviceName);
+        log.info("URL: %s".formatted(url));
+        return RestClient.builder()
+                .baseUrl(url)
+                .build();
     }
 
 }

@@ -27,6 +27,10 @@ public class AppConfig {
                         .filters(f -> f.rewritePath("/auth/api/v1/auth", "/api/v1/auth")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(auth), service.getPort(auth))))
+                .route(p -> p.path("/auth/api/v1/auth/service/*")
+                        .filters(f -> f.rewritePath("/auth/api/v1/auth/service/(?<segment>.*)",
+                                "/api/v1/auth/service/${segment}")).uri("http://%s:%s/"
+                                .formatted(service.getHostName(auth), service.getPort(auth))))
                 .route(p -> p.path("/auth/api/v1/auth/*")
                         .filters(f -> f.rewritePath("/auth/api/v1/auth/(?<segment>.*)",
                                 "/api/v1/auth/${segment}")).uri("http://%s:%s/"
@@ -48,6 +52,10 @@ public class AppConfig {
                         .filters(f -> f.rewritePath("/product/api/v1/token", "/api/v1/token")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(product), service.getPort(product))))
+                .route(p -> p.path("/product/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/product/api/v1/tokens", "/api/v1/tokens")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(product), service.getPort(product))))
                 //order_service
                 .route(p -> p.path("/order/api/v1/order")
                         .filters(f -> f.rewritePath("/order/api/v1/order", "/api/v1/order")
@@ -59,6 +67,10 @@ public class AppConfig {
                                 .formatted(service.getHostName(order), service.getPort(order))))
                 .route(p -> p.path("/order/api/v1/token")
                         .filters(f -> f.rewritePath("/order/api/v1/token", "/api/v1/token")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(order), service.getPort(order))))
+                .route(p -> p.path("/order/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/order/api/v1/tokens", "/api/v1/tokens")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(order), service.getPort(order))))
                 //storage_service
@@ -74,6 +86,10 @@ public class AppConfig {
                         .filters(f -> f.rewritePath("/storage/api/v1/token", "/api/v1/token")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(storage), service.getPort(storage))))
+                .route(p -> p.path("/storage/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/storage/api/v1/tokens", "/api/v1/tokens")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(storage), service.getPort(storage))))
                 //mail_client
                 .route(p -> p.path("/mail_client/api/v1/order")
                         .filters(f -> f.rewritePath("/mail_client/api/v1/order", "/api/v1/order")
@@ -85,6 +101,10 @@ public class AppConfig {
                                 .formatted(service.getHostName(client), service.getPort(client))))
                 .route(p -> p.path("/mail_client/api/v1/token")
                         .filters(f -> f.rewritePath("/mail_client/api/v1/token", "/api/v1/token")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(client), service.getPort(client))))
+                .route(p -> p.path("/mail_client/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/mail_client/api/v1/tokens", "/api/v1/tokens")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(client), service.getPort(client))))
                 //mail_processor
@@ -100,6 +120,10 @@ public class AppConfig {
                         .filters(f -> f.rewritePath("/mail_processor/api/v1/token", "/api/v1/token")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(processor), service.getPort(processor))))
+                .route(p -> p.path("/mail_processor/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/mail_processor/api/v1/tokens", "/api/v1/tokens")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(processor), service.getPort(processor))))
                 //notification_service
                 .route(p -> p.path("/notification/api/v1/order")
                         .filters(f -> f.rewritePath("/notification/api/v1/order", "/api/v1/order")
@@ -111,6 +135,10 @@ public class AppConfig {
                                 .formatted(service.getHostName(notification), service.getPort(notification))))
                 .route(p -> p.path("/notification/api/v1/token")
                         .filters(f -> f.rewritePath("/notification/api/v1/token", "/api/v1/token")
+                        ).uri("http://%s:%s/"
+                                .formatted(service.getHostName(notification), service.getPort(notification))))
+                .route(p -> p.path("/notification/api/v1/tokens")
+                        .filters(f -> f.rewritePath("/notification/api/v1/tokens", "/api/v1/tokens")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(notification), service.getPort(notification))))
                 .build();

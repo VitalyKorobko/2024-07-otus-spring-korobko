@@ -46,7 +46,7 @@ public class AdminController {
     }
 
     //Отслеживание перехода на страницу продавца
-    @GetMapping("/admin/seller-{id}")
+    @GetMapping("/admin/seller/{id}")
     public String userItems(@PathVariable(value = "id") long userId, Model model) {
         var user = userService.findById(userId);
         model.addAttribute("products", productService.findAllByUser(user));

@@ -1,11 +1,11 @@
-package ru.otus.hw.controller.page;
+package ru.otus.hw.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MyErrorController implements ErrorController {
+public class ErrorsController implements ErrorController {
 
     @RequestMapping("/error")
     public String error() {

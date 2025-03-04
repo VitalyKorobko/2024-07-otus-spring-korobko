@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.otus.hw.config.TokenStorage;
 import ru.otus.hw.service.TokenService;
 
 import java.util.Objects;
@@ -17,8 +16,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Controller
 public class MainController {
 
-    private final TokenStorage tokenStorage;
-
     private final TokenService tokenService;
 
     private final String host;
@@ -27,12 +24,10 @@ public class MainController {
 
     private final ThreadPoolExecutor executor;
 
-    public MainController(TokenStorage tokenStorage,
-                          TokenService tokenService,
+    public MainController(TokenService tokenService,
                           @Value("${app.gateway.host}") String host,
                           @Value("${app.gateway.port}") String port,
                           ThreadPoolExecutor executor) {
-        this.tokenStorage = tokenStorage;
         this.tokenService = tokenService;
         this.host = host;
         this.port = port;
@@ -55,25 +50,24 @@ public class MainController {
     }
 
     private void reg(Authentication authentication) {
-        var token = tokenService.getToken(authentication);
-        tokenStorage.setToken(token);
+        var token = tokenService.add(authentication);
         sendToken(token);
     }
 
     private void sendToken(String token) {
         log.info(token);
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/product/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/product/api/v1/token".formatted(host, port)));
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/order/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/order/api/v1/token".formatted(host, port)));
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/storage/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/storage/api/v1/token".formatted(host, port)));
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/mail_client/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/mail_client/api/v1/token".formatted(host, port)));
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/mail_processor/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/mail_processor/api/v1/token".formatted(host, port)));
         executor.execute(() ->
-                tokenService.sendToken(token, "%s:%s/notification/api/v1/token".formatted(host, port)));
+                tokenService.send(token, "%s:%s/notification/api/v1/token".formatted(host, port)));
     }
 
 

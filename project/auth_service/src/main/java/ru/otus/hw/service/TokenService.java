@@ -2,10 +2,12 @@ package ru.otus.hw.service;
 
 import org.springframework.security.core.Authentication;
 
+
 public interface TokenService {
 
-    String getToken(Authentication authentication);
+    String add(Authentication authentication);
 
-    void sendToken(String token, String url);
+    void sendAll(String url);
 
+    void send(String token, String url);
 }
