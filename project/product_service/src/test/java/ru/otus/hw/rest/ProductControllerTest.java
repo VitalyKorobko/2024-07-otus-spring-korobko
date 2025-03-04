@@ -21,9 +21,9 @@ import ru.otus.hw.dto.ProductDto;
 import ru.otus.hw.dto.ProductDtoWeb;
 import ru.otus.hw.mapper.ProductMapper;
 import ru.otus.hw.model.Product;
-import ru.otus.hw.repository.ProductRepository;
 import ru.otus.hw.security.SecurityConfiguration;
 import org.springframework.security.test.context.support.WithMockUser;
+import ru.otus.hw.services.ProductService;
 
 import java.time.Duration;
 import java.util.List;
@@ -53,9 +53,8 @@ public class ProductControllerTest {
 
     private static final String SELLER_ID_MESSAGE = "id - продавца целое число";
 
-
     @MockBean
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @LocalServerPort
     private int port;
@@ -76,7 +75,7 @@ public class ProductControllerTest {
         );
 
         var productFlux = Flux.fromIterable(products);
-        given(productRepository.findAll()).willReturn(productFlux);
+        given(productService.findAll()).willReturn(productFlux.map(o -> productMapper.toProductDto(o)));
         var result = webTestClient
                 .get().uri("/api/v1/product")
                 .accept(MediaType.TEXT_EVENT_STREAM)
@@ -104,7 +103,7 @@ public class ProductControllerTest {
 
         var productMono = Mono.just(product);
         System.out.println(port);
-        given(productRepository.findById("1")).willReturn(productMono);
+        given(productService.findById("1")).willReturn(productMono.map(o -> productMapper.toProductDto(o)));
         var client = WebClient.create(String.format("http://localhost:%d", port));
 
         var result = client
@@ -126,7 +125,8 @@ public class ProductControllerTest {
                 "https://1", "description1", 100, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -151,8 +151,9 @@ public class ProductControllerTest {
         var savedProduct = new Product("1", "TITLE1", "ref12",
                 "https://1", "description1", 100, 1);
         var productMono = Mono.just(product);
-        given(productRepository.findById("1")).willReturn(productMono);
-        given(productRepository.save(any())).willReturn(Mono.just(savedProduct));
+        given(productService.findById("1")).willReturn(productMono.map(o -> productMapper.toProductDto(product)));
+        given(productService.save(any()))
+                .willReturn(Mono.just(productMapper.toProductDtoWeb(savedProduct, null)));
 
         var result = webTestClient
                 .patch().uri("/api/v1/product/1")
@@ -177,7 +178,7 @@ public class ProductControllerTest {
                 .exchange()
                 .expectStatus()
                 .isOk();
-        verify(productRepository, times(1)).deleteById("1");
+        verify(productService, times(1)).deleteById("1");
     }
 
     @Test
@@ -188,7 +189,8 @@ public class ProductControllerTest {
                 "https://1", "description1", 100, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -212,7 +214,8 @@ public class ProductControllerTest {
                 "https://1", "description1", 100, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -237,7 +240,8 @@ public class ProductControllerTest {
                 "htt://", "description1", 100, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -264,7 +268,8 @@ public class ProductControllerTest {
                 100, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -286,10 +291,11 @@ public class ProductControllerTest {
     @DisplayName("должен возвращать сообщение в поле message при некорретных данных в поле price")
     void shouldReturnMessageIfPriceValueIsIncorrect() {
         var product = new Product("100", "title1", "ref12",
-                "https://1","description1", -1, 1);
+                "https://1", "description1", -1, 1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")
@@ -311,10 +317,11 @@ public class ProductControllerTest {
     @DisplayName("должен возвращать сообщение в поле message при некорретных данных в поле sellerId")
     void shouldReturnMessageIfSellerIdValueIsIncorrect() {
         var product = new Product("100", "title1", "ref12",
-                "https://1","description1", 100, -1);
+                "https://1", "description1", 100, -1);
 
         var productMono = Mono.just(product);
-        given(productRepository.save(any())).willReturn(productMono);
+        given(productService.save(any()))
+                .willReturn(productMono.map(o -> productMapper.toProductDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/product")

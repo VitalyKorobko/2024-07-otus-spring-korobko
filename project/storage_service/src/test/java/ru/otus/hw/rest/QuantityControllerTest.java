@@ -1,6 +1,5 @@
 package ru.otus.hw.rest;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -22,9 +21,9 @@ import ru.otus.hw.dto.QuantityDto;
 import ru.otus.hw.dto.QuantityDtoWeb;
 import ru.otus.hw.mapper.QuantityMapper;
 import ru.otus.hw.model.Quantity;
-import ru.otus.hw.repository.QuantityRepository;
 import ru.otus.hw.security.SecurityConfiguration;
 import org.springframework.security.test.context.support.WithMockUser;
+import ru.otus.hw.services.QuantityService;
 
 import java.time.Duration;
 import java.util.List;
@@ -45,7 +44,7 @@ public class QuantityControllerTest {
     private static final String PRODUCT_ID_MESSAGE = "id продукта не должно быть пустым";
 
     @MockBean
-    private QuantityRepository quantityRepository;
+    private QuantityService quantityService;
 
     @LocalServerPort
     private int port;
@@ -66,7 +65,7 @@ public class QuantityControllerTest {
         );
 
         var quantityFlux = Flux.fromIterable(quantities);
-        given(quantityRepository.findAll()).willReturn(quantityFlux);
+        given(quantityService.findAll()).willReturn(quantityFlux.map(o -> quantityMapper.toQuantityDto(o)));
         var result = webTestClient
                 .get().uri("/api/v1/quantity")
                 .accept(MediaType.TEXT_EVENT_STREAM)
@@ -91,7 +90,8 @@ public class QuantityControllerTest {
 
         var quantityMono = Mono.just(quantity);
         System.out.println(port);
-        given(quantityRepository.findByProductId("1")).willReturn(quantityMono);
+        given(quantityService.findByProductId("1"))
+                .willReturn(quantityMono.map(o -> quantityMapper.toQuantityDto(o)));
         var client = WebClient.create(String.format("http://localhost:%d", port));
 
         var result = client
@@ -112,7 +112,8 @@ public class QuantityControllerTest {
         var quantity = new Quantity("1", 1000, "1");
 
         var quantityMono = Mono.just(quantity);
-        given(quantityRepository.save(any())).willReturn(quantityMono);
+        given(quantityService.save(any()))
+                .willReturn(quantityMono.map(o->quantityMapper.toQuantityDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/quantity")
@@ -134,8 +135,9 @@ public class QuantityControllerTest {
         var quantity = new Quantity("1", 1000, "1");
         var savedQuantity = new Quantity("1", 2000, "1");
         var quantityMono = Mono.just(quantity);
-        given(quantityRepository.findById("1")).willReturn(quantityMono);
-        given(quantityRepository.save(any())).willReturn(Mono.just(savedQuantity));
+        given(quantityService.findById("1")).willReturn(quantityMono);
+        given(quantityService.save(any()))
+                .willReturn(Mono.just(quantityMapper.toQuantityDtoWeb(savedQuantity, null)));
 
         var result = webTestClient
                 .patch().uri("/api/v1/quantity/1")
@@ -159,7 +161,7 @@ public class QuantityControllerTest {
                 .exchange()
                 .expectStatus()
                 .isOk();
-        verify(quantityRepository, times(1)).deleteById("1");
+        verify(quantityService, times(1)).deleteById("1");
     }
 
     @Test
@@ -172,7 +174,8 @@ public class QuantityControllerTest {
         quantityDto.setProductCount(-1);
 
         var quantityMono = Mono.just(quantity);
-        given(quantityRepository.save(any())).willReturn(quantityMono);
+        given(quantityService.save(any()))
+                .willReturn(quantityMono.map(o->quantityMapper.toQuantityDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/quantity")
@@ -197,7 +200,8 @@ public class QuantityControllerTest {
         quantityDto.setProductId("");
 
         var quantityMono = Mono.just(quantity);
-        given(quantityRepository.save(any())).willReturn(quantityMono);
+        given(quantityService.save(any()))
+                .willReturn(quantityMono.map(o->quantityMapper.toQuantityDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/quantity")

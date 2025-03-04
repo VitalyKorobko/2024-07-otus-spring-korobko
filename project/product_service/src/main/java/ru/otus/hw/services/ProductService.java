@@ -2,14 +2,16 @@ package ru.otus.hw.services;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.otus.hw.dto.ProductDto;
+import ru.otus.hw.dto.ProductDtoWeb;
 import ru.otus.hw.model.Product;
 
 public interface ProductService {
-    Flux<Product> findAll();
+    Flux<ProductDto> findAll();
 
-    Mono<Product> findById(String id);
+    Mono<ProductDto> findById(String id);
 
-    Mono<Product> save(Product order);
+    Mono<ProductDtoWeb> save(Product order);
 
     Mono<Void> deleteById(String id);
 

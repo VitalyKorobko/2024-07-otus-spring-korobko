@@ -20,7 +20,6 @@ import ru.otus.hw.dto.ProductDto;
 import ru.otus.hw.dto.ProductDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
-import ru.otus.hw.mapper.ProductMapper;
 import ru.otus.hw.model.Product;
 import ru.otus.hw.services.ProductService;
 
@@ -35,18 +34,16 @@ public class ProductController {
 
     private final ProductService productService;
 
-    private final ProductMapper productMapper;
-
     @GetMapping("/api/v1/product")
     @CircuitBreaker(name = "getAllProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllProduct")
     public Flux<ProductDto> getAll() {
-        return productService.findAll().map(productMapper::toProductDto);
+        return productService.findAll();
     }
 
     @GetMapping("/api/v1/product/{id}")
     @CircuitBreaker(name = "getProductCircuitBreaker", fallbackMethod = "circuitBreakerFallBackProduct")
     public Mono<ProductDto> get(@PathVariable("id") String id) {
-        return productService.findById(id).map(productMapper::toProductDto);
+        return productService.findById(id);
     }
 
     @PostMapping("/api/v1/product")
@@ -63,7 +60,6 @@ public class ProductController {
                                         productDto.getDescription(),
                                         productDto.getPrice(),
                                         productDto.getSellerId())))
-                .map(product -> productMapper.toProductDtoWeb(product, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                         Mono.just(new ProductDtoWeb(
                                 null,
@@ -94,7 +90,6 @@ public class ProductController {
                                 tuple.getT1().getDescription(),
                                 tuple.getT1().getPrice(),
                                 tuple.getT1().getSellerId())))
-                .map(product -> productMapper.toProductDtoWeb(product, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                         Mono.just(new ProductDtoWeb(id,
                                 ex.getFieldValue("title").toString(),

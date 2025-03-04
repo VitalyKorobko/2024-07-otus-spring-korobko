@@ -23,7 +23,6 @@ import ru.otus.hw.enums.Status;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
 import ru.otus.hw.exceptions.ParseDateException;
-import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.services.OrderService;
 
 import java.time.LocalDateTime;
@@ -40,19 +39,16 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    private final OrderMapper orderMapper;
-
     @GetMapping("/api/v1/order")
     @CircuitBreaker(name = "getAllOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllOrder")
     public Flux<OrderDto> getAll() {
-        return orderService.findAll().map(orderMapper::toOrderDto);
+        return orderService.findAll();
     }
-
 
     @GetMapping("/api/v1/order/{id}")
     @CircuitBreaker(name = "getOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackOrder")
     public Mono<OrderDto> get(@PathVariable("id") String id) {
-        return orderService.findById(id).map(orderMapper::toOrderDto);
+        return orderService.findById(id);
     }
 
     @PostMapping("/api/v1/order")
@@ -68,7 +64,6 @@ public class OrderController {
                                         LocalDateTime.ofEpochSecond(orderDto.getEndDate(), 0, ZoneOffset.UTC),
                                         orderDto.getOrderField(),
                                         orderDto.getUserId())))
-                .map(order -> orderMapper.toOrderDtoWeb(order, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                                 Mono.just(new OrderDtoWeb(
                                         null,
@@ -97,7 +92,6 @@ public class OrderController {
                                         LocalDateTime.ofEpochSecond(tuple.getT1().getEndDate(), 0, ZoneOffset.UTC),
                                         tuple.getT1().getOrderField(),
                                         tuple.getT1().getUserId())))
-                .map(order -> orderMapper.toOrderDtoWeb(order, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                         Mono.just(new OrderDtoWeb(
                                 id,

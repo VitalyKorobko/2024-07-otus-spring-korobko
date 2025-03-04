@@ -22,9 +22,9 @@ import ru.otus.hw.dto.OrderDtoWeb;
 import ru.otus.hw.enums.Status;
 import ru.otus.hw.mapper.OrderMapper;
 import ru.otus.hw.domain.Order;
-import ru.otus.hw.repository.OrderRepository;
 import ru.otus.hw.security.SecurityConfiguration;
 import org.springframework.security.test.context.support.WithMockUser;
+import ru.otus.hw.services.OrderService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -52,7 +52,7 @@ public class OrderControllerTest {
     private static final String USER_ID_MESSAGE = "Должно быть целое положительное число";
 
     @MockBean
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @LocalServerPort
     private int port;
@@ -75,7 +75,7 @@ public class OrderControllerTest {
         );
 
         var orderFlux = Flux.fromIterable(orders);
-        given(orderRepository.findAll()).willReturn(orderFlux);
+        given(orderService.findAll()).willReturn(orderFlux.map((o) -> orderMapper.toOrderDto(o)));
         var result = webTestClient
                 .get().uri("/api/v1/order")
                 .accept(MediaType.TEXT_EVENT_STREAM)
@@ -103,7 +103,7 @@ public class OrderControllerTest {
 
         var orderMono = Mono.just(order);
         System.out.println(port);
-        given(orderRepository.findById("1")).willReturn(orderMono);
+        given(orderService.findById("1")).willReturn(orderMono.map(o -> orderMapper.toOrderDto(o)));
         var client = WebClient.create(String.format("http://localhost:%d", port));
 
         var result = client
@@ -125,7 +125,7 @@ public class OrderControllerTest {
                 LocalDateTime.now(), "description1", 1);
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")
@@ -150,8 +150,8 @@ public class OrderControllerTest {
         var savedOrder = new Order("1", Status.PAID, LocalDateTime.now(),
                 LocalDateTime.now(), "description1", 1);
         var orderMono = Mono.just(order);
-        given(orderRepository.findById("1")).willReturn(orderMono);
-        given(orderRepository.save(any())).willReturn(Mono.just(savedOrder));
+        given(orderService.findById("1")).willReturn(orderMono.map(o -> orderMapper.toOrderDto(o)));
+        given(orderService.save(any())).willReturn(Mono.just(orderMapper.toOrderDtoWeb(savedOrder, null)));
 
         var result = webTestClient
                 .patch().uri("/api/v1/order/1")
@@ -175,7 +175,7 @@ public class OrderControllerTest {
                 .exchange()
                 .expectStatus()
                 .isOk();
-        verify(orderRepository, times(1)).deleteById("1");
+        verify(orderService, times(1)).deleteById("1");
     }
 
     @Test
@@ -188,7 +188,7 @@ public class OrderControllerTest {
         orderDto.setStatus("any");
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")
@@ -214,7 +214,7 @@ public class OrderControllerTest {
         orderDto.setStartDate(-1);
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")
@@ -241,7 +241,7 @@ public class OrderControllerTest {
         orderDto.setEndDate(-1);
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")
@@ -268,7 +268,7 @@ public class OrderControllerTest {
         orderDto.setOrderField("");
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")
@@ -295,7 +295,7 @@ public class OrderControllerTest {
         orderDto.setUserId(-1);
 
         var orderMono = Mono.just(order);
-        given(orderRepository.save(any())).willReturn(orderMono);
+        given(orderService.save(any())).willReturn(orderMono.map(o -> orderMapper.toOrderDtoWeb(o, null)));
 
         var result = webTestClient
                 .post().uri("/api/v1/order")

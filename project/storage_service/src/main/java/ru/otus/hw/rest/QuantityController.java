@@ -20,7 +20,6 @@ import ru.otus.hw.dto.QuantityDto;
 import ru.otus.hw.dto.QuantityDtoWeb;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.exceptions.NotAvailableException;
-import ru.otus.hw.mapper.QuantityMapper;
 import ru.otus.hw.model.Quantity;
 import ru.otus.hw.services.QuantityService;
 
@@ -31,23 +30,20 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class QuantityController {
-
     private static final String NOT_AVAILABLE_MESSAGE = "service not available";
 
     private final QuantityService service;
 
-    private final QuantityMapper mapper;
-
     @GetMapping("/api/v1/quantity")
     @CircuitBreaker(name = "getAllQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackAllQuantity")
     public Flux<QuantityDto> getAll() {
-        return service.findAll().map(mapper::toQuantityDto);
+        return service.findAll();
     }
 
     @GetMapping("/api/v1/quantity/{id}")
     @CircuitBreaker(name = "getQuantityCircuitBreaker", fallbackMethod = "circuitBreakerFallBackQuantity")
     public Mono<QuantityDto> get(@PathVariable("id") String id) {
-        return service.findByProductId(id).map(mapper::toQuantityDto);
+        return service.findByProductId(id);
     }
 
     @PostMapping("/api/v1/quantity")
@@ -62,7 +58,6 @@ public class QuantityController {
                                         quantityDto.getProductId())
                         )
                 )
-                .map(quantity -> mapper.toQuantityDtoWeb(quantity, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                         Mono.just(new QuantityDtoWeb(
                                 null,
@@ -86,7 +81,6 @@ public class QuantityController {
                                 new Quantity(id,
                                         tuple.getT1().getProductCount(),
                                         tuple.getT1().getProductId())))
-                .map(quantity -> mapper.toQuantityDtoWeb(quantity, null))
                 .onErrorResume(WebExchangeBindException.class, ex ->
                         Mono.just(new QuantityDtoWeb(
                                 id,
@@ -117,7 +111,8 @@ public class QuantityController {
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 
-    private Mono<QuantityDtoWeb> circuitBreakerFallBackUpdateQuantity(Mono<QuantityDto> monoQuantityDto, Throwable e) {
+    private Mono<QuantityDtoWeb> circuitBreakerFallBackUpdateQuantity(Mono<QuantityDto> monoQuantityDto,
+                                                                      String id, Throwable e) {
         log.error("circuit breaker got open state when update product: Err: {}:{}", e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
