@@ -23,6 +23,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Flux<OrderDto> findByUserId(long userId) {
+        return repository.findByUserId(userId).map(orderMapper::toOrderDto);
+    }
+
+    @Override
     public Mono<OrderDto> findById(String id) {
         return repository.findById(id).map(orderMapper::toOrderDto);
     }

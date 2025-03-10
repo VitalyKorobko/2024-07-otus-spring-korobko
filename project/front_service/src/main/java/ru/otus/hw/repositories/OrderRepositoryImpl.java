@@ -48,7 +48,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             backoff = @Backoff(delay = 2000, multiplier = 3))
     public List<Order> findByUser(User user) {
         List<OrderDto> orderDtoList = orderRestClient.get()
-                .uri("/api/v1/order")
+                .uri("/api/v1/order/user/%s".formatted(user.getId()))
                 .header(AUTHORIZATION, BEARER + tokenStorage.getToken())
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<OrderDto>>() {

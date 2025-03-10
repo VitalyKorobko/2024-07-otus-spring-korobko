@@ -45,6 +45,12 @@ public class OrderController {
         return orderService.findAll();
     }
 
+    @GetMapping("/api/v1/order/user/{id}")
+    @CircuitBreaker(name = "getOrdersByUserIdCircuitBreaker", fallbackMethod = "circuitBreakerFallBackOrdersByUserId")
+    public Flux<OrderDto> getByUserId(@PathVariable("id") long userId) {
+        return orderService.findByUserId(userId);
+    }
+
     @GetMapping("/api/v1/order/{id}")
     @CircuitBreaker(name = "getOrderCircuitBreaker", fallbackMethod = "circuitBreakerFallBackOrder")
     public Mono<OrderDto> get(@PathVariable("id") String id) {
@@ -131,6 +137,12 @@ public class OrderController {
 
     private Flux<OrderDto> circuitBreakerFallBackAllOrder(Throwable e) {
         log.error("circuit breaker got open state when get all order: Err: {}:{}", e, e.getMessage());
+        throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
+    }
+
+    private Flux<OrderDto> circuitBreakerFallBackOrdersByUserId(long userId, Throwable e) {
+        log.error("circuit breaker got open state when get orders by userId={}: Err: {}:{}",
+                userId, e, e.getMessage());
         throw new NotAvailableException(NOT_AVAILABLE_MESSAGE);
     }
 

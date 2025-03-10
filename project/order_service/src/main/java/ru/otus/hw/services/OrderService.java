@@ -9,6 +9,8 @@ import ru.otus.hw.dto.OrderDtoWeb;
 public interface OrderService {
     Flux<OrderDto> findAll();
 
+    Flux<OrderDto> findByUserId(long userId);
+
     Mono<OrderDto> findById(String id);
 
     Mono<OrderDtoWeb> save(Order order);

@@ -55,6 +55,9 @@ resilience4j:
       getAllOrderCircuitBreaker:
         baseConfig: default
         slidingWindowSize: 25
+      getOrdersByUserIdCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
       getOrderCircuitBreaker:
         baseConfig: default
         slidingWindowSize: 25

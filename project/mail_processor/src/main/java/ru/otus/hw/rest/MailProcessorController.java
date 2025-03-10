@@ -29,7 +29,8 @@ public class MailProcessorController {
 
     private final TokenStorageService tokenStorageService;
 
-    public MailProcessorController(@Qualifier("notificationWebClient") WebClient webClient, TokenStorageService tokenStorageService) {
+    public MailProcessorController(@Qualifier("notificationWebClient") WebClient webClient,
+                                   TokenStorageService tokenStorageService) {
         this.webClient = webClient;
         this.tokenStorageService = tokenStorageService;
     }

@@ -73,6 +73,10 @@ public class AppConfig {
                         .filters(f -> f.rewritePath("/order/api/v1/tokens", "/api/v1/tokens")
                         ).uri("http://%s:%s/"
                                 .formatted(service.getHostName(order), service.getPort(order))))
+                .route(p -> p.path("/order/api/v1/order/user/*")
+                        .filters(f -> f.rewritePath("/order/api/v1/order/user/(?<segment>.*)",
+                                "/api/v1/order/user/${segment}")).uri("http://%s:%s/"
+                                .formatted(service.getHostName(order), service.getPort(order))))
                 //storage_service
                 .route(p -> p.path("/storage/api/v1/quantity")
                         .filters(f -> f.rewritePath("/storage/api/v1/quantity", "/api/v1/quantity")
