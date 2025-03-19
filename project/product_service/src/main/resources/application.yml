@@ -1,0 +1,34 @@
+server:
+  port: 7773
+
+eureka:
+  client:
+    fetch-registry: true
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      #      port: 0
+      database: productDB
+
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.hw.mongock.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
+
+jwt:
+  public.key: classpath:app.pub

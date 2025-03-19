@@ -1,0 +1,38 @@
+server:
+  port: 7777
+
+app:
+  # адрес почты, через которую сервер отправляет письма
+#  server-email: ${server.email}
+  server-email: korobkovn3@yandex.ru
+  # адрес почты администратора, на которую сервер отправляет письма
+#  admin-email: ${administrator.email}
+#  admin-email: korobkovn2@yandex.ru
+
+spring:
+#  datasource:
+#    initialization-mode: always
+#
+#  jpa:
+#    generate-ddl: false
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#
+#  rabbitmq:
+#    addresses: "localhost"
+
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    # логин и пароль для почты, через которую сервер отправляет письма
+#    username:
+#    password:
+    username: korobkovn3
+    password: vptcyurvhmqtnncs
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true

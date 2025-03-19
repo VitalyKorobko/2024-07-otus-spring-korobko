@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы пользователя</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+        <h3 th:text="'Все заказы пользователя ' + ${user.username}+':'"/>
+        <div class="block2" th:each="el : ${orders}">
+            <a th:href="'/order/' + ${el.id}">
+                <span th:switch="${el.status}">
+                    <h3 th:case="${CURRENT}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: текущий(корзина)'"/>
+                    <h3 th:case="${ISSUED}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: оформлен'"/>
+                    <h3 th:case="${PAID}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: оплачен'"/>
+                    <h3 th:case="${COMPLETED}" th:text="'номер заказа: ' + ${el.id} + '; дата заказа: ' + ${el.startDate} + '; статус заказа: завершен'"/>
+                </span>
+            </a>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+server:
+  port: 7774
+#  port: 0
+
+eureka:
+  client:
+    fetch-registry: true
+
+spring:
+  application:
+    name: storage_service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      #      port: 0
+      database: storageDB
+
+mongock:
+  runner-type: "ApplicationRunner" # default
+#  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.hw.mongock.changelog
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
+
+jwt:
+  public.key: classpath:app.pub
+
+application:
+  auth_service:
+    name: auth_service
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      getAllQuantityCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      getQuantityCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      createQuantityCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      updateQuantityCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokensSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25

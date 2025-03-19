@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных пользователя</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h1 th:text="'данные пользователя: ' + ${user.username}"/>
+    <form method="get" th:action="'/admin'">
+        <button type="submit">Вернуться в панель администратора</button>
+    </form>
+    <form th:action="@{'/admin/update/user-' + ${user.id}}" method="post">
+        <p></p>
+        <span>логин:</span>
+        <input th:value="${user.username}" type="text" name="username" placeholder="Введите username">
+        <br>
+        <span>e-mail:</span>
+        <input th:value="${user.email}" type="text" name="email" placeholder="Введите email">
+        <br>
+        <p>пароль:</p>
+        <input th:value="${user.password}" type="password" name="password" placeholder="Введите пароль">
+        <br>
+        <p>повторите пароль:</p>
+        <input th:value="${user.password}" type="password" name="repeatPassword" placeholder="Введите пароль">
+        <br>
+        <p>текущий статус:</p>
+        <select th:field="*{user.enabled}" name="enabled">
+            <option th:value="true" th:text="активен"></option>
+            <option th:value="false" th:text="заблокирован"></option>
+        </select>
+        <br>
+        <p>права доступа:</p>
+        <select th:field="*{user.roles}" name="roles">
+            <option th:value="USER" th:text="Пользователь"></option>
+            <option th:value="ADMIN" th:text="Администратор"></option>
+            <option th:value="SELLER" th:text="Продавец"></option>
+        </select>
+        <div th:text="${error}" style="color: red"/>
+        <button type="submit">Обновить данные</button>
+    </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

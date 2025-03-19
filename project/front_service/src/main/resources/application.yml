@@ -1,0 +1,44 @@
+server:
+  port: 7772
+  error:
+    path: /error
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/front_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  jpa:
+    database: postgresql
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+  expire: 86400
+
+app:
+  expire: 86400
+  remember-me-key: SomeKey
+  remember-me-name: marketplace
+  gateway:
+    host: http://localhost:8080
+    auth-path: /auth
+    product-path: /product
+    storage-path: /storage
+    notification-path: /mail_client
+    order-path: /order
+
+logging:
+  level:
+    ROOT: INFO

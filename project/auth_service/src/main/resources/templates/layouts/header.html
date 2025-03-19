@@ -1,0 +1,33 @@
+<header class="container" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns="http://www.w3.org/1999/html"
+        th:fragment="header">
+    <span class="logo">Project</span>
+
+    <nav>
+<!--        <a href="/">Главная</a>-->
+<!--        <a href="/about-us">О нас</a>-->
+        <span sec:authorize="!isAuthenticated()">
+            <a href="/login">Авторизоваться</a>
+            <a href="/reg">Регистрация</a>
+        </span>
+<!--        <span sec:authorize="hasAuthority('ROLE_SELLER')">-->
+<!--            <a href="/product/add">Добавить запись</a>-->
+<!--        </span>-->
+<!--        <span sec:authorize="isAuthenticated()">-->
+<!--            <a href="/user">Кабинет</a>-->
+<!--        </span>-->
+<!--        <span sec:authorize="hasAuthority('ROLE_ADMIN')">-->
+<!--            <a href="/admin" e>Панель админа</a>-->
+<!--        </span>-->
+<!--        <span sec:authorize="hasAuthority('ROLE_USER')">-->
+<!--            <a href="/cart" e>Корзина</a>-->
+<!--        </span>-->
+        <span sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Выйти</button>
+            </form>
+        </span>
+    </nav>
+</header>
+

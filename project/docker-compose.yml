@@ -1,0 +1,92 @@
+version: '3.9'
+
+services:
+  mongo-db:
+    image: "mongo:4.2"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-db-data:/var/lib/mongodb/data
+    networks:
+      - my_net_1
+    restart: always
+
+  postgres-db:
+    image: "postgres:13"
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=front_db
+    volumes:
+      - postgres-db-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=login@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=pass
+    ports:
+      - "32080:80"
+    volumes:
+      - pgadmin-db-data:/var/lib/pgadmin/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - my_net_1
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.2.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - my_net_1
+
+  broker:
+    image: confluentinc/cp-kafka:7.0.0
+    container_name: broker
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - my_net_1
+
+networks:
+  my_net_1:
+    driver: bridge
+
+volumes:
+  mongo-db-data:
+  postgres-db-data:
+  pgadmin-db-data:
+
+
+
+
+
+

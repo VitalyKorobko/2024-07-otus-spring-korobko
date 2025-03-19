@@ -1,0 +1,61 @@
+server:
+  port: 7777
+#  port: 0
+
+eureka:
+  client:
+    fetch-registry: true
+
+app:
+  # адрес почты, через которую сервер отправляет письма
+#  server-email: ${server.email}
+  server-email: korobkovn3@yandex.ru
+
+
+spring:
+  application:
+    name: notification_service
+
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    # логин и пароль для почты, через которую сервер отправляет письма
+#    username:
+#    password:
+    username: korobkovn3
+    password: vptcyurvhmqtnncs
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+application:
+  auth_service:
+    name: auth_service
+
+jwt:
+  public.key: classpath:app.pub
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 30
+    instances:
+      getOrderCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokenSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25
+      tokensSendCircuitBreaker:
+        baseConfig: default
+        slidingWindowSize: 25

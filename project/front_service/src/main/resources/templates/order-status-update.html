@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Изменить статус заказа</title>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+  <h1>Изменить товар</h1>
+  <form method="post" th:action="@{'/order/' + ${order.id}+'/status'}">
+    <select th:field="*{order.status}" name="status">
+      <option th:value="ISSUED" th:text="сформирован"></option>
+      <option th:value="PAID" th:text="оплачен"></option>
+      <option th:value="COMPLETED" th:text="завершен"></option>
+    </select>
+    <button sec:authorize="hasAuthority('ROLE_ADMIN')" type="submit">Изменить статус</button>
+  </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

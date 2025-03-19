@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить товар</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main th:if="${product.user.id==user.id || user.roles.iterator().next()==ADMIN}" class="container">
+    <h1>Изменить товар</h1>
+    <form method="post" th:action="@{'/product/' + ${product.id} + '/update'}">
+        <input type="hidden" name="id" th:value="${product.id}">
+        <input type="text" name="title" placeholder="Введите название товарра" th:value="${product.title}">
+        <input type="text" name="ref" placeholder="Введите артикул" th:value="${product.ref}">
+        <input type="text" name="image" placeholder="Введите URL фото" th:value="${product.image}">
+        <input type="number" name="price" placeholder="Укажите стоимость" th:value="${product.price}">
+        <textarea name="description" placeholder="Введите описание товара" th:text="${product.description}"></textarea>
+        <div class="errors" th:if="${error}" th:text="${message}">Wrong title</div>
+        <button type="submit">Изменить</button>
+    </form>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.title}"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <div class="items">
+        <div>
+            <a th:href="'/product/' + ${product.id}"><img th:src="${product.image}" th:alt="${product.title}"></a>
+            <h3 th:text="${product.title}"/>
+            <p th:text="${product.ref}"/><br>
+            <p th:text="${product.description}"/><br>
+            <p>Продавец <b th:text="${product.user.username}"/></p>
+            <span th:text="${product.price} + '$'"/>
+        </div>
+    </div>
+    <span th:if="${product.user.id==user.id || user.roles.iterator().next()==ADMIN}" sec:authorize="hasAnyAuthority('ROLE_SELLER', 'ROLE_ADMIN')">
+    <a class="edit-btn" th:href="'/product/' + ${product.id} + '/update'">Редактировать</a>
+  </span>
+    <span sec:authorize="hasAnyAuthority('ROLE_USER')">
+        <div th:unless="${contains}">
+            <form method="post" th:action="@{'/added/' + ${product.id}}">
+              <button type="submit">Добавить в корзину</button>
+            </form>
+        </div>
+        <p th:if="${contains==true}" th:text="'Добавлено'"/>
+  </span>
+    <span sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+    <form method="post" th:action="@{'/product/' + ${product.id} + '/delete'}">
+      <button type="submit">Удалить</button>
+    </form>
+  </span>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

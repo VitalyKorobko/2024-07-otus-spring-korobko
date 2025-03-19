@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+
+jwt:
+  public.key: classpath:app.pub
+
+app:
+  auth_service: auth_service
+  mail_client: mail_client
+  mail_processor: mail_processor
+  notification_service: notification_service
+  order_service: order_service
+  product_service: product_service
+  storage_service: storage_service

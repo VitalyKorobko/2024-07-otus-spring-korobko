@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: storage_service
+  cloud:
+    config:
+      fail-fast: true

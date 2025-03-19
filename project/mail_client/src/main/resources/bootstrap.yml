@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: mail_client
+  cloud:
+    config:
+      fail-fast: true

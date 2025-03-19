@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о заказе</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+    <h1 th:text="'Заказ номер ' + ${order.id}"/><br>
+    <div sec:authorize="hasAuthority('ROLE_USER') || hasAuthority('ROLE_ADMIN')" th:if="${!mapProducts.isEmpty()}">
+        <h3>перечень товаров:</h3>
+        <div class="block2" th:each="el : ${mapProducts.keySet()}">
+            <a th:href="'/order/' + ${el.id}"><h3 th:text="${el.title}"/></a>
+            <p th:text="'цена: ' + ${el.price}"/>
+            <p th:text="'количество: ' + ${mapProducts.get(el)}"/>
+            <p th:text="'стоимость: ' + ${el.price} * ${mapProducts.get(el)}"/>
+        </div>
+        <h3>информация о заказе:</h3>
+        <div class="block2">
+            <p th:text="'номер заказа: '  + ${order.id}"/>
+            <p th:switch="${order.status}">
+                <span th:case="${CURRENT}" th:text="'статус заказа: текущий(корзина)'"/>
+                <span th:case="${ISSUED}" th:text="'статус заказа: оформлен'"/>
+                <span th:case="${PAID}" th:text="'статус заказа: оплачен'"/>
+                <span th:case="${COMPLETED}" th:text="'статус заказа: завершен'"/>
+            </p>
+            <p th:text="'сумма заказа: ' + ${total}"/>
+            <p th:text="'дата заказа: '  + ${order.startDate}"/>
+        </div>
+        <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="'/order/' + ${order.id}+'/status'">
+            <div class="btn-item"><span style="color: white">Изменить статус заказа</span></div>
+        </a>
+    </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

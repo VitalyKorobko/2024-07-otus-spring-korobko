@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Такой товара не существует</title>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="~{layouts/header :: header}"></div>
+<main class="container">
+  <div class="block">
+    <H2>Такой товара уже не существует</H2>
+    <p>Товар была удален ранее</p>
+    <a th:href="'/'">Перейти на главную страницу</a>
+  </div>
+</main>
+<div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>
